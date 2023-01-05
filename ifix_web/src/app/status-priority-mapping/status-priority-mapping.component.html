@@ -1,0 +1,106 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)"
+                   [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" *ngIf="!updateFlag">Add Status Priority Mapping</div>
+    <div class="modal-title" *ngIf="updateFlag">Update Status Priority Mapping</div>
+  </div>
+
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+        <div class="form-group row">
+            <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization :</b></label>
+            <div class="col-sm-8 col-md-8">
+                <select class="form-control font-13 radius-0" [(ngModel)]="organizationId" (change)="onOrgChange($event.target.selectedIndex)">
+                    <option value="">Select Organization</option>
+                    <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+                </select>
+            </div>    
+        </div>
+
+
+      <!-- =======================================tickform========================== -->
+      <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Type :</b></label>
+        <div class="col-sm-8 col-md-8"> 
+            <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffTypeSeqno"
+                    (change)="getrecordbydifftype($event.target.selectedIndex, 'from')">
+            <option value="">Select From Property Type</option>
+            <option *ngFor="let record of recordTypeStatus;" [value]="record.seqno">{{record.typename}}</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group row" [hidden]="fromPropLevels.length===0">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Level:</b></label>
+        <div class="col-sm-8 col-md-8">
+            <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelid"
+                    (change)="onLevelChange($event.target.selectedIndex,'from')">
+                <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Value:</b></label>
+        <div class="col-sm-8 col-md-8">
+            <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId" 
+            (change)="getfromticketproperty($event.target.selectedIndex,'from')">
+                <option value="">Select From Property</option>
+                <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+            </select>
+        </div>    
+      </div>
+  
+     <!--==============================catform==================================== -->
+  
+       <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Type:</b></label>
+        <div class="col-sm-8 col-md-8">
+            <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffTypeStatus"
+                    (change)="getrecordbydifftypestat($event.target.selectedIndex, 'from')">
+            <option value="">Select From Property Type</option>
+            <option *ngFor="let record of recordTypeStatus;" [value]="record.seqno">{{record.typename}}</option>
+            </select>
+        </div>    
+      </div>
+
+      <div class="form-group row" [hidden]="fromPropLevelsStat.length===0">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Level :</b></label>
+        <div class="col-sm-8 col-md-8">  
+            <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelstatid"
+                    (change)="onLevelChangeStat($event.target.selectedIndex,'from')">
+                <option *ngFor="let level of fromPropLevelsStat" [value]="level.id">{{level.typename}}</option>
+            </select>
+        </div>    
+      </div>
+
+      <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Value:</b></label>
+        <div class="col-sm-8 col-md-8">
+            <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffStat"
+            (change)="getfromstatusproperty($event.target.selectedIndex)">
+                <option value="">Select From Property</option>
+                <option *ngFor="let record of formTicketTypeListStat;" [value]="record.id">{{record.typename}}</option>
+            </select>
+        </div>    
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Priority Value :</b></label>
+        <div class="col-sm-8 col-md-8">
+          <input type="number" class="form-control radius-0 font-13" placeholder="Enter Priorty Value"
+                 [(ngModel)]="priority">
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer pad-8">
+      <button type="button" class="btn btn-success radius-0" (click)="save()" *ngIf="!updateFlag">Save</button>
+      <button type="button" class="btn btn-success radius-0" (click)="update()" *ngIf="updateFlag">Update</button>
+      <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+    </div>
+  </ng-template>
+

@@ -1,0 +1,111 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)"
+                   [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" *ngIf="!updateFlag">Add SLA Criteria</div>
+    <div class="modal-title" *ngIf="updateFlag">Update SLA Criteria</div>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+              (change)="onOrgChange($event.target.selectedIndex)">
+        <option *ngFor="let org of organization" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="custom-select font-13 radius-0" [(ngModel)]="selectedSlaName"
+              (change)="onSlaNameChange($event.target.selectedIndex)">
+        <option value="0">Select SLA Name</option>
+        <option *ngFor="let sla of slaNames" [value]="sla.id">{{sla.slaname}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="custom-select font-13 radius-0" [(ngModel)]="selectedTicketType"
+              (change)="onTicketTypeChange($event.target.selectedIndex)">
+        <option value="0">Select Ticket type</option>
+        <option *ngFor="let type of ticketTypes" [value]="type.id">{{type.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="custom-select font-13 radius-0" [(ngModel)]="selectedPriority"
+              (change)="onPriorityChange($event.target.selectedIndex)">
+        <option value="0">Select Priority</option>
+        <option *ngFor="let priority of priorities" [value]="priority.id">{{priority.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="custom-select font-13 radius-0" [(ngModel)]="selectedWorkingCategory"
+              (change)="onWorkingCategoryChange($event.target.selectedIndex)">
+        <option value="0">Select Working category</option>
+        <option *ngFor="let cat of workingList" [value]="cat.id">{{cat.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Response Time: </label>
+      <div class="row">
+        <!--<div class="col-sm-6">-->
+          <!--<input type="number" class="form-control radius-0 font-13" [(ngModel)]="respHour"-->
+                 <!--placeholder="Hour">-->
+        <!--</div>-->
+        <div class="col-sm-6">
+          <input type="number" class="form-control radius-0 font-13" [(ngModel)]="respMin"
+                 placeholder="Min">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Resolution Time: </label>
+      <div class="row">
+        <!--<div class="col-sm-6">-->
+          <!--<input type="number" class="form-control radius-0 font-13" [(ngModel)]="resoHour"-->
+                 <!--placeholder="Hour">-->
+        <!--</div>-->
+        <div class="col-sm-6">
+          <input type="number" class="form-control radius-0 font-13" [(ngModel)]="resoMin"
+                 placeholder="Min">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="form-group">
+      <label>Response SLA Compliance %: </label>
+      <!-- &nbsp;<span class="warning-msg">
+        *In %
+      </span> -->
+      <div class="row">
+        <div class="col-sm-6">
+          <input type="number" class="form-control radius-0 font-13" [(ngModel)]="responseSLACompliance"
+                 placeholder="Enter Response SLA Compliance">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Resolution SLA Compliance %: </label>
+      <!-- &nbsp;<span class="warning-msg">
+        *In %
+      </span> -->
+      <div class="row">
+        <div class="col-sm-6">
+          <input type="number" class="form-control radius-0 font-13" [(ngModel)]="resolutionSLACompliance"
+                 placeholder="Enter Resolution SLA Compliance">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="form-group ticket-menu">
+      <mat-checkbox class ="font-13" [(ngModel)]="specificToSuppGrp">Specific To Supportgroup</mat-checkbox>
+    </div>
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()" *ngIf="!updateFlag">Save</button>
+    <button type="button" class="btn btn-success radius-0" (click)="update()" *ngIf="updateFlag">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+

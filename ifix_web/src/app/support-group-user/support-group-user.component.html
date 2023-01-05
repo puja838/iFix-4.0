@@ -1,0 +1,107 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"(offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [dataLoaded]="dataLoaded"></app-base-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Map User With Support Group</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+    <!-- <div class="form-group" [hidden]="notAdmin">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected"
+              (change)="onClientChange($event.target.selectedIndex)">
+        <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+      </select>
+    </div> -->
+    <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected" (change)="onOrgChange($event.target.selectedIndex)">
+          <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+        </select>
+      </div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="grpSelected" (change)="ongrpChange($event.target.selectedIndex)">
+        <option *ngFor="let grp of groups" [value]="grp.id">{{grp.supportgroupname}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" placeholder="Enter Login ID OR Name"
+             [(ngModel)]="userSelected"
+             matInput [formControl]="searchUser"[matAutocomplete]="auto"
+            >
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getUserDetails()">
+          <mat-option *ngIf="isLoading" class="is-loading">
+              <mat-spinner diameter="50"></mat-spinner>
+          </mat-option>
+          <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let user of users" [value]="user.loginname">
+                {{ user.name }} - {{user.loginname}}
+              </mat-option>
+          </ng-container>
+      </mat-autocomplete>
+  </div>
+
+  <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" placeholder="User Name" readonly
+             [(ngModel)]="userName">
+  </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+    <div class="modal-header modalTitle">
+      <div class="modal-title">Update User Support Group Mapping</div>
+
+    </div>
+    <div class="modal-body">
+        <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+        <!-- <div class="form-group" [hidden]="notAdmin">
+          <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected"
+                  (change)="onClientChange($event.target.selectedIndex)">
+            <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+          </select>
+        </div> -->
+        <div class="form-group">
+            <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected" (change)="onOrgChange($event.target.selectedIndex)">
+              <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+            </select>
+          </div>
+        <div class="form-group">
+          <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="grpSelected" (change)="ongrpChange($event.target.selectedIndex)">
+            <option *ngFor="let grp of groups" [value]="grp.id">{{grp.supportgroupname}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control radius-0 font-13" placeholder="Enter Login ID OR Name"
+                 [(ngModel)]="userSelected"
+                 matInput [formControl]="searchUser"[matAutocomplete]="auto"
+                >
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getUserDetails()">
+              <mat-option *ngIf="isLoading" class="is-loading">
+                  <mat-spinner diameter="50"></mat-spinner>
+              </mat-option>
+              <ng-container *ngIf="!isLoading">
+                  <mat-option *ngFor="let user of users" [value]="user.loginname">
+                    {{ user.name }} - {{user.loginname}}
+                  </mat-option>
+              </ng-container>
+          </mat-autocomplete>
+      </div>
+
+      <div class="form-group">
+          <input type="text" class="form-control radius-0 font-13" placeholder="User Name" readonly
+                 [(ngModel)]="userName">
+      </div>
+
+      </div>
+    <div class="modal-footer pad-8">
+      <button type="button" class="btn btn-success radius-0" (click)="update()">Update</button>
+      <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+    </div>
+  </ng-template>

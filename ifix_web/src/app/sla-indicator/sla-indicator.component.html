@@ -1,0 +1,88 @@
+
+<app-base-template (modal)="openModal(content)" [displayData]="displayData" [totalPage]="totalPage" (tabledata)="getTableData()"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)"
+                   [dataLoaded]="dataLoaded"></app-base-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header modalTitle">
+        <div class="modal-title" *ngIf="!updateFlag">Add SLA Indicator</div>
+        <div class="modal-title" *ngIf="updateFlag">Update SLA Indicator</div>
+    </div>
+    <div class="modal-body">
+        <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+        <div class="form-group">
+            <select class="form-control font-13 radius-0" [(ngModel)]="organizationId" (change)="onOrgChange($event.target.selectedIndex)">
+                <option value="">Select Organization</option>
+                <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffTypeSeqno"
+            (change)="getrecordbydifftype($event.target.selectedIndex, 'from')">
+                <option value="">Select From Property Type</option>
+                <option *ngFor="let record of recordTypeStatus;" [value]="record.seqno">{{record.typename}}</option>
+            </select>
+        </div>
+        <div class="form-group" [hidden]="fromPropLevels.length===0">
+            <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelid"
+            (change)="onLevelChange($event.target.selectedIndex,'from')">
+                <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId">
+                <option value="">Select From Property</option>
+                <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control font-13 radius-0" [(ngModel)]="toRecordDiffTypeSeqno"
+            (change)="getrecordbydifftype($event.target.selectedIndex, 'to')">
+                <option value="">Select To Property Type</option>
+                <option *ngFor="let record of recordTypeStatus;" [value]="record.seqno">{{record.typename}}</option>
+            </select>
+        </div>
+        <div class="form-group" [hidden]="toPropLevels.length===0">
+            <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="tolevelid"
+            (change)="onLevelChange($event.target.selectedIndex,'to')">
+                <option *ngFor="let level of toPropLevels" [value]="level.id">{{level.typename}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control font-13 radius-0" [(ngModel)]="toRecordDiffId">
+                <option value="">Select To Property</option>
+                <option *ngFor="let record of toTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="custom-select font-13 radius-0" [(ngModel)]="selectedSlaName"
+            (change)="onSlaNameChange($event.target.selectedIndex)">
+                <option value="0">Select SLA Name</option>
+                <option *ngFor="let sla of slaNames" [value]="sla.id">{{sla.slaname}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control font-13 radius-0" [(ngModel)]="selectedMeter" 
+            (change)="onMeterChange($event.target.selectedIndex)">
+                <option value="0">Select SLA Meter</option>
+                <option *ngFor="let meter of meters;" [value]="meter.id">{{meter.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group ticket-menu" [hidden]="slaTermsNames.length===0">
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="pauseSla">
+                <mat-radio-button *ngFor="let slaTermsName of slaTermsNames" [value]="slaTermsName.id">{{slaTermsName.name}}&nbsp;&nbsp; </mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+    </div>
+    <div class="modal-footer pad-8">
+        <button type="button" class="btn btn-success radius-0" (click)="save()" *ngIf="!updateFlag">Save</button>
+        <button type="button" class="btn btn-success radius-0" (click)="update()" *ngIf="updateFlag">Update</button>
+        <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+    </div>
+</ng-template>

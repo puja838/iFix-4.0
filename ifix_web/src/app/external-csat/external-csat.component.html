@@ -1,0 +1,149 @@
+<nav class="navbar navbar-expand-md navbar-style fixed-top" id="navbarId">
+  <div class="container-fluid pad-lft-rgt-0 row">
+    <div class="col-3 row">
+      <div class="col-9 mar-lft">
+        <img class="user-avatar mr-3  user-logo1 pointer" src="../../assets/img/logo.png" height="40" width="140"
+             >
+        <img class="user-avatar mr-3  user-logo pointer" src="../../assets/img/logo2.png" height="40" width="40"
+             >
+
+      </div>
+
+    </div>
+
+
+    <!--<div class="col-2 widthx">
+
+      <div class="user-area dropdown float-right">
+        <img class="user-avatar mr-3 profile " class="logo-dash" src="../../assets/img/tata.png" alt="User Avatar">
+        <a class="dropdown-toggle" (click)="profileDetail()">
+          <img class="user-avatar rounded-circle profile" src="../../assets/img/profile2.jfif" alt="User Avatar" height="40"
+               width="40">
+        </a>
+        <div class="user-menu dropdown-menu" *ngIf="isProfile" [ngStyle]="{'background':profileValue}">
+          <a class="nav-link cursor-pointer" (click)="openUserInfo()" [ngStyle]="{'color':footerItem}"><i
+            class="fa fa-user"></i> My Profile</a>
+          <a class="nav-link cursor-pointer" (click)="openLoginInfo()" [ngStyle]="{'color':footerItem}"><i
+            class="fa fa-user"></i> Impersonate Login</a>
+
+          &lt;!&ndash;          <a class="nav-link cursor-pointer" (click)="change_password()" [ngStyle]="{'color':footerItem}"><i class="fa fa-lock"></i> Change Password</a>&ndash;&gt;
+
+          &lt;!&ndash;<a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
+
+          <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>&ndash;&gt;
+
+          <a class="nav-link" class="link" (click)="logOut()" [ngStyle]="{'color':footerItem}"><i
+            class="fa fa-power-off"></i> Logout</a>
+        </div>
+      </div>
+    </div>-->
+  </div>
+</nav>
+<ng-template #checkterm>
+  <div *ngFor="let term of stateterms" [ngSwitch]="term.termtypeid">
+    <div class="form-group " *ngSwitchCase="'2'">
+      <div *ngIf="nextstatusseq !== CLOSE_STATUS_SEQ">
+        <mat-form-field class="matcss">
+          <mat-label>{{term.tername}}</mat-label>
+          <mat-select [(ngModel)]="term.insertedvalue">
+            <mat-option *ngFor="let opt of term.recordtermvalue.split(',')" [value]="opt"
+            >{{opt}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="nextstatusseq === CLOSE_STATUS_SEQ">
+        <mat-label class="label1">{{term.tername}} &nbsp;&nbsp;</mat-label>
+        <mat-radio-group [(ngModel)]="term.insertedvalue">
+          <mat-radio-button *ngFor="let opt of term.recordtermvalue.split(',')" [value]="opt">{{opt}}&nbsp;&nbsp;
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="form-group " *ngSwitchCase="'1'">
+      <div class="row margin2">
+        <label class="col-sm-3 col-form-label label1 ">{{term.tername}}</label>
+        <div class="col-sm-9">
+          <div class="form-group">
+            <textarea
+              class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+              placeholder="Long Description" [(ngModel)]="term.insertedvalue" (keypress)="blockSpecialChar($event)">
+                  </textarea>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group " *ngSwitchCase="'6'">
+      <div class="row margin2">
+        <label class="col-sm-7 col-form-label label1 ">{{term.tername}}</label>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <ngb-rating class="rate mar-top-5" [max]="5" [(ngModel)]="term.insertedvalue"></ngb-rating>
+          </div>
+        </div>
+        <div class="col-sm-2" *ngIf="term.insertedvalue !== ''">
+          <img src='{{ "assets/img/CSAT" +term.insertedvalue + ".jpg" }}' class="height-30">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group  " *ngSwitchCase="'4'">
+      <div class="row margin2">
+        <label class="col-sm-3 col-form-label label1 ">{{term.tername}}</label>
+        <div class="col-sm-9">
+          <div class="form-group">
+            <input
+              class="form-control radius-0 font-13 "
+              placeholder="{{term.tername}}" [(ngModel)]="term.insertedvalue"
+              [owlDateTimeTrigger]="dt10"
+              [owlDateTime]="dt10" readonly>
+            <owl-date-time [pickerType]="'calendar'" #dt10></owl-date-time>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group  " *ngSwitchCase="'5'">
+      <div class="row margin2">
+        <label class="col-sm-3 col-form-label label1 ">{{term.tername}}</label>
+        <div class="col-sm-9">
+          <div class="form-group">
+            <!-- <input class="form-control radius-0 font-13 "
+                   placeholder="{{term.tername}}" aria-label="24hr format" [(ngModel)]="term.insertedvalue"
+                   [ngxTimepicker]="fullTime" [format]="24" readonly>
+            <ngx-material-timepicker #fullTime></ngx-material-timepicker> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group  " *ngSwitchCase="'8'">
+      <div class="row margin2">
+        <label class="col-sm-3 col-form-label label1 ">{{term.tername}}</label>
+        <div class="col-sm-9">
+          <div class="form-group">
+            <textarea
+              class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+              placeholder="Long Description" [(ngModel)]="term.insertedvalue"
+              (keypress)="blockSpecialChar($event)">
+                          </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--    <div class="form-group  " *ngSwitchCase="'3'">-->
+<!--      <div class="row margin2">-->
+<!--        <div class="form-group col-sm-6 pad-lft-rgt-0 pad-6">-->
+<!--          <app-material-fileupload-singleclick [target]="fileUploadUrl" [text]="uploadButtonName"-->
+<!--                                               [formData]="formdata" [MAX_FILE_SIZE]="maxfilesize"-->
+<!--                                               (uploadError)="onFileError($event)" [isMultiple]="false"-->
+<!--                                               (complete)="onTermFileComplete($event)"-->
+<!--          ></app-material-fileupload-singleclick>-->
+<!--        </div>-->
+<!--        <div class="col-sm-6 pad-15 text-center upload-msg" [hidden]="hideAttachment">{{attachMsg}}-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+  <button mat-raised-button color="accent" (click)="addStatusTerm()">Add</button>
+</ng-template>

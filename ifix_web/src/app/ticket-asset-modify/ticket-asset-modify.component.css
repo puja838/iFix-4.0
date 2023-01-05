@@ -1,0 +1,26 @@
+.search-box {
+  padding: 10px;
+  background-color: #DDDBDC;
+  height: 150px;
+  float: left;
+  overflow: auto;
+}
+
+.asstetBody{
+  background-color: #9FDAEE;
+  font-family: Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+.asstetHead{
+  background-color: #2BB0D7;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+.duration-bg{
+  background-color: #e9d4f1 !important
+}

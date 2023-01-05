@@ -1,0 +1,172 @@
+<app-base-template (modal)="openModal(content)"  (tabledata)="getTableData()" [displayData]="displayData"  (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)"[dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Add Client</div>
+  </div>
+  <div class="modal-body hight_modal" style="height: 460px; overflow: auto;">
+    <div class="none" *ngIf = "isError" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="name"
+             placeholder="Client Name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="clientCode"
+             placeholder="Client code">
+    </div>
+
+    <div class="form-group">
+      <textarea class="form-control radius-0 font-13" [(ngModel)]="description" placeholder="Client Description"></textarea>
+    </div>
+    <!-- <div class="form-group">
+      <textarea class="form-control radius-0 font-13" [(ngModel)]="cliAddr" placeholder="Client Address"></textarea>
+    </div> -->
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="keyPerson"
+             placeholder="Enter Key Person Name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="keyEmail"
+             placeholder="Enter Key Person Email Id">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="keyMobile"
+             placeholder="Enter Key Person Mobile">
+    </div>
+    <div class="form-group">
+      <mat-slide-toggle (toggleChange)="keyPersonChecked()" [checked]="personChecked"><b class="blue">Same As Key Person</b>
+      </mat-slide-toggle>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="spocPerson"
+             placeholder="Enter Business Spoc Name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="spocEmail"
+             placeholder="Enter Business Spoc Email Id">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="spocMobile"
+             placeholder="Enter Business Spoc Mobile">
+    </div>
+    <!--<div class="form-group">-->
+      <!--<input type="text" class="form-control radius-0 font-13" placeholder="Search Zone.." [(ngModel)]="zoneSelected"-->
+             <!--matInput [formControl]="searchTerm"-->
+             <!--[matAutocomplete]="auto">-->
+      <!--<mat-autocomplete #auto="matAutocomplete">-->
+        <!--<mat-option *ngIf="isLoading" class="is-loading">-->
+          <!--<mat-spinner diameter="50"></mat-spinner>-->
+        <!--</mat-option>-->
+        <!--<ng-container *ngIf="!isLoading">-->
+          <!--<mat-option *ngFor="let zone of zones" [value]="zone.id">-->
+            <!--{{ zone.zonename }}-->
+          <!--</mat-option>-->
+        <!--</ng-container>-->
+      <!--</mat-autocomplete>-->
+    <!--</div>-->
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Edit Client</div>
+
+  </div>
+  <div class="modal-body" style="height: 460px; overflow: auto;">
+    <div class="none"  *ngIf = "isError" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Client Name :</b></label>
+        <div class="col-sm-8 col-md-8">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="name"
+             placeholder="Client Name" pattern="^[a-zA-Z_\-]+$">
+    </div>
+    </div>
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Client Code :</b></label>
+        <div class="col-sm-8 col-md-8">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="clientCode"
+             placeholder="Client Code">
+    </div>
+    </div>
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Client Description :</b></label>
+        <div class="col-sm-8 col-md-8">
+      <textarea class="form-control radius-0 font-13" [(ngModel)]="description" placeholder="Client Description"></textarea>
+    </div>
+    </div>
+
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Key Person Name :</b></label>
+        <div class="col-sm-8 col-md-8">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="keyPerson"
+             placeholder="Enter Key Person Name">
+    </div>
+    </div>
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Key Person Email Id :</b></label>
+        <div class="col-sm-8 col-md-8">
+      <input type="email" class="form-control radius-0 font-13" [(ngModel)]="keyEmail"
+             placeholder="Enter Key Person Email Id">
+    </div>
+    </div>
+
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Key Person Mobile :</b></label>
+        <div class="col-sm-8 col-md-8">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="keyMobile"
+             placeholder="Enter Key Person Mobile">
+    </div>
+    </div>
+
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Business Spoc Name :</b></label>
+        <div class="col-sm-8 col-md-8">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="spocPerson"
+             placeholder="Enter Business Spoc Name">
+    </div>
+    </div>
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Business Spoc Email Id :</b></label>
+        <div class="col-sm-8 col-md-8">
+      <input type="email" class="form-control radius-0 font-13" [(ngModel)]="spocEmail"
+             placeholder="Enter Business Spoc Email Id">
+    </div>
+    </div>
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Business Spoc Mobile :</b></label>
+        <div class="col-sm-8 col-md-8">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="spocMobile"
+             placeholder="Enter Business Spoc Mobile">
+    </div>
+    </div>
+    <!--<div class="form-group">-->
+      <!--<input type="text" class="form-control radius-0 font-13" placeholder="Search Zone.." [(ngModel)]="zoneSelected"-->
+             <!--matInput [formControl]="searchTerm"-->
+             <!--[matAutocomplete]="auto">-->
+      <!--<mat-autocomplete #auto="matAutocomplete">-->
+        <!--<mat-option *ngIf="isLoading" class="is-loading">-->
+          <!--<mat-spinner diameter="50"></mat-spinner>-->
+        <!--</mat-option>-->
+        <!--<ng-container *ngIf="!isLoading">-->
+          <!--<mat-option *ngFor="let zone of zones" [value]="zone.name">-->
+            <!--{{ zone.name }}-->
+          <!--</mat-option>-->
+        <!--</ng-container>-->
+      <!--</mat-autocomplete>-->
+    <!--</div>-->
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+
+<!--<notifier-container></notifier-container>-->

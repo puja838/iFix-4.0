@@ -1,0 +1,194 @@
+<app-base-template (modal)="openModal(content)"  (tabledata)="getTableData()" [displayData]="displayData" (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [totalPage]="totalPage" [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Add FAQ Document</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="organizationId" (change) = "onOrgChange($event.target.selectedIndex)">
+        <option value="">Select Organization</option>
+        <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffType" (change)="getrecordbydifftype($event.target.selectedIndex)">
+        <option value="">Select From Property Type</option>
+        <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+
+    <div class="form-group" [hidden]="fromPropLevels.length===0">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelid"
+              (change)="onLevelChange($event.target.selectedIndex)">
+              <option value="">Select Property Level</option>
+        <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId" (change) = "onPropertyChange($event.target.selectedIndex)">
+        <option value="">Select From Property</option>
+        <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+        <select class="form-control font-13 radius-0" [(ngModel)]="sgOrganizationId" (change) = "onSgOrgChange($event.target.selectedIndex)">
+          <option value="">Select Support Group Organization</option>
+          <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+        </select>
+      </div>
+
+
+      <!--<div class="form-group matFrom">
+        <mat-form-field>
+          <mat-label class="font-13">Select Support Group</mat-label>
+          <mat-select [(ngModel)]="levelSelected" multiple>
+            <mat-option *ngFor="let level of levels" [value]="level.id" class="font-13">{{level.supportgroupname}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>-->
+
+      <div class="form-group">
+        <ng-select [items]="levels"  bindLabel="supportgroupname" bindValue="id" [closeOnSelect]="false" [multiple]="true" 
+                   groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                   [searchable]="true" placeholder="Select Support Group" [(ngModel)]="levelSelected">
+
+            <ng-template ng-multi-label-tmp let-items="items">
+              <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                  <span class="ng-value-label"> {{item.supportgroupname}}</span>
+                  <!-- <span class="ng-value-icon right" (click)="clear(item.id)" aria-hidden="true">×</span> -->
+              </div>
+              <div class="ng-value" *ngIf="items.length > 4" >
+                  <span class="ng-value-label">{{items.length - 4}} more...</span>
+              </div>
+          </ng-template>         
+          
+          <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" [ngModel] ="item$.selected"/>&nbsp;&nbsp;Select All
+          </ng-template>
+
+            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.supportgroupname}}
+            </ng-template>          
+        </ng-select>
+      </div>
+
+      <div class="form-group">
+          <span class="font-13">Upload FAQ:</span>
+          <app-material-fileupload [target]="fileUploadUrl" [text]="uploadButtonName"
+                                   (complete)="onFileComplete($event)" [formData]="formData"
+                                   (uploadError)="onFileError($event)" [isMultiple]="false" [maxFile]=1></app-material-fileupload>
+          <span class="font-13 warn">**Please upload one file at a time</span>
+          <div class="col-sm-6 pad-15 text-center upload-msg">{{attachMsg}}</div>
+      </div>
+   
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Update FAQ Document</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization :</b></label>
+        <div class="col-sm-8 col-md-8">
+           <select class="form-control font-13 radius-0" [(ngModel)]="organizationId" (change) = "onOrgChange($event.target.selectedIndex)">
+          <option value="">Select Organization</option>
+          <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Type:</b></label>
+        <div class="col-sm-8 col-md-8">
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffType" (change)="getrecordbydifftype($event.target.selectedIndex)">
+          <option value="">Select Property Type</option>
+          <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+        </select>
+      </div>
+    </div>
+
+      <div class="form-group row">
+          <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>From Property :</b></label>
+          <div class="col-sm-8 col-md-8">
+        <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId" (change) = "onPropertyChange($event.target.selectedIndex)">
+          <option value="">Select Property</option>
+          <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+        </select>
+      </div>
+      </div>
+  
+      <div class="form-group row">
+          <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Group Organization :</b></label>
+          <div class="col-sm-8 col-md-8">
+            <select class="form-control font-13 radius-0" [(ngModel)]="sgOrganizationId" (change) = "onSgOrgChange($event.target.selectedIndex)">
+              <option value="">Select Group Organization</option>
+              <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+            </select>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+          <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Group level :</b></label>
+          <div class="col-sm-8 col-md-8">  
+            <ng-select [items]="levels"  bindLabel="supportgroupname" bindValue="id" [multiple]="false" [closeOnSelect]="false" [searchable]="true" 
+                       groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false" 
+                       placeholder="Select Support Group" [(ngModel)]="levelSelected1">
+
+                <!-- <ng-template ng-multi-label-tmp let-items="items">
+                  <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                      <span class="ng-value-label"> {{item.supportgroupname}}</span>
+                  </div>
+                  <div class="ng-value" *ngIf="items.length > 4" >
+                      <span class="ng-value-label">{{items.length - 4}} more...</span>
+                  </div>
+                </ng-template>         
+              
+                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                      <input id="item-{{index}}" type="checkbox" [ngModel] ="item$.selected"/>&nbsp;&nbsp;Select All
+                </ng-template>
+
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.supportgroupname}}
+                </ng-template>          -->
+            </ng-select>
+          </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Upload FAQ:</b></label>
+        <div class="col-sm-8 col-md-8  file-name" *ngIf="fileEdit">{{fileName}}</div>
+        <!--<div class="col-sm-8 col-md-8">
+          <app-material-fileupload [target]="fileUploadUrl" [text]="uploadButtonName"
+                                   (complete)="onFileComplete($event)" [formData]="formData"
+                                   (uploadError)="onFileError($event)"></app-material-fileupload>
+          
+          <div class="col-sm-4 col-md-4 text-center upload-msg">{{attachMsg}} </div>
+        </div>-->
+      </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template> 
+
+
+
+<!-- <notifier-container></notifier-container> -->

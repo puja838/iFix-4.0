@@ -1,0 +1,50 @@
+<div class="div-container">
+    <div class="limiter back">
+      <div class="container-login100">
+        <div class="login100-more bg-image"></div>
+        <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+          <!--<form class="login100-form validate-form">-->
+          <!--<span class="login100-form-title p-b-15">
+                          <img src="../../assets/img/logo.png" alt="">
+                      </span>-->
+
+          <div class="wrap-input300 validate-input">
+            <input class="input100" type="text" [(ngModel)]="vOtp" placeholder="Enter OTP">
+          </div>
+
+          
+          
+          <div class="forgtsec">
+  <!--          <a href="#" class="notankr"> Not Registered Yet?</a>-->
+  <!--          <a href="#" class="frgtankr "> Forget Password?</a>-->
+          </div>
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" [hidden]="validFlag1" (click)="validation()">
+                Validete OTP
+              </button>
+
+              <button class="login100-form-btn" [hidden]="validFlag">
+                Verifying for login .....
+              </button>
+            </div>
+          </div>
+          <!--<div class="social text-center">
+            <small><b>&copy; Copyright {{currentYear}} <span class="red">i</span><span class="blue">FIX</span> tech Global | All Rights Reserved </b></small>
+          </div>
+          <footer class=" dashfoot text-center">
+            <small><b>&copy; Copyright {{currentYear}} <span class="red">i</span><span class="blue">FIX</span> tech Global | All Rights Reserved </b></small>
+          </footer>-->
+          <!--<div class="social text-center">
+            <a href="#"><img src="../../assets/img/linkdin.png" alt=""></a>
+            <a href="#"><img src="../../assets/img/facebook.png" alt=""></a>
+            <a href="#"><img src="../../assets/img/twittr.png" alt=""></a>
+            <a href="#"><img src="../../assets/img/instra.png" alt=""></a>
+            <a href="#"><img src="../../assets/img/youtube.png" alt=""></a>
+          </div>-->
+          <!--</form>-->
+        </div>
+      </div>
+    </div>
+  </div>

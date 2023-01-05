@@ -1,0 +1,58 @@
+<div class="loader" [hidden]="dataLoaded"><img class="loading-gif" src="../../../assets/img/loader.gif"></div>
+<div class="dasboard-width">
+  <div class="row header mar-lft-rgt-0">
+    <div class="col-md-4 col-sm-4 pageName" >{{displayData.pageName}}</div>
+    <!-- <div class="col-md-4 col-sm-4">
+      <button class="btn btn-success addButton" (click)="openModal(content)"
+              [hidden]="hideBtn">{{displayData.openModalButton}}</button>
+    </div> -->
+  </div>
+  <div class="col-md-12 col-sm-12 maxWidth">
+    <div class="card">
+      <div class="card-header card-header-top">
+        <div class="col-md-3 mar-lft-rgt-0">
+            {{displayData.tabName}}
+        </div>
+        <div class="col-md-10 mar-lft-rgt-0  row pull-right ">
+            <div class="col-md-4 mar-lft-rgt-0">
+                <button type="button" class="btn btn-primary btn-Primary radius-0 font-13" (click)="stateChangeButton(APPROVED_STATUS_SEQ)">Accept</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-secondary btn-Grey3 radius-0 font-13" (click)="stateChangeButton(REJECTED_STATUS_SEQ)">Reject</button>
+            </div>
+          <div class="col-sm-2 font-13">
+            <select class="custom-select mr-sm-2 radius-0 font-13 custom-width" [(ngModel)]="pageSizeSelected"
+                    (change)="onPageSizeChange($event.target.selectedIndex)">
+              <option *ngFor="let pageSize of pageSizeObj" [value]="pageSize.id">{{pageSize.value}}</option>
+            </select>
+          </div>
+          <div class="col-sm-3 mar-lft-rgt-0 font-13">
+            <ngb-pagination [(collectionSize)]="totalData" #numPages 
+                            [(pageSize)]="itemsPerPage" [(page)]="page"
+                            [(maxSize)]="maxLength" (pageChange)="pageChanged($event)"
+                            aria-label="Default pagination"></ngb-pagination>
+          </div>
+          <div class="col-sm-3 mar-lft-rgt-0  font-13">
+            <b >Total items: </b> <span>{{totalData}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body card-body-grid" id="viewGrid" *ngIf="isDisplay">
+        <angular-slickgrid  gridId="grid12"
+                            [columnDefinitions]="columnDefinitions"
+                            [gridOptions]="gridOptions"
+                            (onAngularGridCreated)="angularGridReady($event)"
+                            (sgOnCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
+                            (onGridStateChanged)="onGridChanged($event.change.newValues.dataContextIds)"
+                            [gridHeight]="365"
+                            (sgOnSelectedRowsChanged)="handleSelectedRowsChanged($event.detail.eventData, $event.detail.args)"
+                            (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
+                            [dataset]="dataset">
+        </angular-slickgrid>
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+
+
+  

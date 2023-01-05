@@ -1,0 +1,404 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Add Organization</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{message}}</div>
+
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected"
+              (change)="onClientChange($event.target.selectedIndex)">
+        <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgTypeSelected"
+              (change)="onOrgTypeChange($event.target.selectedIndex)">
+        <option *ngFor="let orgType of orgTypes" [value]="orgType.id">{{orgType.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="porgSelected"
+              (change)="onParentOrgChange($event.target.selectedIndex)">
+        <option value="0">Select Parent Organization</option>
+        <option *ngFor="let parentOrg of parentOrg" [value]="parentOrg.id">{{parentOrg.organizationname}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <div class="form-group">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="orgName"
+               placeholder="Enter name">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectCity"
+              (change)="oncityChange($event.target.selectedIndex)">
+        <option *ngFor="let city of cities" [value]="city.id">{{city.cityname}}</option>
+      </select>
+    </div>
+
+
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="countrySelected"
+              (change)="oncountryChange($event.target.selectedIndex)">
+        <option *ngFor="let country of countrys" [value]="country.id">{{country.countryname}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="code"
+               placeholder="Enter code">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="location"
+               placeholder="Enter location">
+      </div>
+    </div>
+
+    <!--<div class="form-group">
+      <div class="form-group">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="pincode"
+               placeholder="Enter pincode">
+      </div>
+    </div>-->
+
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" placeholder="Search Organization Time Zone.."
+             [(ngModel)]="timeZoneSelected"
+             matInput [formControl]="searchTimeZone"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngIf="isLoading" class="is-loading">
+          <mat-spinner diameter="50"></mat-spinner>
+        </mat-option>
+        <ng-container *ngIf="!isLoading">
+          <mat-option *ngFor="let zone of timeZones" [value]="zone.zonename">
+            {{ zone.zonename }}
+          </mat-option>
+        </ng-container>
+      </mat-autocomplete>
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" placeholder="Search Organization Report Zone.."
+             [(ngModel)]="zoneSelected"
+             matInput [formControl]="searchTerm"
+             [matAutocomplete]="autoTest">
+      <mat-autocomplete #autoTest="matAutocomplete">
+        <mat-option *ngIf="isLoading" class="is-loading">
+          <mat-spinner diameter="50"></mat-spinner>
+        </mat-option>
+        <ng-container *ngIf="!isLoading">
+          <mat-option *ngFor="let zone of zones" [value]="zone.zonename">
+            {{ zone.zonename }}
+          </mat-option>
+        </ng-container>
+      </mat-autocomplete>
+    </div>
+    <div class="form-group">
+      <input class="form-control radius-0 font-13" [owlDateTimeTrigger]="dt6" [owlDateTime]="dt6"
+             placeholder="Activation start" [(ngModel)]="activationDate" [min]="min">
+      <owl-date-time [pickerType]="'calendar'" #dt6></owl-date-time>
+    </div>
+
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectLoginType"
+              (change)="onLoginTypeChange($event.target.selectedIndex)">
+        <option *ngFor="let login of logins" [value]="login.id">{{login.name}}</option>
+      </select>
+    </div>
+
+    <!--    <div class="form-group" >-->
+    <mat-checkbox *ngIf="(selectLoginType != 2 && selectLoginType != 0) " class="font-13"
+                  [(ngModel)]="localLogin">Combine With iFIX Login
+    </mat-checkbox>
+    <!--    </div>-->
+
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectTimeForm"
+              (change)="onTimeFormChange($event.target.selectedIndex)">
+        <option *ngFor="let timeFrom of times" [value]="timeFrom.id">{{timeFrom.timeformat}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectReportTime"
+              (change)="onReportTimeChange($event.target.selectedIndex)">
+        <option *ngFor="let reprTime of reportTime" [value]="reprTime.id">{{reprTime.timeformat}}</option>
+      </select>
+    </div>
+
+    <div class="form-group row">
+      <mat-checkbox class="col-sm-4" [(ngModel)]="isOrgMfa">Enable Organization MFA</mat-checkbox>
+    </div>
+
+    <div class="form-group row">
+      <mat-checkbox class="col-sm-4" [(ngModel)]="isNotification">Enable Notification</mat-checkbox>
+    </div>
+
+     <div class="row mar-lft-rgt-0">
+      <div class="text-center">
+        <span class="font-14 ">Upload Logo:</span>
+        <app-material-fileupload-singleclick [target]="fileUploadUrl" [text]="uploadButtonName" [formData]="formdata"
+          (uploadError)="onFileError($event)" (complete)="onFileComplete($event)" (onFileRemove)="onRemove()"
+          (dataLoaded)="onUpload($event)"></app-material-fileupload-singleclick>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="fileName">
+      <span class="file-name">{{orginalDocumentName}}</span>
+    </div>
+
+      <div class="row mar-lft-rgt-0">
+      <div class="text-center">
+        <span class="font-14">Upload Background:</span>
+        <app-material-fileupload-singleclick [target]="fileUploadUrl" [text]="uploadButtonName" [formData]="formdata"
+          (uploadError)="onBgFileError($event)" (complete)="onBgFileComplete($event)" (onFileRemove)="onRemove()"
+          (dataLoaded)="onUpload($event)"></app-material-fileupload-singleclick>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="fileName">
+      <span class="file-name">{{orginalBgImageName}}</span>
+    </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Update Organization</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{message}}</div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Client Select :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="clientSelectedName" readonly>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization Type :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgTypeSelected"
+                (change)="onOrgTypeChange($event.target.selectedIndex)">
+          <option *ngFor="let orgType of orgTypes" [value]="orgType.id">{{orgType.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Parent Organization :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="porgSelected"
+                (change)="onParentOrgChange($event.target.selectedIndex)" [disabled]="isBaseOrg">
+          <option value="-1">Select Parent Organization</option>      
+          <option value="0" *ngIf="isBaseOrg">Base Organization</option>      
+          <option *ngFor="let parentOrg of parentOrg" [value]="parentOrg.id">{{parentOrg.organizationname}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization Name :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="orgName"
+               placeholder="Enter name">
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>City Name :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectCity"
+                (change)="oncityChange($event.target.selectedIndex)">
+          <option *ngFor="let city of cities" [value]="city.id">{{city.cityname}}</option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Country :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="countrySelected"
+                (change)="oncountryChange($event.target.selectedIndex)">
+          <option *ngFor="let country of countrys" [value]="country.id">{{country.countryname}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Code :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="code"
+               placeholder="Enter code">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Location :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="location"
+               placeholder="Enter location">
+      </div>
+    </div>
+
+    <!--<div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>pincode :</b></label>
+        <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="pincode"
+               placeholder="Enter pincode">
+      </div>
+    </div>-->
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization Time Zone :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" placeholder="Search Organization Time Zone.."
+               [(ngModel)]="timeZoneSelected1"
+               matInput [formControl]="searchTimeZone"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngIf="isLoading" class="is-loading">
+            <mat-spinner diameter="50"></mat-spinner>
+          </mat-option>
+          <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let zone of timeZones" [value]="zone.zonename">
+              {{ zone.zonename }}
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization Report Zone :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" placeholder="Search Organization Report Zone.."
+               [(ngModel)]="zoneSelected1"
+               matInput [formControl]="searchTerm"
+               [matAutocomplete]="autoTest">
+        <mat-autocomplete #autoTest="matAutocomplete">
+          <mat-option *ngIf="isLoading" class="is-loading">
+            <mat-spinner diameter="50"></mat-spinner>
+          </mat-option>
+          <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let zone of zones" [value]="zone.zonename">
+              {{ zone.zonename }}
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Activation start :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input class="form-control radius-0 font-13" [owlDateTimeTrigger]="dt6" [owlDateTime]="dt6"
+               placeholder="Activation start" [(ngModel)]="activationDate1" [min]="min">
+        <owl-date-time [pickerType]="'calendar'" #dt6></owl-date-time>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Login Type :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectLoginType"
+                (change)="onLoginTypeChange($event.target.selectedIndex)">
+          <option *ngFor="let login of logins" [value]="login.id">{{login.name}}</option>
+        </select>
+      </div>
+    </div>
+    <mat-checkbox *ngIf="(selectLoginType != 2 && selectLoginType != 0) " class="font-13"
+                  [(ngModel)]="localLogin">Combine With iFIX Login
+    </mat-checkbox>
+    <!--<div class="form-group row" *ngIf="(selectLoginType != 2 && selectLoginType != 0) ">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Local Login :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <mat-checkbox class="form-control font-13" [(ngModel)]="localLogin">Local Login</mat-checkbox>
+      </div>
+    </div>-->
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Time Format :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectTimeForm"
+                (change)="onTimeFormChange($event.target.selectedIndex)">
+          <option *ngFor="let timeFrom of times" [value]="timeFrom.id">{{timeFrom.timeformat}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Report Time Format :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectReportTime"
+                (change)="onReportTimeChange($event.target.selectedIndex)">
+          <option *ngFor="let reprTime of reportTime" [value]="reprTime.id">{{reprTime.timeformat}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <mat-checkbox class="col-sm-4" [(ngModel)]="isOrgMfa">Enable Organization MFA</mat-checkbox>
+    </div>
+    
+    <div class="form-group row">
+      <mat-checkbox class="col-sm-4" [(ngModel)]="isNotification">Enable Notification</mat-checkbox>
+    </div>
+
+    <div class="row mar-lft-rgt-0">
+      <div class="text-center">
+        <span class="font-14 ">Upload Logo:</span>
+        <app-material-fileupload-singleclick [target]="fileUploadUrl" [text]="uploadButtonName" [formData]="formdata"
+          (uploadError)="onFileError($event)" (complete)="onFileComplete($event)" (onFileRemove)="onRemove()"
+          (dataLoaded)="onUpload($event)"></app-material-fileupload-singleclick>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="fileName">
+      <span class="file-name">{{orginalDocumentName}}</span>
+    </div>
+
+      <div class="row mar-lft-rgt-0">
+      <div class="text-center">
+        <span class="font-14">Upload Background:</span>
+        <app-material-fileupload-singleclick [target]="fileUploadUrl" [text]="uploadButtonName" [formData]="formdata"
+          (uploadError)="onBgFileError($event)" (complete)="onBgFileComplete($event)" (onFileRemove)="onRemove()"
+          (dataLoaded)="onUpload($event)"></app-material-fileupload-singleclick>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="fileName">
+      <span class="file-name">{{orginalBgImageName}}</span>
+    </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+<!--<notifier-container></notifier-container>-->
+

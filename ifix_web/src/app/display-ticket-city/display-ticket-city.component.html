@@ -1,0 +1,2289 @@
+<ng-template #content let-c="close" let-d="dismiss">
+
+  <div class="modal-header modalTitle" *ngIf="isModal">
+    <div class="modal-title">{{ticketidlabel}}: {{ticketId}} <span class="close"
+                                                                   (click)="c()" aria-hidden="true">&times;</span>
+    </div>
+
+  </div>
+  <div *ngIf="!isModal">
+    <div class="row header-view modalTitle2 " [ngStyle]="{'background':selectedColor,'color':pageNameCss}">
+      <div class="loader" [hidden]="!isdataLoaded"><img class="loading-gif"
+                                                     src="../../../assets/img/loader.gif"></div>
+      <div class="loader" [hidden]="!isStatusChange"><img class="loading-gif"
+                                                      src="../../../assets/img/loader.gif"></div>
+      <span class="col-md-2  back align-left" *ngIf="url === null || url === ''"></span>
+      <span class="col-md-2  back align-left" *ngIf="url !== null && url !== ''" (click)="gotoprev()"> <i
+        class="fa fa-arrow-left"
+        aria-hidden="true"
+      ></i> Back</span>
+      <div class="col-md-2  text-right mar-top-9">{{ticketidlabel}}: {{ticketId}}
+      </div>
+      <div class="col-md-2 row " *ngIf="cloneBtn && haspermission">
+        <button mat-raised-button color="accent"
+                (click)="cloneTicket('cl')">Clone Ticket
+        </button>
+
+      </div>
+      <div class="col-md-2 row " *ngIf="convertBtn && !noConversion && haspermission">
+        <button mat-raised-button color="accent"
+                (click)="cloneTicket('cv')">Convert Ticket
+        </button>
+      </div>
+      <div class="col-md-4 row " *ngIf="!isDisabled && nextstates.length>0">
+        <div class="pad-0-8" *ngIf="cancelBtn && isCreator">
+          <button mat-raised-button color="primary"
+                  (click)="cancelTicket()">
+            Cancel Ticket
+          </button>
+        </div>
+        <div class="pad-0-8" *ngIf="grpLevel === 1 && reopenBtn && isCreator">
+          <button mat-raised-button color="primary"
+                  (click)="stateChangeButtonReopen(REPOEN_STATUS_SEQ)">Re Open Ticket
+          </button>
+        </div>
+        <div class="pad-0-8" *ngIf=" grpLevel > 1 && reopenBtn ">
+          <button mat-raised-button color="primary"
+                  (click)="stateChangeButtonReopen(REPOEN_STATUS_SEQ)">Re Open Ticket
+          </button>
+        </div>
+        <div class="pad-0-8" *ngIf="closeBtn && isCreator ">
+          <button mat-raised-button color="primary"
+                  (click)="stateChangeButton(CLOSE_STATUS_SEQ)">Close Ticket
+          </button>
+        </div>
+        <div class="pad-0-8" *ngIf="userRepliedBtn && !isCreator">
+          <button mat-raised-button color="primary"
+                  (click)="stateChangeButton(USER_REPLIED_STATUS_SEQ)">User Replied
+          </button>
+        </div>
+
+        <div class="pad-0-8"
+             *ngIf="updateStatusBtn && canForward ">
+          <button mat-raised-button color="accent"
+                  (click)="forwardTicketWithState()">{{changeStateButton}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body modal-height pad-top-0">
+    <mat-tab-group [selectedIndex]='selectedIndextab' (selectedTabChange)="tabClick($event)">
+      <mat-tab *ngIf="ticketTab" label="Ticket Details">
+        <div *ngIf="ticketTab" [ngStyle]="{'color':pageNameCss}">
+          <div class="loaderRes" [hidden]="dataLoaded"><img class="loading-gif"
+                                                         src="../../../assets/img/loader.gif"></div>
+          <div class="row mar-lft-rgt-0 ">
+            <div class="height-40" [hidden]="categoryLoaded">
+              <img class="loading-gif-42" src="../../../assets/img/loader-42px.gif">
+            </div>
+            <div class="col-md-10 pad-7 pad-lft-0 marginTop">
+              <select class="custom-select  tcktyp" *ngFor="let ticket of ticketTypes;"
+                      [disabled]=" grpLevel===1|| isCreatedState || ticket.isDisabled || isDisabled || !canForward || !categoryUpdateBtn"
+                      (change)="onCategoryChange(ticket,$event.target.value)" [hidden]="!categoryLoaded"
+                      id="ticket_{{ticket.id}}" [ngStyle]="{'background':tableCss}">
+                <option *ngFor="let option of ticket.child"
+                        [value]="option|json">{{option.title}}</option>
+              </select>
+            </div>
+            <div class="col-md-2 pad-7 pad-lft-0 marginTop"
+                 *ngIf="categoryUpdateBtn && canForward && !isDisabled">
+              <button mat-raised-button color="primary"
+                      (click)="changeCategory()"><i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+            </div>
+
+          </div>
+
+          <div class="row mar-lft-rgt-0"
+               *ngIf="dynamicFields.length>0 && categoryUpdateBtn && canForward && !isDisabled">
+            <div class="col-md-6 pad-15 pad-lft-0 marginTop">
+              <div class="form-group">
+                <label class="custom-label">Please Select Impacted Location : </label>
+                <input type="text" class="form-control radius-0 font-13 locationSearch" placeholder="Search Location"
+                       [(ngModel)]="locationSelected"
+                       matInput [formControl]="searchLocation" [matAutocomplete]="auto"
+                >
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationDetails()">
+                  <mat-option *ngIf="isLoading" class="is-loading">
+                    <mat-spinner diameter="50"></mat-spinner>
+                  </mat-option>
+                  <ng-container *ngIf="!isLoading">
+                    <mat-option *ngFor="let locationlist of locations" [value]="locationlist.location">
+                      {{ locationlist.location }}
+                    </mat-option>
+                  </ng-container>
+                </mat-autocomplete>
+              </div>
+            </div>
+          </div>
+
+          <div class=" marginTop ">
+            <div class="row mar-lft-rgt-0">
+              <div class="col-sm-3 " *ngFor="let field of dynamicFields;" [ngSwitch]="field.termstypeid">
+                <div class="form-row" *ngSwitchCase="'2'">
+                  <div class="form-group custom-label">
+                    <label>{{field.termsname}}:</label>
+                    <select class="custom-select radius-0 font-13" [(ngModel)]="field.value"
+                            [disabled]="grpLevel===1 || statusseq===CREATED_STATUS_SEQ || statusseq===REPOEN_STATUS_SEQ || !additionalFieldBtn || isDisabled || !additionalFieldBtn || !canForward"
+                            [ngStyle]="{'background':tableCss}">
+                      <option *ngFor="let opt of field.termsvalue.split(',')" [value]="opt">{{opt}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row" *ngSwitchCase="'1'">
+                  <div class="form-group custom-label">
+                    <label>{{field.termsname}}:</label>
+                    <input type="text" class="form-control radius-0 font-13 "
+                           [(ngModel)]="field.value"
+                           [readonly]="field.seqno===38 || grpLevel===1 || statusseq===CREATED_STATUS_SEQ || statusseq===REPOEN_STATUS_SEQ || isDisabled || !additionalFieldBtn || !canForward"
+                           maxlength="200" [ngStyle]="{'background':tableCss}"/>
+                  </div>
+                </div>
+                <div class="form-row" *ngSwitchCase="'4'">
+                  <div class="form-group custom-label">
+                    <label>{{field.termsname}}:</label>
+                    <input
+                      class="form-control radius-0 font-13 marginTop"
+                      placeholder="{{field.values}}" [(ngModel)]="field.value"
+                      [readonly]="grpLevel===1 || statusseq===CREATED_STATUS_SEQ || statusseq===REPOEN_STATUS_SEQ || isDisabled || !additionalFieldBtn || !canForward"
+                      [owlDateTimeTrigger]="dt5"
+                      [owlDateTime]="dt5" readonly [ngStyle]="{'background':tableCss}">
+                    <owl-date-time [pickerType]="'calendar'" #dt5></owl-date-time>
+                  </div>
+                </div>
+                <div class="form-row" *ngSwitchCase="'5'">
+                  <div class="form-group custom-label">
+                    <label>{{field.termsname}}:</label>
+                    <input
+                      [readonly]="grpLevel===1 || statusseq===CREATED_STATUS_SEQ || statusseq===REPOEN_STATUS_SEQ || isDisabled || !additionalFieldBtn || !canForward"
+                      class="form-control radius-0 font-13 marginTop"
+                      placeholder="{{field.values}}" [(ngModel)]="field.value"
+                      [owlDateTimeTrigger]="dt6"
+                      [owlDateTime]="dt6" readonly [ngStyle]="{'background':tableCss}">
+                    <owl-date-time [pickerType]="'timer'" #dt6></owl-date-time>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 mar-top-28">
+                <div *ngIf="additionalFieldBtn && canForward && !isDisabled && dynamicFields.length>0">
+                  <button mat-raised-button color="primary"
+                          (click)="updateadditionalfields('a')"><i class="fa fa-check" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--<div class="pad-0-8" *ngIf="grpLevel>1  && !isCreatedState && canForward && !isDisabled">
+            &lt;!&ndash;<span><i class="far fa-check-square"></i></span>&ndash;&gt;
+
+          </div><br>-->
+
+          <!--<div class="col-sm-12 divLine" ></div><br>-->
+
+          <div class="row">
+
+            <div class="col-sm-6">
+              <button mat-raised-button color="primary" class="mar-bot-10"
+                      (click)="cmdbReview()" *ngIf="attachCmdb">CMDB Review
+              </button>
+              <br>
+              <app-ticket-asset [hidden]="grpLevel===1 || !isassetattached" (onAssetAttach)="assetAttached($event)"
+                                [ticketid]="tId" [tickettypeseq]="typeSeq" [ticketorgid]="orgId"
+                                (onAssetRemove)="assetRemoved($event)"></app-ticket-asset>
+              <div class="row mar-lft-rgt-0" *ngIf="parentDetails.length>0  ">
+                <span class="type">{{parentSource}}:</span> <span class="source"
+                                                                  [ngClass]="typeSeq===STASK_SEQ|| typeSeq=== CTASK_SEQ?'not-pointer':'pointer'"
+                                                                  (click)="onParentClick()">{{parentId}}</span>&nbsp;&nbsp;
+                <a class="pointer" *ngIf="grpLevel>1 && canDetach " (click)="detachTicket()"
+                   title="Detach Ticket From Parent">
+                  <mat-icon class="icon-mat">cancel</mat-icon>
+                </a>
+              </div>
+              <div class="row mar-lft-rgt-0" *ngIf="attachedTicket.length>0">
+                <span class="custom-label">{{childSource}}:</span>&nbsp; <span class="status">({{attachedTicket.length}}
+                )</span><br>
+
+              </div>
+              <div class="row mar-lft-rgt-0" *ngIf="typeSeq!==CR_SEQ && typeSeq !== CTASK_SEQ && typeSeq !== STASK_SEQ">
+                <span class="custom-label">Source:</span>&nbsp; <span class="status">{{sourcetype}}</span><br>
+
+              </div>
+              <div class="row mar-lft-rgt-0" *ngIf="linkedticket !==''">
+                <span class="custom-label">Linked With :</span>&nbsp; <span class="status">{{linkedticket}}</span><br>
+
+              </div>
+              <div class="row mar-lft-rgt-0" *ngIf="custVisibleCount">
+                <span class="custom-label">Customer visible comment not update since: </span>&nbsp; <span
+                class="status">{{customercommentcount}}</span> <span class="custom-label">&nbsp;days</span><br>
+              </div>
+              <div class="row mar-lft-rgt-0" *ngIf="prioChangeCount">
+                <span class="custom-label">Priority Change Count:</span>&nbsp; <span
+                class="status">{{priorityChangeCount}}</span><br>
+              </div>
+              <div class="row mar-lft-rgt-0" *ngIf="agingCount">
+                <span class="custom-label">Aging:</span>&nbsp; <span
+                class="status">{{aging}}</span><br>
+              </div>
+              <div class="row mar-lft-rgt-0" *ngIf="hopCount">
+                <span class="custom-label">Hop Count:</span>&nbsp; <span class="status">{{noOfHops}}</span><br>
+              </div>
+              <div class="row mar-lft-rgt-0" *ngIf="reopenCount">
+                <span class="custom-label">Reopen Count:</span>&nbsp; <span class="status">{{reopencount}}</span><br>
+              </div>
+              <div class="row mar-lft-rgt-0" *ngIf="userFollowCount">
+                <span class="custom-label">User Followup Count:</span>&nbsp; <span
+                class="status">{{followUpCnt}}</span>&nbsp;<a
+                *ngIf="typeSeq !==CR_SEQ && statusseq !== RESOLVE_STATUS_SEQUENCE && statusseq !== CLOSE_STATUS_SEQ && statusseq !== CANCEL_STATUS_SEQ  "
+                class="pointer" (click)="addfollowCountComment()"
+                title="Add Follow up comment">
+                <i class="fa fa-plus-square fa-lg" aria-hidden="true"></i></a><br>
+              </div>
+              <div class="row mar-lft-rgt-0" *ngIf="outBoundCount">
+                <span class="custom-label">Outbound Call Count:</span>&nbsp; <span
+                class="status">{{outboundcount}}</span>&nbsp;<a
+                *ngIf="typeSeq !==CR_SEQ && statusseq !== RESOLVE_STATUS_SEQUENCE && statusseq !== CLOSE_STATUS_SEQ && statusseq !== CANCEL_STATUS_SEQ"
+                class="pointer"
+                (click)="addOutCountComment()"
+                title="Add outbound comment">
+                <i class="fa fa-plus-square fa-lg" aria-hidden="true"></i></a><br>
+              </div>
+              <div *ngIf="grpLevel> 1">
+                <div class="row mar-lft-rgt-0" *ngIf="canForward && addEffortBtn">
+                  <button type="button" class="btn btn-dark radius-0 font-13" (click)="addEffort()"
+                          [ngStyle]="{'background':buttonCss}">Add Effort
+                  </button>&nbsp;&nbsp;
+                  <button type="button" class="btn btn-dark radius-0 font-13" (click)="openParentModal()"
+                          *ngIf="parentDetails.length===0 && attachParentBtn"
+                          [ngStyle]="{'background':buttonCss}">Attach to Parent
+                  </button>
+                </div>
+              </div>
+              <div class="row mar-lft-rgt-0" [hidden]="typeSeq===SR_SEQ">
+                <!--                <span class="custom-label" *ngIf="!hasSLA">Status:</span>&nbsp; <span class="status">{{statusName}}</span>&nbsp;-->
+                <span class="custom-label" *ngIf="vendorDetails.length>0">Vendor Name:</span>&nbsp; <span
+                class="status">{{vendorname}}</span>&nbsp;
+                <span class="custom-label" *ngIf="vendorDetails.length>0">Vendor Id:</span>&nbsp; <span
+                class="status">{{vendorid}}</span>&nbsp;&nbsp;<a
+                *ngIf="vendorDetails.length>0"
+                class="pointer" (click)="addVendorTicket()" title="Add Vendor Ticket Id">
+                <i class="fa fa-plus-square fa-lg" aria-hidden="true"></i></a>&nbsp;
+              </div>
+              <div class="form-row" *ngIf="typeSeq !==STASK_SEQ">
+                <div class="form-group col-sm-6">
+                  <label class="custom-label">Estimated Effort :</label>
+                  <input class="form-control radius-0 font-13 " type="text" [(ngModel)]="estimatedEffortName"
+                         placeholder="Estimated Effort" readonly
+                         [ngStyle]="{'background':darkCss}">
+                </div>
+                <div class="form-group col-sm-6" *ngIf="typeSeq=== CR_SEQ">
+                  <label class="custom-label">CR Type :</label>
+                  <input class="form-control radius-0 font-13 " type="text" [(ngModel)]="crtype"
+                         placeholder="CR Type" readonly
+                         [ngStyle]="{'background':darkCss}">
+                </div>
+              </div>
+              <div class="form-group row mar-top-9"
+                   *ngIf="grpLevel> 1 && displayPriority">
+                <label class="col-sm-2 custom-label"><span>Priority</span></label>
+                <div class="col-sm-6">
+                  <select class="custom-select  radius-0 font-13" [(ngModel)]="priorityId"
+                          (change)="onPriorityChange($event.target.selectedIndex)"
+                          [disabled]="isCreatedState || !canForward || !hasSLA"
+                          [ngStyle]="{'background':tableCss}">
+                    <option *ngFor="let prio of priorities"
+                            [value]="prio.id">{{prio.typename}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-sm-6">
+                  <label class="custom-label"><span>Requester Name :</span> &nbsp;&nbsp;<i type="button"
+                                                                                           class="fa fa-info-circle"
+                                                                                           aria-hidden="true"
+                                                                                           (click)="openUserInfo()"></i>
+                    &nbsp;&nbsp;<img class="height-19" src="../../../assets/img/crown3.jfif" *ngIf="isVip">
+                  </label>
+                  <input type="text" class="form-control radius-0 font-13"
+                         placeholder="Requester Name" [(ngModel)]="rName" readonly
+                         [ngStyle]="{'background':darkCss}">
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="custom-label"><span>Requester Mobile :</span></label>
+                  <input type="text" class="form-control radius-0 font-13"
+                         placeholder="Requester Mobile" title="{{rMobile}}" [(ngModel)]="rMobile" readonly
+                         [ngStyle]="{'background':darkCss}">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-sm-6">
+                  <label class="custom-label"><span>Requester Email:</span></label>
+                  <input type="text" class="form-control radius-0 font-13"
+                         placeholder="Requester Email" title="{{rEmail}}" [(ngModel)]="rEmail" readonly
+                         [ngStyle]="{'background':darkCss}">
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="custom-label"><span>Requester Location :</span></label>
+                  <input type="text" class="form-control radius-0 font-13"
+                         placeholder="Requester Location" title="{{rLoc}}" [(ngModel)]="rLoc" readonly
+                         [ngStyle]="{'background':darkCss}">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-sm-6">
+                  <label class="custom-label"><span>Open By Name :</span>
+                  </label>
+                  <input type="text" class="form-control radius-0 font-13"
+                         placeholder="Requester Name" [(ngModel)]="orgrequestername" readonly
+                         [ngStyle]="{'background':darkCss}">
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="custom-label"><span>Open By Mobile :</span></label>
+                  <input type="text" class="form-control radius-0 font-13"
+                         placeholder="Requester Mobile" title="{{orgrequestermobile}}" [(ngModel)]="orgrequestermobile"
+                         readonly [ngStyle]="{'background':darkCss}">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-sm-6">
+                  <label class="custom-label "><span>Open By Email:</span></label>
+                  <input type="text" class="form-control radius-0 font-13"
+                         placeholder="Requester Email" title="{{orgrequesteremail}}" [(ngModel)]="orgrequesteremail"
+                         readonly [ngStyle]="{'background':darkCss}">
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="custom-label "><span>Open By Location :</span></label>
+                  <input type="text" class="form-control radius-0 font-13"
+                         placeholder="Requester Location" title="{{orgrequesterlocation}}"
+                         [(ngModel)]="orgrequesterlocation" readonly [ngStyle]="{'background':darkCss}">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-sm-12">
+                  <label class="custom-label "><span>Created Date:</span></label>
+                  <input type="text" class="form-control radius-0 font-13"
+                         [(ngModel)]="rDate" readonly title="{{rDate}}"
+                         [ngStyle]="{'background':darkCss}">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-sm-12">
+                  <label class="custom-label"><span>Short Description:</span></label>
+                  <input type="text" class="form-control radius-0 font-13"
+                         placeholder="Short Description" [(ngModel)]="desc" placement="right" title="{{desc}}"
+                         [readonly]="true" [ngStyle]="{'background':darkCss}">
+                </div>
+
+              </div>
+              <div class="form-row">
+                <div class="form-group col-sm-12">
+                  <label class="custom-label"><span>Long Description :</span></label>
+                  <textarea
+                    class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+                    placeholder="Long Description" [(ngModel)]="brief" title="{{brief}}"
+                    [readonly]="true" [ngStyle]="{'background':darkCss}">
+                    </textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card mar-top-9" [hidden]="true">
+                <div class="card-header card-header-top font-13">
+                  <b>Manual States</b>
+                </div>
+                <div class="card-body assign">
+                  <div class="logo-mid" *ngIf="manualStateLoading">
+                    <img class="logo-140" src="../../../assets/img/loader.gif">
+                  </div>
+                  <div class="row mar-lft-rgt-0">
+                    <div class="form-group col-sm-12 row">
+                      <label for="group" class="col-sm-4 col-form-label type">Available State:</label>
+                      <div class="col-sm-8">
+                        <select class="custom-select radius-0 font-13" [(ngModel)]="stateSelected"
+                                (change)="onmanualstateChange($event.target.selectedIndex)">
+                          <option *ngFor="let tran of transitions"
+                                  [value]="tran.currentstateid">{{tran.currentstate}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="form-group col-sm-12 row">
+                      <label for="group" class="col-sm-4 col-form-label type">Select Group:</label>
+                      <div class="col-sm-8">
+                        <select class="custom-select radius-0 font-13"
+                                (change)="onmanualgrpChange($event.target.selectedIndex)" [(ngModel)]="manualgroupid"
+                        >
+                          <option *ngFor="let group of manualgroups"
+                                  [value]="group.id">{{group.supportgroupname}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="form-group col-sm-12 row">
+                      <label for="user" class="col-sm-4 col-form-label type">Select User:</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control radius-0 font-13"
+                               placeholder="Enter Login ID OR Name"
+                               style="display:inline-block; width: 100%;"
+                               [(ngModel)]="manualUserNameSelected"
+                               matInput [formControl]="manualSearchUser" [matAutocomplete]="auto"
+                        >
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getManualUserDetails()">
+                          <mat-option *ngIf="isLoading" class="is-loading">
+                            <mat-spinner diameter="50"></mat-spinner>
+                          </mat-option>
+                          <ng-container *ngIf="!isLoading">
+                            <mat-option *ngFor="let user of manualUserList" [value]="user.loginname">
+                              {{ user.name }} - {{user.loginname}}
+                            </mat-option>
+                          </ng-container>
+                        </mat-autocomplete>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-12 row margin-left">
+                      <button mat-raised-button color="primary" (click)="transitionChange()">Change</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mar-top-9" [ngStyle]="{'background':tableCss}" *ngIf="hasSLA && grpLevel >1">
+                <div class="card-header card-header-top font-15" [ngStyle]="{'background':selectedColor}">
+                  <b>SLA Meter</b>
+                  <b class="right">Status: <span class="blue">{{statusName}}</span></b>
+                </div>
+                <div class="card-body assign row">
+                  <div class="col-sm-6 ">
+                    <span class="custom-label">Response Meter</span><br>
+                    <circle-progress
+                      [percent]="respPercent"
+                      [radius]="40"
+                      [outerStrokeWidth]="8"
+                      [innerStrokeWidth]="4"
+                      [showSubtitle]="false"
+                      [outerStrokeColor]="outerColorResp"
+                      [innerStrokeColor]="innerColorResp"
+                      [animation]="true"
+                      [animationDuration]="300"
+                      [startFromZero]="false"
+                    ></circle-progress>
+                    <br>
+
+                    <b class="font-13" [hidden]="priorityChangeCount>0 || grpLevel===1">Total Time (hh:mm) : <span
+                      class="green">{{respTime}}</span></b><br [hidden]="priorityChangeCount>0 || grpLevel===1">
+                    <b class="font-13">SLA Due Datetime : <span
+                      class="green">{{responseDueDateTime}}</span></b><br>
+                    <b class="font-13" [hidden]="priorityChangeCount>0 || remainingSlaResponse==='' || grpLevel===1">SLA
+                      Due In (hh:mm)
+                      : <span
+                        class="green">{{remainingSlaResponse}}</span></b><br
+                    [hidden]="priorityChangeCount>0 || remainingSlaResponse==='' || grpLevel===1">
+                    <b class="font-13">SLA Clock Status : <span
+                      [ngClass]="reponseStatus?'green':'red'">{{respClockStatus}}</span></b><br>
+                    <b class="font-13">SLA Breached : <span
+                      [ngClass]="responseslaviolated==='NO'?'green':'red'">{{responseslaviolated}}</span></b><br>
+                    <b class="font-13" [hidden]="respOverdue==='' || grpLevel===1">Overdue (hh:mm) : <span
+                      class="red">{{respOverdue}}</span></b>
+                  </div>
+                  <div class="col-sm-6">
+                    <span class="custom-label">Resolution Meter</span><br>
+                    <circle-progress
+                      [percent]="percent"
+                      [radius]="40"
+                      [outerStrokeWidth]="8"
+                      [innerStrokeWidth]="4"
+                      [showSubtitle]="false"
+                      [outerStrokeColor]="outerColor"
+                      [innerStrokeColor]="innerColor"
+                      [animation]="true"
+                      [animationDuration]="300"
+                      [startFromZero]="false"
+                    ></circle-progress>
+                    <br>
+                    <b class="font-13" [hidden]="grpLevel===1">Total Time (hh:mm) : <span
+                      class="green">{{resoTime}}</span></b><br [hidden]="grpLevel===1">
+                    <b class="font-13">SLA Due Datetime : <span
+                      class="green">{{resolutionduetime}}</span></b><br>
+                    <b class="font-13" [hidden]="remainingSla==='' || grpLevel===1">SLA Due In (hh:mm) : <span
+                      class="green">{{remainingSla}}</span></b><br [hidden]="remainingSla==='' || grpLevel===1">
+                    <b class="font-13">SLA Clock Status : <span
+                      [ngClass]="resolutionStatus?'green':'red'">{{resoClockStatus}}</span></b><br>
+                    <b class="font-13">SLA Breached : <span
+                      [ngClass]="resolutionslaviolated === 'NO'?'green':'red'">{{resolutionslaviolated}}</span></b><br>
+                    <b class="font-13" [hidden]="resoOverdue==='' || grpLevel===1">Overdue (hh:mm) : <span
+                      class="red">{{resoOverdue}}</span></b>
+                  </div>
+                </div>
+              </div>
+              <div class="card mar-top-9" *ngIf="stategroups.length===0||grpLevel===1"
+                   [ngStyle]="{'background':tableCss}">
+                <div class="card-header card-header-top font-13" [ngStyle]="{'background':selectedColor}">
+                  <b>Assignment</b>
+                  <b class="right" *ngIf="!hasSLA || grpLevel ===1">Status: <span class="blue">{{statusName}}</span></b>
+                </div>
+                <div class="card-body assign">
+                  <div class="row  mar-lft-rgt-0">
+                    <div class="form-group col-sm-12 row">
+                      <span class="type">Assigned Group:</span>&nbsp;&nbsp;
+                      <span *ngIf="showLastDetails">{{lastgroup}}</span>
+                      <span *ngIf="!showLastDetails">{{currentGroup}}</span>
+                    </div>
+                    <div class="form-group col-sm-12 row" *ngIf="grpLevel>1">
+
+                      <span class="type">Assigned User:</span>&nbsp;&nbsp;
+                      <span *ngIf="showLastDetails">{{lastuser}}</span>
+                      <span *ngIf="!showLastDetails">{{currentUser}}</span>
+                    </div>
+                    <div class="form-group col-sm-12 row" *ngIf="false">
+
+                      <span class="type">Last Action Group:</span>&nbsp;&nbsp;<span>{{lastgroup}}</span>
+                    </div>
+                    <div class="form-group col-sm-12 row" *ngIf="false">
+
+                      <span class="type">Last Action User:</span>&nbsp;&nbsp;<span>{{lastuser}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mar-top-9" *ngIf="stategroups.length>0 && grpLevel>1 "
+                   [ngStyle]="{'background':tableCss}">
+                <div class="card-header card-header-top font-13" [ngStyle]="{'background':selectedColor}">
+                  <b>Assignment</b>
+                  <span class="right curser" title="List of users" (click)="fetchGroupUser()"> <i class="fa fa-users"
+                                                                                                  aria-hidden="true"></i></span>
+                  <b class="right" *ngIf="!hasSLA">Status: <span class="blue">{{statusName}}</span>&nbsp;&nbsp;</b>
+
+                </div>
+                <div class="card-body assign">
+                  <div class="row mar-lft-rgt-0">
+                    <div class="form-group col-sm-12 row">
+                      <label for="group" class="col-sm-4 col-form-label type"><span>Assigned Group:</span></label>
+                      <div class="col-sm-8">
+                        <select class="custom-select radius-0 font-13" id="group" [(ngModel)]="grpSelected"
+                                (change)="ongrpChange($event.target.selectedIndex)"
+                                [disabled]="isDisabled || statusseq !==ACTIVE_STATUS_SEQ || !canForward"
+                                [ngStyle]="{'background':darkCss}">
+                          <option *ngFor="let group of stategroups"
+                                  [value]="group.mstgroupid">{{group.groupname}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="form-group col-sm-12 row">
+                      <label for="user" class="col-sm-4 col-form-label type"><span>Assigned User:</span></label>
+                      <!--                      <label style="display: inline-block;margin-right: 20px;width: 12%;">Assigned User:</label>-->
+                      <div class="col-sm-6" *ngIf="!isDisabled && canChangeUser">
+                        <input type="text" class="form-control radius-0 font-13" id="user"
+                               placeholder="Enter Login ID OR Name"
+                               style="display:inline-block; width: 100%;"
+                               [(ngModel)]="userNameSelected"
+                               matInput [formControl]="searchUser" [matAutocomplete]="auto"
+                               [ngStyle]="{'background':tableCss}">
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngIf="isLoading" class="is-loading">
+                            <mat-spinner diameter="50"></mat-spinner>
+                          </mat-option>
+                          <ng-container *ngIf="!isLoading">
+                            <mat-option *ngFor="let user of userList" [value]="user.name"
+                                        (click)="onUserSelected(user)">
+                              {{ user.name }} - {{user.loginname}}
+                            </mat-option>
+                          </ng-container>
+                        </mat-autocomplete>
+                      </div>
+                      <div class="col-sm-6" *ngIf="isDisabled || !canChangeUser">
+                        <input type="text" class="form-control radius-0 font-13" [readOnly]="true"
+                               placeholder="Enter Login ID OR Name" style="display:inline-block; width: 100%;"
+                               [(ngModel)]="userNameSelected"
+                               [ngStyle]="{'background':tableCss}">
+                      </div>
+                      <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary radius-0" style="line-height:1;"
+                                [disabled]="isDisabled || !canChangeUser"
+                                (click)="changeUserWithState()">
+                          <i class="fa fa-check" aria-hidden="true"></i></button>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-12 row" *ngIf="false">
+                      <label for="group" class="col-sm-4 col-form-label type">Last Action Group:</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control font-13 radius-0" [(ngModel)]="lastgroup" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-12 row" *ngIf="false">
+                      <label for="group" class="col-sm-4 col-form-label type">Last Action User:</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control font-13 radius-0" [(ngModel)]="lastuser" readonly>
+                      </div>
+                    </div>
+                    <!-- <div class="form-group col-sm-12 row margin-left" [hidden]="isDisabled || grpLevel===1">
+                       <button mat-raised-button color="primary" (click)="changeUser()">Change</button>
+                     </div>-->
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="card mar-top-9" *ngIf="grpLevel>1"
+                   [ngStyle]="{'background':tableCss}">
+                <table class="table">
+                  <thead [ngStyle]="{'background':selectedColor}">
+                  <tr class="rsdb-head">
+                    <th>Effort</th>
+                    <th>Created Date</th>
+                    <th>Name</th>
+                  </tr>
+                  </thead>
+                  <tbody class="rsdb-head" *ngFor="let item of termValueBySeq">
+                  <tr>
+                    <td>{{item.recordtermvalue}}</td>
+                    <td>{{item.showcreatedate}}</td>
+                    <td>{{item.name}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+                <div class="custom-label" *ngIf="termValueBySeq.length >0">Total Effort: <span>{{totalEffort}}</span>
+                </div>
+              </div>
+              <div class="card card-padd mar-top-9" *ngIf="typeSeq === CTASK_SEQ || typeSeq===STASK_SEQ"
+                   [ngStyle]="{'background':tableCss}">
+                <div class="form-row">
+                  <div class="form-group col-sm-6">
+                    <label class="custom-label"><span>ID:</span></label>
+                    <input type="text" class="form-control radius-0 font-13"
+                           [(ngModel)]="pId" readonly
+                           [ngStyle]="{'background':darkCss}">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label class="custom-label"><span>Short Description :</span></label>
+                    <input type="text" class="form-control radius-0 font-13"
+                           [(ngModel)]="pDesc" readonly
+                           [ngStyle]="{'background':darkCss}">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-sm-6">
+                    <label class="custom-label"><span>Status:</span></label>
+                    <input type="text" class="form-control radius-0 font-13"
+                           [(ngModel)]="pStatus" readonly
+                           [ngStyle]="{'background':darkCss}">
+                  </div>
+                </div>
+                <div class="form-row" *ngIf="typeSeq===CTASK_SEQ">
+                  <div class="form-group col-sm-6">
+                    <label class="custom-label"><span>Planned Start Date time :</span></label>
+                    <input type="text" class="form-control radius-0 font-13"
+                           [(ngModel)]="pstime" readonly
+                           [ngStyle]="{'background':darkCss}">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label class="custom-label"><span>Planned End Date time:</span></label>
+                    <input type="text" class="form-control radius-0 font-13"
+                           [(ngModel)]="petime" readonly
+                           [ngStyle]="{'background':darkCss}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mar-lft-15" *ngIf="typeSeq===CR_SEQ">
+            <div class="col-12 ">
+              <mat-tab-group #tab class="tabset dark" [selectedIndex]="selectedTab">
+                <mat-tab label="Schedule" id="tab4">
+                  <div class="row mar-lft-rgt-5 mar-top-15">
+                    <div class="col-sm-3 " *ngFor="let field of scheduletab;" [ngSwitch]="field.termtypeid">
+                      <div class="form-row" *ngSwitchCase="'2'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}: </label>
+                          <select class="custom-select radius-0 font-13" [(ngModel)]="field.val"
+                                  (change)="onschedulechange(field)"
+                                  [ngStyle]="{'background':tableCss}" [disabled]="field.writepermission ===0">
+                            <option *ngFor="let opt of field.recordtermvalue.split(',')" [value]="opt"
+                            >{{opt}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'1'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input type="text" class="form-control radius-0 font-13" (focusout)="onschedulechange(field)"
+                                 [readonly]="field.writepermission ===0"
+                                 [(ngModel)]="field.val"
+                                 maxlength="200" [ngStyle]="{'background':tableCss}"/>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'4'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input
+                            class="form-control radius-0 font-13 marginTop"
+                            [(ngModel)]="field.val"
+                            [owlDateTimeTrigger]="dt5"
+                            [owlDateTime]="dt5" [disabled]="field.writepermission ===0"
+                            [ngStyle]="{'background':tableCss}">
+                          <owl-date-time (afterPickerClosed)="onschedulechange(field)" [pickerType]="'calendar'"
+                                         #dt5></owl-date-time>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'5'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input
+                            class="form-control radius-0 font-13 marginTop"
+                            [(ngModel)]="field.val"
+                            [owlDateTimeTrigger]="dt6"
+                            [owlDateTime]="dt6" [disabled]="field.writepermission ===0">
+                          <owl-date-time (afterPickerClosed)="onschedulechange(field)" [pickerType]="'timer'"
+                                         #dt6></owl-date-time>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'7'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input
+                            class="form-control radius-0 font-13 marginTop"
+                            [(ngModel)]="field.val"
+                            [owlDateTimeTrigger]="dt7"
+                            [owlDateTime]="dt7" [disabled]="field.writepermission ===0">
+                          <owl-date-time (afterPickerClosed)="onschedulechange(field)" #dt7></owl-date-time>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'8'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <textarea (focusout)="onschedulechange(field)"
+                                    class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+                                    placeholder="Long Description" [(ngModel)]="field.val"
+                                     [readonly]="field.writepermission ===0">
+                            </textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <button mat-raised-button color="primary"
+                          *ngIf="grpLevel>1  && canForward && !isDisabled && scheduletab.length>0"
+                          (click)="updatescheduletab()">Submit
+                  </button>
+                </mat-tab>
+                <mat-tab label="Plan Of Action" id="tab5">
+                  <div class="row mar-lft-rgt-5 mar-top-15">
+                    <div class="col-sm-4 " *ngFor="let field of plantab;" [ngSwitch]="field.termtypeid">
+                      <div class="form-row" *ngSwitchCase="'2'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <select class="custom-select radius-0 font-13" [(ngModel)]="field.val"
+                                  (change)="onplandropdownchange(field)"
+                                  [ngStyle]="{'background':tableCss}" [disabled]="field.writepermission ===0">
+                            <option *ngFor="let opt of field.recordtermvalue.split(',')" [value]="opt"
+                            >{{opt}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'1'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input type="text" class="form-control radius-0 font-13 "
+                                 (focusout)="onplandropdownchange(field)"
+                                 [readonly]="field.writepermission ===0"
+                                 [(ngModel)]="field.val"
+                                 maxlength="200" [ngStyle]="{'background':tableCss}"/>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'4'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input
+                            class="form-control radius-0 font-13 marginTop"
+                            [(ngModel)]="field.val"
+                            [owlDateTimeTrigger]="dt5"
+                            [owlDateTime]="dt5" [disabled]="field.writepermission ===0"
+                            [ngStyle]="{'background':tableCss}">
+                          <owl-date-time (afterPickerClosed)="onplandropdownchange(field)" [pickerType]="'calendar'"
+                                         #dt5></owl-date-time>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'5'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input
+                            class="form-control radius-0 font-13 marginTop"
+                            [(ngModel)]="field.val"
+                            [owlDateTimeTrigger]="dt6"
+                            [owlDateTime]="dt6" [disabled]="field.writepermission ===0">
+                          <owl-date-time (afterPickerClosed)="onplandropdownchange(field)" [pickerType]="'timer'"
+                                         #dt6></owl-date-time>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'7'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input
+                            class="form-control radius-0 font-13 marginTop"
+                            [(ngModel)]="field.val"
+                            [owlDateTimeTrigger]="dt7"
+                            [owlDateTime]="dt7" [disabled]="field.writepermission ===0">
+                          <owl-date-time (afterPickerClosed)="onplandropdownchange(field)" #dt7></owl-date-time>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'8'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <textarea (focusout)="onplandropdownchange(field)"
+                                    class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+                                    placeholder="Long Description" [(ngModel)]="field.val" rows="10" cols="50"
+                                    [readonly]="field.writepermission ===0">
+                            </textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 " *ngFor="let field of extras;" [ngSwitch]="field.termtypeid"
+                         [hidden]="displayMandatory">
+                      <div class="form-row" *ngSwitchCase="'2'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <select class="custom-select radius-0 font-13" [(ngModel)]="field.val"
+                                  (change)="onplandropdownchange(field)"
+                                  [ngStyle]="{'background':tableCss}" [disabled]="field.writepermission ===0">
+                            <option *ngFor="let opt of field.recordtermvalue.split(',')" [value]="opt"
+                            >{{opt}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'1'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input type="text" class="form-control radius-0 font-13 "
+                                 (focusout)="onplandropdownchange(field)"
+                                 [readonly]="field.writepermission ===0"
+                                 [(ngModel)]="field.val"
+                                 maxlength="200" [ngStyle]="{'background':tableCss}"/>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'4'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input
+                            class="form-control radius-0 font-13 marginTop"
+                            [(ngModel)]="field.val"
+                            [owlDateTimeTrigger]="dt10"
+                            [owlDateTime]="dt10" [disabled]="field.writepermission ===0"
+                            [ngStyle]="{'background':tableCss}">
+                          <owl-date-time (afterPickerClosed)="onplandropdownchange(field)" [pickerType]="'calendar'"
+                                         #dt10></owl-date-time>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'5'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input
+                            class="form-control radius-0 font-13 marginTop"
+                            [(ngModel)]="field.val"
+                            [owlDateTimeTrigger]="dt9"
+                            [owlDateTime]="dt9" [disabled]="field.writepermission ===0">
+                          <owl-date-time (afterPickerClosed)="onplandropdownchange(field)" [pickerType]="'timer'"
+                                         #dt9></owl-date-time>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'7'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <input
+                            class="form-control radius-0 font-13 marginTop"
+                            [(ngModel)]="field.val"
+                            [owlDateTimeTrigger]="dt8"
+                            [owlDateTime]="dt8" [disabled]="field.writepermission ===0">
+                          <owl-date-time #dt8 (afterPickerClosed)="afterclosed(field)"></owl-date-time>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngSwitchCase="'8'">
+                        <div class="form-group custom-label">
+                          <label>{{field.tername}}:</label>
+                          <textarea (focusout)="onplandropdownchange(field)"
+                                    class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+                                    placeholder="Long Description" [(ngModel)]="field.val" rows="10" cols="50"
+                                    [readonly]="field.writepermission ===0">
+                            </textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button mat-raised-button color="primary"
+                          *ngIf="grpLevel>1  && canForward && !isDisabled && plantab.length>0"
+                          (click)="updateplantab()">Submit
+                  </button>
+                </mat-tab>
+                <mat-tab label="Linked Tickets" id="tab6">
+                  <div class="form-group mar-top-15 mar-bot-0">
+                    <div class="col-sm-12 row">
+                      <div class=" col-sm-6 offset-2 row">
+                        <div class="col-sm-3">
+                          <label class="custom-label">Ticket Number: </label>
+                        </div>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control radius-0 font-13"
+                                 placeholder="Enter Ticket Number"
+                                 [(ngModel)]="ticNumber" [ngStyle]="{'background':tableCss}">
+                        </div>
+                      </div>
+                      <div class=" col-sm-2">
+                        <button mat-raised-button color="accent" (click)="searchLinkedTicket()"
+                                [disabled]="isLinkedSearchTicket">Search
+                        </button>
+                      </div>
+                      <div class=" col-sm-2">
+                        <button mat-raised-button color="primary" (click)="attachTicket()"
+                                [disabled]="isLinkAttachedTicket">
+                          Attach
+                        </button>
+                      </div>
+                    </div>
+                    <!--              <div class="col-sm-12 divLine"></div>-->
+                  </div>
+                  <div class="row">
+                    <div class="card mar-top-9 col-sm-6">
+                      <div class="card-body card-body-grid" style="height:237px;overflow: auto;padding:3px;"
+                           [ngStyle]="{'background':tableCss}">
+                        <table class="table">
+                          <thead [ngStyle]="{'background':selectedColor}">
+                          <tr class="rsdb-head">
+                            <th>Ticket Id</th>
+                            <th>Ticket Type</th>
+                            <th>Title</th>
+                          </tr>
+                          </thead>
+                          <tbody class="rsdb-body">
+                          <tr *ngFor="let search of searchdetails" (click)="clicksearch(search.id)">
+                            <td>{{search.code}}</td>
+                            <td>{{search.recordtype}}</td>
+                            <td>{{search.title}}</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="card mar-top-9 col-sm-6">
+                      <div class="card-body card-body-grid" style="height:237px;overflow: auto;padding:3px;"
+                           [ngStyle]="{'background':tableCss}">
+                        <table class="table">
+                          <thead [ngStyle]="{'background':selectedColor}">
+                          <tr class="rsdb-head">
+                            <th>Ticket Id</th>
+                            <th>Ticket Type</th>
+                            <th>Title</th>
+                            <th>Action</th>
+                          </tr>
+                          </thead>
+                          <tbody class="rsdb-body">
+                          <tr *ngFor="let search of linkAttachedTicket;let i = index;" (click)="clicksearch(search.id)">
+                            <td>{{search.code}}</td>
+                            <td>{{search.recordtype}}</td>
+                            <td>{{search.title}}</td>
+                            <td class="pointer">
+                              <mat-icon (click)="removeTicket(i)">delete_outline</mat-icon>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </div>
+          <!-- <div class="row mar-lft-rgt-0" *ngIf="priorityType===1">
+            <div class="col-sm-4 pad-15">
+              <select class="custom-select" [(ngModel)]="impact" (change)="onImpactChange($event)"
+                      id="impactid">
+                <option *ngFor="let map of impacts" [value]="map.id">{{map.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-4 pad-15">
+              <select class="custom-select" [(ngModel)]="urgency" (change)="onUrgencyChange($event)"
+                      id="urgencyid">
+                <option *ngFor="let map of urgencies" [value]="map.id">{{map.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-4 pad-15">
+              <input
+                class="form-control radius-0 font-13" [(ngModel)]="priority" readonly>
+            </div>
+          </div> -->
+
+          <hr>
+          <div class="row mar-top-9"
+               *ngIf="statusseq !== CLOSE_STATUS_SEQ && statusseq !== CANCEL_STATUS_SEQ && haspermission">
+            <div class="col-sm-6">
+              <div class="card" [ngStyle]="{'background':tableCss}">
+                <div class="card-header card-header-top font-13" [ngStyle]="{'background':selectedColor}">
+                  <b>Add Work Notes</b>
+                </div>
+                <div class="card-body assign">
+                    <textarea
+                      class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+                      placeholder="Add Work Notes" [(ngModel)]="comment" [ngStyle]="{'background':tableCss}"></textarea>
+                  <div *ngIf="grpLevel>1">
+                    <br>
+                    <input type="checkbox"
+                           [(ngModel)]="isChecked">&nbsp;Customer Visible
+                    <br>
+                  </div>
+                  <button *ngIf="grpLevel===1" mat-raised-button class="mar-top-5" color="primary"
+                          (click)="addTermValue(COMMENT_TERM_SEQ)"
+                          [disabled]="prioritydisable">Add Work Note
+                  </button>
+                  <button *ngIf="grpLevel>1" mat-raised-button class="mar-top-5" color="primary"
+                          (click)="addTermValue(INTERNAL_COMMENT_TERM_SEQ)"
+                          [disabled]="prioritydisable">Add Work Note
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card" [ngStyle]="{'background':tableCss}">
+                <div class="card-header card-header-top font-13" [ngStyle]="{'background':selectedColor}">
+                  <b>Attach File:</b>
+                </div>
+                <div class="card-body assign">
+                  <app-material-fileupload-singleclick [target]="fileUploadUrl" [text]="uploadButtonName"
+                                                       [formData]="formdata" [MAX_FILE_SIZE]="maxfilesize"
+                                                       (uploadError)="onFileError($event)" [isMultiple]="false"
+                                                       (complete)="onFileComplete($event)"
+                                                       (onFileRemove)="onRemove()"
+                                                       (dataLoaded)="onUpload($event)"></app-material-fileupload-singleclick>
+                  <div class="download">
+                    <table class="table font-13 ">
+                      <tbody>
+                      <tr *ngFor="let file of attachedFiles;let i = index;">
+                        <td class="pointer link"
+                            (click)="downloadFile(file.uploadname,file.originalname)">{{file.originalname}}</td>
+                        <td>{{file.name}}</td>
+                        <td>{{file.showcreatedate}}</td>
+                        <td class="pointer" (click)="deleteAttachment(i)">
+                          <mat-icon class="icon-mat">cancel</mat-icon>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mar-top-9">
+            <button mat-mini-fab color="warn" aria-label="Filter" matTooltip="Filter Activity Logs" class="right"
+                    (click)="termFilter()">
+              <mat-icon>filter_list</mat-icon>
+            </button>
+            <br>
+            <div class="col-sm-12 mar-top-15">
+
+              <div class="stepper-container vertical">
+                <div class="stepper">
+                  <div class="step step-height" *ngFor="let previousTerm of previousTerms;">
+                    <div class="step-inner">
+                      <div class="step-circle"><span><i
+                        class="fa fa-user"></i></span>
+                      </div>
+                    </div>
+                    <div class="step-content col-sm-12 mar-top-15 mar-lft-rgt-0">
+                      <div class="card radius-0" [ngStyle]="{'color':pageNameCss,'background':selectedColor}">
+                        <div class="card-header radius-0 card-header-top stepper-head">
+                          <b class="weight-normal" *ngIf="grpLevel>1">Updated By :&nbsp;<span
+                            class="green">{{previousTerm.name}}</span>&nbsp;&nbsp;</b>
+                          <b class="weight-normal" *ngIf="grpLevel===1">Updates :&nbsp;&nbsp;</b>
+                          <b class="weight-normal" *ngIf="grpLevel>1"> Tower: &nbsp;<span
+                            class="green">{{previousTerm.supportgroupname}}</span></b>
+                          <b class="weight-normal right"> Date-Time:&nbsp;<span
+                            class="green">{{previousTerm.showcreatedate}}</span>&nbsp;</b>
+                        </div>
+                        <div class="card-body" [ngStyle]="{'background':tableCss}">
+                          <div *ngIf="previousTerm.status !=''" class="font-15 blue">Status: &nbsp;<span
+                            class="log-desc" [ngStyle]="{'color':pageNameCss}">{{  previousTerm.status}}</span></div>
+                          <div class="font-15 blue">Action: &nbsp;<span
+                            class="log-desc" [ngStyle]="{'color':pageNameCss}">{{previousTerm.activitydesc}}</span>
+                          </div>
+                          <div class="font-15 blue">Action Description: &nbsp;<span
+                            class="log-desc pre-wrap" [ngStyle]="{'color':pageNameCss}"><div [innerHTML]="previousTerm.logvalue"></div></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab *ngIf="false" label="Common">
+        <ng-template mat-tab-label>
+          Common &nbsp;
+        </ng-template>
+        <img class="loading-gif" src="../../../assets/img/loader.gif" [hidden]="privateComLoaded">
+        <div class="mar-top-15 ">
+          <div class="form-group offset-3 col-sm-6 ">
+            <select class="custom-select radius-0 font-13" [(ngModel)]="termNameSelected"
+            >
+              <option *ngFor="let termName of termNames"
+                      [value]="termName.id">{{termName.description}}</option>
+            </select>
+          </div>
+          <div class=" mar-lft-rgt-0 marginTop ">
+            <div class="row " style=" margin-left: 5px;  margin-right: 5px; ">
+              <div class="offset-3 col-sm-6 " [ngSwitch]="termstypeidd">
+                <div class="form-group " *ngSwitchCase="'2'">
+                  <mat-form-field class="matcss">
+                    <mat-label>{{termNameValue}}</mat-label>
+                    <mat-select [(ngModel)]="comment">
+                      <mat-option *ngFor="let opt of dropDownValue" [value]="opt"
+                      >{{opt}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group " *ngSwitchCase="'1'">
+                  <div class="row margin2">
+                    <div class="form-group col-sm-12 pad-lft-rgt-0 pad-6">
+                          <textarea type="text" class="form-control radius-0 font-13 "
+                                    placeholder="{{termNameValue}}"
+                                    [(ngModel)]="comment"
+                                    maxlength="450"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group  " *ngSwitchCase="'4'">
+                  <div class="row margin2">
+                    <div class="form-group col-sm-12  pad-lft-rgt-0 pad-6">
+                      <input
+                        class="form-control radius-0 font-13 "
+                        placeholder="{{termNameValue}}" [(ngModel)]="comment"
+                        [owlDateTimeTrigger]="dt5"
+                        [owlDateTime]="dt5" readonly>
+                      <owl-date-time [pickerType]="'calendar'" #dt5></owl-date-time>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="form-group  " *ngSwitchCase="'5'">
+                  <div class="row margin2">
+                    <div class="form-group col-sm-12  pad-lft-rgt-0 pad-6">
+                      <input class="form-control radius-0 font-13 "
+                             placeholder="{{termNameValue}}" [(ngModel)]="comment"
+                             [owlDateTimeTrigger]="dt6"
+                             [owlDateTime]="dt6" readonly>
+                      <owl-date-time [pickerType]="'timer'" #dt6></owl-date-time>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group  " *ngSwitchCase="'3'">
+                  <div class="row margin2">
+                    <div class="form-group col-sm-6 pad-lft-rgt-0 pad-6">
+                      <app-material-fileupload [target]="fileUploadUrl" [text]="uploadButtonName" [formData]="formdata"
+                                               (uploadError)="onFileError($event)"
+                                               (complete)="onFileComplete($event)"
+                                               (onFileAttach)="onFileAttach()"
+                                               (onFileRemove)="onRemove()"
+                                               (dataLoaded)="onUpload($event)"></app-material-fileupload>
+                    </div>
+                    <div class="col-sm-6 pad-15 text-center upload-msg" [hidden]="hideAttachment">{{attachMsg}}
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="sol-div offset-5 col-sm-6" *ngIf="!isDisabled">
+            <button mat-raised-button color="accent" (click)="addTermValue(1)">Add</button>
+          </div>
+          <div class="col-sm-12 mar-top-15">
+
+            <div class="stepper-container vertical">
+              <div class="stepper">
+                <div class="step step-height" *ngFor="let previousTerm of previousTerms;">
+                  <div class="step-inner">
+                    <div class="step-circle"><span><i
+                      class="fa fa-user"></i></span>
+                    </div>
+                  </div>
+                  <div class="step-content col-sm-12 mar-top-15 mar-lft-rgt-0">
+                    <div class="card radius-0">
+                      <div class="card-header radius-0 card-header-top stepper-head">
+                        <b>{{previousTerm.tername}}</b>
+                        <b class="right"> Status :{{previousTerm.recorddiffname}}&nbsp;</b>
+                        <b class="right"> Created Date :{{previousTerm.createddate}}&nbsp;</b>
+                        <b> Created By :{{previousTerm.username}}&nbsp;</b>
+                      </div>
+                      <div class="card-body">
+                        <pre>{{previousTerm.termvalue}}</pre>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab *ngIf="false" label="Add Asset">
+        <ng-template mat-tab-label>
+          Add Asset &nbsp;
+        </ng-template>
+        <div class="modal-header">
+          <h4 class="modal-title">Asset Management</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row" [hidden]="isDisabled">
+            <div class="col-md-3">
+              <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="masterNameSelected"
+                      (change)="onMasterChange($event.target.selectedIndex)">
+                <option *ngFor="let master of masterNameObj" [value]="master.id">{{master.name}}</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="columnNameSelected"
+                      (change)="onClientChange($event.target.selectedIndex)">
+                <option *ngFor="let column of columnDataObj"
+                        [value]="column.id">{{column.name}}</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <input type="text" class="form-control radius-0 font-13" [(ngModel)]="assetValue"
+                     placeholder="Digital Asset value">
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-primary radius-0 font-13" (click)="submitAssetData()">Submit
+              </button>
+            </div>
+          </div>
+          <div class="assetGrid" *ngIf="showGridA1">
+            <angular-slickgrid gridId="gridA1"
+                               [columnDefinitions]="columnDefinitionsA"
+                               [gridOptions]="gridOptionsA"
+                               (onAngularGridCreated)="angularGridReady($event)"
+                               gridWidth="4000"
+                               gridHeight="300"
+                               (sgOnSelectedRowsChanged)="handleSelectedRowsChanged($event.detail.eventData, $event.detail.args)"
+                               [dataset]="dataA">
+            </angular-slickgrid>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success btn-block radius-0 font-13" (click)="saveData()" style="
+                      margin-top: 8px;">Add Asset
+            </button>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab *ngIf="false" label="View Asset">
+        <ng-template mat-tab-label>
+          View Asset &nbsp;
+        </ng-template>
+        <div class="modal-body">
+          <div class="form-group row">
+            <div class=" col-md-6 offset-2">
+              <select class="custom-select  mr-sm-2 radius-0 font-13" [(ngModel)]="masterNameSelected"
+                      (change)="viewAssetmanagement()">
+                <option *ngFor="let master of masterNameObj" [value]="master.id">{{master.name}}</option>
+              </select>
+            </div>
+            <div class=" col-md-2" [hidden]="!noAsset">
+              <span>{{totalAssect}} asset attached</span>
+            </div>
+            <div class=" col-md-2" [hidden]="noAsset">
+              <p>No asset attached</p>
+            </div>
+            <div class="assetGrid" *ngIf="showGridView">
+              <angular-slickgrid gridId="gridV1"
+                                 [columnDefinitions]="columnDefinitionsView"
+                                 [gridOptions]="gridOptionsView"
+                                 (onAngularGridCreated)="angularGridReady1($event)"
+                                 gridWidth="4000"
+                                 gridHeight="300"
+                                 (sgOnSelectedRowsChanged)="handleSelectedRowsChanged1($event.detail.eventData, $event.detail.args)"
+                                 (sgOnClick)="onCellClicked1($event.detail.eventData, $event.detail.args)"
+                                 [dataset]="dataView">
+              </angular-slickgrid>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="SLA Meter" *ngIf="false">
+        <div class="mar-top-15 row mar-lft-rgt-0">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header card-header-top font-13">
+                <b>Response Meter</b>
+              </div>
+              <div class="card-body middle">
+                <circle-progress
+                  [percent]="respPercent"
+                  [radius]="70"
+                  [outerStrokeWidth]="10"
+                  [innerStrokeWidth]="5"
+                  [showSubtitle]="false"
+                  [outerStrokeColor]="outerColorResp"
+                  [innerStrokeColor]="innerColorResp"
+                  [animation]="true"
+                  [animationDuration]="300"
+                  [startFromZero]="false"
+                ></circle-progress>
+                <br>
+                <b class="font-13">Priority : <span class="green">{{priority}}</span></b><br>
+                <b class="font-13">Status : <span class="green">{{statusName}}</span></b><br>
+                <b class="font-13">Total Response Time (hh:mm) : <span class="green">{{respTime}}</span></b><br>
+                <b class="font-13">Response SLA Due Datetime : <span
+                  class="green">{{responseDueDateTime}}</span></b><br>
+                <b class="font-13">Response SLA Due In (hh:mm) : <span
+                  class="green">{{remainingSlaResponse}}</span></b><br>
+                <b class="font-13">Response SLA Violated:<span
+                  [ngClass]="slaViolatedResp?'green':'red'"> {{slaStringResp}}</span></b><br>
+                <b class="font-13">Response SLA Clock Status : <span
+                  [ngClass]="reponseStatus?'green':'red'">{{respClockStatus}}</span></b>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header card-header-top font-13">
+                <b>Resolution Meter</b>
+              </div>
+              <div class="card-body middle">
+                <circle-progress
+                  [percent]="percent"
+                  [radius]="70"
+                  [outerStrokeWidth]="10"
+                  [innerStrokeWidth]="5"
+                  [showSubtitle]="false"
+                  [outerStrokeColor]="outerColor"
+                  [innerStrokeColor]="innerColor"
+                  [animation]="true"
+                  [animationDuration]="300"
+                  [startFromZero]="false"
+                ></circle-progress>
+                <br>
+                <b class="font-13">Priority : <span class="green">{{priority}}</span></b><br>
+                <b class="font-13">Status : <span class="green">{{statusName}}</span></b><br>
+                <b class="font-13">Total Resolution Time (hh:mm) : <span
+                  class="green">{{resoTime}}</span></b><br>
+                <b class="font-13">Resolution SLA Due Datetime : <span
+                  class="green">{{dDate}}</span></b><br>
+                <b class="font-13">Resolution SLA Due In (hh:mm) : <span
+                  class="green">{{remainingSla}}</span></b><br>
+                <b class="font-13">Resolution SLA Violated : <span
+                  [ngClass]="slaViolated?'red':'green'"> {{slaString}}</span></b><br>
+                <b class="font-13">Resolution SLA Clock Status : <span
+                  [ngClass]="resolutionStatus?'green':'red'">{{resoClockStatus}}</span></b>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mar-top-15  mar-lft-rgt-0  font-13">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body ">
+                <table class="table ">
+                  <thead class="card-header-top table_center">
+                  <tr>
+                    <!--<th class="font-13">Holidays (Before Due Date)</th>-->
+                    <th class="font-13">Holiday</th>
+                    <th class="font-13">Start Time</th>
+                    <th class="font-13">End Time</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let holiday of holidayList">
+                    <td>{{holiday.holiday}}</td>
+                    <td> {{holiday.starttime}}</td>
+                    <td>{{holiday.endtime}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 mar-top-15  mar-lft-rgt-0  font-13">
+            <div class="card">
+              <div class="card-body ">
+                <th class="font-13">{{currentGroup}} - Service Window</th>
+                <table class="table ">
+                  <thead class="card-header-top table_center">
+                  <tr>
+                    <th class="font-13">Days</th>
+                    <th class="font-13">Start Time in (hh:mm):</th>
+                    <th class="font-13">End Time in (hh:mm):</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let timedetails of creatortimedetails">
+                    <th class="font-13">{{timedetails.day}}</th>
+                    <td class="font-13">{{timedetails.starttime}}</td>
+                    <td class="font-13">{{timedetails.endtime}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 mar-top-15  mar-lft-rgt-0  font-13">
+            <div class="card">
+              <div class="card-body ">
+                <th class="font-13">{{loginOrgName}} - Business Hour</th>
+                <table class="table ">
+                  <thead class="card-header-top table_center">
+                  <tr>
+                    <th class="font-13">Days</th>
+                    <th class="font-13">Start Time in (hh:mm):</th>
+                    <th class="font-13">End Time in (hh:mm):</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let timedetails of creatortimedetails">
+                    <th class="font-13">{{timedetails.day}}</th>
+                    <td class="font-13">{{timedetails.starttime}}</td>
+                    <td class="font-13">{{timedetails.endtime}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <!--<div class="row mar-top-15  mar-lft-rgt-0  font-13">-->
+          <b><span class="col-sm-12 font-13">SLA Calculation Done By : {{slaCalculationBasedOn}}</span></b>
+          <!--</div>-->
+        </div>
+        <div class="col-sm-12 mar-top-15">
+          <b><span class="font-13">SLA breach reason :</span></b>
+          <div class="stepper-container vertical">
+            <div class="stepper" *ngIf="external_id === null">
+              <div class="step step-height" *ngFor="let comment of internalComments;">
+                <div class="step-inner">
+                  <div class="step-circle"><span><i class="fa fa-user"></i></span></div>
+                </div>
+                <div class="step-content col-sm-12 mar-top-15 mar-lft-rgt-0">
+                  <div class="card radius-0">
+                    <div class="card-header radius-0 card-header-top stepper-head">
+                      <b>{{comment.name}}</b>
+                      <b class="date-type">Beached Time: </b> {{dDate}}
+                      <b class="right"> {{comment.createddate| date:'EEEE, MMM d, y h:mm:ss a'}}</b>
+                    </div>
+                    <div class="card-body">
+                      <span>Breach Cause Code: {{comment.breach_code}}</span>
+                      <textarea class="form-control radius-0 font-13 ie-textarea sol-com-height edge-textarea"
+                                placeholder="Put your solution here" [(ngModel)]="comment.feedback"
+                                resizeCursorPrecision="10"
+                                [style.height.px]="solHeight"></textarea>
+                      <!--<pre>{{comment.feedback}}</pre><br/>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stepper" *ngIf="external_id !== null">
+              <div class="step step-height" *ngFor="let comment of comments;">
+                <div class="step-inner">
+                  <div class="step-circle"><span><i
+                    class="fa fa-user"></i></span>
+                  </div>
+                </div>
+                <div class="step-content col-sm-12 mar-top-15 mar-lft-rgt-0">
+                  <div class="card radius-0">
+                    <div class="card-header radius-0 card-header-top stepper-head">
+                      <b>{{comment.sys_created_by}}</b>
+                      <b class="right"> {{comment.sys_created_on| date:'EEEE, MMM d, y h:mm:ss a'}}</b>
+                    </div>
+                    <div class="card-body">
+                      <pre>{{comment.value}}</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </mat-tab>
+      <mat-tab *ngIf="attachChildTab  && parentDetails.length===0" label="Attach Child Ticket">
+        <ng-template mat-tab-label>
+          Child Ticket
+        </ng-template>
+        <div class="form-group row mar-top-15" [hidden]="isDisabled">
+          <!--<div class="col-sm-12 row"
+            *ngIf="statusseq !==CREATED_STATUS_SEQ && statusseq !==RESOLVE_STATUS_SEQUENCE && statusseq !==CLOSE_STATUS_SEQ && statusseq !==CANCEL_STATUS_SEQ && statusseq !==REPOEN_STATUS_SEQ  ">
+            <div class=" col-sm-6 offset-2 row">
+              <div class="col-sm-3">
+                <label class="custom-label">Ticket Number: </label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control radius-0 font-13"
+                     placeholder="Enter Ticket Number"
+                     [(ngModel)]="tNumber" [ngStyle]="{'background':tableCss}">
+              </div>
+            </div>
+            <div class=" col-sm-2">
+              <button mat-raised-button color="accent" (click)="searchTicket()" [disabled]="isSearchTicket">Search</button>
+            </div>
+            <div class=" col-sm-2">
+              <button mat-raised-button color="primary" (click)="attachChildTicket()"
+                      [disabled]="isAttachedTicket">
+                Attach
+              </button>
+            </div>
+          </div><br><br>
+          <div class="col-sm-12 divLine" ></div><br>-->
+
+          <div class="col-sm-12 row"
+               *ngIf="statusseq !==CREATED_STATUS_SEQ && statusseq !==RESOLVE_STATUS_SEQUENCE && statusseq !==CLOSE_STATUS_SEQ && statusseq !==CANCEL_STATUS_SEQ && statusseq !==REPOEN_STATUS_SEQ  ">
+            <div class="col-sm-3"></div>
+            <select class="custom-select col-sm-5 radius-0 font-13" [(ngModel)]="selectedID"
+                    (change)="onChildSearchChange($event.target.value)"
+                    [ngStyle]="{'background':tableCss}">
+              <option *ngFor="let item of searchArr"
+                      [value]="item.id">{{item.value}}</option>
+            </select>
+          </div>
+          <br><br>
+          <div class="row col-sm-12"
+               *ngIf="statusseq !==CREATED_STATUS_SEQ && statusseq !==RESOLVE_STATUS_SEQUENCE && statusseq !==CLOSE_STATUS_SEQ && statusseq !==CANCEL_STATUS_SEQ && statusseq !==REPOEN_STATUS_SEQ  ">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-5 row form-group PaddingReq" [hidden]="!hiddenTicketId">
+              <label class="custom-label"><span>Ticket Id: </span></label>
+              <input type="text" class="form-control radius-0 font-13"
+                     [(ngModel)]="searchTicketId" placeholder="Enter Ticket Id">
+            </div>
+            <div class="col-sm-5 row form-group PaddingReq" [hidden]="!hiddenRequestorName">
+              <label class="custom-label"><span>Requestor Name: </span></label>
+              <input type="text" class="form-control radius-0 font-13" id="user1"
+                     placeholder="Enter Requestor Name"
+                     style="display:inline-block; width: 100%;"
+                     [(ngModel)]="requestorName"
+                     matInput [formControl]="searchRequestorName" [matAutocomplete]="auto"
+                     [ngStyle]="{'background':tableCss}">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngIf="isLoading" class="is-loading">
+                  <mat-spinner diameter="50"></mat-spinner>
+                </mat-option>
+                <ng-container *ngIf="!isLoading">
+                  <mat-option *ngFor="let Rname of requestorNameList" [value]="Rname.name">
+                    {{ Rname.name }}
+                  </mat-option>
+                </ng-container>
+              </mat-autocomplete>
+
+            </div>
+            <div class="col-sm-5 row form-group PaddingReq" [hidden]="!hiddenRequestorLoginId">
+              <label class="custom-label"><span>Requestor Login ID: </span></label>
+              <input type="text" class="form-control radius-0 font-13" id="user2"
+                     placeholder="Enter Requestor Login ID"
+                     style="display:inline-block; width: 100%;"
+                     [(ngModel)]="requestorLogin"
+                     matInput [formControl]="searchRequestorLogIn" [matAutocomplete]="auto1"
+                     [ngStyle]="{'background':tableCss}">
+              <mat-autocomplete #auto1="matAutocomplete">
+                <mat-option *ngIf="isLoading" class="is-loading">
+                  <mat-spinner diameter="50"></mat-spinner>
+                </mat-option>
+                <ng-container *ngIf="!isLoading">
+                  <mat-option *ngFor="let name of requestorLogInList" [value]="name.loginname">
+                    {{ name.loginname }}
+                  </mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            </div>
+            <div class="col-sm-5 row form-group PaddingReq" [hidden]="!hiddenRequestorLocation">
+              <label class="custom-label"><span>Requestor Location: </span></label>
+              <input type="text" class="form-control radius-0 font-13" id="user3"
+                     placeholder="Enter Requestor Location"
+                     style="display:inline-block; width: 100%;"
+                     [(ngModel)]="requestorLocation"
+                     matInput [formControl]="searchRequestorLocation" [matAutocomplete]="auto3"
+                     [ngStyle]="{'background':tableCss}">
+              <mat-autocomplete #auto3="matAutocomplete">
+                <mat-option *ngIf="isLoading" class="is-loading">
+                  <mat-spinner diameter="50"></mat-spinner>
+                </mat-option>
+                <ng-container *ngIf="!isLoading">
+                  <mat-option *ngFor="let name of requestorLocationList" [value]="name.branch">
+                    {{ name.branch }}
+                  </mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            </div>
+            <div class="col-sm-5 row form-group PaddingReq" [hidden]="!hiddenShortDescription">
+              <label class="custom-label"><span>Short Description: </span></label>
+              <input type="text" class="form-control radius-0 font-13"
+                     [(ngModel)]="shortDescription" placeholder="Enter Short Description">
+            </div>
+            <div class="col-sm-3 row form-group PaddingReq" [hidden]="!hiddenDate">
+              <label class="custom-label"><span>From Date: </span></label>
+              <input class="form-control radius-0 font-13" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
+                     placeholder="From" [(ngModel)]="fromCreatedDate" [readonly]="true">
+              <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+            </div>
+            <div class="col-sm-3 row form-group PaddingReq" [hidden]="!hiddenDate">
+              <label class="custom-label"><span>To Date: </span></label>
+              <input class="form-control radius-0 font-13" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+                     placeholder="To" [(ngModel)]="toCreatedDate" [readonly]="true" [max]="min">
+              <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
+            </div>
+            <div class="col-sm-5 row form-group PaddingReq" [hidden]="!hiddenAssignmentGroup">
+              <label class="custom-label"><span>Assignment Group: </span></label>
+              <select class="custom-select  radius-0 font-13" [(ngModel)]="selectedSupportGroup"
+                      [ngStyle]="{'background':tableCss}">
+                <option *ngFor="let item of assignmentGroupArr"
+                        [value]="item.id">{{item.supportgroupname}}</option>
+              </select>
+            </div>
+            <div class="col-sm-5 row form-group PaddingReq" [hidden]="!hiddenPriority">
+              <label class="custom-label"><span>Priority: </span></label>
+              <select class="custom-select  radius-0 font-13" [(ngModel)]="searchPriorityId"
+                      [disabled]="isCreatedState || isDisabled"
+                      [ngStyle]="{'background':tableCss}">
+                <option *ngFor="let prio of priorities"
+                        [value]="prio.id">{{prio.typename}}</option>
+              </select>
+            </div>
+            <div class="col-sm-9 row form-group PaddingReq" [hidden]="!hiddenCategory">
+              <div class="pad-7 pad-lft-0 marginTop">
+                <select class="custom-select  tcktyp" *ngFor="let ticket of ticketTypesSearch;"
+                        [disabled]="ticket.isDisabled"
+                        (change)="onCategoryChange1(ticket.sequanceno,$event.target.value)"
+                        [hidden]="!categoryLoaded" [ngStyle]="{'background':tableCss}">
+                  <option *ngFor="let option of ticket.child" [value]="option|json">{{option.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-12 row form-group">
+              <button mat-raised-button class="btnMid1" color="accent" (click)="onSearch()" [disabled]="isSearchTicket">
+                Search
+              </button>
+              <button mat-raised-button color="primary" [disabled]="isAttachedTicket" [hidden]="hiddenChildAttach"
+                      class="btnMid" (click)="childAttach()">
+                Attach
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card mar-top-9" [hidden]="isDisabled">
+          <div class="card-header card-header-top font-13" [ngStyle]="{'background':selectedColor,'color':pageNameCss}">
+            <b>Searched Ticket :{{tNumber}}</b>
+          </div>
+          <div class="card-body assign" [ngStyle]="{'background':tableCss}">
+            <div class="assetGrid" *ngIf="showChildTicket">
+              <angular-slickgrid gridId="gridV2"
+                                 [columnDefinitions]="columnDefinitionschild"
+                                 [gridOptions]="gridOptionsChild"
+                                 (onAngularGridCreated)="angularGridReadyChild($event)"
+                                 (sgOnSelectedRowsChanged)="handleSelectedChildTicketRowsChanged($event.detail.eventData, $event.detail.args)"
+                                 (sgOnClick)="onChildTicketCellClicked($event.detail.eventData, $event.detail.args)"
+                                 gridWidth="1500"
+                                 gridHeight="400"
+                                 [dataset]="searchTicketdetails">
+              </angular-slickgrid>
+            </div>
+          </div>
+        </div>
+        <div class="card mar-top-9">
+          <div class="card-header card-header-top font-13" [ngStyle]="{'background':selectedColor,'color':pageNameCss}">
+            <b>Attached Ticket :</b>
+          </div>
+          <div class="card-body assign" [ngStyle]="{'background':tableCss}">
+            <div class="assetGrid" *ngIf="showChildTicket">
+              <angular-slickgrid gridId="gridV3"
+                                 [columnDefinitions]="columnDefinitionschild1"
+                                 [gridOptions]="gridOptionsChild"
+                                 (onAngularGridCreated)="angularGridReadyChild1($event)"
+                                 gridWidth="1500"
+                                 gridHeight="400"
+                                 (sgOnClick)="onCellClickedChild($event.detail.eventData, $event.detail.args)"
+                                 [dataset]="attachedTicket">
+              </angular-slickgrid>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab *ngIf="parentChildCollabTab && attachedTicket.length > 0" label="Parent Child Collaboration">
+        <ng-template mat-tab-label>
+          Parent Child Collaboration
+        </ng-template>
+
+        <div class="height-40" [hidden]="parentChildCollabLoaded">
+          <img class="loading-gif-42" src="../../../assets/img/loader-42px.gif">
+        </div>
+
+        <div class="col-sm-12 mar-top-15" [hidden]="!parentChildCollabLoaded">
+          <div class="stepper-container vertical">
+            <div class="stepper">
+              <div class="step step-height" *ngFor="let item of parentChildCollabArr;">
+                <div class="step-inner">
+                  <div class="step-circle"><span><i
+                    class="fa fa-user"></i></span>
+                  </div>
+                </div>
+                <div class="step-content col-sm-12 mar-top-15 mar-lft-rgt-0">
+                  <div class="card radius-0" [ngStyle]="{'color':pageNameCss,'background':selectedColor}">
+                    <div class="card-header radius-0 card-header-top stepper-head">
+                      <b class="weight-normal">Updated By :&nbsp;<span
+                        class="green">{{item.name}}</span>&nbsp;&nbsp;</b>
+                      <b class="weight-normal"> Tower: &nbsp;<span
+                        class="green">{{item.supportgroupname}}</span></b>
+                      <b class="weight-normal right"> Date-Time:&nbsp;<span
+                        class="green">{{item.showcreatedate}}</span>&nbsp;</b>
+                    </div>
+                    <div class="card-body" [ngStyle]="{'background':tableCss}">
+                      <div class="font-15 blue">Ticket ID: &nbsp;<span
+                        class="log-desc" [ngStyle]="{'color':pageNameCss}">{{item.code}}</span>
+                      </div>
+                      <div *ngIf="item.status !=''" class="font-15 blue">Status: &nbsp;<span
+                        class="log-desc" [ngStyle]="{'color':pageNameCss}">{{item.status}}</span></div>
+                      <div class="font-15 blue">Action: &nbsp;<span
+                        class="log-desc" [ngStyle]="{'color':pageNameCss}">{{item.activitydesc}}</span>
+                      </div>
+                      <div class="font-15 blue">Action Description: &nbsp;<span
+                        class="log-desc" [ngStyle]="{'color':pageNameCss}">{{item.logvalue}}</span></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </mat-tab>
+
+      <mat-tab *ngIf="instantMessagingTab && !isDisabled" label="Instant Messaging">
+        <ng-template mat-tab-label>
+          Instant Messaging
+        </ng-template>
+        <div class="offset-3 col-md-6 col-sm-6 mar-top-15">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label font-13">To:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control font-13" [(ngModel)]="receiver" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label font-13">Cc:</label>
+            <div class="col-sm-8">
+              <!-- <textarea class="form-control  font-13 ie-textarea sol-com-height edge-textarea"
+                        placeholder="Enter Mail Ids" [(ngModel)]="cc" maxlength="1000">
+                      </textarea> -->
+              <!-- <input type="text" class="form-control radius-0 font-13" placeholder="Enter Mail Ids"
+                 [(ngModel)]="cc"
+                 matInput [formControl]="searchCCUser" [matAutocomplete]="auto"
+          >
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getCCUsers()">
+            <mat-option *ngIf="isLoading" class="is-loading">
+              <mat-spinner diameter="50"></mat-spinner>
+            </mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let users of usersList" [value]="users.useremail">
+                {{ users.name}} - {{users.useremail}}
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete> -->
+          <mat-form-field class="example-chip-list" appearance="fill">
+              <mat-chip-list #chipList aria-label=" Mail Ids">
+                <mat-chip
+                  *ngFor="let usersName of userEmail"
+                   (removed)="remove(usersName)">
+                  {{usersName}}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip>
+                <input class="userMail" placeholder="Search Mail Ids..."
+                  #UserInput
+                  [formControl]="searchCCUser"
+                  [matAutocomplete]="userAuto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="addUser($event)">
+              </mat-chip-list>
+              <mat-autocomplete #userAuto="matAutocomplete" (optionSelected)="getCCUsers($event)">
+                <mat-option *ngFor="let users of usersList" [value]="users.useremail">
+                  {{users.name}} - {{users.useremail}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+              <div class="warning-msg">
+                *Press comma or semicolon or space or enter key at the end of an email.
+              </div>
+            </div>
+          </div>
+          <!--<div class="form-group row">
+              <label class="col-sm-2 col-form-label font-13">Ticket Id ::</label>
+
+          </div>-->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label font-13">Subject:</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control font-13" [(ngModel)]="ticketIdMail" readonly>
+            </div>
+            <div class="col-sm-5">
+
+              <input type="text" class="form-control font-13" [(ngModel)]="subject">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label font-13">Mail Body:</label>
+            <div class="col-sm-8">
+              <textarea class="form-control  font-13 ie-textarea sol-com-height edge-textarea"
+                placeholder="Put your mail body here" [(ngModel)]="mail" maxlength="1000"></textarea>
+              <div class="warning-msg">
+                *maximum 1000 characters
+              </div>
+            </div>
+          </div>
+          <div class="form-group row attachDesign">
+            <div class="col-sm-6">
+              <app-material-fileupload-singleclick class="col-sm-7 " [target]="fileUploadUrl" [text]="uploadButtonName"
+                (complete)="onFileComplete2($event)" [formData]="formData" (uploadError)="onFileError($event)">
+              </app-material-fileupload-singleclick>
+            </div>
+            <div class="col-sm-6 " *ngIf="dataLoadedForSendMail">
+              <img class="loading-gif-42-edit8" src="../../../assets/img/loader-42px.gif">
+            </div>
+            <div class="col-sm-6 " *ngIf="!dataLoadedForSendMail">
+              <button type="button" class="btn btn-success font-13 radius-0 sendM" *ngIf="!isCreateTicket"
+                (click)="sendMail()"> Send Mail
+              </button>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-6   upload-msg marg">{{attachMsg}}</div>
+
+              <div class="col-sm-6   upload-msg marg">{{nameMsg}}</div>
+            </div>
+            <!--<div class="col-sm-6 pad-15 text-center upload-msg marg">{{attachMsg}}</div>
+
+            <div class="col-sm-6 pad-15 text-center upload-msg marg">{{nameMsg}}</div>-->
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab *ngIf="createTaskTab && !isDisabled" label="Create Task">
+        <div class="height-40" [hidden]="showCreateTicket">
+          <img class="loading-gif-42" src="../../../assets/img/loader-42px.gif">
+        </div>
+        <iframe id="createticket" [src]="createUrl" frameborder="1" width="100%" height="450px"></iframe>
+      </mat-tab>
+      <mat-tab *ngIf="viewTaskTab" label="View Task">
+        <div class="assetGrid" *ngIf="showTaskTicket">
+          <angular-slickgrid gridId="gridV4"
+                             [columnDefinitions]="columnDefinitionsTask"
+                             [gridOptions]="gridOptionsChild"
+                             (onAngularGridCreated)="angularGridReadyChild1($event)"
+                             gridWidth="1500"
+                             gridHeight="400"
+                             (sgOnClick)="onCellClickedTask($event.detail.eventData, $event.detail.args)"
+                             [dataset]="attachedTicket">
+          </angular-slickgrid>
+        </div>
+      </mat-tab>
+      <!--<mat-tab label="Activity Logs">
+        <table class="table font-13 mar-top-15 activity">
+          <thead class="thead-dark">
+          <tr>
+            <th>Support Group</th>
+            <th>Username</th>
+            <th>Action</th>
+            <th>Action Description</th>
+            <th>Action Date</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let log of logs;">
+            <td>{{log.supportgroupname}}</td>
+            <td>{{log.name}}</td>
+            <td>{{log.activitydesc}}</td>
+            <td>{{log.logvalue}}</td>addEffort
+            <td>{{log.createdate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </mat-tab>-->
+    </mat-tab-group>
+  </div>
+</ng-template>
+
+
+<div *ngIf="!isModal">
+  <div *ngTemplateOutlet="content">
+  </div>
+</div>
+
+<ng-template #attachparent let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Attach to Parent <span class="close"
+                                                    (click)="c()" aria-hidden="true">&times;</span></div>
+
+  </div>
+  <div class="modal-body height-450">
+    <div class="col-sm-12 row"
+         *ngIf="statusseq !==RESOLVE_STATUS_SEQUENCE && statusseq !==CLOSE_STATUS_SEQ && statusseq !==CANCEL_STATUS_SEQ && statusseq !==REPOEN_STATUS_SEQ  ">
+      <div class=" col-sm-6 offset-2 row">
+        <div class="col-sm-3">
+          <label class="custom-label">Ticket Number: </label>
+        </div>
+        <div class="col-sm-9">
+          <input type="text" class="form-control radius-0 font-13"
+                 placeholder="Enter Ticket Number"
+                 [(ngModel)]="tNumber" [ngStyle]="{'background':tableCss}">
+        </div>
+      </div>
+      <div class=" col-sm-2">
+        <button mat-raised-button color="accent" (click)="searchParentTicket()" [disabled]="isSearchTicket">Search
+        </button>
+      </div>
+      <div class=" col-sm-2">
+        <button mat-raised-button color="primary" (click)="attachParentTicket()"
+                [disabled]="isAttachedTicket">
+          Attach
+        </button>
+      </div>
+    </div>
+    <br><br><br>
+    <div class="card mar-top-9" [hidden]="isDisabled">
+      <div class="card-header card-header-top font-13" [ngStyle]="{'background':selectedColor,'color':pageNameCss}">
+        <b>Searched Ticket :{{tNumber}}</b>
+      </div>
+      <div class="card-body assign" [ngStyle]="{'background':tableCss}">
+        <div class="assetGrid" *ngIf="showParentTicket">
+          <angular-slickgrid gridId="gridV2"
+                             [columnDefinitions]="columnDefinitionschild"
+                             [gridOptions]="gridOptionsParent"
+                             (onAngularGridCreated)="angularGridReadyParent($event)"
+                             gridWidth="1500"
+                             gridHeight="150"
+                             [dataset]="searchTicketdetails">
+          </angular-slickgrid>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #selectState>
+  <div class="loader" [hidden]="!isStatusChange"><img class="loading-gif"
+                                                 src="../../../assets/img/loader.gif"></div>
+  <div class="state-label text-center"> Select State to proceed:</div>
+  <div class="form-group col-sm-12 shadow states" *ngFor="let state of nextstates;let i = index"
+       (click)="changeState(state.transitionid,i)">
+    {{state.statename}}
+    <p *ngIf="state.seqno===REPOEN_STATUS_SEQ" class="state-msg">(Please raise new ticket if you are reporting a
+      different issue)</p>
+    <p *ngIf="state.seqno===RESOLVE_STATUS_SEQUENCE" class="state-msg">(Please update your efforts if not updated
+      already!)</p>
+  </div>
+
+</ng-template>
+<ng-template #termfilter>
+  <mat-checkbox class="font-13" *ngFor="let term of termNames" value="{{term.id}}"
+                [(ngModel)]="term.checked">{{term.description}}</mat-checkbox>
+  <br>
+  <button mat-stroked-button color="primary" (click)="applyFilter()">Apply</button>&nbsp;&nbsp;
+  <button mat-stroked-button color="warn" (click)="closeFilter()">Close</button>
+</ng-template>
+<ng-template #userInfo>
+  <div *ngFor="let usr of userinfo">
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">NAME:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.name}}"
+               title="{{usr.name}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">VIP :</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.vipuser}}"
+               title="{{usr.vipuser}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">EMAIL ID:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.useremail}}"
+               title="{{usr.useremail}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">MOBILE NO:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.usermobileno}}"
+               title="{{usr.usermobileno}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">DIVISION:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.division}}"
+               title="{{usr.division}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">SECONDARY NO:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.secondaryno}}"
+               title="{{usr.secondaryno}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">BAND:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.brand}}"
+               title="{{usr.brand}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">DESIGNATION:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.designation}}"
+               title="{{usr.designation}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">CITY:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.city}}"
+               title="{{usr.city}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">BRANCH:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.branch}}"
+               title="{{usr.branch}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">USER TYPE :</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.usertype}}"
+               title="{{usr.usertype}}"
+               [disabled]="true">
+      </div>
+    </div>
+  </div>
+  <button mat-raised-button color="accent" (click)="closeinfo()">Close</button>
+</ng-template>
+<ng-template #checkterm>
+  <div *ngFor="let term of stateterms" [ngSwitch]="term.termtypeid">
+    <div class="form-group " *ngSwitchCase="'2'">
+      <div *ngIf="nextstatusseq !== CLOSE_STATUS_SEQ">
+        <mat-form-field class="matcss">
+          <mat-label>{{term.tername}}</mat-label>
+          <mat-select [(ngModel)]="term.insertedvalue"
+                      (selectionChange)="chnagetermdropdown(term.insertedvalue,term.seq)">
+            <mat-option *ngFor="let opt of term.recordtermvalue.split(',')" [value]="opt"
+            >{{opt}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="nextstatusseq === CLOSE_STATUS_SEQ">
+        <mat-label class="label1">{{term.tername}} &nbsp;&nbsp;</mat-label>
+        <mat-radio-group [(ngModel)]="term.insertedvalue">
+          <mat-radio-button *ngFor="let opt of term.recordtermvalue.split(',')" [value]="opt">{{opt}}&nbsp;&nbsp;
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="form-group " *ngSwitchCase="'1'">
+      <div class="row margin2">
+        <label class="col-sm-3 col-form-label label1 ">{{term.tername}}</label>
+        <div class="col-sm-9">
+          <div class="form-group">
+            <input
+              class="form-control radius-0 font-13 "
+              placeholder="{{term.tername}}" [(ngModel)]="term.insertedvalue" >
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group " *ngSwitchCase="'6'">
+      <div class="row margin2">
+        <label class="col-sm-7 col-form-label label1 ">{{term.tername}}</label>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <ngb-rating class="rate mar-top-5" [(ngModel)]="term.insertedvalue"></ngb-rating>
+          </div>
+        </div>
+        <div class="col-sm-2" *ngIf="term.insertedvalue !== ''">
+          <img src='{{ "assets/img/CSAT" +term.insertedvalue + ".jpg" }}' class="height-30">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group  " *ngSwitchCase="'4'">
+      <div class="row margin2">
+        <label class="col-sm-3 col-form-label label1 ">{{term.tername}}</label>
+        <div class="col-sm-9">
+          <div class="form-group">
+            <input
+              class="form-control radius-0 font-13 "
+              placeholder="{{term.tername}}" [(ngModel)]="term.insertedvalue"
+              [owlDateTimeTrigger]="dt10"
+              [owlDateTime]="dt10" readonly>
+            <owl-date-time [pickerType]="'calendar'" #dt10></owl-date-time>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group  " *ngSwitchCase="'5'">
+      <div class="row margin2">
+        <label class="col-sm-3 col-form-label label1 ">{{term.tername}}</label>
+        <div class="col-sm-9">
+          <div class="form-group">
+            <!-- <input class="form-control radius-0 font-13 "
+                   placeholder="{{term.tername}}" aria-label="24hr format" [(ngModel)]="term.insertedvalue"
+                   [ngxTimepicker]="fullTime" [format]="24" readonly>
+            <ngx-material-timepicker #fullTime></ngx-material-timepicker> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group  " *ngSwitchCase="'3'">
+      <div class="row margin2">
+        <div class="form-group col-sm-6 pad-lft-rgt-0 pad-6">
+          <app-material-fileupload-singleclick [target]="fileUploadUrl" [text]="uploadButtonName"
+                                               [formData]="formdata" [MAX_FILE_SIZE]="maxfilesize"
+                                               (uploadError)="onFileError($event)" [isMultiple]="false"
+                                               (complete)="onTermFileComplete($event)"
+          ></app-material-fileupload-singleclick>
+        </div>
+        <div class="col-sm-6 pad-15 text-center upload-msg" [hidden]="hideAttachment">{{attachMsg}}
+        </div>
+
+      </div>
+    </div>
+    <div class="form-group  " *ngSwitchCase="'8'">
+      <div class="row margin2">
+        <label class="col-sm-3 col-form-label label1 ">{{term.tername}}</label>
+        <div class="col-sm-9">
+          <div class="form-group">
+              <textarea
+                class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+                placeholder="Long Description" [(ngModel)]="term.insertedvalue"
+                >
+                            </textarea>
+            <!--<input
+              class="form-control radius-0 font-13 "
+              placeholder="{{term.tername}}" [(ngModel)]="term.insertedvalue"
+              [owlDateTimeTrigger]="dt10"
+              [owlDateTime]="dt10" readonly>
+            <owl-date-time [pickerType]="'calendar'" #dt10></owl-date-time>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button mat-raised-button color="accent" (click)="addStatusTerm()">Add</button>
+</ng-template>
+<ng-template #addcommentterm>
+  <div class="form-group ">
+    <div class="row">
+      <label class="col-sm-3 col-form-label custom-label ">Add Comment:</label>
+      <div class="col-sm-9">
+        <div class="form-group">
+              <textarea
+                class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+                placeholder="Long Description" [(ngModel)]="commentTerm" >
+                    </textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img class="loading-gif-42-edit5" *ngIf="dataLoadedForAddButton" src="../../../assets/img/loader-42px.gif">
+  <button mat-stroked-button color="primary" *ngIf="!dataLoadedForAddButton"
+          (click)="addCommentTerm()">Add
+  </button>&nbsp;&nbsp;
+</ng-template>
+<ng-template #listusers>
+  <table class="table font-13 mar-top-15">
+    <thead class="thead-dark">
+    <tr>
+      <th>Username</th>
+      <th>Login Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of groupUsers;">
+      <td>{{user.name}}</td>
+      <td>{{user.loginname}}</td>
+
+    </tr>
+    </tbody>
+  </table>
+  <button mat-stroked-button color="primary" (click)="closelistusers()">Close</button>
+</ng-template>
+
+<ng-template #timepicker>
+  <div class="form-group ">
+    <div class="row">
+      <label class="col-sm-4 col-form-label custom-label ">Effort Time :</label>
+      <div class="col-sm-8">
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <mat-form-field class="matcss">
+              <mat-select [(ngModel)]="selectedHour">
+                <mat-option *ngFor="let hour of Hours" [value]="hour"
+                >{{hour}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <span class="marginTop">&nbsp; HH &nbsp;&nbsp; <b>:</b> &nbsp;&nbsp;</span>
+          <div class="col-sm-4">
+            <mat-form-field class="matcss">
+              <mat-select [(ngModel)]="selectedMinute">
+                <mat-option *ngFor="let min of Minutes" [value]="min"
+                >{{min}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <span class="marginTop">&nbsp; MM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button mat-stroked-button color="primary" (click)="addTime()">Add</button>&nbsp;&nbsp;
+</ng-template>
+<ng-template #addvendorticket>
+  <div class="form-group ">
+    <div class="row">
+      <label class="col-sm-3 col-form-label custom-label ">Add Vendor Ticket Id:</label>
+      <div class="col-sm-9">
+        <div class="form-group">
+          <input type="text" class="form-control radius-0 font-13 "
+                 [(ngModel)]="vendorid">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button mat-stroked-button color="primary"
+            (click)="addVendorTicketTerm()">Add</button>&nbsp;&nbsp;
+    <button mat-stroked-button color="danger"
+            (click)="closeVendor()">Close</button>&nbsp;&nbsp;
+  </div>
+</ng-template>
+<app-ticket-asset-modify></app-ticket-asset-modify>

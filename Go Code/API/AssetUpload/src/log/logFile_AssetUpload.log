@@ -1,0 +1,28 @@
+2022/03/17 12:07:06 logger.go:54: LogFile : /home/ubuntu/Puja/Angular/API/AssetUpload/src/log/logFile_AssetUpload.log
+2022/03/17 12:07:06 StartPoint.go:16: Main Started
+2022/03/17 12:07:31 AssetUploadHandler.go:27: Asset Upload Controller
+2022/03/17 12:07:31 AssetUploadHandler.go:33: Payload====> map[]
+2022/03/17 12:07:31 AssetUploadHandler.go:49: Payload====> map[clientid:2 mstorgnhirarchyid:28 originalfilename:AirAsia India_ASSET.xlsx uploadedfilename:20220317-869f1d13-08e6-4ef8-8dcf-9dda89fbeab9.xlsx userid:5]
+2022/03/17 12:07:31 AssetUploadModel.go:80: In assetUpload Service
+2022/03/17 12:07:31 downloadFile.go:41: DownLoadFile API CAll with =======>    {"id":0,"clientid":2,"mstorgnhirarchyid":28,"credentialtype":"","credentialaccount":"","credentialpassword":"","credentialkey":"","activeflg":0,"originalfile":"AirAsia India_ASSET.xlsx","filename":"20220317-869f1d13-08e6-4ef8-8dcf-9dda89fbeab9.xlsx","path":""}
+2022/03/17 12:07:31 AssetUploadModel.go:97: File DownLoaded Successfull...Path==> /home/ubuntu/Puja/Angular/API/AssetUpload/src/resource/downloads/CITYPE.xlsx
+2022/03/17 12:07:31 dbconfig.go:27: dbConn======>  <nil>
+2022/03/17 12:07:31 dbconfig.go:38: root:password@tcp(localhost:3306)/iFIX
+2022/03/17 12:07:31 dbconfig.go:41: Connection Object=====> &{0 0xc000010060 0 {0 0} [] map[] 0 0 0xc00001e1e0 false map[] map[] 0 0 0 0 <nil> 0 0 0 0 0x4d8ca0}
+2022/03/17 12:07:31 dbconfig.go:46: DB Connected!!!
+2022/03/17 12:07:31 dbconfig.go:50: DbConn in Else condition =======> &{0 0xc000010060 0 {0 0} [] map[] 0 0 0xc00001e1e0 false map[] map[] 0 0 0 0 <nil> 0 0 0 0 0x4d8ca0}
+2022/03/17 12:07:31 AssetUploadDao.go:14: CheckSheetNamePresentInDB &{0 0xc000010060 0 {0 0} [] map[] 0 0 0xc00001e1e0 false map[] map[] 0 0 0 0 <nil> 0 0 0 0 0x4d8ca0}
+2022/03/17 12:07:32 AssetUploadDao.go:25: sql: no rows in result set
+2022/03/17 12:07:32 AssetUploadModel.go:32: ERROR: ROW Scan error
+2022/03/17 12:07:32 AssetUploadModel.go:114: ERROR: DiffType Fetch Error 
+2022/03/17 12:18:20 AssetUploadHandler.go:27: Asset Upload Controller
+2022/03/17 12:18:20 AssetUploadHandler.go:33: Payload====> map[]
+2022/03/17 12:18:20 AssetUploadHandler.go:49: Payload====> map[clientid:2 mstorgnhirarchyid:28 originalfilename:AirAsia India_ASSET.xlsx uploadedfilename:20220317-765c1357-2a26-40dd-9562-fab8eb9ff323.xlsx userid:5]
+2022/03/17 12:18:20 AssetUploadModel.go:80: In assetUpload Service
+2022/03/17 12:18:20 downloadFile.go:41: DownLoadFile API CAll with =======>    {"id":0,"clientid":2,"mstorgnhirarchyid":28,"credentialtype":"","credentialaccount":"","credentialpassword":"","credentialkey":"","activeflg":0,"originalfile":"AirAsia India_ASSET.xlsx","filename":"20220317-765c1357-2a26-40dd-9562-fab8eb9ff323.xlsx","path":""}
+2022/03/17 12:18:21 AssetUploadModel.go:97: File DownLoaded Successfull...Path==> /home/ubuntu/Puja/Angular/API/AssetUpload/src/resource/downloads/CITYPE.xlsx
+2022/03/17 12:18:21 dbconfig.go:50: DbConn in Else condition =======> &{0 0xc000010060 0 {0 0} [0xc00007a1b0] map[] 0 1 0xc00001e1e0 false map[0xc00007a1b0:map[0xc00007a1b0:true]] map[] 0 0 0 0 <nil> 0 0 0 0 0x4d8ca0}
+2022/03/17 12:18:21 AssetUploadDao.go:14: CheckSheetNamePresentInDB &{0 0xc000010060 0 {0 0} [0xc00007a1b0] map[] 0 1 0xc00001e1e0 false map[0xc00007a1b0:map[0xc00007a1b0:true]] map[] 0 0 0 0 <nil> 0 0 0 0 0x4d8ca0}
+2022/03/17 12:18:21 AssetUploadDao.go:25: sql: no rows in result set
+2022/03/17 12:18:21 AssetUploadModel.go:32: ERROR: ROW Scan error
+2022/03/17 12:18:21 AssetUploadModel.go:114: ERROR: DiffType Fetch Error 

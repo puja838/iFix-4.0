@@ -1,0 +1,769 @@
+<!-- <app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [totalPage]="totalPage"
+                   [dataLoaded]="dataLoaded">
+</app-base-template> -->
+
+<div class="loader" [hidden]="dataLoaded"><img class="loading-gif" src="../../../assets/img/loader.gif"></div>
+<div class="dasboard-width">
+  <div class="row header mar-lft-rgt-0">
+    <div class="col-md-4 col-sm-4 pageName" >{{displayData.pageName}}</div>
+    <div class="col-md-4 col-sm-4">
+      <button class="btn btn-success addButton" (click)="openModal(content)"
+              [hidden]="hideBtn">{{displayData.openModalButton}}</button>
+    </div>
+  </div>
+  <div class="col-md-9 col-sm-12 maxWidth">
+    <div class="card">
+      <div class="card-header card-header-top">
+        <div class="col-md-4 mar-lft-rgt-0">
+            {{displayData.tabName}}
+        </div>
+        <div class="col-md-8 mar-lft-rgt-0  row pull-right ">
+          <div class="col-sm-2 font-13">
+            <select class="custom-select mr-sm-2 radius-0 font-13 custom-width" [(ngModel)]="pageSizeSelected"
+                    (change)="onPageSizeChange($event.target.selectedIndex)">
+              <option *ngFor="let pageSize of pageSizeObj" [value]="pageSize.id">{{pageSize.value}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6 mar-lft-rgt-0 font-13">
+            <ngb-pagination [(collectionSize)]="totalData" #numPages 
+                            [(pageSize)]="itemsPerPage" [(page)]="page"
+                            [(maxSize)]="maxLength" (pageChange)="pageChanged($event)"
+                            aria-label="Default pagination"></ngb-pagination>
+          </div>
+          <div class="col-sm-4 mar-lft-rgt-0  font-13">
+            <b >Total items: </b> <span>{{totalData}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body card-body-grid" id="viewGrid" *ngIf="isDisplay">
+        <angular-slickgrid  gridId="grid12"
+                            [columnDefinitions]="columnDefinitions"
+                            [gridOptions]="gridOptions"
+                            (onAngularGridCreated)="angularGridReady($event)"
+                            (sgOnCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
+                            (onGridStateChanged)="onGridChanged($event.change.newValues, $event.change.type)"
+                            [gridHeight]="365"
+                            (sgOnSelectedRowsChanged)="handleSelectedRowsChanged($event.detail.eventData, $event.detail.args)"
+                            (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
+                            [dataset]="dataset">
+        </angular-slickgrid>
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" [hidden]="isUpdate">Add Notification</div>
+    <div class="modal-title" [hidden]="!isUpdate">Update Notification</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Organization: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="organizationId"
+              (change)="onOrgChange($event.target.selectedIndex)">
+        <option value="">Select Organization</option>
+        <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3"><b>Property Type: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="fromRecordDiffType"
+              (change)="getrecordbydifftype($event.target.selectedIndex, 'from')" [disabled]="true">
+        <option value="">Select Property Type</option>
+        <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group row" [hidden]="fromPropLevels.length===0">
+      <label class="col-sm-3"><b>Property Level: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="fromlevelid"
+              (change)="onLevelChange($event.target.selectedIndex, 'from')">
+        <option value="">Select Property Level</option>
+        <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3"><b>Property: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="fromRecordDiffId"
+                (change)="onPropertyChange($event.target.selectedIndex, 'm')" 
+                [hidden]="isUpdate" [disabled]="false" required>
+          <option value="">Select Property</option>
+          <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+        </select>
+        <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="fromRecordDiffId"
+                (change)="onPropertyChange($event.target.selectedIndex, 'm')" 
+                [hidden]="!isUpdate" [disabled]="true" required>
+          <option value="">Select Property</option>
+          <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+        </select>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Working Label: </b></label>
+      <!--<mat-form-field class="matcss col-sm-8" [hidden]="isUpdate">
+        <mat-label>Select Working Label</mat-label>
+        <mat-select [(ngModel)]="workingdiffid" (selectionChange)="onWorkingChange($event.value)"
+                [disabled]="false" multiple>
+          <mat-option *ngFor="let record of workingList;" [value]="record.id">{{record.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="matcss col-sm-8" [hidden]="!isUpdate">
+        <mat-label>Select Working Label</mat-label>
+        <mat-select [(ngModel)]="workingdiffid" (selectionChange)="onWorkingChange($event.value)"
+                [disabled]="true" multiple>
+          <mat-option *ngFor="let record of workingList;" [value]="record.id">{{record.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>-->
+          <ng-select class="matcss col-sm-8" [items]="workingList"  bindLabel="name" bindValue="id" [closeOnSelect]="false" [multiple]="true" 
+                     groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                     [searchable]="true" placeholder="Select Working Label" [(ngModel)]="workingdiffid" [hidden]="isUpdate">
+              
+              <ng-template ng-multi-label-tmp let-items="items">
+                  <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                      <span class="ng-value-label"> {{item.name}}</span>
+                      <!-- <span class="ng-value-icon right" (click)="clear(item.id)" aria-hidden="true">×</span> -->
+                  </div>
+                  <div class="ng-value" *ngIf="items.length > 4" >
+                      <span class="ng-value-label">{{items.length - 4}} more...</span>
+                  </div>
+              </ng-template>         
+              
+              <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel] ="item$.selected"/>&nbsp;&nbsp;Select All
+              </ng-template>       
+              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.name}}
+              </ng-template>  
+          </ng-select>
+
+      <div class="col-sm-8 matcss" [hidden]="!isUpdate">
+          <ng-select class="matcss col-sm-8" [items]="workingList"  bindLabel="name" bindValue="id" [closeOnSelect]="false" [multiple]="true" 
+                     groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                     [searchable]="true" placeholder="Select Working Label" [(ngModel)]="workingdiffid" [hidden]="!isUpdate" [disabled]="true">
+              <ng-template ng-multi-label-tmp let-items="items">
+                  <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                      <span class="ng-value-label"> {{item.name}}</span>
+                      <!-- <span class="ng-value-icon right" (click)="clear(item.id)" aria-hidden="true">×</span> -->
+                  </div>
+                  <div class="ng-value" *ngIf="items.length > 4" >
+                      <span class="ng-value-label">{{items.length - 4}} more...</span>
+                  </div>
+              </ng-template>         
+              
+              <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel] ="item$.selected"/>&nbsp;&nbsp;Select All
+              </ng-template>       
+              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.name}}
+              </ng-template>           
+          </ng-select>
+      </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3"><b>Channel: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="channeldiffid"
+                (change)="onChannelChange($event.target.selectedIndex)"
+                [hidden]="isUpdate" [disabled]="false" required>  
+          <option *ngFor="let list of channelList;" [value]="list.id">{{list.name}}</option>
+        </select>
+        <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="channeldiffid"
+                (change)="onChannelChange($event.target.selectedIndex)"
+                [hidden]="!isUpdate" [disabled]="true" required>    
+          <option *ngFor="let list of channelList;" [value]="list.id">{{list.name}}</option>
+        </select>
+    </div>
+    <div class="form-group row" [hidden]="isTitle">
+        <label class="col-sm-3"><b>Subject: </b></label>
+        <input type="text" class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="inputSubject" 
+               placeholder="Enter a Subject">
+    </div>
+    <div class="form-group row" [hidden]="!textField">
+      <label class="col-sm-3"></label>
+      <span class="form-group font-13 col-sm-8" style="text-align: center;"
+                ><u class="linkHov" (click)="openVariablesHelpPopUp()">Variables Help</u></span>
+    </div>
+    <div class="form-group" [hidden]="!textField">
+        <div class="form-group row" *ngIf ='istextarea'>
+            <label class="col-sm-3"><b>Content: </b></label>
+            <textarea class="form-control radius-0 font-13 col-sm-8" [(ngModel)]="contentValue" 
+                        placeholder="Enter Content"></textarea>
+        </div>
+        <div  class="form-group row" *ngIf ='!istextarea'>
+            <label class="col-sm-3"><b>Body: </b></label>
+            <ck-editor name="editor1" class="col-sm-8" [(ngModel)]="contentValue" skin="moono-lisa" 
+                        language="en" [fullPage]="true" 
+                        placeholder="Template body"></ck-editor>
+        </div>
+    </div>
+
+
+
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Event Type: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8"  [(ngModel)]="eventtypeid"
+              (change)="onEventChange($event.target.selectedIndex)"
+              [hidden]="isUpdate" [disabled]="false" required>  
+        <option *ngFor="let typ of EventTypes;" [value]="typ.id">{{typ.eventname}}</option>
+      </select>
+      <select class="form-control font-13 radius-0 col-sm-8"  [(ngModel)]="eventtypeid"
+              (change)="onEventChange($event.target.selectedIndex)"
+              [hidden]="!isUpdate" [disabled]="true" required>  
+        <option *ngFor="let typ of EventTypes;" [value]="typ.id">{{typ.eventname}}</option>
+      </select>
+    </div>
+
+    <div class="form-group row" [hidden]="eventtypeid!=1">
+      <label class="col-sm-3"><b>Resolution Type: </b></label>
+      <mat-radio-group  [(ngModel)]="resolutionType"  class="font-13">
+        <mat-radio-button class = "col-sm-5" [value]="1">Converted</mat-radio-button>
+        <mat-radio-button class = "col-sm-5" [value]="2">Normal </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="form-group row" [hidden]="!isEventTypeStatus">
+        <label class="col-sm-3"><b>Status: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-8"  [(ngModel)]="statusid"
+                (change)="onStatusChange($event.target.selectedIndex)">  
+          <option *ngFor="let typ of statusArr;" [value]="typ.id">{{typ.typename}}</option>
+        </select>
+    </div>
+    <div class="form-group row" [hidden]="!isEventTypeNumberCount">
+        <label class="col-sm-3"><b>Number of count: </b></label>
+        <input type="number" class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="noofcount"
+              (keypress)="onlyIntegerAllowed($event)" placeholder="Enter number of count">
+    </div>
+    <div class="form-group row" [hidden]="!isEventTypePriority">
+        <label class="col-sm-3"><b>Priority: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-8"  [(ngModel)]="priorityid"
+                (change)="onPriorityChange($event.target.selectedIndex)">  
+          <option *ngFor="let typ of priorityArr;" [value]="typ.id">{{typ.typename}}</option>
+        </select>
+    </div>
+    <div class="form-group row" [hidden]="!isEventTypeSLA">
+        <label class="col-sm-3"><b>SLA: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-4 margRgt"  [(ngModel)]="processid"
+                (change)="onProcessChange($event.target.selectedIndex)">  
+          <option *ngFor="let typ of priorityArr;" [value]="typ.id">{{typ.typename}}</option>
+        </select>
+        <input type="number" class="form-control font-13 radius-0 col-sm-3 margLft" [(ngModel)]="processcomplete"
+                placeholder="Enter Percentage">&nbsp;
+        <b class="perCent">%</b>
+    </div>
+
+    <div class="form-group row" [hidden]="!isEventTypeAging">
+        <label class="col-sm-3"><b>Aging based on priority: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-4 margRgt"  [(ngModel)]="priorityid"
+                (change)="onPriorityChange($event.target.selectedIndex)">  
+          <option *ngFor="let typ of priorityArr;" [value]="typ.id">{{typ.typename}}</option>
+        </select>
+        <input type="number" class="form-control font-13 radius-0 col-sm-3 margLft" [(ngModel)]="noofdays"
+              (keypress)="onlyIntegerAllowed($event)" placeholder="Enter number of days">
+    </div>
+    <div class="form-group row" [hidden]="!isEventTypeNoofDays">
+        <label class="col-sm-3"><b>Number of days: </b></label>
+        <input type="number" class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="noofdays"
+              (keypress)="onlyIntegerAllowed($event)" placeholder="Enter number of days">
+    </div>
+
+
+    <div class="form-group row">
+        <label class="col-sm-3"><b>To: </b></label>
+        <div class="form-group col-sm-8 row">
+          <div class="col-sm-4">
+            <mat-checkbox [(ngModel)]="checkRequestor">&nbsp;Requestor</mat-checkbox>
+          </div>
+          <div class="col-sm-4">
+            <mat-checkbox [(ngModel)]="checkOpenedBy">&nbsp;Opened by</mat-checkbox>
+          </div>
+          <div class="col-sm-4">
+            <mat-checkbox [(ngModel)]="checkAssignee">&nbsp;Assignee</mat-checkbox>
+          </div>
+          <div class="col-sm-4">
+            <mat-checkbox [(ngModel)]="checkAssigneeGroup">&nbsp;Assignee Group</mat-checkbox>
+          </div>
+          <div class="col-sm-4">
+            <mat-checkbox [(ngModel)]="checkAssigneeGroupMember">&nbsp;Assignee Group Member</mat-checkbox>
+          </div>
+
+            <!-- <mat-form-field class="matcss">
+                <mat-label>Select Support Group</mat-label>
+                <mat-select [(ngModel)]="grpSelectedTO" (selectionChange)="onGrpChange1()" multiple>
+                  <mat-option *ngFor="let grp of groups" [value]="grp.id"
+                  >{{grp.supportgroupname}}</mat-option>
+                </mat-select>
+            </mat-form-field> -->
+
+        </div>
+
+
+        <!-- <div class="form-group col-sm-4">
+            <input type="text" class="form-control radius-0 font-13" id="user1"
+                    placeholder="Enter User"
+                    style="display:inline-block; width: 100%; margin-top: 5%; height: 30px;"
+                    [(ngModel)]="selectedUserTO"
+                    matInput [formControl]="searchUserTO" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getUserDetails1()">
+                <mat-option *ngIf="isLoading" class="is-loading">
+                <mat-spinner diameter="50"></mat-spinner>
+                </mat-option>
+                <ng-container *ngIf="!isLoading">
+                <mat-option *ngFor="let name of Users" [value]="name.name">
+                    {{ name.name }} - {{ name.groupname }}
+                </mat-option>
+                </ng-container>
+            </mat-autocomplete>
+        </div>
+        <div class="form-group col-sm-10" style="margin-left: 25%;" [hidden]="!isselectedUserTO">
+          <b>Selected User :</b> &nbsp;&nbsp;
+          <table class="table table1 table-bordered table-striped mb-0">
+            <thead class="thead">
+            <tr>
+              <th>User Name</th>
+              <th>Group Name</th>
+              <th>Erase</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table_data" *ngFor="let name of reserveArr1; let i=index">
+              <td>{{name.name}}</td>
+              <td>{{name.groupname}}</td>
+              <td><i class="fa fa-trash Isize" aria-hidden="true" (click)="removeUser1(i)"></i></td>
+            </tr>
+            </tbody>
+          </table>
+        </div> -->
+    </div>
+    <div class="form-group row" [hidden]="isTitle">
+        <label class="col-sm-3"><b>Additional Group Receipients: </b></label>
+            <!--<mat-form-field class="matcss">-->
+                <!-- <mat-label>Select Support Group</mat-label>
+                <mat-select [(ngModel)]="grpSelectedCC" (selectionChange)="onGrpChange2()" multiple>
+                  <mat-option *ngFor="let grp of groups" [value]="grp.id"
+                  >{{grp.supportgroupname}}</mat-option>
+                </mat-select> -->
+                <ng-select class="col-sm-8 matcss" [items]="groups"  bindLabel="supportgroupname" bindValue="id" [multiple]="true" 
+                           groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                           [searchable]="true" placeholder="'Select Support Group" [(ngModel)]="grpSelectedCC">
+
+                    <ng-template ng-multi-label-tmp let-items="items">
+                        <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                            <span class="ng-value-label"> {{item.supportgroupname}}</span>
+                            <!-- <span class="ng-value-icon right" (click)="clear(item.id)" aria-hidden="true">×</span> -->
+                        </div>
+                        <div class="ng-value" *ngIf="items.length > 4" >
+                            <span class="ng-value-label">{{items.length - 4}} more...</span>
+                        </div>
+                    </ng-template>         
+                    
+                    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                          <input id="item-{{index}}" type="checkbox" [ngModel] ="item$.selected"/>&nbsp;&nbsp;Select All
+                    </ng-template>       
+
+                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.supportgroupname}}
+                    </ng-template>          
+                </ng-select>
+            <!-- </mat-form-field> -->
+        <!-- <div class="form-group col-sm-4">
+            <input type="text" class="form-control radius-0 font-13" id="user2"
+                    placeholder="Enter User"
+                    style="display:inline-block; width: 100%; margin-top: 5%; height: 30px;"
+                    [(ngModel)]="selectedUserCC"
+                    matInput [formControl]="searchUserCC" [matAutocomplete]="auto1">
+            <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="getUserDetails2()">
+                <mat-option *ngIf="isLoading" class="is-loading">
+                <mat-spinner diameter="50"></mat-spinner>
+                </mat-option>
+                <ng-container *ngIf="!isLoading">
+                <mat-option *ngFor="let name of Users" [value]="name.name">
+                    {{ name.name }} - {{ name.groupname }}
+                </mat-option>
+                </ng-container>
+            </mat-autocomplete>
+        </div>
+        <div class="form-group col-sm-10" style="margin-left: 25%;" [hidden]="!isselectedUserCC">
+          <b>Selected User :</b> &nbsp;&nbsp;
+          <table class="table table1 table-bordered table-striped mb-0">
+            <thead class="thead">
+            <tr>
+              <th>User Name</th>
+              <th>Group Name</th>
+              <th>Erase</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table_data" *ngFor="let name of reserveArr2; let i=index">
+              <td>{{name.name}}</td>
+              <td>{{name.groupname}}</td>
+              <td><i class="fa fa-trash Isize" aria-hidden="true" (click)="removeUser2(i)"></i></td>
+            </tr>
+            </tbody>
+          </table>
+        </div> -->
+    </div>
+    <div class="form-group row" *ngIf ='isemailarea'>
+        <label class="col-sm-3"><b> Additional Recipients Email: </b><br>
+          <span>(Comma Separated)</span>
+        </label>
+        <input type="text" class="form-control radius-0 font-13 col-sm-8" placeholder="Enter Additional Recipients Email"
+               [(ngModel)]="enteredAdditionalRecipient">
+    </div>
+    <div class="form-group row" *ngIf ='istextarea'>
+        <label class="col-sm-3"><b> Additional Recipients Phone No.: </b><br>
+          <span>(Comma Separated)</span>
+        </label>
+        <input type="text" class="form-control radius-0 font-13 col-sm-8" placeholder="Enter Additional Recipients Phone No."
+               [(ngModel)]="enteredAdditionalRecipient">
+    </div>
+
+    <div class="form-group row" *ngIf ='istextarea'>
+        <label class="col-sm-3"><b>indiaDltContentTemplateId: </b></label>
+        <input type="text" class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="indiaDltContentTemplateId" 
+               placeholder="Enter indiaDltContentTemplateId">
+    </div>
+    <div class="form-group row" *ngIf ='istextarea'>
+      <label class="col-sm-3"><b>SMS Type: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8"  [(ngModel)]="selectedSmsType"
+              (change)="onSMSTypeChange($event.target.selectedIndex)">  
+        <option *ngFor="let typ of SMSTypes;" [value]="typ.id">{{typ.typename}}</option>
+      </select>
+    </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()" [hidden]="isUpdate">Save</button>
+    <button type="button" class="btn btn-success radius-0" (click)="update()" [hidden]="!isUpdate">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+
+
+<!-- <ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Update Notification</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Organization: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="organizationId"
+              (change)="onOrgChange($event.target.selectedIndex)">
+        <option value="">Select Organization</option>
+        <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Property Type: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="fromRecordDiffType"
+              (change)="getrecordbydifftype($event.target.selectedIndex, 'from')">
+        <option value="">Select Property Type</option>
+        <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group row" [hidden]="fromPropLevels.length===0">
+      <label class="col-sm-3"><b>Property Level: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="fromlevelid"
+              (change)="onLevelChange($event.target.selectedIndex, 'from')">
+        <option value="">Select Property Level</option>
+        <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3"><b>Property: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="fromRecordDiffId"
+              (change)="onPropertyChange($event.target.selectedIndex, 'm')">
+        <option value="">Select Property</option>
+        <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3"><b>Working Label: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="workingdiffid"
+              (change)="onWorkingChange($event.target.selectedIndex)">
+        <option *ngFor="let record of workingList;" [value]="record.id">{{record.name}}</option>
+      </select>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3"><b>Channel: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="channeldiffid"
+                (change)="onChannelChange($event.target.selectedIndex)">
+          <option value="">Select Channel</option>      
+          <option *ngFor="let list of channelList;" [value]="list.id">{{list.name}}</option>
+        </select>
+    </div>
+    <div class="form-group row" [hidden]="!textField">
+        <label class="col-sm-3" [hidden]="isTitle"><b>Subject: </b></label>
+        <input type="text" class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="inputSubject" 
+                [hidden]="isTitle" placeholder="Enter a Subject">
+        <label class="col-sm-3" [hidden]="!isTitle"><b>Title: </b></label>
+        <input type="text" class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="inputSubject" 
+                [hidden]="!isTitle" placeholder="Enter a Title">
+    </div>
+    <div class="form-group" [hidden]="!textField">
+        <div class="form-group row" *ngIf ='istextarea'>
+            <label class="col-sm-3"><b>Content: </b></label>
+            <textarea class="form-control radius-0 font-13 col-sm-8" [(ngModel)]="contentValue" 
+                        placeholder="Enter Content"></textarea>
+        </div>
+        <div  class="form-group row" *ngIf ='!istextarea'>
+            <label class="col-sm-3"><b>Body: </b></label>
+            <ck-editor name="editor1" class="col-sm-8" [(ngModel)]="contentValue" skin="moono-lisa" 
+                        language="en" [fullPage]="true" 
+                        placeholder="Template body"></ck-editor>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3"><b>To: </b></label>
+        <div class="form-group col-sm-4">
+            <mat-form-field class="matcss">
+                <mat-label>Select Support Group</mat-label>
+                <mat-select [(ngModel)]="grpSelectedTO" (selectionChange)="onGrpChange1()" multiple>
+                  <mat-option *ngFor="let grp of groups" [value]="grp.id"
+                  >{{grp.supportgroupname}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-sm-4">
+            <input type="text" class="form-control radius-0 font-13" id="user1"
+                    placeholder="Enter User"
+                    style="display:inline-block; width: 100%; margin-top: 5%; height: 30px;"
+                    [(ngModel)]="selectedUserTO"
+                    matInput [formControl]="searchUserTO" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getUserDetails1()">
+                <mat-option *ngIf="isLoading" class="is-loading">
+                <mat-spinner diameter="50"></mat-spinner>
+                </mat-option>
+                <ng-container *ngIf="!isLoading">
+                <mat-option *ngFor="let name of Users" [value]="name.name">
+                    {{ name.name }} - {{ name.groupname }}
+                </mat-option>
+                </ng-container>
+            </mat-autocomplete>
+        </div>
+        <div class="form-group col-sm-10" style="margin-left: 25%;" [hidden]="!isselectedUserTO">
+          <b>Selected User :</b> &nbsp;&nbsp;
+          <table class="table table1 table-bordered table-striped mb-0">
+            <thead class="thead">
+            <tr>
+              <th>User Name</th>
+              <th>Group Name</th>
+              <th>Erase</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table_data" *ngFor="let name of reserveArr1; let i=index">
+              <td>{{name.name}}</td>
+              <td>{{name.groupname}}</td>
+              <td><i class="fa fa-trash Isize" aria-hidden="true" (click)="removeUser1(i)"></i></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <div class="form-group row" [hidden]="isTitle">
+        <label class="col-sm-3"><b>C.C.: </b></label>
+        <div class="form-group col-sm-4">
+            <mat-form-field class="matcss">
+                <mat-label>Select Support Group</mat-label>
+                <mat-select [(ngModel)]="grpSelectedCC" (selectionChange)="onGrpChange2()" multiple>
+                  <mat-option *ngFor="let grp of groups" [value]="grp.id"
+                  >{{grp.supportgroupname}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-sm-4">
+            <input type="text" class="form-control radius-0 font-13" id="user2"
+                    placeholder="Enter User"
+                    style="display:inline-block; width: 100%; margin-top: 5%; height: 30px;"
+                    [(ngModel)]="selectedUserCC"
+                    matInput [formControl]="searchUserCC" [matAutocomplete]="auto1">
+            <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="getUserDetails2()">
+                <mat-option *ngIf="isLoading" class="is-loading">
+                <mat-spinner diameter="50"></mat-spinner>
+                </mat-option>
+                <ng-container *ngIf="!isLoading">
+                <mat-option *ngFor="let name of Users" [value]="name.name">
+                    {{ name.name }} - {{ name.groupname }}
+                </mat-option>
+                </ng-container>
+            </mat-autocomplete>
+        </div>
+        <div class="form-group col-sm-10" style="margin-left: 25%;" [hidden]="!isselectedUserCC">
+          <b>Selected User :</b> &nbsp;&nbsp;
+          <table class="table table1 table-bordered table-striped mb-0">
+            <thead class="thead">
+            <tr>
+              <th>User Name</th>
+              <th>Group Name</th>
+              <th>Erase</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table_data" *ngFor="let name of reserveArr2; let i=index">
+              <td>{{name.name}}</td>
+              <td>{{name.groupname}}</td>
+              <td><i class="fa fa-trash Isize" aria-hidden="true" (click)="removeUser2(i)"></i></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3"><b>Additional Recipient: </b></label>
+        <input type="text" class="form-control radius-0 font-13 col-sm-8" placeholder="Enter Additional Recipient"
+                [(ngModel)]="enteredAdditionalRecipient">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3"><b>Event Type: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-8"  [(ngModel)]="eventtypeid"
+                (change)="onEventChange($event.target.selectedIndex)">  
+          <option *ngFor="let typ of EventTypes;" [value]="typ.id">{{typ.eventname}}</option>
+        </select>
+    </div>
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template> -->
+
+
+<ng-template #openpopup>
+  <br>
+  <div class="form-group modal-body">
+
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Event Type: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8"  [(ngModel)]="eventtypeid"
+              (change)="onEventChange($event.target.selectedIndex)"
+              [hidden]="!isUpdate" [disabled]="true" required>  
+        <option *ngFor="let typ of EventTypes;" [value]="typ.id">{{typ.eventname}}</option>
+      </select>
+    </div>
+
+    <div class="form-group row" [hidden]="!isEventTypeStatus">
+        <label class="col-sm-3"><b>Status: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-8"  [(ngModel)]="statusid"
+                (change)="onStatusChange($event.target.selectedIndex)" [disabled]="true">  
+          <option *ngFor="let typ of statusArr;" [value]="typ.id">{{typ.typename}}</option>
+        </select>
+    </div>
+    <div class="form-group row" [hidden]="!isEventTypeNumberCount">
+        <label class="col-sm-3"><b>Number of count: </b></label>
+        <input type="number" class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="noofcount"
+              (keypress)="onlyIntegerAllowed($event)" placeholder="Enter number of count" readonly>
+    </div>
+    <div class="form-group row" [hidden]="!isEventTypePriority">
+        <label class="col-sm-3"><b>Priority: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-8"  [(ngModel)]="priorityid"
+                (change)="onPriorityChange($event.target.selectedIndex)" [disabled]="true">  
+          <option *ngFor="let typ of priorityArr;" [value]="typ.id">{{typ.typename}}</option>
+        </select>
+    </div>
+    <div class="form-group row" [hidden]="!isEventTypeSLA">
+        <label class="col-sm-3"><b>SLA: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-4 margRgt"  [(ngModel)]="processid"
+                (change)="onProcessChange($event.target.selectedIndex)" [disabled]="true">  
+          <option *ngFor="let typ of priorityArr;" [value]="typ.id">{{typ.typename}}</option>
+        </select>
+        <input type="number" class="form-control font-13 radius-0 col-sm-3 margLft" [(ngModel)]="processcomplete"
+                placeholder="Enter Percentage" readonly>&nbsp;
+        <b class="perCent">%</b>
+    </div>
+
+    <div class="form-group row" [hidden]="!isEventTypeAging">
+        <label class="col-sm-3"><b>Aging based on priority: </b></label>
+        <select class="form-control font-13 radius-0 col-sm-4 margRgt"  [(ngModel)]="priorityid"
+                (change)="onPriorityChange($event.target.selectedIndex)" [disabled]="true">  
+          <option *ngFor="let typ of priorityArr;" [value]="typ.id">{{typ.typename}}</option>
+        </select>
+        <input type="number" class="form-control font-13 radius-0 col-sm-3 margLft" [(ngModel)]="noofdays"
+              (keypress)="onlyIntegerAllowed($event)" placeholder="Enter number of days" readonly>
+    </div>
+    <div class="form-group row" [hidden]="!isEventTypeNoofDays">
+        <label class="col-sm-3"><b>Number of days: </b></label>
+        <input type="number" class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="noofdays"
+              (keypress)="onlyIntegerAllowed($event)" placeholder="Enter number of days" readonly>
+    </div>
+
+    <div class="row">
+      <label class="col-sm-2 col-form-label custom-label ">TO:</label>
+      <div class="col-sm-9 form-group row">
+        <div class="col-sm-4">
+          <mat-checkbox [(ngModel)]="checkRequestor" [disabled]="true">&nbsp;Requestor</mat-checkbox>
+        </div>
+        <div class="col-sm-4">
+          <mat-checkbox [(ngModel)]="checkOpenedBy" [disabled]="true">&nbsp;Opened by</mat-checkbox>
+        </div>
+        <div class="col-sm-4">
+          <mat-checkbox [(ngModel)]="checkAssignee" [disabled]="true">&nbsp;Assignee</mat-checkbox>
+        </div>
+        <div class="col-sm-4">
+          <mat-checkbox [(ngModel)]="checkAssigneeGroup" [disabled]="true">&nbsp;Assignee Group</mat-checkbox>
+        </div>
+        <div class="col-sm-4">
+          <mat-checkbox [(ngModel)]="checkAssigneeGroupMember" [disabled]="true">&nbsp;Assignee Group Member</mat-checkbox>
+        </div>
+      </div>
+    </div><br>
+    <div class="row">
+      <label class="col-sm-2 col-form-label custom-label ">Additional Group Receipients:</label>
+      <div class="col-sm-9 form-group">
+        <table class="table table-bordered table-striped mb-0">
+          <thead class="thead">
+            <tr>
+              <th>Group Name</th>
+              <th>User Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table_data" *ngFor="let item of tableArrayCC">
+              <td>{{item.groupname}}</td>
+              <td>{{item.username}}</td>
+            </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="form-group modal-footer">
+    <button mat-stroked-button color="primary" (click)="closeModal()">close</button>&nbsp;&nbsp;
+  </div>
+</ng-template>
+
+
+<ng-template #varHelp>
+  <br>
+  <div class="form-group modal-body row">
+    <div class="col-sm-3"><b>List of Variables: </b></div>
+    <div class="col-sm-8">
+      <table class="table table-bordered table-striped mb-0">
+        <thead class="thead">
+          <tr>
+            <th>Variable Names</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="table_data" *ngFor="let item of variablesList">
+            <td>{{item.name}}</td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-group modal-footer">
+    <button mat-stroked-button color="primary" (click)="closeModal2()">close</button>&nbsp;&nbsp;
+  </div>
+</ng-template>
+

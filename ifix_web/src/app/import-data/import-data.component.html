@@ -1,0 +1,36 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+    (offset)="getData($event)" (pageSize)="onPageSizeChange($event)" [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header modalTitle">
+        <div class="modal-title" *ngIf="!isEdit">Import Master Data</div>
+        <!-- <div class="modal-title" *ngIf="isEdit">Update Organization wise Tools Mapping</div> -->
+    </div>
+    <div class="modal-body">
+        <div class="loader" [hidden]="fileLoader"><img class="loading-gif" src="../../../assets/img/loader.gif"></div>
+        <div class="form-group row">
+            <div class="col-sm-4 col-md-4 text-center">
+                <app-material-fileupload-singleclick-for-import [target]="fileUploadUrl" [text]="uploadButtonName"
+                    [formData]="formdata" (uploadError)="onFileError($event)" (complete)="onFileComplete($event)"
+                    (onFileRemove)="onRemove()" (dataLoaded)="onUpload($event)" [isMultiple]="false"></app-material-fileupload-singleclick-for-import>
+            </div>
+            <label class="col-sm-8 col-md-8 col-form-label font-14" *ngIf="shownMessage">Import Master Data for {{clientName}} client and {{orgName}} organization</label>
+        </div>
+
+        <div class="form-group upload-msg" *ngIf="fileName">
+            <span class="file-name">{{orginalDocumentName}}</span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-4 col-md-4 col-form-label font-13"><b><mat-checkbox class="col-sm-4" [(ngModel)]="isUpdate"></mat-checkbox></b></div>
+            <div class="col-sm-8 col-md-8" style="color: red;">
+                **Please tick the check box if you want to update the existing records from the file
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer pad-8">
+        <button type="button" class="btn btn-success radius-0" *ngIf="!isEdit" (click)="save()">Import</button>
+        <!-- <button type="button" class="btn btn-success radius-0" *ngIf="isEdit" (click)="update()">Update</button> -->
+        <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+    </div>
+</ng-template>

@@ -1,0 +1,253 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Add Organization Business Hour</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{message}}</div>
+    <div class="form-group" [hidden]="notAdmin">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected"
+              (change)="onClientChange($event.target.selectedIndex)">
+        <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+              (change)="onOrgChange($event.target.selectedIndex)">
+        <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    <!--<div class="form-group">-->
+      <!--<mat-slide-toggle (toggleChange)="hourChange()" [checked]="hourChecked"><b class="blue">Use same business hour-->
+        <!--for-->
+        <!--all working days</b>-->
+      <!--</mat-slide-toggle>-->
+    <!--</div>-->
+    <div [hidden]="!hourChecked">
+
+      <div class="form-group">
+        <b>Hours start :</b>
+        <select class="custom-select radius-0 font-13 size1" [(ngModel)]="hoursStart">
+          <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+        </select> <b>:</b>
+        <select class="custom-select radius-0 font-13 size1" [(ngModel)]="minsStart">
+          <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <b>Hours End :</b>
+        <select class="custom-select radius-0 font-13 size1" [(ngModel)]="hoursEnd">
+          <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+        </select> <b>:</b>
+        <select class="custom-select radius-0 font-13 size1" [(ngModel)]="minsEnd">
+          <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+        </select>
+      </div>
+      <div class="form-group font-13">
+        <mat-checkbox *ngFor="let day of days" value="{{day.id}}" [(ngModel)]="day.checked">{{day.day}}</mat-checkbox>
+      </div>
+    </div>
+    <table class="table table-bordered font-13 dayChecked" [hidden]="hourChecked">
+      <thead>
+      <tr>
+        <th scope="col" class="radius-0 font-13 text-center	">Days</th>
+        <th scope="col" class="radius-0 font-13 text-center">Start Time</th>
+        <th scope="col" class="radius-0 font-13 text-center">End Time</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <mat-checkbox value="0" [(ngModel)]="sunChck">Sun</mat-checkbox>
+        </td>
+        <td>
+
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="sunHoursStart">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="sunMinsStart">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+        </td>
+        <td>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="sunHoursEnd">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="sunMinsEnd">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-checkbox value="1" [(ngModel)]="monChck">Mon</mat-checkbox>
+        </td>
+        <td>
+
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="monHoursStart">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="monMinsStart">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+        </td>
+        <td>
+
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="monHoursEnd">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="monMinsEnd">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+      </tr>
+      <tr>
+        <td>
+          <mat-checkbox value="2" [(ngModel)]="tueChck">Tue</mat-checkbox>
+        </td>
+        <td>
+
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="tueHoursStart">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="tueMinsStart">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+        </td>
+        <td>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="tueHoursEnd">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="tueMinsEnd">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+      </tr>
+      <tr>
+        <td>
+          <mat-checkbox value="3" [(ngModel)]="wedChck">Wed</mat-checkbox>
+        </td>
+        <td>
+
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="wedHoursStart">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="wedMinsStart">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+        </td>
+        <td>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="wedHoursEnd">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="wedMinsEnd">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+      </tr>
+      <tr>
+        <td>
+          <mat-checkbox value="4" [(ngModel)]="thurChck">Thurs</mat-checkbox>
+        </td>
+        <td>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="thurHoursStart">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="thurMinsStart">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+        </td>
+        <td>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="thurHoursEnd">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="thurMinsEnd">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+      </tr>
+      <tr>
+        <td>
+          <mat-checkbox value="5" [(ngModel)]="friChck">Fri</mat-checkbox>
+        </td>
+        <td>
+
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="friHoursStart">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="friMinsStart">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+        </td>
+        <td>
+
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="friHoursEnd">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="friMinsEnd">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+      </tr>
+      <tr>
+        <td>
+          <mat-checkbox value="6" [(ngModel)]="satChck">Sat</mat-checkbox>
+        </td>
+        <td>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="satHoursStart">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="satMinsStart">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+        </td>
+        <td>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="satHoursEnd">
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select> <b>:</b>
+          <select class="custom-select radius-0 font-13 size" [(ngModel)]="satMinsEnd">
+            <option *ngFor="let min of mins" [ngValue]="min">{{min}}</option>
+          </select>
+      </tr>
+
+      </tbody>
+    </table>
+    <div class="form-group">
+      <input class="form-control radius-0 font-13" [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5"
+             placeholder="Activation Start" [(ngModel)]="dateStart" [min]="min">
+      <owl-date-time [pickerType]="'calendar'" #dt5></owl-date-time>
+    </div>
+    <div class="row mar-lft-rgt-0">
+      <div class="text-center">
+        <span class="font-13">Upload LOGO:</span>
+        <app-material-fileupload [target]="fileUploadUrl" [text]="uploadButtonName"
+                                 (complete)="onFileComplete($event)" [formData]="formData"
+                                 (uploadError)="onFileError($event)"></app-material-fileupload>
+      </div>
+      <div class="col-sm-6 pad-15 text-center upload-msg">{{attachMsg}}
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" placeholder="Search Organization Report Zone.." [(ngModel)]="zoneSelected"
+             matInput [formControl]="searchTerm"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngIf="isLoading" class="is-loading">
+          <mat-spinner diameter="50"></mat-spinner>
+        </mat-option>
+        <ng-container *ngIf="!isLoading">
+          <mat-option *ngFor="let zone of zones" [value]="zone.zonename">
+            {{ zone.zonename }}
+          </mat-option>
+        </ng-container>
+      </mat-autocomplete>
+    </div>
+    <div class="form-group">
+      <input class="form-control radius-0 font-13" type="text" placeholder="Upload path" [(ngModel)]="uploadUrl">
+    </div>
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+<!--<notifier-container></notifier-container>-->

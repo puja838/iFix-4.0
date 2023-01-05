@@ -1,0 +1,137 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [totalPage]="totalPage"
+                   [dataLoaded]="dataLoaded"></app-base-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Map Support Group Specific URL</div>
+
+  </div>
+  <div class="modal-body">
+    <!-- <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div> -->
+
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="organizationId"(change)="onOrgChange($event.target.selectedIndex)">
+        <option value="">Select Organization</option>
+        <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="urlSelected"
+                (change)="onUrlKeyChange($event.target.selectedIndex)">
+                <option value="">Select URL Key</option>
+          <option *ngFor="let url of urlArr" [value]="url.id">{{url.Urlkeyname}}</option>
+        </select>
+      </div>
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffTypeId"
+              (change)="getrecordbydifftype($event.target.selectedIndex)">
+        <option value="">Select From Property Type</option>
+        <option *ngFor="let record of recordTypeStatus;" [value]="record.seqno">{{record.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group" [hidden]="fromPropLevels.length===0">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelid"
+              (change)="onLevelChange($event.target.selectedIndex)">
+        <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group" >
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId">
+        <option value="">Select From Property</option>
+        <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+
+        <div class="form-group matFrom">
+        <!-- <mat-form-field>
+          <mat-label class="font-13">Select Support Group</mat-label>
+          <mat-select [(ngModel)]="sgroupSelected" multiple>
+            <mat-option *ngFor="let group of support_group" [value]="group.id" class="font-13">{{group.supportgroupname}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <ng-select [items]="support_group"  bindLabel="supportgroupname" bindValue="id" [closeOnSelect]="false" [multiple]="true" 
+                   [searchable]="true" placeholder="Select Group Name" [(ngModel)]="sgroupSelected">
+            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.supportgroupname}}
+            </ng-template>   
+        </ng-select>
+      </div>
+
+
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Update Support Group Specific URL</div>
+
+  </div>
+  <div class="modal-body">
+    <!-- <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div> -->
+
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="organizationId"(change)="onOrgChange($event.target.selectedIndex)">
+        <option value="">Select Organization</option>
+        <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="urlSelected"
+                (change)="onUrlKeyChange($event.target.selectedIndex)">
+                <option value="">Select URL Key</option>
+          <option *ngFor="let url of urlArr" [value]="url.id">{{url.Urlkeyname}}</option>
+        </select>
+      </div>
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffTypeId"
+              (change)="getrecordbydifftype($event.target.selectedIndex)">
+        <option value="">Select From Property Type</option>
+        <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group" [hidden]="fromPropLevels.length===0">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelid"
+              (change)="onLevelChange($event.target.selectedIndex)">
+        <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group" >
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId">
+        <option value="">Select From Property</option>
+        <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+
+        <div class="form-group">
+        <!-- <mat-form-field>
+          <mat-label class="font-13">Select Support Group</mat-label>
+          <mat-select [(ngModel)]="sgroupSelected" multiple>
+            <mat-option *ngFor="let group of support_group" [value]="group.id" class="font-13">{{group.supportgroupname}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <ng-select [items]="support_group"  bindLabel="supportgroupname" bindValue="id" [closeOnSelect]="false" [multiple]="true" 
+                   [searchable]="true" placeholder="Select Group Name" [(ngModel)]="sgroupSelected">
+            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.supportgroupname}}
+            </ng-template>   
+        </ng-select>
+  
+      </div>
+
+
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+

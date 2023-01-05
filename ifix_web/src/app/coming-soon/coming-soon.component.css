@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0px;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  body {
+    background: #fff;
+    margin: 0;
+    color: #84b1eb;
+  }
+  
+  h1{
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+  }
+
+  ::selection {
+    color: #fff;
+    text-shadow: none;
+    background: #93bee9;
+  }
+  
+  #h {
+    background: url("../../assets/img/header.jpg") no-repeat center top;
+    padding-top: 150px;
+    text-align: center;
+    background-attachment: relative;
+    background-position: center center;
+    min-height:740px;
+    width: 100%;
+    color: white;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow: hidden;
+  }
+  
+  #h h1 {
+    font-weight: 900;
+    font-size: 60px;
+    letter-spacing: 1px;
+    padding-left: 31%;
+  }
+  
+  

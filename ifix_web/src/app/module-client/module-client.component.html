@@ -1,0 +1,59 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                    (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)"[dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Map Module With Client</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{message}}</div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected" (change)="onClientChange($event.target.selectedIndex)">
+      <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected" (change)="onOrgChange($event.target.selectedIndex)">
+          <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+        </select>
+      </div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="moduleSelected" (change)="onModuleChange($event.target.selectedIndex)">
+        <option *ngFor="let module of modules" [value]="module.id">{{module.modulename}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Update Client Module</div>
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{message}}</div>
+     <div class="form-group">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="clientSelectedName" readonly>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="orgSelectedName" readonly>
+      </div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="moduleSelected" (change)="onModuleChange($event.target.selectedIndex)">
+        <option *ngFor="let module of modules" [value]="module.id">{{module.modulename}}</option>
+      </select>
+    </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="update()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+<!--<notifier-container></notifier-container>-->

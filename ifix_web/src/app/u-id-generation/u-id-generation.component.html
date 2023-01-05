@@ -1,0 +1,56 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" [hidden]="isUpdate">Add UID Generation</div>
+    <div class="modal-title" [hidden]="!isUpdate">Update UID Generation</div>
+  </div>  
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+    <div class="form-group row">
+        <label class="col-sm-3"><b>Client: </b></label>
+        <select class="custom-select mr-sm-2 radius-0 font-13 col-sm-8" [(ngModel)]="clientSelected"
+                (change)="onClientChange($event.target.selectedIndex, 'i')" [disabled] = "isUpdate">
+            <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+        </select>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3"><b>Organization: </b></label>
+        <select class="custom-select mr-sm-2 radius-0 font-13 col-sm-8" [(ngModel)]="orgSelected"
+                (change)="onOrgChange($event.target.selectedIndex)" [disabled] = "isUpdate">
+            <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+        </select>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Differentiation Type: </b></label>
+      <select class="custom-select mr-sm-2 radius-0 font-13 col-sm-8" [(ngModel)]="difftypeSeqSelected"
+              (change)="onCategoryTypeChange($event.target.value)" [disabled] = "isUpdate">
+              <option [value]="0">Select Differentiation Type</option>
+          <option [value]="11" *ngIf="orgnType<3">Email</option>
+          <option [value]="5">CI Type</option>
+      </select>
+    </div>
+    <div class="form-group row" *ngIf="isCategoryType && isEmail">
+        <label class="col-sm-3"><b>UID: </b></label>
+        <input type="number" class="form-control radius-0 font-13 col-sm-8" [(ngModel)]="uidSelected"
+                placeholder="Enter Your UID" [disabled] = "isUpdate && difftypeSeqSelected != 11">
+    </div> 
+    <div class="form-group row" *ngIf="isCategoryType && !isEmail">
+        <label class="col-sm-3"><b>Code: </b></label>
+        <input type="text" class="form-control radius-0 font-13 col-sm-8" [(ngModel)]="clientCodeSelected" 
+                placeholder="Enter Your Code" [disabled] = "isUpdate">
+    </div>
+    <div class="form-group row" *ngIf="isCategoryType && !isEmail">
+        <label class="col-sm-3"><b>Number to start with: </b></label>
+        <input type="number" class="form-control radius-0 font-13 col-sm-8" [(ngModel)]="numberToStartWith"
+                placeholder="Enter Number More Than Zero" [disabled] = "isUpdate">
+    </div>
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" [hidden]="isUpdate" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" [hidden]="!isUpdate" class="btn btn-success radius-0" (click)="update()" [disabled] = "difftypeSeqSelected != 11">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+

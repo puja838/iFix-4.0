@@ -1,0 +1,116 @@
+<ng-template #content let-modal let-c="close" class="mar-bot-0">
+  <div class="modal-header">
+    <h4 class="modal-title">Asset management</h4>
+    <!--    <button type="button" class="close" aria-label="Close" (click)="c()">-->
+    <!--      <span aria-hidden="true">&times;</span>-->
+    <!--    </button>-->
+  </div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <div class="col-md-3">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="masterNameSelected"
+                (change)="onMasterChange($event.target.selectedIndex)">
+          <option *ngFor="let master of masterNameObj" [value]="master.id">{{master.name}}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="columnNameSelected"
+                (change)="onClientChange($event.target.selectedIndex)">
+          <option *ngFor="let column of columnDataObj"
+                  [value]="column.id">{{column.name}}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="assetValue"
+               placeholder="Digital Asset value">
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-primary radius-0 font-13" (click)="searchAssetmanagement()"
+                [disabled]="isDisabled">Submit
+        </button>
+      </div>
+    </div>
+    <div class="card-body-grid">
+      <angular-slickgrid gridId="grid1"
+                         [columnDefinitions]="columnDefinitions"
+                         [gridOptions]="gridOptions"
+                         (onAngularGridCreated)="angularGridReady($event)"
+                         gridHeight="300"
+                         (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
+                         (sgOnCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
+                         (sgOnSelectedRowsChanged)="handleSelectedRowsChanged($event.detail.eventData, $event.detail.args)"
+                         [dataset]="data">
+      </angular-slickgrid>
+    </div>
+  </div>
+  <div class="modal-footer content-center">
+    <!--    <ngb-pagination [collectionSize]="collectionSize" [maxSize]="5" (pageChange)="onPageChange($event)"-->
+    <!--                    [(page)]="page"-->
+    <!--                    [pageSize]="pageSize" aria-label="Default pagination"></ngb-pagination>-->
+    <!--    <button type="button" class="btn btn-success  radius-0 font-13 " (click)="saveData()" style="-->
+    <!--    margin-top: 8px;">Add Asset-->
+    <!--    </button>-->
+
+    <button type="button" class="btn btn-warning  radius-0 font-13 " (click)="close()"
+            *ngIf="statusseq ===RESOLVE_STATUS_SEQUENCE || allassets.length>0">Close
+    </button>
+  </div>
+  <div class="col-md-12 height-350 font-13 mar-top-9" [ngStyle]="{'background':darkCss}"
+       *ngFor="let assets of allassets;let j=index">
+    <table class="table" *ngIf="assets.length>0">
+      <thead [ngStyle]="{'background':selectedColor,'color':footerItem}">
+      <tr class="rsdb-head">
+        <!--        <th></th>-->
+        <th>Asset History</th>
+        <th *ngFor="let header of _object.keys(assets[0])">{{header}}</th>
+      </tr>
+      </thead>
+      <tbody [ngStyle]="{'color':footerItem}">
+      <tr *ngFor="let row of assets; let i = index">
+        <!--        <td class="pointer">-->
+        <!--          <mat-icon (click)="removeAsset(i,j)" *ngIf="sameUser">delete_outline</mat-icon>-->
+        <!--        </td>-->
+        <td class="pointer" (click)="showHistory(i,j)">
+          <i class="fa fa-history" aria-hidden="true"></i>
+        </td>
+        <td *ngFor="let objKey of _object.keys(row)">{{ row[objKey] }} </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+<ng-template #assetcontent let-modal let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title">Selected Asset</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="overflow-auto">
+      <angular-slickgrid gridId="grid1"
+                         [columnDefinitions]="columnDefinitions"
+                         [gridOptions]="gridOptions"
+                         (onAngularGridCreated)="angularGridReady($event)"
+                         gridWidth="4000"
+                         gridHeight="120"
+                         [dataset]="assetdata">
+      </angular-slickgrid>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning radius-0 font-13" (click)="closeAsset()">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #contentModal let-c="close" let-d="dismiss">
+  <div class="modal-header asstetHead centered">
+    <h4 class="modal-title" id="modal-primary-title"><b>Asset History</b></h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body asstetBody centered">
+    <pre><b>{{assetMessage}}</b></pre>
+  </div>
+</ng-template>

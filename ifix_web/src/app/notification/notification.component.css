@@ -1,0 +1,43 @@
+
+.matcss {
+    display: inline;
+    padding: 0;
+}
+
+.maxWidth{
+    max-width: 100%;
+    margin-top: 5px;
+}
+
+.addButton {
+    margin-bottom: 7px;
+    margin-top: 7px;
+}
+
+.table1{
+    width: 80%;
+}
+
+.Isize{
+    font-size: large;
+    cursor: pointer;
+}
+
+.margRgt{
+    margin-right: 30px;
+}
+
+.margLft{
+    margin-left: 10px;
+}
+
+.perCent{
+    margin-left: 5px;
+    margin-top: 8px;
+    font-size: large;
+}
+
+.linkHov{
+    cursor: pointer;
+    color: rgb(25, 25, 179);
+}

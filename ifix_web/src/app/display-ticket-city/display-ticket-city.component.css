@@ -1,0 +1,558 @@
+/*@import "~bootstrap/dist/css/bootstrap.css";*/
+.custom-radio .custom-control-label::before {
+  border: 2px solid #BDBABB;
+}
+
+
+.folders {
+  list-style-type: none;
+  padding: 0px;
+}
+
+ul.folders li {
+  padding: 10px;
+  /*border-left: 3px solid #3c8dbc;*/
+  background: white;
+  border-bottom: 3px solid #f1f3f4;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.activeF {
+  border-left: 3px solid #3c8dbc;
+  background: #e4e6eb !important;
+  font-weight: 600;
+}
+
+.Marg {
+  margin-left: 1%;
+  margin-right: -7%;
+}
+
+.PaddingReq {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.marginTop {
+  margin-top: 15px;
+}
+
+.divLine {
+  border-top: 2px solid #0f1113;
+  padding: 5px 10px 5px 10px;
+}
+
+.btnMid {
+  margin-left: 5%;
+}
+
+.btnMid1 {
+  margin-left: 43%;
+}
+
+.views-body.mar-top-15 {
+  box-shadow: 0px 10px 9px -9px rgba(0, 0, 0, 0.75);
+  margin-bottom: 5px;
+}
+
+.inline {
+  float: left;
+  width: 75%;
+}
+
+.mar-lft-2 {
+  margin-left: 2px;
+}
+
+.mar-top-1 {
+  margin-top: 1px;
+}
+
+.modalTitle {
+  display: inline;
+  text-align: center;
+  padding: 10px;
+  background-color: #060c0f;
+  color: white;
+  font-weight: 600;
+  border-radius: 0px;
+}
+
+.back {
+  padding: 10px;
+  /* color: blue; */
+  cursor: pointer;
+}
+
+.tcktyp {
+  width: auto;
+  font-size: 13px;
+  border-radius: 0px;
+  margin-right: 3px;
+}
+
+.modalTitle2 {
+  font-weight: 600;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+.formClass {
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  height: calc(2.25rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.radius-0 {
+  border-radius: 0px !important;
+}
+
+.font-13 {
+  font-size: 13px;
+}
+
+.height-120 {
+  height: 120px;
+}
+
+.height-235 {
+  height: 235px;
+  overflow: auto;
+}
+
+.pad-8 {
+  padding: 8px;
+}
+
+.pad-0-8 {
+  padding: 0px 8px;
+  text-align: center;
+}
+
+/*.without_ampm::-webkit-datetime-edit-ampm-field {*/
+/*  display: none;*/
+/*}*/
+input[type=time]::-webkit-clear-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  margin: -10px;
+}
+
+/*.activity tr > *:nth-child(1) { width:15%; }
+.activity tr > *:nth-child(2) { width:25%; }
+.activity tr > *:nth-child(3) { width:40%; }
+.activity tr > *:nth-child(4) { width:20%; }*/
+
+.attachment tr > *:nth-child(1) {
+  width: 70%;
+}
+
+.attachment tr > *:nth-child(2) {
+  width: 30%;
+}
+
+.status {
+  color: blue;
+  font-style: italic;
+}
+
+.modal-height {
+  height: 573px;
+  overflow: auto;
+}
+
+.sla-card-pading {
+  padding: 10px;
+}
+
+.sla-meter {
+  padding: 25px 0px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pad-top-0 {
+  padding-top: 0px;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.stepper-head {
+  font-size: 13px;
+}
+
+.card-body-grid {
+  height: 463px;
+}
+
+select.form-control:not([size]):not([multiple]) {
+  height: 33px !important;
+}
+
+.modalheight {
+  height: 500px;
+}
+
+.cdate {
+  padding: 0px;
+}
+
+.assign {
+  padding: 10px;
+}
+
+.priority-val {
+  padding-bottom: 5px;
+  font-size: 13px;
+  padding-top: 4px;
+  padding-left: 5px;
+  background-color: #e9ecef;
+  border: none;
+}
+
+@media all and (-ms-high-contrast: none) {
+  /*.foo { color: green } !* IE10 *!*/
+  *::-ms-backdrop,
+    /*.foo { color: red } !* IE11 *!*/
+  .create-date {
+    flex: 0 0 100%;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .priority {
+    /*flex: 0 0 100%;*/
+    /*max-width: 100%;*/
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 31px;
+  }
+
+  .sol-div {
+    padding-top: 10px;
+  }
+
+  .desc-div {
+    padding-right: 0px;
+
+  }
+
+  .textareadiv {
+    width: 100% !important;
+    min-height: 120px !important;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .solbtn {
+    padding-left: 5px;
+    height: 44px !important;
+    margin-left: 20px;
+  }
+
+  .comment-top {
+    padding-top: 17px;
+  }
+
+}
+
+.ticketid {
+  padding-left: 14px;
+}
+
+.step-height {
+  min-height: 7em;
+}
+
+.sol-com-height {
+  min-height: 120px;
+}
+
+.desc-height {
+  min-height: 100px;
+}
+
+.checklistTitle {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  background-color: #3c8dbc;
+  color: white;
+  font-weight: 600;
+  border-radius: 0px;
+}
+
+.mat-dialog-container {
+  padding: 0px !important;
+}
+
+.selectone {
+  padding: 12px 8px 12px;
+}
+
+.checklist {
+  padding-left: 300px
+}
+
+.checklist-div {
+  padding-top: 15px;
+}
+
+.checklist-title {
+  padding-left: 550px;
+  padding-top: 5px;
+  font-size: 24px;
+}
+
+.source {
+  font-size: 15px;
+  font-weight: 600;
+  color: red;
+}
+
+.card_footer {
+  padding: 0px 10px 0px 10px;
+}
+
+.paddding_style {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.attachbtn {
+  width: 15%;
+  margin-bottom: 3%;
+}
+
+.root {
+  margin-bottom: 2%;
+  margin-top: 1%;
+}
+
+.marginRow {
+  margin: 0% !important;
+}
+
+/*================= additional field=====================*/
+/*.margin{*/
+/*margin-right: 15px;*/
+/*}*/
+.marginTop {
+  margin-top: 1rem;
+}
+
+.label1 {
+
+  width: 362px;
+  font-size: 16px;
+  font-weight: 600
+}
+
+@media screen and (max-width: 1340px)and (min-width: 1225px) {
+  .label1 {
+    width: 350px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1224px)and (min-width: 1095px) {
+  .label1 {
+    width: 295px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1094px )and (min-width: 878px) {
+  .label1 {
+    width: 480px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 426px )and (min-width: 54px) {
+  .label1 {
+    width: 250px;
+    font-size: 16px;
+  }
+}
+
+.matcss {
+  display: inline;
+}
+
+.date-type {
+  padding-left: 15px;
+}
+
+.sol-com-height {
+  min-height: 120px;
+}
+
+.heighttxt {
+  height: 150px;
+}
+
+.mar_bottom {
+  margin-bottom: 0px !important;
+}
+
+.curser {
+  cursor: pointer;
+}
+
+.note {
+  font-size: 12px;
+  background-color: antiquewhite;
+  padding-bottom: 1px;
+  margin-bottom: 8px;
+}
+
+
+.border {
+  border: 1px solid #949da7;
+  height: 72%;
+  padding-left: 13%;
+  padding-right: 0%;
+  /* padding-top: 1%; */
+}
+
+
+.vip-size {
+  height: 30px;
+  width: 30px;
+}
+
+.width_10 {
+  width: 24%;
+}
+
+
+.margin-left {
+  margin-left: 1%;
+}
+
+.mat-input-element {
+  border: 1px solid !important;
+  border-color: lightgray !important;
+  padding: 7px !important;
+}
+
+.states {
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  background: black;
+  color: white;
+}
+
+.state-label {
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.close {
+  cursor: pointer;
+}
+
+.pad-6 {
+  padding-left: 6px;
+}
+
+
+.state-msg {
+  font-size: 13px;
+  font-weight: 600;
+  color: red !important;
+}
+
+.download {
+  padding: 5px;
+  height: 104px;
+  color: blue;
+  overflow: auto;
+}
+
+.download .table td {
+  padding: 5px;
+  border-top: 0px;
+}
+
+.mar-top-28 {
+  margin-top: 28px;
+}
+
+.attachDesign {
+  margin-left: 13%;
+}
+
+.marg {
+  margin-left: 10%;
+  text-align: left;
+}
+
+.sendM {
+  margin-left: 30%;
+  text-align: right;
+}
+
+.card-padd {
+  padding: 10px 10px 0px 10px;
+}
+
+.locationSearch {
+  background-color: rgb(255, 255, 255);
+  padding-left: 4%;
+  box-sizing: border-box;
+  border: 1px solid #ced4da;
+}
+
+.loaderRes {
+  top: 0px;
+  left: 0px;
+  right: 14px;
+  bottom: 0px;
+  background-color: black;
+  position: fixed;
+  opacity: 0.5;
+  z-index: 1000
+}
+
+@media (max-width: 1311px) {
+  .loaderRes {
+    right: 28px;
+  }
+}
+
+.example-chip-list {
+  width: 100%;
+}
+
+.userMail{
+  border: none !important;
+}

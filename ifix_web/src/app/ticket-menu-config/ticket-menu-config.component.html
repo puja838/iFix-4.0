@@ -1,0 +1,91 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [totalPage]="totalPage"
+                   [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Menu Configuration</div>
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected"
+              (change)="clientIdSpecific($event.target.selectedIndex)">
+        <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+              (change)="onOrgChange($event.target.selectedIndex)">
+        <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fieldSelected"
+              (change)="onFieldChange($event.target.selectedIndex)">
+        <option *ngFor="let field of fields" [value]="field.id">{{field.name}}</option>
+      </select>
+    </div>
+    <div class="form-group" [hidden]="!hiddenRadio" [(ngModel)]="isNew">
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1" (change)="adddescription()">Create New</mat-radio-button> &nbsp;
+        <mat-radio-button value="2" (change)="changedescription()">Add Existing</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="form-group" [hidden]="!hiddencolor" [(ngModel)]="isColor">
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1" (change)="addColorPicker()">Add Color</mat-radio-button> &nbsp;&nbsp;
+        <mat-radio-button value="2" (change)="addImage()">Add Image</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="form-group" [hidden]="fieldloader">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectField"
+              (change)="valueFunc($event.target.selectedIndex)">
+        <option *ngFor="let fieldValue of fieldValues" [value]="fieldValue.funcdescid"
+        >{{fieldValue.description}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" placeholder="Add description"
+             [(ngModel)]="newDescription">
+    </div>
+    <div class="form-group" [hidden]="!colorpicker">
+      <input class="form-control radius-0 font-13" [(colorPicker)]="color" placeholder="Color Picker"
+             [style.background]="color"/>
+    </div>
+    <div class="form-group mar-bot-0 font-13" [hidden]="!hiddenmenu">
+      <label>Menu Type :</label>
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="iscatalog" [disabled]="isNew==='2'" (change)="onCatalogChange()">
+        <mat-radio-button value="1">Non Catalog Menu</mat-radio-button> &nbsp;&nbsp;
+        <mat-radio-button value="2">Catalog Menu</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="form-group mar-bot-0 font-13" [hidden]="!hiddenRadio1">
+      <label>Management View :</label>
+      <br>
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="managementValue" [disabled]="isNew==='2'">
+        <mat-radio-button value="1">My Workspace</mat-radio-button> &nbsp;&nbsp;
+        <mat-radio-button value="2">Team Workspace</mat-radio-button> &nbsp;&nbsp;
+        <mat-radio-button value="3">Opened By / Requested By</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="row mar-lft-rgt-0" [hidden]="!file">
+      <label id="label1" class="font-13">Attach Image </label>
+      <br>
+      <div class="col-sm-6 mar-lft-rgt-0 text-center">
+        <app-material-fileupload [target]="fileUploadUrl" [text]="uploadButtonName" [formData]="formdata"
+                                 (uploadError)="onFileError($event)"
+                                 (complete)="onFileComplete($event)"></app-material-fileupload>
+      </div>
+      <div class="col-sm-6 pad-15 text-center upload-msg">{{attachMsg}}
+      </div>
+    </div>
+    <div class="pad-8">
+      <button type="button" class="btn btn-success radius-0" (click)="save()">Submit</button>
+      <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+    </div>
+  </div>
+</ng-template>
+
+<!--<notifier-container></notifier-container>-->

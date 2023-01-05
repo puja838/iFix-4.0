@@ -1,0 +1,186 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-9 col-md-9">
+      <div>
+        <div class="d-flex bd-highlight">
+          <div class="p-2 flex-fill bd-highlight">
+            <div class="form-group">
+              <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+                      (change)="onOrgChange($event.target.selectedIndex)">
+                <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="p-2 flex-fill bd-highlight">
+            <div class="form-group">
+              <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="typeSelected"
+                      (change)="ontypechange()">
+                <option *ngFor="let type of types" [value]="type.id">{{type.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-sm-4 row process">
+            <!--<select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="processId"
+                    (change)="onProcessChange($event.target.selectedIndex)">
+              <option value="0">Select Process</option>
+              <option *ngFor="let org of processes" [value]="org.id">{{org.name}}</option>
+            </select>-->
+            
+            <ng-select  class="ngselect" appendTo="body" [items]="processes"  bindLabel="name" bindValue="id" [searchable]="true" 
+                       placeholder="Select Process" [(ngModel)]="processId">
+            </ng-select>
+          </div>
+          <div class="p-2 flex-fill bd-highlight">
+            <button mat-raised-button color="accent" (click)="submit()">Submit</button>&nbsp;&nbsp;
+            <button mat-raised-button color="warn" class="margin-lft-10" (click)="clearProcess()">Clear</button>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content" id="workflow-tabContent">
+        <div>
+          <div class="workflow-container">
+            <div class="col-sm-12 col-md-12 full-height" id="add-container" style="border: 1px solid black;">
+
+            </div>
+          </div>
+          <div class="text-right" style="margin-top: 10px;">
+            <button class="btn btn-primary font-13" (click)="executeWorkflow()">Activate Process</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+             aria-controls="nav-profile" aria-selected="false">States</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <!-- Core tab start -->
+        <div class="tab-pane active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <ul class="list-group" id="myUL">
+            <li class="list-group-item" *ngFor="let parent of stateList;">
+              <span class="caret">{{parent.statetypename}}</span>
+              <ul class="nested list-group">
+                <li class="list-group-item statename custom-drag-btn" *ngFor="let child of parent.states;"
+                    id="{{child.stateid}}">
+                  {{child.statename}}
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- Core tab end -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #processDefineModal>
+  <div class="card">
+    <h3 class="card-header">
+      Define Process
+      <a class="float-right" style="cursor:pointer;" (click)="closeModal()">x</a>
+    </h3>
+    <div class="card-body">
+      <table class="table">
+        <tr>
+          <td style="border:0;">
+            <mat-radio-group [(ngModel)]="groupType" (change)="onRadioButtonChange($event.value)">
+              <mat-radio-button value='1'>Go to the Creator</mat-radio-button>&nbsp;&nbsp;
+              <mat-radio-button value='2'>Manual Group</mat-radio-button>&nbsp;&nbsp;
+<!--              <mat-radio-button value='3'>Self Assign</mat-radio-button>-->
+            </mat-radio-group>
+          </td>
+        </tr>
+      </table>
+      <div class="row" [hidden]="isCreator">
+        <div class="col-lg-12 col-md-12">
+          <mat-checkbox class="font-13"[(ngModel)]="isSelfAssign" (change)="onAssignChange()">Self Assign</mat-checkbox><br><br>
+          <mat-checkbox class="font-13"[(ngModel)]="isSender" (change)="onSenderChange()">Back to sender (User)</mat-checkbox><br><br>
+          <mat-checkbox class="font-13"[(ngModel)]="isSenderGroup" (change)="onSenderGroupChange()">Back to sender (Group)</mat-checkbox><br><br>
+          <mat-checkbox class="font-13"[(ngModel)]="isManager" (change)="onManagerChange()">Send to Manager</mat-checkbox>
+          <div class="form-group">
+            <label style="display: inline-block;margin-right: 20px;width: 12%;">Support Group</label>
+            <select class="form-control font-13 radius-0" style="display:inline-block; width: 50%;"
+                    [(ngModel)]="supportGroupId" (change)="onGroupChange($event.target.selectedIndex)">
+              <option value="0">Select Support Group</option>
+              <option *ngFor="let group of supportGroupList" [value]="group.id">{{group.supportgroupname}}</option>
+            </select>
+            <span class="inputError" id="grperr"></span>
+          </div>
+          <div class="form-group">
+            <label style="display: inline-block;margin-right: 20px;width: 12%;">User</label>
+            <input type="text" class="form-control radius-0 font-13" placeholder="Enter Login ID OR Name"
+                   style="display:inline-block; width: 50%;"
+                   [(ngModel)]="loginname"
+                   matInput [formControl]="searchUser" [matAutocomplete]="auto"
+            >
+            <span class="inputError" id="usrerr"></span>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getUserDetails()">
+              <mat-option *ngIf="isLoading" class="is-loading">
+                <mat-spinner diameter="50"></mat-spinner>
+              </mat-option>
+              <ng-container *ngIf="!isLoading">
+                <mat-option *ngFor="let user of userList" [value]="user.loginname">
+                  {{ user.name }} - {{user.loginname}}
+                </mat-option>
+              </ng-container>
+            </mat-autocomplete>
+          </div>
+
+          <div class="text-center">
+            <button mat-raised-button color="accent" (click)="addUserList()">Add Details</button>
+<!--            <button class="btn btn-primary" (click)="addUserList()"> Add</button>-->
+          </div>
+          <hr>
+        </div>
+        <div class="col-lg-12 col-md-12">
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered">
+              <thead>
+              <tr>
+                <th>Seq No.</th>
+                <th>Support Group</th>
+                <th>User</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let usr of stateWiseUserList;let i = index;">
+                <td>{{i + 1}}</td>
+                <td>{{usr.groupname}}</td>
+                <td>{{usr.loginname}}</td>
+                <td>
+                  <a (click)="removeUserList(i)"><i class="fa fa-trash font-20" style="color: red;"
+                                                    aria-hidden="true"></i></a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+<!--      <div class="form-group matFrom">-->
+<!--        <mat-form-field>-->
+<!--          <mat-label class="font-13">Select Activity</mat-label>-->
+<!--          <mat-select [(ngModel)]="activity" multiple>-->
+<!--            <mat-option *ngFor="let activity of activities" [value]="activity.id" class="font-13">{{activity.actionname}}</mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+
+<!--      </div>-->
+      <!--<div class="form-group ">
+        <label class=" type"> Select Activity : </label>
+        <mat-checkbox class ="font-13" *ngFor="let activity of activities" value="{{activity.id}}" [(ngModel)]="activity.checked">
+          {{activity.actionname}}&nbsp;&nbsp;</mat-checkbox>
+      </div>-->
+      <div class="text-center">
+        <button mat-raised-button color="primary" (click)="saveStateDefination()">Submit</button>
+<!--        <button class="btn btn-primary font-13" (click)="saveStateDefination()">Submit</button>-->
+      </div>
+    </div>
+  </div>
+</ng-template>

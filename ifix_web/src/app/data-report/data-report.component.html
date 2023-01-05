@@ -1,0 +1,190 @@
+<div class="loader" [hidden]="dataLoaded"><img class="loading-gif" src="../../../assets/img/loader.gif"></div>
+<div class="dasboard-width">
+  <div class="row header mar-lft-rgt-0">
+    <div class="col-md-4 col-sm-4 pageName">{{displayData.pageName}}</div>
+  </div>
+</div>
+
+<div class="row content mr-top-5 mar-lft-rgt-0">
+  <div class="col-md-12 col-sm-12">
+    <div class="card">
+      <div class="card-header card-header-top">
+        <div class="col-md-4 mar-lft-rgt-0">
+          {{displayData.tabName}}
+        </div>
+        <div class="col-md-8 mar-lft-rgt-0  row pull-right ">
+
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="container-fluid mar-top-15">
+          <div class="offset-3 col-sm-6">
+            <fieldset>
+              <legend>Download Data Report</legend>
+              <!-- <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Client :</b></label>
+                <div class="col-sm-8 col-md-8">
+                    <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected"
+                        (change)="onClientChange($event.target.selectedIndex)">
+                        <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+                    </select>
+                </div>
+            </div> -->
+    
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization :</b></label>
+                <div class="col-sm-8 col-md-8">
+                    <ng-select [items]="organization" bindLabel="mstorgnhirarchyname" bindValue="mstorgnhirarchyid" [closeOnSelect]="false"
+                        [multiple]="true" groupBy="selectedAllGroup" [selectableGroup]="true"
+                        [selectableGroupAsModel]="false" appendTo="body" [searchable]="true"
+                        placeholder="Select Organization" [(ngModel)]="orgSelected" (change)="onOrgChange()">
+    
+                        <ng-template ng-multi-label-tmp let-items="items">
+                            <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                                <span class="ng-value-label"> {{item.mstorgnhirarchyname}}</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 4">
+                                <span class="ng-value-label">{{items.length - 4}} more...</span>
+                            </div>
+                        </ng-template>
+    
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;Select All
+                        </ng-template>
+    
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox"
+                                [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.mstorgnhirarchyname}}
+                        </ng-template>
+                    </ng-select>
+                </div>
+            </div>
+          <!-- ===========================================tictfrom======================================================= -->
+            <div class="form-group row">
+              <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Type :</b></label>
+              <div class="col-sm-8 col-md-8"> 
+                  <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffTypeSeqno"
+                  [disabled]="true">
+                  <option value="">Select Property Type</option>
+                  <option *ngFor="let record of recordTypeStatus;" [value]="record.seqno">{{record.typename}}</option>
+                  </select>
+              </div>
+            </div>
+      
+            <!-- <div class="form-group row" [hidden]="fromPropLevels.length===0">
+              <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Level:</b></label>
+              <div class="col-sm-8 col-md-8">
+                  <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelid"
+                          (change)="onLevelChange($event.target.selectedIndex)">
+                      <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+                  </select>
+              </div>
+            </div> -->
+      
+            <div class="form-group row">
+              <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Value:</b></label>
+              <div class="col-sm-8 col-md-8">
+                  <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId" 
+                  (change)="getfromticketproperty($event.target.selectedIndex)">
+                      <option value=''>Select Property</option>
+                      <option *ngFor="let record of formTicketTypeList;" [value]="record.seqno">{{record.name}}</option>
+                  </select>
+              </div>    
+            </div>
+        
+           <!--==============================catform==================================== -->
+        
+             <div class="form-group row">
+              <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Type:</b></label>
+              <div class="col-sm-8 col-md-8">
+                  <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffTypeStat"
+                  [disabled]="true" >
+                  <option value="">Select Property Type</option>
+                  <option *ngFor="let record of recordTypeStatus;" [value]="record.seqno">{{record.typename}}</option>
+                  </select>
+              </div>    
+            </div>
+      
+            <!-- <div class="form-group row" [hidden]="fromPropLevelsCat.length===0">
+              <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Level :</b></label>
+              <div class="col-sm-8 col-md-8">  
+                  <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelcatgid"
+                          (change)="onLevelChangestatus($event.target.selectedIndex)">
+                      <option *ngFor="let level of fromPropLevelsCat" [value]="level.id">{{level.typename}}</option>
+                  </select>
+              </div>    
+            </div> -->
+      
+            <div class="form-group row">
+              <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Value:</b></label>
+              <div class="col-sm-8 col-md-8">
+                  <!-- <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffStat"
+                  (change)="getfromcatagoryproperty($event.target.selectedIndex)">
+                      <option value="">Select From Property</option>
+                      <option *ngFor="let record of formTicketTypeListStat;" [value]="record.id">{{record.typename}}</option>
+                  </select> -->
+                  <ng-select [items]="formTicketTypeListStat" bindLabel="name" bindValue="seqno" [closeOnSelect]="false"
+                        [multiple]="true" groupBy="selectedAllGroup" [selectableGroup]="true"
+                        [selectableGroupAsModel]="false" appendTo="body" [searchable]="true"
+                        placeholder="Select Property" [(ngModel)]="fromRecordDiffStat">
+    
+                        <ng-template ng-multi-label-tmp let-items="items">
+                            <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                                <span class="ng-value-label"> {{item.name}}</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 4">
+                                <span class="ng-value-label">{{items.length - 4}} more...</span>
+                            </div>
+                        </ng-template>
+    
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;Select All
+                        </ng-template>
+    
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox"
+                                [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.name}}
+                        </ng-template>
+                    </ng-select>
+              </div>    
+            </div>
+
+            <!-- ================================================================================================ -->
+    
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-form-label font-13"><b>From Date :</b></label>
+                <div class="col-sm-8 col-md-8">
+                    <input class="form-control radius-0 font-13" #startDate [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+                        placeholder="From Date" [(ngModel)]="startTime" [disabled]='isAllDate' (ngModelChange)="fromDateChange($event)">
+                    <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
+                </div>
+            </div>
+    
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-form-label font-13"><b>To Date :</b></label>
+                <div class="col-sm-8 col-md-8">
+                    <input class="form-control radius-0 font-13" #endDate [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3"
+                        placeholder="To Date" [(ngModel)]="endTime"  (ngModelChange)="toDateChange($event)">
+                    <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
+                </div>
+            </div>
+    
+            <!-- <div class="form-group row">
+                <label class="col-sm-4 col-md-4 col-form-label font-13"><b>All Date :</b></label>
+                <div class="col-sm-8 col-md-8">
+                    <mat-checkbox class="form-control font-13" [(ngModel)]="isAllDate" (change)="onFieldCheck()"></mat-checkbox>
+                </div>
+            </div>         -->
+
+
+              <div class="modal-footer pad-8">
+                <button type="button" class="btn btn-success radius-0" (click)="save()">Download</button>
+                <button type="button" class="btn btn-danger radius-0" (click)="reset()">Reset</button>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

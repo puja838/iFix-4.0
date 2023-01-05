@@ -1,0 +1,41 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+    (offset)="getData($event)" (pageSize)="onPageSizeChange($event)" [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header modalTitle">
+        <div class="modal-title" *ngIf="!isEdit">Add Transport Table</div>
+        <div class="modal-title" *ngIf="isEdit">Update Transport Table</div>
+    </div>
+    <div class="modal-body">
+       
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Table Name :</b></label>
+            <div class="col-sm-8 col-md-8">
+                <input type="text" class="form-control radius-0 font-13" [(ngModel)]="tableName"
+                    placeholder="Enter Table Name">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Table  Desciption:</b></label>
+            <div class="col-sm-8 col-md-8">
+                    <input type="text" class="form-control radius-0 font-13" placeholder="Search Table Describtion"
+                    [(ngModel)]="selectedTableDesc" matInput [formControl]="searchParent" [matAutocomplete]="auto">
+                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getTableDesc()" >
+                   <mat-option *ngIf="isLoading" class="is-loading">
+                     <mat-spinner diameter="50"></mat-spinner>
+                   </mat-option>
+                   <ng-container *ngIf="!isLoading">
+                     <mat-option *ngFor="let tables of tableDescList" [value]="tables.tabletypedescription">
+                       {{ tables.tabletypedescription }}
+                     </mat-option>
+                   </ng-container>
+                 </mat-autocomplete>    
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer pad-8">
+        <button type="button" class="btn btn-success radius-0" *ngIf="!isEdit" (click)="save()">Save</button>
+        <button type="button" class="btn btn-success radius-0" *ngIf="isEdit" (click)="update()">Update</button>
+        <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+    </div>
+</ng-template>

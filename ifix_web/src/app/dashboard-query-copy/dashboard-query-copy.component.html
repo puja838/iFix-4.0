@@ -1,0 +1,153 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)" (pageSize)="onPageSizeChange($event)"
+                   [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" [hidden]="isUpdate">Add Dashboard Copy Query</div>
+    <div class="modal-title" [hidden]="!isUpdate">Update Dashboard Copy Query</div>
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+    <fieldset>
+      <legend>From</legend>
+      <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromClientSelected"
+                (change)="onClientChangeFrom($event.target.selectedIndex)">
+          <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromOrgSelected"
+                (change)="onOrgChangeFrom($event.target.selectedIndex)">
+          <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fieldSelected"
+                (change)="onFieldChange($event.target.selectedIndex)">
+          <option *ngFor="let field of fields" [value]="field.id">{{field.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group mar-bot-0 font-13" [hidden]="fieldSelected !== '1'">
+        <label><b>Workspace View </b></label> &nbsp;
+        <mat-radio-group (change)="onRadioButtonChange($event)" [(ngModel)]="tileType">
+          <mat-radio-button value="1">My Workspace</mat-radio-button> &nbsp;&nbsp;
+          <mat-radio-button value="2">Team Workspace</mat-radio-button> &nbsp;&nbsp;
+          <mat-radio-button value="3">Opened By / Requested By</mat-radio-button> &nbsp;&nbsp;
+          <mat-radio-button value="4">Catalog Menu</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="form-group">
+        <!-- <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="tileIdSelected"
+          (change)="onTileNameChange($event.target.selectedIndex)">
+          <option *ngFor="let fieldValue of fieldValues" [value]="fieldValue.funcdescid">{{fieldValue.description}}
+          </option>
+        </select> -->
+
+        <ng-select [items]="fieldValues" bindLabel="description" bindValue="funcdescid" [closeOnSelect]="false"
+                   [multiple]="true" groupBy="selectedAllGroup" [selectableGroup]="true"
+                   [selectableGroupAsModel]="false"
+                   [searchable]="true" placeholder="Select Tiles Name" [(ngModel)]="tileIdSelected">
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+              <span class="ng-value-label"> {{item.description}}</span>
+              <!-- <span class="ng-value-icon right" (click)="clear(item.id)" aria-hidden="true">×</span> -->
+            </div>
+            <div class="ng-value" *ngIf="items.length > 4">
+              <span class="ng-value-label">{{items.length - 4}} more...</span>
+            </div>
+          </ng-template>
+
+          <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/>&nbsp;&nbsp;Select All
+          </ng-template>
+
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/>&nbsp;&nbsp;{{item.description}}
+          </ng-template>
+        </ng-select>
+      </div>
+      <div [hidden]="tileType === '4'">
+        <div class="form-group">
+          <select class="custom-select font-13 radius-0" [(ngModel)]="fromRecordDiffTypeSeqno"
+                  (change)="getrecordbydifftypeFrom($event.target.selectedIndex, 'from')">
+            <option value="">Select From Property Type</option>
+            <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+          </select>
+        </div>
+        <div class="form-group" [hidden]="fromPropLevels.length===0">
+          <select class="custom-select font-13 radius-0" [(ngModel)]="fromlevelid"
+                  (change)="onLevelChangeFrom($event.target.selectedIndex, 'from')">
+            <option value="">Select Property Level</option>
+            <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="custom-select font-13 radius-0" [(ngModel)]="fromRecordDiffId"
+                  (change)="getrecordvalueFrom($event.target.selectedIndex)">
+            <option value="">Select From Property</option>
+            <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="queryType"
+                (change)="onQueryTypeChange($event.target.selectedIndex)">
+          <option *ngFor="let query of queryTypes" [value]="query.id">{{query.name}}</option>
+        </select>
+      </div>
+    </fieldset>
+    <div class="container">
+    </div>
+
+
+    <fieldset>
+      <legend>To</legend>
+      <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="toClientSelected"
+                (change)="onClientChangeTo($event.target.selectedIndex)">
+          <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="toOrgSelected"
+                (change)="onOrgChangeTo($event.target.selectedIndex)">
+          <option *ngFor="let org of toOrganaisation" [value]="org.id">{{org.organizationname}}</option>
+        </select>
+      </div>
+      <div [hidden]="tileType === '4'">
+        <div class="form-group">
+          <select class="custom-select font-13 radius-0" [(ngModel)]="toRecordDiffTypeSeqno"
+                  (change)="getrecordbydifftypeTo($event.target.selectedIndex, 'to')">
+            <option value="">Select From Property Type</option>
+            <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+          </select>
+        </div>
+        <div class="form-group" [hidden]="fromPropLevels.length===0">
+          <select class="custom-select font-13 radius-0" [(ngModel)]="tolevelid"
+                  (change)="onLevelChangeTo($event.target.selectedIndex, 'to')">
+            <option value="">Select Property Level</option>
+            <option *ngFor="let level of toPropLevels" [value]="level.id">{{level.typename}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="custom-select font-13 radius-0" [(ngModel)]="toRecordDiffId"
+                  (change)="getrecordvalueTo($event.target.selectedIndex)">
+            <option value="">Select From Property</option>
+            <option *ngFor="let record of toTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" *ngIf="!isEdit" (click)="save()">Save</button>
+    <button type="button" class="btn btn-success radius-0" *ngIf="isEdit" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>

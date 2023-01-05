@@ -1,0 +1,198 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+  (offset)="getData($event)" (pageSize)="onPageSizeChange($event)" [dataLoaded]="dataLoaded">
+</app-base-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" *ngIf="!isEdit">Add Schedule Notification </div>
+    <div class="modal-title" *ngIf="isEdit">Update Schedule Notification</div>
+  </div>
+
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-md-3 col-form-label font-13"><b>Organization :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="form-control radius-0 font-13" [(ngModel)]="orgSelected"
+          (change)="onOrgChange($event.target.selectedIndex)">
+          <option *ngFor="let org of organization" [value]="org.id">{{org.organizationname}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-md-3 col-form-label font-13"><b>Property Type :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffTypeId"
+          (change)="getrecordbydifftype($event.target.selectedIndex)">
+          <option value=''>Select Property Type</option>
+          <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row" [hidden]="fromPropLevels.length===0">
+      <label class="col-sm-3 col-md-3 col-form-label font-13"><b>Property Level :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="form-control font-13 radius-0" [(ngModel)]="fromlevelid"
+          (change)="onLevelChange($event.target.selectedIndex)">
+          <!-- <option value="">Select Property Level</option> -->
+          <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-md-3 col-form-label font-13"><b>Property Value :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId"
+          (change)="onTicketTypeChange($event.target.selectedIndex)">
+          <option value="">Select Property Value</option>
+          <option *ngFor="let cat of allPropertyValues" [value]="cat.id">{{cat.typename}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-md-3 col-form-label font-13"><b>Channel Type :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="form-control font-13 radius-0" [(ngModel)]="channeldiffid"
+          (change)="onChannelChange($event.target.selectedIndex)">
+          <option *ngFor="let list of channelList;" [value]="list.id">{{list.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-md-3 col-form-label font-13"><b>Email Subject: </b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control font-13 radius-0" [(ngModel)]="inputSubject"
+          placeholder="Enter a Subject">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-6 col-md-6"></label>
+      <div class="col-sm-6 col-md-6">
+        <span class="form-group font-13">
+          <u class="linkHov" (click)="openVariablesHelpPopUp()">Template Variables Help</u></span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-md-3"><b>Email Body: </b></label>
+      <div class="col-sm-8 col-md-8">
+        <ck-editor name="editor1" class="col-sm-8" [(ngModel)]="contentValue" skin="moono-lisa" language="en"
+          [fullPage]="true" placeholder="Template body"></ck-editor>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-md-3 col-form-label font-13"><b>Event Type: :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="form-control font-13 radius-0" [(ngModel)]="eventtypeid"
+          (change)="onEventChange($event.target.selectedIndex)">
+          <option value=0>Select Event Type</option>
+          <option *ngFor="let typ of EventTypes;" [value]="typ.id">{{typ.eventname}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Send To User: </b></label>
+      <div class="col-sm-8 col-md-8">
+        <ng-select [items]="userList" bindLabel="clienname" bindValue="clientid" [closeOnSelect]="false"
+          [multiple]="true" [searchable]="true" placeholder="Select Users List" [(ngModel)]="userSelected">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.clienname}}
+          </ng-template>
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3"><b> Trigger Condition: </b><br>
+        <span>(No of Days)</span>
+      </label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" placeholder="Enter Trigger Condition"
+          [(ngModel)]="triggerCondition">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3"><b> Schedule Time : </b></label>
+      <div class="col-sm-8 col-md-8">
+        <input class="form-control radius-0 font-13" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+          placeholder="Schedule Time" [(ngModel)]="ScheduleTime">
+        <owl-date-time [pickerType]="'timer'" [showSecondsTimer]="true" #dt2></owl-date-time>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-md-3 col-form-label font-13"><b>Priority List :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="form-control font-13 radius-0" [(ngModel)]="priorityId"
+          (change)="onPriorityTypeChange($event.target.selectedIndex)">
+          <option value="">Select Priority</option>
+          <option *ngFor="let cat of allPriorityValues" [value]="cat.seqno">{{cat.typename}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Additional Group Recipients: </b></label>
+      <div class="col-sm-8 col-md-8">
+        <ng-select [items]="groups" bindLabel="supportgroupname" bindValue="id" [closeOnSelect]="false"
+          [multiple]="true" [searchable]="true" placeholder="Select Support Group" [(ngModel)]="grpSelectedCC">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox"
+              [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.supportgroupname}}
+          </ng-template>
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3"><b> Additional Recipients Email: </b><br>
+        <span>(Comma Separated)</span>
+      </label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" placeholder="Enter Additional Recipients Email"
+          [(ngModel)]="enteredAdditionalRecipient">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" *ngIf="!isEdit" (click)="save()">Save</button>
+    <button type="button" class="btn btn-success radius-0" *ngIf="isEdit" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+<ng-template #varHelp>
+  <br>
+  <div class="form-group modal-body row">
+    <div class="col-sm-3"><b>List of Variables: </b></div>
+    <div class="col-sm-8">
+      <table class="table table-bordered table-striped mb-0">
+        <thead class="thead">
+          <tr>
+            <th>Variable Names</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table_data" *ngFor="let item of variablesList">
+            <td>{{item.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-group modal-footer">
+    <button mat-stroked-button color="primary" (click)="closeModal2()">close</button>&nbsp;&nbsp;
+  </div>
+</ng-template>

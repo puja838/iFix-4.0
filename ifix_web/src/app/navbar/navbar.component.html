@@ -1,0 +1,463 @@
+<nav class="navbar navbar-expand-md navbar-style fixed-top" id="navbarId"
+  [ngStyle]="{'background':footerCss,'color':footerItem}">
+
+  <div class="container-fluid pad-lft-rgt-0 row">
+    <div class="col-3 row">
+      <div class="col-9 mar-lft">
+        <img class="user-avatar mr-3  user-logo1 pointer" src="../../assets/img/logo.png" height="40" width="140"
+          (click)="dashboard()">
+        <img class="user-avatar mr-3  user-logo pointer" src="../../assets/img/logo2.png" height="40" width="40"
+          (click)="dashboard()">
+
+      </div>
+
+      <div class="col-3 pad-lft-2" [hidden]="isEndUser">
+        <a id="menuToggle" class="menutoggle pull-left mar-lft" [ngClass]="isOpenSideBar ? 'open' : ''"
+          (click)="drawers()"><i class="fa fa fa-tasks"></i></a>
+      </div>
+    </div>
+
+    <div class="col-4 row header-left margin-lt">
+      <marquee behavior="scroll" direction="left" scrollamount="1" class="banner"
+        [ngStyle]="{'font-size': fontSize, 'color':colorCss }" *ngFor="let msg of banners;">{{msg.message}}</marquee>
+
+      <!-- <img class="user-avatar mr-3  user-logo pointer" src="../../assets/img/AA-2020-LOGO-4.png" height="40" width="100"
+        (click)="dashboard()"> -->
+      <!--      <marquee behavior="scroll" direction="left" scrollamount="1">Here is some scrolling text... left to right!</marquee>-->
+      <!--      <marquee behavior="scroll" direction="left" scrollamount="1">Here is some scrolling text... left to right!</marquee>-->
+      <!--      <marquee behavior="scroll" direction="left" scrollamount="1">Here is some scrolling text... left to right!</marquee>-->
+    </div>
+    <div class="col-2">
+      <input type="text" class="searching form-control" placeholder="Search Ticket Id.." [(ngModel)]="tNumber"
+        (keydown)="searchTicket($event)" [hidden]="isSearching">
+      <img class="loading-gif-42" style="margin-top: -17px;" src="../../../assets/img/loader-42px.gif"
+        [hidden]="!isSearching">
+    </div>
+    <!--<div class="col-sm-6 row header-left margin-lt">
+      <div class="col-search mar-lft width-box">
+        <a><i class="fa fa-search"></i></a>
+
+        &lt;!&ndash; <div class="form-inline">
+                <form class="search-form">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                    <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                </form>
+            </div> &ndash;&gt;
+
+      </div>
+
+      <div class=" disply-inline width-box">
+        &lt;!&ndash; ////////////////////////////////////////////////// &ndash;&gt;
+        &lt;!&ndash; <a class=" dropdown-toggle" type="button" id="notification">
+                <i class="fa fa-bell"></i>
+                <span class="count bg-danger">5</span>
+
+        </a> &ndash;&gt;
+
+        &lt;!&ndash; ///////////////////////////////////////// &ndash;&gt;
+
+
+        <div class="dropdown for-notification ">
+          <a class=" dropdown-toggle" id="notification" data-toggle="dropdown" (click)="notification()">
+            <i class="fa fa-bell"></i> </a>
+          <span class="count bg-danger">5</span>
+          <div class="dropdown-menu dropdownDiv collapse" *ngIf="showNotification" id="dropdown">
+            <p class="red">You have 3 Notification</p>
+            <a class="dropdown-item media bg-flat-color-1" href="#">
+              <i class="fa fa-check"></i>
+              <p>Server #1 overloaded.</p>
+            </a>
+            <a class="dropdown-item media bg-flat-color-4" href="#">
+              <i class="fa fa-info"></i>
+              <p>Server #2 overloaded.</p>
+            </a>
+            <a class="dropdown-item media bg-flat-color-5" href="#">
+              <i class="fa fa-warning"></i>
+              <p>Server #3 overloaded.</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="notification-email width-box">
+        <div class="dropdown for-message">
+          <button class="btn btn-secondary dropdown-toggle" type="button"
+                  id="message" (click)="mailNotifications()"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="ti-email"></i>
+            <span class="count bg-primary">9</span>
+          </button>
+          <div *ngIf="mailNotification" class="dropdown-menu" aria-labelledby="message">
+            <p class="red">You have 4 Mails</p>
+            <a class="dropdown-item media bg-flat-color-1" href="#">
+              <span class="photo media-left"><img alt="avatar" src="../../assets/img/admin.jpg" height="35" width="35"></span>
+              <span class="message media-body">
+                                    <span class="name float-left">Jonathan Smith</span>
+                                    <span class="time float-right">Just now</span>
+                                        <p>Hello, this is an example msg</p>
+                                </span>
+            </a>
+            <a class="dropdown-item media bg-flat-color-4" href="#">
+              <span class="photo media-left"><img alt="avatar" src="../../assets/img/admin.jpg" height="35" width="35"></span>
+              <span class="message media-body">
+                                    <span class="name float-left">Jack Sanders</span>
+                                    <span class="time float-right">5 minutes ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </span>
+            </a>
+            <a class="dropdown-item media bg-flat-color-5" href="#">
+              <span class="photo media-left"><img alt="avatar" src="../../assets/img/admin.jpg" height="35" width="35"></span>
+              <span class="message media-body">
+                                    <span class="name float-left">Cheryl Wheeler</span>
+                                    <span class="time float-right">10 minutes ago</span>
+                                        <p>Hello, this is an example msg</p>
+                                </span>
+            </a>
+            <a class="dropdown-item media bg-flat-color-3" href="#">
+              <span class="photo media-left"><img alt="avatar" src="../../assets/img/admin.jpg" height="35" width="35"></span>
+              <span class="message media-body">
+                                    <span class="name float-left">Rachel Santos</span>
+                                    <span class="time float-right">15 minutes ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>-->
+
+    <div class="col-3 widthx">
+
+      <div class="user-area dropdown float-right">
+        <!-- <img class="user-avatar mr-3 profile " class="logo-dash" [hidden]="aaiLogo" src="../../assets/img/tata.png" alt="User Avatar"> -->
+        <img [hidden]="!aaiLogo"  class="logo-dash1" id='navImage' height="40" width="100"> &nbsp;
+        <a class="dropdown-toggle" (click)="profileDetail()">
+          <img class="user-avatar rounded-circle profile" src="../../assets/img/profile2.jfif" alt="User Avatar"
+            height="40" width="40">
+          <span class="mar-username" alt="User Avatar">{{username}}</span>
+        </a>
+
+        <div class="user-menu dropdown-menu" *ngIf="isProfile" [ngStyle]="{'background':profileValue}">
+          <a class="nav-link cursor-pointer" (click)="openUserInfo()" [ngStyle]="{'color':footerItem}"><i
+              class="fa fa-user"></i> My Profile</a>
+          <a class="nav-link cursor-pointer" (click)="openLoginInfo()" [ngStyle]="{'color':footerItem}"><i
+              class="fa fa-user"></i> Impersonate Login</a>
+          <a class="nav-link cursor-pointer" (click)="openDefaultSupportGroupModal()"
+            [ngStyle]="{'color':footerItem}"><i class="fa fa-user"></i> Change Default Group</a>
+
+          <a *ngIf="createtype === 0 || createtype=== 2 " class="nav-link cursor-pointer" (click)="change_password()"
+            [ngStyle]="{'color':footerItem}"><i class="fa fa-lock"></i> Change Password</a>
+
+          <!--<a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
+
+          <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>-->
+
+          <a class="nav-link" class="link" (click)="logOut()" [ngStyle]="{'color':footerItem}"><i
+              class="fa fa-power-off"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<mat-sidenav-container class="example-container" [ngStyle]="{'background': selectedColor }">
+  <mat-sidenav #drawer [mode]="mobileQuery.matches ? 'push' : 'side'" class="nav-content sidenav"
+    [(opened)]="isOpenSideBar" [ngStyle]="{'background':sideNavCss}">
+    <ul class="nav sidenavbar">
+      <li class="dashname">
+        <img class="user-avatar rounded-circle" src="../../assets/img/admin.jpg" alt="User Avatar" width="40">
+        <b class="mar-dashname" [ngStyle]="{'color':fontColor}"> Welcome {{username}}</b>
+      </li>
+      <br>
+      <li>
+        <div class="searchbar">
+          <input class="search_input" type="text" placeholder="Search Menu ... " [formControl]="searchTerm"
+            [matAutocomplete]="auto" matInput [(ngModel)]="menuSelected">
+          <a class="search_icon"><i class="fa fa-search"></i></a>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngIf="isLoaderLoading" class="is-loading">
+              <mat-spinner diameter="50"></mat-spinner>
+            </mat-option>
+            <ng-container *ngIf="!isLoaderLoading">
+              <mat-option *ngFor="let menu of menus" [value]="menu.label" (onSelectionChange)="onMenuSelected(menu)">
+                {{ menu.label }}
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </div>
+      </li>
+      <!--      <li class="menuitemsingle active">-->
+      <!--        <a> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>-->
+      <!--      </li>-->
+    </ul>
+    <img class="loading-gif-70" src="../../../assets/img/loader-70px.gif" [hidden]="navLoaded">
+    <ng-material-multilevel-menu [items]='navbar' (selectedItem)="changeRouting($event.path)"
+      class="meterial-menu font-13">
+    </ng-material-multilevel-menu>
+  </mat-sidenav>
+  <mat-sidenav-content [style.background-image]="dispalyImage"  style="background-size: cover; background-repeat: no-repeat;" opened=true>
+    <div class="pad-lft-rgt-0 mar-top" >
+      <router-outlet></router-outlet>
+    </div>
+    <!--<div class="row">
+      <footer class=" dashfoot text-center" [ngStyle]="{'background':footerCss,'color':footerItem}">
+        <small><b>&copy; Copyright {{currentYear}} <span class="red">i</span><span class="blue">FIX</span> tech Global | All Rights Reserved &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *Browser Support: Please use Google Chrome for better user experience</b></small>
+      </footer>
+    </div>-->
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- ===================================================================== -->
+
+<ng-template #userInfo>
+  <div *ngFor="let usr of userinfo">
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">NAME:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.name}}" title="{{usr.name}}"
+          [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">VIP :</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.vipuser}}" title="{{usr.vipuser}}"
+          [disabled]="true">
+      </div>
+    </div>
+    <!--<div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-2 custom-label pad-lft-0 color">FIRST NAME:</p>
+      <div class="col-sm-10">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.firstname}}"
+               title="{{usr.firstname}}"
+               [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-2 custom-label pad-lft-0 color">LAST NAME:</p>
+      <div class="col-sm-10">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.lastname}}"
+               title="{{usr.lastname}}"
+               [disabled]="true">
+      </div>
+    </div>-->
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">EMAIL ID:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" [(ngModel)]="selectedEmail" value="{{usr.useremail}}"
+          title="{{usr.useremail}}" [disabled]="false">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">MOBILE NO:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" [(ngModel)]="selectedMobileNo"
+          value="{{usr.usermobileno}}" title="{{usr.usermobileno}}" [disabled]="false">
+      </div>
+    </div>
+    <!-- <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">DIVISION:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.division}}" title="{{usr.division}}"
+          [disabled]="true">
+      </div>
+    </div> -->
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">SECONDARY NO:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.secondaryno}}" title="{{usr.secondaryno}}"
+          [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">BAND:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.brand}}" title="{{usr.brand}}"
+          [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">DESIGNATION:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.designation}}" title="{{usr.designation}}"
+          [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">CITY:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.city}}" title="{{usr.city}}"
+          [disabled]="true">
+      </div>
+    </div>
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">BRANCH:</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" [(ngModel)]="selectedBranch" value="{{usr.branch}}"
+          title="{{usr.branch}}" [disabled]="false">
+      </div>
+    </div>
+
+    <div class="form-group row col-sm-12 desc-div ">
+      <p class="col-sm-3 custom-label pad-lft-0 color">USER TYPE :</p>
+      <div class="col-sm-9">
+        <input type="text" class="form-control font-13 radius-0" value="{{usr.usertype}}" title="{{usr.usertype}}"
+          [disabled]="true">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-2">
+      <button mat-raised-button color="primary" (click)="update()">Update</button>
+    </div> &nbsp;&nbsp;&nbsp;
+    <div class="col-md-2">
+      <button mat-raised-button color="accent" (click)="closeinfo()">Close</button>
+    </div>
+  </div>
+  <hr>
+  <!--  <div class="form-group row col-sm-12 desc-div ">-->
+  <!--    <p class="col-sm-3 custom-label pad-lft-0 color">Select Default Group :</p>-->
+  <!--    <div class="col-sm-9">-->
+  <!--      &lt;!&ndash; <input type="text" class="form-control font-13 radius-0" value="{{usr.usertype}}"-->
+  <!--             title="{{usr.usertype}}"-->
+  <!--             [disabled]="true"> &ndash;&gt;-->
+  <!--      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="defGrpSelected" (change)="updateDefGroup()">-->
+  <!--        <option value="0">Select Default Group</option>-->
+  <!--        <option *ngFor="let defGrp of defGroups" [value]="defGrp.id">{{defGrp.groupname}}</option>-->
+  <!--      </select>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <div class="form-group row col-sm-12 desc-div ">
+    <p class="col-sm-3 custom-label pad-lft-0 color">Change Theme :</p>
+    <div class="col-sm-9">
+      <input type="button" *ngFor="let color of colorObj" [ngStyle]="{'background': color.selectedValue}"
+        class="themeSelect rounded-circle profile" (click)="updateColor(color.selectedValue)"
+        selected="color.selectedValue">
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #content>
+  <h1 mat-dialog-title class="title">Change Password</h1>
+  <div mat-dialog-content>
+    <div class="note">
+      <div class="para">Please Note The Following Password Requirement:</div>
+      <br>
+      <div class="unList">
+        <li><b>*</b>&nbsp;&nbsp;&nbsp; Must be a minimum of 8 characters and a maximum of 20 characters.</li>
+        <li><b>*</b>&nbsp;&nbsp;&nbsp; Must contain a mix of uppercase and lowercase letters.</li>
+        <li><b>*</b>&nbsp;&nbsp;&nbsp; Must contain at least one number or special characters (eg.!?&).</li>
+        <li><b>*</b>&nbsp;&nbsp;&nbsp; Cannot contain any spaces.</li>
+        <li><b>*</b>&nbsp;&nbsp;&nbsp; Old Password and New Password can't be same.</li>
+        <br>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13">Old Password:</label>
+      <div class="col-sm-8 col-md-8">
+        <input type="password" class="form-control font-13 radius-0" [(ngModel)]="password" placeholder="Old Password">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13">New Password:</label>
+      <div class="col-sm-8 col-md-8">
+        <input type="password" [(ngModel)]="Newpassword" class="form-control font-13 radius-0"
+          placeholder="New Password">
+        <div class="warning-msg">*minimum 8 characters</div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13">Confirm Password:</label>
+      <div class="col-sm-8 col-md-8">
+        <input type="password" class="form-control font-13 radius-0" [(ngModel)]="confirmpassword"
+          placeholder="Confirm Password">
+      </div>
+    </div>
+    <!--<div class="form-group">
+      <input type="password" class="form-control font-13 radius-0" [(ngModel)]="password" placeholder="Old Password">
+    </div>
+    <div class="form-group">
+      <input type="password" [(ngModel)]="Newpassword"class="form-control font-13 radius-0"  placeholder="New Password">
+      <div class="warning-msg">*minimum 8 characters</div>
+    </div>-->
+    <!--<div class="form-group">
+      <input type="password" class="form-control font-13 radius-0"[(ngModel)]="confirmpassword" placeholder="Confirm Password">
+    </div>-->
+  </div>
+  <div mat-dialog-actions class="right">
+    <button type="button" class="btn btn-danger radius-0" (click)="onNoClick()">Cancel</button>&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-success radius-0" (click)="submit()">Submit</button>
+  </div>
+</ng-template>
+<ng-template #logininfo>
+  <div class="form-group">
+    <div class="form-group row ">
+      <p class="col-sm-4 custom-label pad-lft-rgt-0 color">Enter User Name or Email ID :</p>
+      <div class="col-sm-8">
+        <input type="text" class="form-control radius-0 font-13" placeholder="Enter Login Id or User Name"
+          [formControl]="searchUser" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngIf="isLoading" class="is-loading">
+            <mat-spinner diameter="50"></mat-spinner>
+          </mat-option>
+          <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let user of userDtl" [value]="user.name" (click)="onUserSelected(user)" class="matFont">
+              {{ user.name }} ( {{user.useremail}} )
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-2">
+      <button mat-raised-button color="primary" (click)="login()">Login</button>
+    </div> &nbsp;&nbsp;&nbsp;
+    <div class="col-md-2">
+      <button mat-raised-button color="accent" (click)="closelogin()">Close</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #changeDefaultGroup>
+  <div class="form-group">
+    <div class="form-group row ">
+      <p class="col-sm-4 custom-label pad-lft-0 color">Select Organization : </p>
+      <div class="col-sm-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectedOrganization"
+          (change)="onOrganizationChange($event.target.selectedIndex)">
+          <option value="0">Select Organization</option>
+          <option *ngFor="let org of organizations" [value]="org.mstorgnhirarchyid">{{org.mstorgnhirarchyname}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row ">
+      <p class="col-sm-4 custom-label pad-lft-0 color">Select Support Group : </p>
+      <div class="col-sm-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="changedSupportGroupSelected"
+          (change)="onGroupChange($event.target.selectedIndex)">
+          <option value="0">Select Support Group</option>
+          <option *ngFor="let group of groupLists" [value]="group.id">{{group.groupname}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-2" *ngIf="dataLoadedForChangeSupportGroup">
+      <img class="loading-gif-42-edit5" src="../../../assets/img/loader-42px.gif">
+    </div>
+    <div class="col-md-2" *ngIf="!dataLoadedForChangeSupportGroup">
+      <button mat-raised-button color="primary" (click)="onDefaultSupportGroupChange()">Change</button>
+    </div> &nbsp;&nbsp;&nbsp;
+    <div class="col-md-2">
+      <button mat-raised-button color="accent" [disabled]="dataLoadedForChangeSupportGroup"
+        (click)="closeDefaultSupportGroupModal()">Close
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,24 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+  (offset)="getData($event)" (pageSize)="onPageSizeChange($event)" [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Find Open Tickets Monitor</div>
+  </div>
+  <div class="modal-body">
+        <div class="form-group row">
+            <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Find Open tickets :</b></label>
+            <div class="col-sm-8 col-md-8"> 
+                <select class="form-control font-13 radius-0" [(ngModel)]="openTicketDue" (change)="onDurationhange()">
+                  <option value="0">Select Time Duration</option>
+                  <option *ngFor="let duration of durationList;" [value]="duration.value">{{duration.name}}</option>
+                </select>
+            </div>
+          </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+

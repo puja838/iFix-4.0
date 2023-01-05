@@ -1,0 +1,108 @@
+
+.tcktyp {
+    width: auto;
+    font-size: 13px;
+    border-radius: 0px;
+    margin-right: 3px;
+  }
+  
+  .custom-radio .custom-control-label::before {
+    border: 2px solid #BDBABB;
+  }
+  
+  
+  
+  .search-field {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: inherit;
+    border-bottom-width: 1px;
+    border-left-width: 0px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+  }
+  
+  .search-field:focus {
+    outline: 0px;
+  }
+  
+  .height-120 {
+    height: 120px;
+  }
+  
+  .height-80 {
+    max-height:80px;
+    overflow: auto;
+  }
+  
+  .content {
+    margin-bottom: 40px;
+  }
+  
+  .pad-15 {
+    padding: 6px 15px 6px 15px;
+  }
+  
+  select.form-control:not([size]):not([multiple]) {
+    height: 33px !important;
+  }
+  
+  
+  
+  .answer {
+    padding: 10px;
+    background-color: #d2dade;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 22px;
+  }
+  
+  .brief-desc {
+    min-height: 120px;
+  }
+  
+  .ticket-header1 {
+    height: 55px;
+    text-align: center;
+  }
+  
+  .ticket_head {
+    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  .mar-lft2 {
+    margin-left: 2px;
+  }
+  
+  .matcss {
+    display: inline;
+  }
+  
+  .autoComp{
+    display:inline-block;
+    width: 100%;
+    height: 34px;
+    background-color: white !important;
+    padding: 0.375rem 0.75rem;
+    line-height: 1.5;
+    border: 1px solid #ced4da;
+  }
+
+  .locationSearch{
+    background-color: rgb(255, 255, 255);
+    padding-left: 2%;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+  }
+
+  ::ng-deep .tooltip-inner {
+    background-color: yellow;
+    color: black;
+    font-size: 13px;
+  }
+
+  

@@ -1,0 +1,236 @@
+<!-- <p>dashboard works!</p> -->
+<div class="dasboard-width" [ngStyle]="{'background': selectedColor,'color':pageNameCss }">
+  <div class="row">
+    <div class="page-header col-sm-12">
+      <div class="page-title" [ngStyle]="{'background':dashbordTittleCss}">
+        <h1 class="text-center fornt-18">{{username}}'s DASHBOARD</h1>
+      </div>
+    </div>
+  </div>
+  <!-- <div id="displayImage" [hidden]="!isDashboard" [style.background-image]="dispalyImage"  style="background-size: cover; background-repeat: no-repeat; "> -->
+  <div [hidden]="!isDashboard">
+    <div class=" row mar-lft ">
+      <div class="col-sm-2" *ngIf="orgTypeId===2 && grpLevel>1">
+        <mat-form-field>
+          <mat-label>Organization:</mat-label>
+          <mat-select name="orgSelected" [(ngModel)]="orgSelected" multiple
+                      (selectionChange)="onOrgChange($event.value, 'all')">
+            <mat-checkbox [(ngModel)]="isAllOrg" class="all"
+                          [ngModelOptions]="{standalone: true}"
+                          (change)="selectAllOrg()">Select All
+            </mat-checkbox>
+            <mat-option *ngFor="let item of selectedMultipleOrgs" [value]="item.mstorgnhirarchyid">
+              <span>{{item.mstorgnhirarchyname}}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-2 mar-lft " *ngIf="grpLevel>1">
+        <mat-form-field>
+          <mat-label [ngStyle]="{'color':pageNameCss}">Support Tower:</mat-label>
+
+          <mat-select [(ngModel)]="userGroupOrgWiseSelected" (selectionChange)="onSelectGroupOrgWise()"
+                      multiple>
+            <mat-checkbox [(ngModel)]="isAllGrp" class="all mat-option-text"
+                          [ngModelOptions]="{standalone: true}"
+                          (change)="selectAllGroup()">Select All
+            </mat-checkbox>
+            <mat-option *ngFor="let group of userGroupsOrgWise" [value]="group.id"
+                        [ngStyle]="{'color':pageNameCss}">{{group.groupname}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-2" [hidden]="hascatalog==='Y'">
+        <mat-form-field>
+          <mat-label [ngStyle]="{'color':pageNameCss}">Ticket Type:</mat-label>
+          <mat-select [(ngModel)]="typSelected" (selectionChange)="ontypeChange($event.value)"
+                      [hidden]="!ticketTypeLoaded">
+            <mat-option *ngFor="let ticketType of ticketsTyp" [value]="ticketType.id"
+                        [ngStyle]="{'color':pageNameCss}">{{ticketType.typename}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-2 mar-lft " *ngIf="grpLevel>1">
+        <mat-form-field>
+          <mat-label [ngStyle]="{'color':pageNameCss}">Work Space:</mat-label>
+          <mat-select [(ngModel)]="workspaceSelected" (selectionChange)="onWorkSpaceChange($event.value)">
+            <mat-option *ngFor="let workspace of messageService.workspaces" [value]="workspace.id"
+                        [ngStyle]="{'color':pageNameCss}">{{workspace.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-2 marg-right" *ngIf="false">
+        <mat-form-field>
+          <mat-label [ngStyle]="{'color':pageNameCss}">Role:</mat-label>
+          <mat-select [(ngModel)]="userGroupSelected" (selectionChange)="onSelectGroup($event.value)">
+            <mat-option *ngFor="let group of userGroups" [value]="group.id"
+                        [ngStyle]="{'color':pageNameCss}">{{group.groupname}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="right pad-10">
+      <button mat-mini-fab color="basic" aria-label="Refresh" matTooltip="Refresh" (click)="gettilesnames()"
+              [ngStyle]="{'background':dashbordTittleCss}">
+        <mat-icon [ngStyle]="{'color':pageNameCss}">refresh</mat-icon>
+      </button>
+    </div>
+    <br><br>
+    <div class="mt-3 bg-clr">
+
+      <div class="dashitemsec mar-lft mar-rt">
+        <div class="row">
+          <div class="col-sm-3 pointer" (click)="onCreateClick()" [hidden]="hascatalog==='Y'">
+            <a class="itm" [ngStyle]="{'background':footerCss,'color':pageNameCss}">
+              <span><strong><b>Create Ticket</b></strong></span>
+              <img src="https://ifixuat.blob.core.windows.net/dashboardicon/create.png" alt="">
+            </a>
+          </div>
+          <div class="col-sm-3 pointer" (click)="onBulkApproval()" [hidden]=" typeSeq!==2">
+            <div class="itm" [ngStyle]="{'background':footerCss,'color':pageNameCss}">
+              <span><strong><b>Bulk SR Approval</b></strong>
+                <div *ngIf="workspaceSelected=='2'">
+                  <span class='loader_69'><img src="../../assets/img/elipsis_loader.gif"></span>
+                  <span class='count_69'></span>
+                </div>
+                <div *ngIf="workspaceSelected=='1'">
+                  <span class='loader_16'><img src="../../assets/img/elipsis_loader.gif"></span>
+                  <span class='count_16'></span>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="col-sm-3 pointer" (click)="getCatalogdata()" [hidden]="hascatalog !=='Y'">
+            <a class="itm" [ngStyle]="{'background':footerCss,'color':pageNameCss}">
+              <span><strong><b>Create Ticket</b></strong></span>
+              <img src="https://ifixuat.blob.core.windows.net/dashboardicon/create.png" alt="">
+            </a>
+          </div>
+          <div class="col-sm-3 pointer" *ngFor="let item of tilesDetails" (click)="onTilesClick(item.diffid)">
+            <div class="itm " [id]='item.diffid' [ngStyle]="{'background':footerCss,'color':pageNameCss}">
+              <span><strong>{{item.description}}</strong>
+              <span class='loader_{{item.diffid}}'><img src="../../assets/img/elipsis_loader.gif"></span>
+              <span class='count_{{item.diffid}}'></span>
+              </span>
+              <!-- <img src="../../assets/img/action.png" alt="">-->
+              <img class="tiles-image" src="{{item.image}}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row">
+      <div class="col-md-7 padding-card1">
+        <div class="card font-13">
+          <div class="card-body card-body-padding" [ngStyle]="{'background':selectedColor}">
+            <h2 class="card-title card-title-dash">My Recent Tickets</h2>
+            <div class="table-wrapper-scroll-y ">
+              <table class="table table-bordered table-striped mb-0" [ngStyle]="{'color':pageNameCss}">
+                <thead class="thead">
+                <tr>
+                  <th>Ticket Id</th>
+                  <th>Created Date</th>
+                  <th>Title</th>
+                  <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="table_data" *ngFor="let recentRecord of recentRecordData"
+                    (click)="getDisplayTicket(recentRecord)">
+                  <td>{{recentRecord.code}}</td>
+                  <td>{{recentRecord.showcreatedate}}</td>
+                  <td>{{recentRecord.title}}</td>
+                  <td>{{recentRecord.status}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 padding-card2">
+        <div class="card font-13">
+          <div class="card-body card-body-padding" [ngStyle]="{'background':selectedColor}">
+            <h2 class="card-title card-title-dash">Frequently Reported Tickets</h2>
+            <div class="table-wrapper-scroll-y">
+              <table class="table table-bordered table-striped mb-0" [ngStyle]="{'color':pageNameCss}">
+                <thead>
+                <tr>
+                  <th>Categories</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="table_data" *ngFor="let issue of frequestissues;let i=index;"
+                    (click)="gotoCreateticket(issue.lastlevelid,i)">
+                  <td [innerHTML]="issue.parentcatname"></td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div [hidden]="isDashboard">
+    <div class="row mar-lft-rgt-0 mar-top-15">
+      <div class="col-md-12 col-sm-12">
+        <div class="searchbar">
+          <input class="search_input" type="text" [(ngModel)]="catSelected" placeholder="How can we help ..." matInput
+                 [formControl]="searchTerm"
+                 [matAutocomplete]="auto">
+          <a class="search_icon"><i class="fa fa-search"></i></a>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngIf="isLoaderLoading" class="is-loading">
+              <mat-spinner diameter="50"></mat-spinner>
+            </mat-option>
+            <ng-container *ngIf="!isLoaderLoading">
+              <mat-option *ngFor="let cat of categories" [value]="cat.sortedcategorynames"
+                          (onSelectionChange)="onCategorySelected(cat)">
+                {{ cat.sortedcategorynames }}
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12">
+        <ol class="breadcrumb cust-bread1">
+          <li class="breadcrumb-item" *ngFor="let b of bread;let i = index;" [ngClass]="{active: bread.length-1===i}">
+            <a *ngIf="i !== bread.length-1" class="pointer" (click)="changeBread(b)"
+               [style.color]="lebelCss">{{b.name}}</a>
+            <a *ngIf="i === bread.length-1" [style.color]="lebelCss">{{b.name}}</a>
+          </li>
+          <!--                        <li class="breadcrumb-item active" >test</li>-->
+        </ol>
+      </div>
+
+      <div class="col-md-2 col-sm-2 pad-rght-0">
+        <ul class="folders">
+          <li *ngFor="let data of catalog" [ngClass]="{activeF: step===data.id}" id="menu_{{data.id}}"
+              (click)="getCategoryByCatalog(data.id,data.catalogname)">
+            <i class="fa fa-filter"></i>
+            {{data.catalogname}}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-10 col-sm-10">
+        <div class="row mar-lft-rgt-0">
+          <div class="col-sm-3 pointer" *ngFor="let cat of childCat" (click)="getChildCategory(cat)" id="{{cat.id}}">
+            <a class="itm">
+              <span><strong><b>{{cat.title}}</b></strong></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!--
+<app-display-ticket
+>
+</app-display-ticket>-->

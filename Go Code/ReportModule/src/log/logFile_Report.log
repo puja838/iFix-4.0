@@ -1,0 +1,98 @@
+2022/06/22 17:49:07 logger.go:54: LogFile : /home/ubuntu/Puja/ALL IFIX CODES/Go Code/ReportModule/src/log/logFile_Report.log
+2022/06/22 17:49:07 StartPoint.go:16: Main Started
+2022/06/22 17:49:07 StartPoint.go:24: /home/ubuntu/Puja/ALL IFIX CODES/Go Code/ReportModule/src
+2022/06/22 17:49:15 DownloadReportModel.go:36: Create Ticket Json=======>    {"where":[{"field":"clientid","op":"=","val":"2"},{"field":"mstorgnhirarchyid","op":"in","val":"2"},{"field":"tickettype","op":"=","val":"CTask"},{"field":"status","op":"like","val":"Open"}],"cat":[],"headers":["clientid","mstorgnhirarchyid","id","recordid","tickettypeid","levelonecatename","ticketid","status","shortdescription","requestorname","source","createddatetime","orgcreatorname","vendorname","vendorticketid","priority","lastuser","followuptimetaken","assigneduser","assignedgroup"],"headersdisplay":["Customer","Ticket ID","Status","Short Description","Requester Name","Source","Created Since","Original Created By Name","Vendor Name","Vendor Ticket Id","Priority","Last Update By","Duration in Pending Vendor State (Minutes)","Assigned User (Last assigned  user from the Resolver Group)","Assigned Group (Last assigned Resolver Group)","Parent Ticket","Response SLA Start Date Time","Resolution SLA Start Date Time","Status Reason","Customer Visible Comments","Company","Service"],"userid":5}
+2022/06/22 17:49:15 DbConfig.go:97: root:password@tcp(localhost:3306)/iFIX
+2022/06/22 17:49:15 QueryresultDao.go:19: YYYY.MM.DD 1111111111111 :  2022.06.22 17:49:15 .128
+2022/06/22 17:49:15 QueryresultDao.go:67: Query:===> SELECT recordfulldetails.clientid  ,  recordfulldetails.mstorgnhirarchyid  ,  recordfulldetails.id  ,  recordfulldetails.recordid  ,  recordfulldetails.tickettypeid  ,  recordfulldetails.levelonecatename  ,  recordfulldetails.ticketid  ,  recordfulldetails.status  ,  recordfulldetails.shortdescription  ,  recordfulldetails.requestorname  ,  recordfulldetails.source  ,  recordfulldetails.createddatetime  ,  recordfulldetails.orgcreatorname  ,  recordfulldetails.vendorname  ,  recordfulldetails.vendorticketid  ,  recordfulldetails.priority  ,  recordfulldetails.lastuser  ,  recordfulldetails.followuptimetaken  ,  recordfulldetails.assigneduser  ,  recordfulldetails.assignedgroup  FROM recordfulldetails  WHERE recordfulldetails.activeflg=1 AND recordfulldetails.deleteflg=0   AND recordfulldetails.clientid = ?  AND recordfulldetails.mstorgnhirarchyid IN  ('2')  AND recordfulldetails.tickettype = ?  AND recordfulldetails.status LIKE '%Open%' 
+2022/06/22 17:49:15 QueryresultDao.go:68: Params:===> [2 CTask]
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 137
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 3456
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 3872
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 7328
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 10405
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 11432
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 12735
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 16990
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 17413
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 20924
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 22495
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 25339
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 26406
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 33856
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 38242
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 39377
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 40202
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 45881
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 46257
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 46258
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 46573
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 46659
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 46671
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 46672
+2022/06/22 17:49:15 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:15 QueryresultDao.go:237: PARAMETER 46678
+2022/06/22 17:49:16 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:16 QueryresultDao.go:237: PARAMETER 46688
+2022/06/22 17:49:16 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:16 QueryresultDao.go:237: PARAMETER 46690
+2022/06/22 17:49:16 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:16 QueryresultDao.go:237: PARAMETER 46694
+2022/06/22 17:49:16 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:16 QueryresultDao.go:237: PARAMETER 46696
+2022/06/22 17:49:16 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:16 QueryresultDao.go:237: PARAMETER 46698
+2022/06/22 17:49:16 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:16 QueryresultDao.go:237: PARAMETER 46708
+2022/06/22 17:49:16 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:16 QueryresultDao.go:237: PARAMETER 46714
+2022/06/22 17:49:16 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:16 QueryresultDao.go:237: PARAMETER 46742
+2022/06/22 17:49:16 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:16 QueryresultDao.go:237: PARAMETER 46748
+2022/06/22 17:49:16 QueryresultDao.go:236: SELECT startdatetimeresponse,startdatetimeresolution  FROM mstsladue where  therecordid=?
+2022/06/22 17:49:16 QueryresultDao.go:237: PARAMETER 46752
+2022/06/22 17:49:16 QueryresultDao.go:229: YYYY.MM.DD 1111111111111 :  2022.06.22 17:49:16 .546
+2022/06/22 17:49:16 QueryresultDao.go:381: In side RecordGridCountOnly
+2022/06/22 17:49:16 QueryresultDao.go:401: Query:===> SELECT COUNT(DISTINCT recordfulldetails.recordid) total FROM recordfulldetails  WHERE recordfulldetails.activeflg=1 AND recordfulldetails.deleteflg=0   AND recordfulldetails.clientid = ?  AND recordfulldetails.mstorgnhirarchyid IN  ('2')  AND recordfulldetails.tickettype = ?  AND recordfulldetails.status LIKE '%Open%' 
+2022/06/22 17:49:16 QueryresultDao.go:402: Params:===> [2 CTask]
+2022/06/22 17:49:16 QueryresultDao.go:542: TIME 2 2 2022-06-22 17:49:16
+2022/06/22 17:49:16 QueryresultDao.go:566: addtime: 19800
+2022/06/22 17:49:16 DownloadReportModel.go:75: SEE ITT: 2 2 2022-06-23 04:49:16 <nil>
+2022/06/22 17:49:16 Jsontoexcelconverter.go:19: contextpath->/home/ubuntu/Puja/ALL IFIX CODES/Go Code/ReportModule/src
+2022/06/22 17:49:16 Jsontoexcelconverter.go:26: FILEPATH: /home/ubuntu/Puja/ALL IFIX CODES/Go Code/ReportModule/src/resource/downloads/iFIXReport_2022-06-23 04:49:16.xlsx
+2022/06/22 17:49:16 Jsontoexcelconverter.go:28: 20
+2022/06/22 17:49:16 Jsontoexcelconverter.go:33: [clientid mstorgnhirarchyid id recordid tickettypeid levelonecatename ticketid status shortdescription requestorname source createddatetime orgcreatorname vendorname vendorticketid priority lastuser followuptimetaken assigneduser assignedgroup]
+2022/06/22 17:49:16 fileUploadApiCall.go:20: FileUploadAPICall
+2022/06/22 17:49:17 fileUploadApiCall.go:81: respbody===> {"success":true,"message":"","details":{"id":1,"clientid":1,"mstorgnhirarchyid":1,"credentialtype":"1","credentialaccount":"","credentialpassword":"","credentialkey":"","activeflg":1,"originalfile":"iFIXReport_2022-06-23 04:49:16.xlsx","filename":"20220622-636c8631-a3f8-4963-be66-07479a7d9142.xlsx","path":"https://tcsiccifix4prod.blob.core.windows.net/tcs-icc-ifix-prod-container/20220622-636c8631-a3f8-4963-be66-07479a7d9142.xlsx"}}
+2022/06/22 17:49:17 fileUploadApiCall.go:86: FileUploadAPICall
+2022/06/22 17:49:17 fileUploadApiCall.go:89: fileuploadResponse========> {true  {1 1 1 1    1 iFIXReport_2022-06-23 04:49:16.xlsx 20220622-636c8631-a3f8-4963-be66-07479a7d9142.xlsx https://tcsiccifix4prod.blob.core.windows.net/tcs-icc-ifix-prod-container/20220622-636c8631-a3f8-4963-be66-07479a7d9142.xlsx}}
+2022/06/22 17:49:17 DownloadReportModel.go:94: Create Ticket Json=======>    {"refuserid":5,"originalfilename":"iFIXReport_2022-06-23 04:49:16.xlsx","uploadedfilename":"20220622-636c8631-a3f8-4963-be66-07479a7d9142.xlsx"}
+2022/06/22 17:49:17 DownloadReportModel.go:95: http://localhost:8082/api/addrepoertdownloadlist application/json {"refuserid":5,"originalfilename":"iFIXReport_2022-06-23 04:49:16.xlsx","uploadedfilename":"20220622-636c8631-a3f8-4963-be66-07479a7d9142.xlsx"}
+2022/06/22 17:49:28 reportdownloadlistModel.go:10: In side GetDownloadList
+2022/06/22 17:49:28 reportdownloadlistDao.go:12: In side dao GetDownloadList
+2022/06/22 17:49:28 reportdownloadlistDao.go:38: In side GetDownloadListCount

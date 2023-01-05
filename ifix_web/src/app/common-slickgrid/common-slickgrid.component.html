@@ -1,0 +1,14 @@
+<div *ngIf="isDisplay">
+    <angular-slickgrid gridId='common-grid'
+                       (onAngularGridCreated)="angularGridReady($event)"
+                       [columnDefinitions]="columnDefinitions"
+                       [gridOptions]="gridOptions"
+                       [dataset]="dataset"
+                       [gridWidth]="gridWidth"
+                       [gridHeight]="365"
+                       (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
+                       (sgOnCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
+                       (sgOnSelectedRowsChanged)="handleSelectedRowsChanged($event.detail.eventData, $event.detail.args)"
+    >
+    </angular-slickgrid>
+</div>

@@ -1,0 +1,485 @@
+<div class="row header-view modalTitle2 " [ngStyle]="{'background':selectedColor,'color':pageNameCss}">
+  <span class="col-md-2  back align-left" *ngIf="url === null || url === ''"></span>
+  <span class="col-md-2  back align-left" *ngIf="url !== null && url !== ''" (click)="gotoprev()"> <i
+    class="fa fa-arrow-left"
+    aria-hidden="true"
+  ></i> Back</span>
+  <div class="col-md-4  text-right mar-top-9">Ticket Id: {{ticketId}}
+  </div>
+  <div class="col-md-6 row ">
+    <div class="pad-0-8">
+      <button mat-raised-button color="accent"
+              [disabled]="isTicketCloned" (click)="cloneTicket()">Create Ticket
+      </button>
+    </div>
+  </div>
+</div>
+<div class="modal-body modal-height pad-top-0">
+  <div [ngStyle]="{'color':pageNameCss}">
+    <div class="loader" [hidden]="dataLoaded"><img class="loading-gif"
+                                                   src="../../../assets/img/loader.gif"></div>
+    <div class="row mar-lft-rgt-0" *ngIf="grpLevel>1 " [hidden]="typeSeq===CR_SEQ || typeSeq === CTASK_SEQ || typeSeq === STASK_SEQ">
+      <div class="col-sm-12 pad-lft-0"  >
+        <div class="form-row mar-top-9 ">
+          <div class="form-group col-sm-6">
+            <label class="custom-label">Source :</label>
+            <select class="custom-select radius-0 font-13" [(ngModel)]="selectSource" [ngStyle]="{'background':tableCss}" (change)="onSourceChange()">
+              <option *ngFor="let source of sources">{{source}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mar-lft-rgt-0 ">
+      <div class="height-40" [hidden]="categoryLoaded">
+        <img class="loading-gif-42" src="../../../assets/img/loader-42px.gif">
+      </div>
+      <div class="col-md-12  pad-lft-0 marginTop">
+        <select class="custom-select  tcktyp" *ngFor="let ticket of ticketTypes;" [disabled]="ticket.isDisabled"
+                (change)="onCategoryChange(ticket.sequanceno,$event.target.value)" [hidden]="!categoryLoaded"
+                id="ticket_{{ticket.id}}" [ngStyle]="{'background':tableCss}">
+          <option *ngFor="let option of ticket.child"
+                  [value]="option|json">{{option.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class=" marginTop ">
+      <div class="row mar-lft-rgt-0">
+        <div class="col-sm-3  pad-lft-0 " *ngFor="let field of dynamicFields;" [ngSwitch]="field.termstypeid">
+          <div class="form-row" *ngSwitchCase="'2'">
+            <div class="form-group custom-label">
+              <label>{{field.termsname}}:</label>
+              <select class="custom-select radius-0 font-13" [(ngModel)]="field.value"
+                      [ngStyle]="{'background':tableCss}">
+                <option *ngFor="let opt of field.termsvalue.split(',')" [value]="opt">{{opt}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row" *ngSwitchCase="'1'">
+            <div class="form-group custom-label">
+              <label>{{field.termsname}}:</label>
+              <input type="text" class="form-control radius-0 font-13 "
+                     [(ngModel)]="field.value" (keypress)="blockSpecialChar($event)"
+
+                     maxlength="200" [ngStyle]="{'background':tableCss}"/>
+            </div>
+          </div>
+          <div class="form-row" *ngSwitchCase="'4'">
+            <div class="form-group custom-label">
+              <label>{{field.termsname}}:</label>
+              <input
+                class="form-control radius-0 font-13 marginTop"
+                placeholder="{{field.values}}" [(ngModel)]="field.value"
+                [owlDateTimeTrigger]="dt5"
+                [owlDateTime]="dt5" readonly [ngStyle]="{'background':tableCss}">
+              <owl-date-time [pickerType]="'calendar'" #dt5></owl-date-time>
+            </div>
+          </div>
+          <div class="form-row" *ngSwitchCase="'5'">
+            <div class="form-group custom-label">
+              <label>{{field.termsname}}:</label>
+              <input
+                class="form-control radius-0 font-13 marginTop"
+                placeholder="{{field.values}}" [(ngModel)]="field.value"
+                [owlDateTimeTrigger]="dt6"
+                [owlDateTime]="dt6" readonly [ngStyle]="{'background':tableCss}">
+              <owl-date-time [pickerType]="'timer'" #dt6></owl-date-time>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <!--<div class="row mar-lft-rgt-0">
+          <span class="custom-label">Source:</span>&nbsp; <span class="status">{{sourcetype}}</span><br>
+
+        </div>-->
+        <app-ticket-asset [hidden]="grpLevel===1 || !isassetattached" (onAssetAttach)="assetAttached($event)" [ticketorgid]="orgId"
+                          (onAssetRemove)="assetRemoved($event)" [tickettypeseq]="typeSeq"></app-ticket-asset>
+        <div class="form-group row mar-top-9" *ngIf="priorityType===2 && grpLevel> 1">
+          <label class="col-sm-2 custom-label"><span>Priority</span></label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control radius-0 font-13"
+                    [(ngModel)]="priority" readonly
+                   [ngStyle]="{'background':darkCss}">
+          </div>
+        </div>
+        <div class="form-group row mar-lft-rgt-0 mar-top-9">
+          <span class="col-sm-12 custom-label pad-lft-0">If this is for some other user<span class="link"
+                                                                                             (click)="openTicketDetailsModal()"> Click here</span>
+          </span>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-sm-6">
+            <label class="custom-label"><span>Requester Name :</span> &nbsp;&nbsp;<i type="button"
+                                                                                     class="fa fa-info-circle"
+                                                                                     aria-hidden="true"
+                                                                                     (click)="openUserInfo()"></i>
+              &nbsp;&nbsp;<img class="height-19" src="../../../assets/img/vip.png" *ngIf="isVip">
+            </label>
+            <input type="text" class="form-control radius-0 font-13"
+                   placeholder="Requester Name" [(ngModel)]="rName" readonly
+                   [ngStyle]="{'background':darkCss}">
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="custom-label"><span>Requester Mobile :<span class="star-six"></span></span></label>
+            <input type="text" class="form-control radius-0 font-13"
+                   placeholder="Requester Mobile" title="{{rMobile}}" [(ngModel)]="rMobile"
+                   [ngStyle]="{'background':darkCss}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-sm-6">
+            <label class="custom-label"><span>Requester Email:</span></label>
+            <input type="text" class="form-control radius-0 font-13"
+                   placeholder="Requester Email" title="{{rEmail}}" [(ngModel)]="rEmail" readonly
+                   [ngStyle]="{'background':darkCss}">
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="custom-label"><span>Requester Location :<span class="star-six"></span></span></label>
+            <input type="text" class="form-control radius-0 font-13"
+                   placeholder="Requester Location" title="{{rLoc}}" [(ngModel)]="rLoc"
+                   [ngStyle]="{'background':darkCss}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-sm-12">
+            <label class="custom-label"><span>Short Description:</span></label>
+            <input type="text" class="form-control radius-0 font-13"
+                   placeholder="Short Description" [(ngModel)]="desc" maxlength="100" placement="right" title="{{desc}}"
+                   [ngStyle]="{'background':darkCss}">
+          </div>
+          <div class="warning-msg">
+            *maximum 100 characters
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-sm-12">
+            <label class="custom-label"><span>Long Description :</span></label>
+            <textarea
+              class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+              placeholder="Long Description" [(ngModel)]="brief" title="{{brief}}" maxlength="5000"
+              [ngStyle]="{'background':darkCss}">
+                  </textarea>
+            <div class="warning-msg">
+              *maximum 5000 characters
+            </div>
+          </div>
+        </div>
+        <div class="row mar-lft-15" *ngIf="typeSeq===CR_SEQ">
+          <div class="col-12 ">
+            <mat-tab-group #tab class="tabset dark" >
+              <mat-tab label="Schedule" id="tab4">
+                <div class="row mar-lft-rgt-5 mar-top-15">
+                  <div class="col-sm-3 " *ngFor="let field of scheduletab;" [ngSwitch]="field.termtypeid">
+                    <div class="form-row" *ngSwitchCase="'2'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <select class="custom-select radius-0 font-13" [(ngModel)]="field.val"
+                                [ngStyle]="{'background':tableCss}"
+                                [disabled]="field.iscompulsory===0 && field.writepermission ===0">
+                          <option *ngFor="let opt of field.recordtermvalue.split(',')" [value]="opt"
+                                  [ngStyle]="{'color':footerItem}">{{opt}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'1'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input type="text" class="form-control radius-0 font-13 "
+                               [readonly]="field.iscompulsory===0 && field.writepermission ===0"
+                               [(ngModel)]="field.val" (keypress)="blockSpecialChar($event)"
+                               maxlength="200" [ngStyle]="{'background':tableCss}"/>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'4'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input
+                          class="form-control radius-0 font-13 marginTop"
+                          [(ngModel)]="field.val"
+                          [owlDateTimeTrigger]="dt5"
+                          [owlDateTime]="dt5" [disabled]="field.iscompulsory===0 && field.writepermission ===0"
+                          [ngStyle]="{'background':tableCss}">
+                        <owl-date-time [pickerType]="'calendar'" #dt5></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'5'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input
+                          class="form-control radius-0 font-13 marginTop"
+                          [(ngModel)]="field.val"
+                          [owlDateTimeTrigger]="dt6"
+                          [owlDateTime]="dt6" [disabled]="field.iscompulsory===0 && field.writepermission ===0">
+                        <owl-date-time [pickerType]="'timer'" #dt6></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'7'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input
+                          class="form-control radius-0 font-13 marginTop"
+                          [(ngModel)]="field.val"
+                          [owlDateTimeTrigger]="dt7"
+                          [owlDateTime]="dt7" [disabled]="field.iscompulsory===0 && field.writepermission ===0">
+                        <owl-date-time #dt7></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'8'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <textarea
+                          class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+                          placeholder="Long Description" [readonly]="field.iscompulsory===0 && field.writepermission ===0"
+                          [(ngModel)]="field.val" (keypress)="blockSpecialChar($event)">
+                  </textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Plan Of Action" id="tab5">
+                <div class="row mar-lft-rgt-5 mar-top-15">
+                  <div class="col-sm-4 " *ngFor="let field of plantab;" [ngSwitch]="field.termtypeid">
+                    <div class="form-row" *ngSwitchCase="'2'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <select class="custom-select radius-0 font-13" [(ngModel)]="field.val"
+                                (change)="onplandropdownchange(field.val,field.seq)"
+                                [ngStyle]="{'background':tableCss}"
+                                [disabled]="field.iscompulsory===0 && field.writepermission ===0">
+                          <option *ngFor="let opt of field.recordtermvalue.split(',')" [value]="opt"
+                                  [ngStyle]="{'color':footerItem}">{{opt}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'1'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}:<span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input type="text" class="form-control radius-0 font-13 "
+                               [readonly]="field.iscompulsory===0 && field.writepermission ===0"
+                               [(ngModel)]="field.val" (keypress)="blockSpecialChar($event)"
+                               maxlength="200" [ngStyle]="{'background':tableCss}"/>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'4'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input
+                          class="form-control radius-0 font-13 marginTop"
+                          [(ngModel)]="field.val"
+                          [owlDateTimeTrigger]="dt5"
+                          [owlDateTime]="dt5" [disabled]="field.iscompulsory===0 && field.writepermission ===0"
+                          [ngStyle]="{'background':tableCss}">
+                        <owl-date-time [pickerType]="'calendar'" #dt5></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'5'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input
+                          class="form-control radius-0 font-13 marginTop"
+                          [(ngModel)]="field.val"
+                          [owlDateTimeTrigger]="dt6"
+                          [owlDateTime]="dt6" [disabled]="field.iscompulsory===0 && field.writepermission ===0">
+                        <owl-date-time [pickerType]="'timer'" #dt6></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'7'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input
+                          class="form-control radius-0 font-13 marginTop"
+                          [(ngModel)]="field.val"
+                          [owlDateTimeTrigger]="dt7"
+                          [owlDateTime]="dt7" [disabled]="field.iscompulsory===0 && field.writepermission ===0">
+                        <owl-date-time #dt7></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'8'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <textarea
+                          class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea" rows="10" cols="50"
+                          placeholder="Long Description" [readOnly]="field.iscompulsory===0 && field.writepermission ===0"
+                          [(ngModel)]="field.val" (keypress)="blockSpecialChar($event)">
+                  </textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 " *ngFor="let field of extras;" [ngSwitch]="field.termtypeid"
+                       [hidden]="displayMandatory">
+                    <div class="form-row" *ngSwitchCase="'2'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <select class="custom-select radius-0 font-13" [(ngModel)]="field.val"
+                                [ngStyle]="{'background':tableCss}" [disabled]="field.writepermission ===0">
+                          <option *ngFor="let opt of field.recordtermvalue.split(',')" [value]="opt"
+                          >{{opt}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'1'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input type="text" class="form-control radius-0 font-13 "
+                               [readonly]="field.writepermission ===0"
+                               [(ngModel)]="field.val" (keypress)="blockSpecialChar($event)"
+                               maxlength="200" [ngStyle]="{'background':tableCss}"/>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'4'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input
+                          class="form-control radius-0 font-13 marginTop"
+                          [(ngModel)]="field.val"
+                          [owlDateTimeTrigger]="dt10"
+                          [owlDateTime]="dt10" [disabled]="field.writepermission ===0"
+                          [ngStyle]="{'background':tableCss}">
+                        <owl-date-time [pickerType]="'calendar'" #dt10></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'5'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input
+                          class="form-control radius-0 font-13 marginTop"
+                          [(ngModel)]="field.val"
+                          [owlDateTimeTrigger]="dt9"
+                          [owlDateTime]="dt9" [disabled]="field.writepermission ===0">
+                        <owl-date-time [pickerType]="'timer'" #dt9></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'7'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <input
+                          class="form-control radius-0 font-13 marginTop"
+                          [(ngModel)]="field.val"
+                          [owlDateTimeTrigger]="dt8"
+                          [owlDateTime]="dt8" [disabled]="field.writepermission ===0">
+                        <owl-date-time #dt8 (afterPickerClosed)="afterclosed(field.val,field.seq)"></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="form-row" *ngSwitchCase="'8'">
+                      <div class="form-group custom-label">
+                        <label>{{field.tername}}: <span *ngIf="field.iscompulsory===1" class="star-six"></span></label>
+                        <textarea
+                          class="form-control radius-0 font-13 ie-textarea desc-height edge-textarea"
+                          placeholder="Long Description" [(ngModel)]="field.val" rows="10" cols="50"
+                          (keypress)="blockSpecialChar($event)" [readonly]="field.writepermission ===0">
+                          </textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Linked Tickets" id="tab6">
+                <div class="form-group mar-top-15 mar-bot-0">
+                  <div class="col-sm-12 row">
+                    <div class=" col-sm-6 offset-2 row">
+                      <div class="col-sm-3">
+                        <label class="custom-label">Ticket Number: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control radius-0 font-13"
+                               placeholder="Enter Ticket Number"
+                               [(ngModel)]="tNumber" [ngStyle]="{'background':tableCss}">
+                      </div>
+                    </div>
+                    <div class=" col-sm-2">
+                      <button mat-raised-button color="accent" (click)="searchTicket()" [disabled]="isSearchTicket">Search
+                      </button>
+                    </div>
+                    <div class=" col-sm-2">
+                      <button mat-raised-button color="primary" (click)="attachTicket()"
+                              [disabled]="isAttachedTicket">
+                        Attach
+                      </button>
+                    </div>
+                  </div>
+                  <!--              <div class="col-sm-12 divLine"></div>-->
+                </div>
+                <div class="row">
+                  <div class="card mar-top-9 col-sm-6">
+                    <div class="card-body card-body-grid" style="height:237px;overflow: auto;padding:3px;"
+                         [ngStyle]="{'background':tableCss}">
+                      <table class="table">
+                        <thead [ngStyle]="{'background':selectedColor,'color':footerItem}">
+                        <tr class="rsdb-head">
+                          <th>Ticket Id</th>
+                          <th>Ticket Type</th>
+                          <th>Title</th>
+                        </tr>
+                        </thead>
+                        <tbody class="rsdb-body" [ngStyle]="{'color':footerItem}">
+                        <tr *ngFor="let search of searchTicketdetails" (click)="clicksearch(search.id)">
+                          <td>{{search.code}}</td>
+                          <td>{{search.recordtype}}</td>
+                          <td>{{search.title}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="card mar-top-9 col-sm-6">
+                    <div class="card-body card-body-grid" style="height:237px;overflow: auto;padding:3px;"
+                         [ngStyle]="{'background':tableCss}">
+                      <table class="table">
+                        <thead [ngStyle]="{'background':selectedColor,'color':footerItem}">
+                        <tr class="rsdb-head">
+                          <th>Ticket Id</th>
+                          <th>Ticket Type</th>
+                          <th>Title</th>
+                          <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="rsdb-body" [ngStyle]="{'color':footerItem}">
+                        <tr *ngFor="let search of attachedTicket;let i = index;" (click)="clicksearch(search.id)">
+                          <td>{{search.code}}</td>
+                          <td>{{search.recordtype}}</td>
+                          <td>{{search.title}}</td>
+                          <td class="pointer">
+                            <mat-icon (click)="removeTicket(i)">delete_outline</mat-icon>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<ng-template #loginName>
+  <div class="form-group">
+    <div class="form-group row ">
+      <p class="col-sm-4 custom-label pad-lft-0 color">Enter User Name or Email Id :</p>
+      <div class="col-sm-8">
+        <input type="text" class="form-control radius-0 font-13" placeholder="Enter Login Id or User Name"
+               [(ngModel)]="userSelected"
+               [formControl]="searchUser"
+               [matAutocomplete]="auto" (keydown.enter)="changeId($event)">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngIf="isLoading" class="is-loading">
+            <mat-spinner diameter="50"></mat-spinner>
+          </mat-option>
+          <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let user of userDtl" [value]="user.name" class="matFont">
+              {{ user.name }} ( {{user.useremail}} )
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </div>
+    </div>
+  </div>
+</ng-template>

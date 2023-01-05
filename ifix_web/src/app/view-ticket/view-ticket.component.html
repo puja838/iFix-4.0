@@ -1,0 +1,442 @@
+<div class="dasboard-width" [ngStyle]="{'background':selectedColor,'color':footerItem}">
+  <div class="row header mar-lft-rgt-0 ticket-header">
+    <div class="col-sm-2" >View Tickets</div>
+    <!--<div class="col-sm-3" *ngIf="userGroups.length>1">
+      <mat-form-field>
+        <mat-label [ngStyle]="{'color':footerItem}">Current Role:</mat-label>
+        <mat-select [(ngModel)]="userGroupSelected" (selectionChange)="onSelectGroup()">
+          <mat-option *ngFor="let group of userGroups" [value]="group.id"
+          >{{group.groupname}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>-->
+    <div class="col-sm-3 mar-lft " *ngIf="grpLevel>1">
+      <mat-form-field>
+        <mat-label [ngStyle]="{'color':footerItem}">Work Space:</mat-label>
+        <mat-select [(ngModel)]="workspaceSelected" (selectionChange)="onWorkSpaceChange($event.value)">
+          <mat-option *ngFor="let workspace of messageService.workspaces" [value]="workspace.id"
+                      [ngStyle]="{'color':footerItem}">{{workspace.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row content mr-top-5 mar-lft-rgt-0">
+    <div class="col-md-3" >
+      <div class="views-title" [ngStyle]="{'background':buttonCss}">
+        <span [ngStyle]="{'color':fontColor}">Views</span>
+      </div>
+      <div class="views-body" *ngIf="hascatalog !=='Y'"[ngStyle]="{'background':footerCss,'color':footerItem}">
+        <span>Modules</span>
+        <button class="btn btn-light" (click)="toggleViews()" [ngStyle]="{'background':tableCss}"><i class="fa "
+                                                                 [ngClass]="displayed?'fa-minus':'fa-plus'"></i>
+        </button>
+      </div>
+      <div class="views-body" *ngIf="hascatalog!=='Y'" [hidden]="!displayed" [ngStyle]="{'background':footerCss}">
+        <div class="height-40" [hidden]="ticketTypeLoaded">
+          <img class="loading-gif-42" src="../../../assets/img/loader-42px.gif">
+        </div>
+        <mat-form-field>
+          <mat-label>Ticket Type:</mat-label>
+          <mat-select [(ngModel)]="typSelected" (selectionChange)="ontypeChange($event.value)"
+                      [hidden]="!ticketTypeLoaded">
+            <mat-option *ngFor="let ticketType of ticketsTyp" [value]="ticketType.id"
+            ><span >{{ticketType.typename}}</span></mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+      </div>
+      <div class="views-body mar-top-15" [ngStyle]="{'background':footerCss,'color':footerItem}">
+        <span>Folders</span>
+        <button class="btn btn-light" (click)="toggleFolderViews()" [ngStyle]="{'background':tableCss}"><i class="fa "
+                                                                       [ngClass]="folderDisplayed?'fa-minus':'fa-plus'"></i>
+        </button><br>
+        <div [hidden]="!folderDisplayed" class="row text-center" *ngIf="grpLevel===1">
+          <span class="col-md-12 views-body font-sizes mar-top-15"
+            [ngStyle]="{'background':footerCss,'color':footerItem}"
+            (click)="toggleArchiveViews()" [ngClass]="{'highlight': countSelected === 1}"
+            >
+              <i class="fa fa-archive" aria-hidden="true"></i>
+          </span>
+        </div>
+        <div [hidden]="!folderDisplayed" class="row text-center" *ngIf="grpLevel>1">
+          <span class="col-md-6 views-body font-sizes mar-top-15"
+            [ngStyle]="{'background':footerCss,'color':footerItem}"
+            (click)="toggleArchiveViews()" [ngClass]="{'highlight': countSelected === 1}"
+            >
+              <i class="fa fa-archive" aria-hidden="true"></i>
+          </span>
+          <span class="col-md-6 views-body font-sizes mar-top-15"
+            [ngStyle]="{'background':footerCss,'color':footerItem}"
+            (click)="toggleStarViews()" [ngClass]="{'highlight': countSelected === 2}"
+            >
+              <i class="fa fa-star" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+      <div [hidden]="!archiveDisplayed">
+        <div class="loader-img height-120" [hidden]="folderLoaded">
+          <img class="loading-gif-70" src="../../../assets/img/loader-70px.gif">
+        </div>
+        <ul class="folders">
+          <li *ngFor="let menu of menus;" [ngClass]="{activeF: step===menu.diffid}" id="menu_{{menu.diffid}}"
+              (click)="clickedFilter(menu.diffid)" [ngStyle]="{'background':tableCss}">
+            <i class="fa fa-filter"></i>
+            <span>{{menu.description}}</span>
+          </li>
+        </ul>
+      </div>
+      <div [hidden]="!starDisplayed">
+        <div class="loader-img height-120" [hidden]="folderLoaded">
+          <img class="loading-gif-70" src="../../../assets/img/loader-70px.gif">
+        </div>
+        <ul class="folders">
+          <li class="row margZero" *ngFor="let item of listOfFilters;"
+              [ngClass]="{activeF: starStep===item.id}" id="item_{{item.id}}" [ngStyle]="{'background':tableCss}">
+            <div class="col-sm-10" (click)="clickedStarFilter(item.id, '')">
+              <i class="fa fa-filter"></i>
+              <span>{{item.name}}</span>
+            </div>
+            <div class="col-sm-2">
+              <i class="fa fa-trash trashBin" (click)="deletedStarFilter(item.id)"></i>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div [hidden]="!clockDisplayed">
+        <div class="loader-img height-120" [hidden]="folderLoaded">
+          <img class="loading-gif-70" src="../../../assets/img/loader-70px.gif">
+        </div>
+        <ul class="folders">
+          <li [ngStyle]="{'background':tableCss}">
+            <i class="fa fa-filter"></i>
+            <span>Check 1</span>
+          </li>
+          <li [ngStyle]="{'background':tableCss}">
+            <i class="fa fa-filter"></i>
+            <span>Check 2</span>
+          </li>
+          <li [ngStyle]="{'background':tableCss}">
+            <i class="fa fa-filter"></i>
+            <span>Check 3</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9 col-sm-12 margBottom">
+      <div class="card viewTicket"  *ngIf="grpLevel>1">
+        <ngb-accordion class="range-accordion">
+          <ngb-panel>
+              <ng-template class="cardHeaderColor card-header " ngbPanelTitle>
+                <a class="card-link colorBlack">
+                  <i class="fa fa-filter" style="margin-top: 5px;"></i>&nbsp;Filter
+                </a>
+              </ng-template>
+              <ng-template class="collapse" ngbPanelContent>
+                <div class="card-body">
+                  <div>
+                    <button class="btn btn-Grey" [ngStyle]="{'background':buttonCss}" (click)="onFormRun('run')">Run</button>
+                    <button class="btn btn-Grey" [ngStyle]="{'background':buttonCss}" [disabled]="starStep==undefined" (click)="onFormRun('update')">Save</button>
+                    <button class="btn btn-Grey" [ngStyle]="{'background':buttonCss}" (click)="onFormRun('saveas')">Save As</button>
+                    <button class="btn btn-Grey" [ngStyle]="{'background':buttonCss}" (click)="onFormReset('reset')">Reset Filter</button>
+                    <button class="btn btn-Grey" [ngStyle]="{'background':buttonCss}"
+                            [ngClass] = "isEditHeader ? 'false' : 'true'" (click)="onEditHeader()">Edit Header</button>
+                    <button class="btn btn-Grey" [ngStyle]="{'background':buttonCss}" (click)="onHeaderReset('')">Reset Header</button>
+                  </div>
+                  <div *ngIf="isEditHeader">
+                    <div class="card-header border-rad row margBoth" cdkDropListGroup>
+                      <div class="col-md-3">
+                        <h4 style="text-align: center;"><b>Columns</b></h4>
+                        <div
+                          cdkDropList
+                          [cdkDropListData]="editedGridHeaderNames"
+                          class="example-list accordion"
+                          (cdkDropListDropped)="drop($event)">
+                          <div class="example-box" *ngFor="let item of editedGridHeaderNames" cdkDrag><b>{{item.value}}</b></div>
+                        </div>
+                      </div>
+                      <div class="col-md-9">
+                        <h4 style="text-align: center;"><b>Drop Here</b></h4>
+                        <div
+                          cdkDropList
+                          [cdkDropListData]="selectedGridColumns"
+                          class="example-list1"
+                          (cdkDropListDropped)="openDropList($event)">
+                          <div class="example-box1" *ngFor="let item of selectedGridColumns" cdkDrag><b>{{item.value}}</b></div>
+                        </div>
+                        <button type="submit" class="btn btnSuccess" (click)="onSubmit()">Submit</button>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="breakLine"></div>
+                    <br>
+                  </div>
+                  <div class="row" style="padding-left: 2%;">
+                    <div class="col-sm-3 row" *ngIf="selectedMultipleOrgs.length!==0">
+
+                      <mat-form-field  class="col-sm-12 margin-Right">
+                        <mat-label>Select Organization:</mat-label>
+                        <mat-select name="orgSelected" [(ngModel)]="orgSelected" (selectionChange)="onOrgChange($event.value, '')" multiple>
+                          <mat-checkbox [(ngModel)]="isAllOrg" class="all"
+                                        [ngModelOptions]="{standalone: true}"
+                                        (change)="selectAllOrg()">Select All
+                          </mat-checkbox>
+                          <mat-option *ngFor="let item of selectedMultipleOrgs" [value]="item.mstorgnhirarchyid">
+                            <span>{{item.mstorgnhirarchyname}}</span>
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <!-- <mat-form-field  class="col-sm-12 margin-Right">
+                        <mat-label>Select Organizations:</mat-label>
+                        <mat-select name="orgSelected" [(ngModel)]="orgSelected" (selectionChange)="onOrgChange($event.value)" multiple>
+                          <mat-option *ngFor="let item of selectedMultipleOrgs" [value]="item.mstorgnhirarchyid">
+                            <span>{{item.mstorgnhirarchyname}}</span>
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-3 row" *ngIf="selectedMultipleOrgs.length!==0">
+                      <mat-form-field  class="col-sm-12 margin-Right">
+                        <mat-label>Select Ticket Type:</mat-label>
+                        <mat-select name="ticketTypeSelected" [(ngModel)]="ticketTypeSelected" (selectionChange)="onTicketTypeChange($event.value)">
+                          <mat-option *ngFor="let item of ticketTypesForFilter" [value]="item.name">
+                            <span>{{item.name}}</span>
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="card-header border-rad">
+                    <span><b>All of these conditions must be met</b></span><br>
+                    <div class="box row" id="Form_Group" *ngFor="let obj of frmGroupArr; let i = index;">
+                      <mat-form-field class="col-sm-2 margin-Right">
+                        <mat-label>Field:</mat-label>
+                        <mat-select name="dropDownSelected1{{i}}" [(ngModel)]="obj.dropDownSelected1" (selectionChange)="onFieldChange($event.value, i)">
+                          <mat-option *ngFor="let item of dropDownArr1" [value]="item.field"
+                                ><span >{{item.value}}</span></mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field class="col-sm-2 margin-Right">
+                        <mat-label>Condition:</mat-label>
+                        <mat-select name="dropDownSelected2{{i}}" [(ngModel)]="obj.dropDownSelected2" (selectionChange)="onConditionChange($event.value, i)">
+                          <mat-option *ngFor="let item of dropDownArr2" [value]="item.field"
+                                ><span >{{item.value}}</span></mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <div class="col-sm-2 margin-Right" *ngIf="obj.dropDownSelected2!=='between'"  [hidden]="obj.isNumericConditionValue">
+                        <input type="text" class="form-control radius-0 font-13 mar-top-1 boxLength" 
+                                *ngIf="!obj.isConditionValueDropdown && !obj.isConditionValueDropdownMultiSelect"
+                                [(ngModel)]="obj.dropDownSelected3" placeholder="Condition Value:">
+
+                        <div class="row" *ngIf="obj.isConditionValueDropdown && !obj.isConditionValueDropdownMultiSelect">
+                          <mat-form-field class="col-sm-12 margin-Right">
+                            <mat-label>Condition Value:</mat-label>
+                            <mat-select name="dropDownSelected5{{i}}" [(ngModel)]="obj.dropDownSelected5" (selectionChange)="onConditionValueChange($event.value, i, '')">
+                              <mat-option *ngFor="let item of obj.dropDownArr5" [value]="item.field"
+                                    ><span >{{item.value}}</span></mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="row" *ngIf="obj.isConditionValueDropdown && obj.isConditionValueDropdownMultiSelect">
+                          <mat-form-field class="col-sm-12 margin-Right">
+                            <mat-label>Condition Value:</mat-label>
+                            <mat-select name="dropDownSelected6{{i}}" [(ngModel)]="obj.dropDownSelected6" (selectionChange)="onConditionValueChange($event.value, i, '')"
+                                        multiple>
+                              <mat-checkbox [(ngModel)]="isAllConditionValue" class="all"
+                                        [ngModelOptions]="{standalone: true}"
+                                        (change)="selectAllConditionValue(i)">Select All
+                              </mat-checkbox>
+                              <mat-option *ngFor="let item of obj.dropDownArr6" [value]="item.field"
+                                    ><span >{{item.value}}</span></mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="row" *ngIf="!obj.isConditionValueDropdown && obj.isConditionValueDropdownMultiSelect">
+                          <!-- <input type="date" class="col-sm-12 margin-Right form-control radius-0 font-13 mar-top-1"
+                                  [(ngModel)]="obj.dateTimePicker"> -->
+                          <input class="col-sm-12 margin-Right form-control radius-0 font-13" #startDate [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+                                  placeholder="Date" [(ngModel)]="obj.dateTimePicker">
+                              <owl-date-time [showSecondsTimer]="true" #dt2></owl-date-time>        
+                        </div>
+
+                      </div>
+                      <div class="col-sm-2 margin-Right" *ngIf="obj.dropDownSelected2!=='between'"  [hidden]="!obj.isNumericConditionValue">
+                        <input type="number" class="form-control radius-0 font-13 mar-top-1 boxLength" 
+                                        [(ngModel)]="obj.dropDownSelected4" placeholder="Condition Value:">
+                      </div>
+                      <div class="col-sm-5 row" *ngIf="obj.dropDownSelected2==='between'">
+                        <div class="col-sm-6 margTop">
+                          <span class="textFont">From Date:</span>
+                          <!-- <input type="datetime-local" class="form-control radius-0 font-13 mar-top-1"
+                                  [(ngModel)]="obj.fromDateSelected2"> -->
+                          <input class="col-sm-12 margin-Right form-control radius-0 font-13" #startDate [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3"
+                                  placeholder="Date" [(ngModel)]="obj.fromDateSelected2" (ngModelChange)="fromDateChange($event, i)">  
+                                  <owl-date-time [showSecondsTimer]="true" #dt3></owl-date-time>        
+                        </div>
+                        <div class="col-sm-6 margTop">
+                          <span class="textFont">To Date:</span>
+                          <input class="col-sm-12 margin-Right form-control radius-0 font-13" #endDate [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4"
+                                  placeholder="Date" [(ngModel)]="obj.toDateSelected1"  (ngModelChange)="toDateChange($event, i)">
+                                  <owl-date-time [showSecondsTimer]="true" #dt4></owl-date-time>  
+                          <!-- <input type="datetime-local" class="form-control radius-0 font-13 mar-top-1"
+                                  [(ngModel)]="obj.toDateSelected1"> -->
+                        </div>
+                      </div>
+                      <mat-form-field class="col-sm-2 margin-Right">
+                        <mat-label>Operator:</mat-label>
+                        <mat-select name="operatorSelected{{i}}" [(ngModel)]="obj.operatorSelected">
+                          <mat-option *ngFor="let item of operatorDropdown" [value]="item.id"
+                                ><span >{{item.value}}</span></mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <div class="col-sm-2 row">
+                        <button class="col-sm-6 btn btn-Grey2" [ngStyle]="{'background':buttonCss}" (click)="onClickADD()">
+                          <span><i class="fa fa-plus" aria-hidden="true"></i></span></button>  &nbsp;&nbsp;
+                        <button class="col-sm-4 btn btn-Grey2" [ngStyle]="{'background':buttonCss}" (click)="reemoveFormRow(i)"
+                                *ngIf="frmGroupArr.length>1">
+                          <span><i class="fa fa-times" aria-hidden="true"></i></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+      <div class="loader" [hidden]="dataLoaded"><img class="loading-gif" src="../../../assets/img/loader.gif"></div>
+      <div class="loader" [hidden]="filterLoader"><img class="loading-gif" src="../../../assets/img/loader.gif"></div>
+      <div class="card">
+        <div class="card-header card-header-top">
+          <div class="col-md-12 col-sm-12 mar-lft-rgt-0  row pull-right ">
+            <!-- <div class="col-sm-2 font-13"></div> -->
+            <div class="col-sm-2 font-13 pageSize">
+              <select class="custom-select mr-sm-2 radius-0 font-13 custom-width" [ngStyle]="{'background':tableCss}" [(ngModel)]="pageSizeSelected"
+                      (change)="onPageSizeChange($event.target.selectedIndex)">
+                <option *ngFor="let pageSize of pageSizeObj" [value]="pageSize.id">{{pageSize.value}}</option>
+              </select>
+            </div>
+            <div class="col-sm-5 mar-lft-rgt-0 font-13">
+              <ngb-pagination [(collectionSize)]="totalData" #numPages [(pageSize)]="itemsPerPage" [(page)]="page"
+                              [(maxSize)]="maxLength" (pageChange)="pageChanged($event)"
+                              aria-label="Default pagination"></ngb-pagination>
+            </div>
+            <div class="col-sm-3 mar-lft-rgt-0  font-13 totalData">
+              <b >Total items: </b> <span>{{totalData}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body card-body-grid" id="viewGrid" [ngStyle]="{'background':tableCss}">
+          <angular-slickgrid gridId="grid1"
+                             [columnDefinitions]="columnDefinitions"
+                             [gridOptions]="gridOptions"
+                             (onAngularGridCreated)="angularGridReady($event)"
+                             (sgOnCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
+                             (onGridStateChanged)="onGridChanged($event.change.newValues, $event.change.type)"
+                             [gridHeight]="365"
+                             (sgOnSelectedRowsChanged)="handleSelectedRowsChanged($event.detail.eventData, $event.detail.args)"
+                             (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
+                             (sgOnMouseEnter)="handleOnMouseEnter($event.detail.eventData)"
+                             (sgOnMouseLeave)="handleOnMouseLeave($event.detail.eventData)"
+                             [dataset]="dataset">
+          </angular-slickgrid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #savedFilterName let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Filter Insertion</div>
+  </div>
+  <div class="modal-body bodyStyle1">
+    <span><b>Save filter name as :</b></span><br><br>
+    <input type="text" class="form-control radius-0 font-13 mar-top-1"
+            [(ngModel)]="filteredName"><br>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-cadetblue" [ngStyle]="{'background':buttonCss}" (click)="saveInfo()">Save</button>
+    <button class="btn btn-Grey" [ngStyle]="{'background':buttonCss}" (click)="c()">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #updateFilterName let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Filter Updation</div>
+  </div>
+  <div class="modal-body bodyStyle">
+    <div><b>Filter will be updated with the changes. Are you sure?</b></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn updateBtn" [ngStyle]="{'background':buttonCss}" (click)="updateInfo()">Ok</button>
+    <button class="btn btn-Grey" [ngStyle]="{'background':buttonCss}" (click)="c()">Close</button>
+  </div>
+</ng-template>
+
+
+<ng-template #deleteFilter let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Filter Deletion</div>
+  </div>
+  <div class="modal-body bodyStyle">
+    <div><b>Do you want to delete this filter?</b></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger deleteBtn" [ngStyle]="{'background':buttonCss}" (click)="deleteInfo()">Delete</button>
+    <button class="btn btn-secondary closeBtn" [ngStyle]="{'background':buttonCss}" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+<ng-template #supportGroupEditPopUp>
+  <br>
+  <div class="height-40" [hidden]="categoryLoaded">
+    <img class="loading-gif-42 loaderPosition" src="../../../assets/img/loader-42px.gif">
+  </div>
+  <div class="row" [hidden]="!categoryLoaded">
+    <div class="col-sm-3" style="padding-top: 5px;"><b><i>Assigned Group : </i></b></div>
+    <select class="custom-select radius-0 font-13 col-sm-8" id="group" [(ngModel)]="grpSelected"
+            (change)="ongrpChange($event.target.selectedIndex)"
+            [ngStyle]="{'background':darkCss}" disabled>
+            <option value="0" selected>Select Assignee Group</option>
+            <option *ngFor="let group of selectedSupportGroupData"
+                    [value]="group.mstgroupid">{{group.groupname}}</option>
+    </select>
+    <br><br><br>
+    <div class="col-sm-3" style="padding-top: 5px;"><b><i>Assigned User : </i></b></div>
+    <input type="text" class="form-control radius-0 font-13 col-sm-6 inputBoxStyle" id="user"
+            placeholder="Enter Assignee Group User"
+            style="display:inline-block; width: 100%; padding-top: 5px;"
+            [(ngModel)]="userNameSelected"
+            [formControl]="searchUser" [matAutocomplete]="auto"
+            [ngStyle]="{'background':tableCss}" matInput>
+    <mat-autocomplete #auto="matAutocomplete" >
+      <mat-option *ngIf="isLoading" class="is-loading">
+        <mat-spinner diameter="50"></mat-spinner>
+      </mat-option>
+      <ng-container *ngIf="!isLoading">
+        <mat-option *ngFor="let user of userList" [value]="user.name" (click)="onUserSelected(user)">
+          {{ user.name }} - {{user.loginname}}
+        </mat-option>
+      </ng-container>
+    </mat-autocomplete>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-primary radius-0" style="line-height:1;"
+              [disabled]="grpSelected === agroupid && userSelected === auserid"
+              (click)="changeUserWithState()">
+        <i class="fa fa-check" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <div style="margin-top: 10%; float: right;" [hidden]="!categoryLoaded">
+    <button mat-stroked-button color="primary" (click)="closeModal2()">Close</button>&nbsp;&nbsp;
+  </div>
+</ng-template>
+
+
+
+

@@ -1,0 +1,123 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                  (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)"[dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" *ngIf = '!isUpdate'>Add Template</div>
+    <div class="modal-title" *ngIf = 'isUpdate'>Update Template</div>
+
+  </div>
+  <div class="modal-body">
+    <!-- <div class="none" *ngIf = "isError" [ngClass]="{'inputError':isError}">{{errorMessage}}</div> -->
+
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected" (change)="onOrgChange($event.target.selectedIndex)">
+        <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="tempSelected" (change)="ontempChange($event.target.selectedIndex)">
+         
+            <option value="">Select Template</option>
+            <option *ngFor="let temp of temps" [value]="temp.id">{{temp.name}}</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="tempVal"
+              placeholder="{{placeholder}}">
+      </div>
+
+      <div class="form-group">
+        <select class="custom-select font-13 radius-0" [(ngModel)]="selectedTicketType"
+                (change)="onTicketTypeChange($event.target.selectedIndex)">
+          <option value="0">Select Ticket type</option>
+          <option *ngFor="let type of ticketTypes" [value]="type.id">{{type.typename}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <!-- <select class="custom-select font-13 radius-0" [(ngModel)]="selectedWorkingCategory"
+        (change)="oncategoryTypeChange($event.target.selectedIndex)">
+          <option value="0">Select Working category</option>
+          <option *ngFor="let cat of workingList" [value]="cat.id">{{cat.name}}</option>
+        </select> -->
+        <ng-select [items]="workingList"  bindLabel="name" bindValue="id" [multiple]="false"
+                         [searchable]="true" placeholder="Select Working category" [(ngModel)]="selectedWorkingCategory"> 
+      </ng-select>
+      </div>
+
+
+
+      <div class="form-group">
+        <select class="custom-select font-13 radius-0" [(ngModel)]="selectedStatus">
+          <option value="0">Select Status</option>
+          <option *ngFor="let status of status" [value]="status.id">{{status.typename}}</option>
+        </select>
+      </div>
+
+
+      <div class="form-group" *ngIf ='istextarea'>
+       
+        <textarea class="form-control radius-0 font-13" [(ngModel)]="contentValue" 
+        placeholder="Enter Content"></textarea>
+
+      </div>
+
+      <div  class="form-group" *ngIf ='!istextarea'>
+      <ck-editor name="editor1" [(ngModel)]="editorValue" skin="moono-lisa" language="en" [fullPage]="true" placeholder="Template body"></ck-editor>
+     </div>
+
+     <div class="form-group" *ngIf ='isClosureTime'>
+      <input type="number" class="form-control radius-0 font-13" [(ngModel)]="closureTime"
+            placeholder="Enter Closure Time (In Min)">
+    </div>
+
+    
+    
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0"  *ngIf = '!isUpdate'(click)="save()">Save</button>
+    <button type="button" class="btn btn-success radius-0" *ngIf = 'isUpdate'(click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+<!-- <ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Update Catalog</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" *ngIf = "isError" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization :</b></label>
+        <div class="col-sm-8 col-md-8">
+           <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected" (change)="onOrgChange($event.target.selectedIndex)">
+        <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    </div>
+
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Catalog Name :</b></label>
+        <div class="col-sm-8 col-md-8">
+            <input type="text" class="form-control radius-0 font-13" [(ngModel)]="catalogName"
+                  placeholder="Enter catelog Name">
+          </div>
+       </div>
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template> -->
+
+
+<!--<notifier-container></notifier-container>-->
+

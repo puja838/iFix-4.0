@@ -1,0 +1,30 @@
+.dayChecked.table td{
+    padding: 3px;
+  }
+  /* 
+  .check .mat-checkbox-label{
+    margin-top: 21px !important;
+    margin-left: 5px !important;
+  } */
+  
+  .mat-input-element{
+    border: 1px solid !important;
+    border-color: lightgray !important;
+    padding: 7px !important;
+  }
+  
+  .logo {
+    height: 100px;
+    width: 100px;
+  }
+  
+  
+  .size{
+    width:48% !important;
+  }
+  
+  .size1{
+    width:25% !important;
+  
+  }
+  

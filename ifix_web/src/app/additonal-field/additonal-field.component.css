@@ -1,0 +1,16 @@
+.level {
+  display: none;
+}
+
+.field {
+  border: solid 2px;
+  padding: 5px;
+  height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.add-more {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

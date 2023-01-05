@@ -1,0 +1,10 @@
+fieldset{
+    border: 2px groove; 
+    border-top-color: black; 
+    box-sizing: border-box; 
+    padding: 20px; 
+    width: inherit; 
+}
+legend{
+    width: 27%;
+}

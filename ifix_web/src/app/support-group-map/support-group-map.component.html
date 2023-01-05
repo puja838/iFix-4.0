@@ -1,0 +1,112 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)"
+                   [dataLoaded]="dataLoaded"></app-base-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" *ngIf="!isEdit">Add Support Group Map </div>
+    <div class="modal-title" *ngIf="isEdit">Update Support Group Map </div>
+  </div>
+
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <fieldset>
+    <legend>From</legend>
+
+    <!--<div class="form-group row">
+     <label  class="col-sm-3 col-md-3 col-form-label font-13"><b>Client :</b></label>
+        <div class="col-sm-9 col-md-9">
+            <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected"
+                    (change)="onClientChange($event.target.selectedIndex)">
+                <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+            </select>
+        </div>    
+    </div>-->
+
+    <div class="form-group row">
+     <label  class="col-sm-3 col-md-3 col-form-label font-13"><b>Organization :</b></label>
+        <div class="col-sm-9 col-md-9">
+            <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+                    (change)="onOrgChange($event.target.selectedIndex)">
+                <option *ngFor="let org of organization" [value]="org.id">{{org.organizationname}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+      <label  class="col-sm-3 col-md-3 col-form-label font-13"><b>Support Group:</b></label>
+        <div class="col-sm-9 col-md-9">  
+          <ng-select [items]="supportgroups"  bindLabel="supportgrpname" bindValue="id" [closeOnSelect]="false" [multiple]="true" 
+                      groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false" 
+                     [searchable]="true" placeholder="Select Group Name" [(ngModel)]="grpSelected">
+              <ng-template ng-multi-label-tmp let-items="items">
+                  <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                      <span class="ng-value-label"> {{item.supportgrpname}}</span>
+                      <!-- <span class="ng-value-icon right" (click)="clear(item.id)" aria-hidden="true">×</span> -->
+                  </div>
+                  <div class="ng-value" *ngIf="items.length > 4" >
+                      <span class="ng-value-label">{{items.length - 4}} more...</span>
+                  </div>
+              </ng-template>         
+              
+              <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel] ="item$.selected"/>&nbsp;&nbsp;Select All
+              </ng-template>  
+                   
+              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.supportgrpname}}
+              </ng-template>          
+          </ng-select>
+        </div>    
+
+       
+      </div>
+
+
+    </fieldset>
+    <div class="container">
+    </div>
+    <fieldset>
+    <legend>To</legend>
+
+   
+
+    <div class="form-group row">
+     <label  class="col-sm-3 col-md-3 col-form-label font-13"><b>Organization :</b></label>
+        <div class="col-sm-9 col-md-9">
+          <ng-select [items]="organizationto"  bindLabel="organizationname" bindValue="id" [closeOnSelect]="false" [multiple]="true" 
+                      groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false" 
+                     [searchable]="true" placeholder="Select Organization" [(ngModel)]="orgSelectedto">
+              <ng-template ng-multi-label-tmp let-items="items">
+                  <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                      <span class="ng-value-label"> {{item.organizationname}}</span>
+                      <!-- <span class="ng-value-icon right" (click)="clear(item.id)" aria-hidden="true">×</span> -->
+                  </div>
+                  <div class="ng-value" *ngIf="items.length > 4" >
+                      <span class="ng-value-label">{{items.length - 4}} more...</span>
+                  </div>
+              </ng-template>         
+              
+              <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel] ="item$.selected"/>&nbsp;&nbsp;Select All
+              </ng-template>  
+                   
+              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.organizationname}}
+              </ng-template>       
+          </ng-select>
+        </div>
+        
+    </div>
+
+    </fieldset>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0"  *ngIf="!isEdit" (click)="save()">Replicate</button>
+     <button type="button" class="btn btn-success radius-0" *ngIf="isEdit" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0"   (click)="c()">Cancel</button>
+  </div>
+</ng-template>

@@ -1,0 +1,210 @@
+.dasboard-width {
+  width: auto;
+  height: 100%;
+  /* background-color: #eef3ff; */
+   background-color: transparent !important;
+
+}
+
+.page-title {
+  background-color: white;
+  margin-top: 6px;
+  padding-top: 5px;
+  /* padding-bottom: 5px; */
+
+
+}
+
+.padding-right {
+  padding-right: 2%;
+}
+
+.tiles {
+  cursor: pointer;
+}
+
+.fornt-18 {
+  font-size: 18px;
+}
+
+
+.mar-lft {
+  margin-left: 1%;
+}
+
+
+.radius-0 {
+  border-radius: 0px;
+}
+
+.clr-white {
+  background-color: white;
+}
+
+.padTop-5 {
+  padding-top: 5px;
+}
+
+
+.itm {
+  background: #d5dbe5;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 1px 1px 4px rgb(88, 88, 88);
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  align-items: center;
+  color: #4d4d4d;
+  margin-bottom: 15px;
+}
+
+.itm strong {
+  display: block;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+
+.itm strong {
+  font-size: 14px;
+}
+
+.itm {
+  min-height: 80px;
+}
+
+
+.mar-rt {
+  margin-right: 1%;
+}
+
+.marg-right {
+  margin-right: 2%;
+  margin-left: auto;
+}
+
+
+.dashitemsec {
+  padding-bottom: 30px;
+}
+
+
+.pad-rt-0 {
+  padding-left: 30px;
+  padding-right: 0px;
+}
+
+/**       Dashboard ****/
+.cust-bread1 {
+  /*position: absolute;*/
+  background-color: inherit !important;
+  padding: 6px !important;
+  font-size: 14px;
+}
+
+.cust-bread1 .breadcrumb-item {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.searchbar {
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 50px;
+  background-color: white;
+  border-radius: 30px;
+  padding: 8px 25px;
+  border: 2px solid blue;
+}
+
+.search_input {
+  color: black;
+  border: 0;
+  outline: 0;
+  background: white;
+  width: 90%;
+  line-height: 30px;
+}
+
+.pad-rght-0 {
+  padding-right: 0px;
+}
+
+.folders {
+  list-style-type: none;
+  padding: 0px;
+}
+
+ul.folders li {
+  padding: 10px;
+  /*border-left: 3px solid #3c8dbc;*/
+  background: white;
+  border-bottom: 3px solid #f1f3f4;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.activeF {
+  border-left: 3px solid #3c8dbc;
+  background: #e4e6eb !important;
+  font-weight: 600;
+}
+
+.search_icon {
+  height: 26px;
+  width: 20px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: red;
+  text-decoration: none;
+}
+
+.tiles-image {
+  height: 42px;
+  width: 42px;
+}
+
+/*.content {*/
+/*  margin-bottom: 0px;*/
+/*  background: url('../../assets/img/AirAsia_interior_1.jpg') no-repeat;*/
+/*  background-size: cover;*/
+/*}*/
+
+.content {
+ /* background: url('../../assets/img/Seat_Image.jpg') no-repeat; */
+ background-color: transparent;
+}
+
+.padding-card1 {
+  padding-left: 2%;
+  padding-right: 1%;
+  padding-bottom: 1%;
+}
+
+.padding-card2 {
+  padding-left: 1%;
+  padding-right: 2%;
+  padding-bottom: 1%;
+}
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 160px;
+  overflow: auto;
+  }
+
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+.table_data{
+  cursor: pointer;
+}
+

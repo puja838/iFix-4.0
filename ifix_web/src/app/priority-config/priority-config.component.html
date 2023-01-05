@@ -1,0 +1,67 @@
+<app-base-template (modal)="openModal(content)"  (tabledata)="getTableData()" [displayData]="displayData" (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [totalPage]="totalPage" [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" *ngIf="!isPriorityEdit">Add Priority Config</div>
+    <div class="modal-title" *ngIf="isPriorityEdit">Update Priority Config</div>
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="organizationId" (change) = "onOrgChange($event.target.selectedIndex)" [disabled]="isPriorityEdit">
+        <option value="">Select Organization</option>
+        <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffType" (change)="getrecordbydifftype($event.target.selectedIndex)" [disabled]="isPriorityEdit">
+        <option value="">Select From Property Type</option>
+        <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+
+    <div class="form-group" [hidden]="fromPropLevels.length===0">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelid"
+              (change)="onLevelChange($event.target.selectedIndex)">
+              <option value="">Select Property Level</option>
+        <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId" (change) = "onPropertyChange($event.target.selectedIndex)" [disabled]="isPriorityEdit">
+        <option value="">Select From Property</option>
+        <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <mat-radio-group  [(ngModel)]='redioButton'(change)="onRadioButtonChange($event)" [disabled]="isPriorityEdit">
+        <mat-radio-button value='1'>Urgency Wise</mat-radio-button>&nbsp;&nbsp;
+        <mat-radio-button value='2'>Category Wise</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="form-group">
+      <mat-checkbox [(ngModel)] ="basePriorityConfig">Set as Default Priority</mat-checkbox>
+    </div>
+    <!-- <div class="form-group">
+
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="workGrpSelected" (change)="onWrkLevelChange($event.target.selectedIndex)">
+        <option value="">Select Working Category</option>
+      <option *ngFor="let workinglevels of workinglevel" [value]="workinglevels.id">{{workinglevels.recorddiffname}}</option>
+    </select>
+  </div> -->
+
+    <!-- <div class="form-group">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="followUp"
+              placeholder="Enter Followup" >
+      </div>
+    -->
+
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" *ngIf="!isPriorityEdit" (click)="save()">Save</button>
+    <button type="button" class="btn btn-success radius-0" *ngIf="isPriorityEdit" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>

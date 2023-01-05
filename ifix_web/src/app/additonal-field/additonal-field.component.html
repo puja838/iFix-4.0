@@ -1,0 +1,245 @@
+<div class="loader" [hidden]="dataLoaded"><img class="loading-gif" src="../../../assets/img/loader.gif"></div>
+<div class="dasboard-width" >
+  <div class="row header mar-lft-rgt-0">
+    <div class="col-md-4 col-sm-4 pageName">{{displayData.pageName}}</div>
+    <div class="col-md-4 col-sm-4">
+      <button class="btn btn-success addButton" (click)="openModal()">{{displayData.openModalButton}}</button>
+    </div>
+  </div>
+  <div class="row content mr-top-5 mar-lft-rgt-0">
+    <div class="col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-header card-header-top">
+          <div class="col-md-4 mar-lft-rgt-0  ">
+            {{displayData.tabName}}
+          </div>
+          <div class="col-md-8 mar-lft-rgt-0  row pull-right ">
+            <div class="col-sm-2 font-13"  [hidden]="!view">
+              <select class="custom-select mr-sm-2 radius-0 font-13 custom-width" [(ngModel)]="pageSizeSelected" (change)="onPageSizeChange($event.target.selectedIndex)">
+                <option *ngFor="let pageSize of pageSizeObj" [value]="pageSize.id">{{pageSize.value}}</option>
+              </select>
+            </div>
+            <div class="col-sm-6 mar-lft-rgt-0 font-13">
+              <ngb-pagination [(collectionSize)]="totalData" #numPages [(pageSize)]="itemsPerPage" [(page)]="page" [(maxSize)] = "maxLength" (pageChange)="pageChanged($event)" aria-label="Default pagination"></ngb-pagination>
+            </div>
+            <div class="col-sm-4 mar-lft-rgt-0  font-13">
+              <b>Total items: </b> <span>{{totalData}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body ">
+          <angular-slickgrid gridId='common-grid1'
+                             (onAngularGridCreated)="angularGridReady($event)"
+                             [columnDefinitions]="columnDefinitions"
+                             [gridOptions]="gridOptions"
+                             [dataset]="dataset"
+                             [gridWidth]="gridWidth"
+                             [gridHeight]="365"
+                             (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
+                             (sgOnCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
+                             (sgOnSelectedRowsChanged)="handleSelectedRowsChanged($event.detail.eventData, $event.detail.args)"
+          >
+          </angular-slickgrid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Add Additional Fields</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" *ngIf="isError" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+              (change)="onOrgChange($event.target.selectedIndex)">
+        <option value="">Select Organization</option>
+        <option *ngFor="let org of organaisation" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectedTermType">
+        <option value="">Select Term Type</option>
+        <option *ngFor="let type of termType" [value]="type.name">{{type.name}}</option>
+      </select>
+    </div>
+    <!--<div class="form-group">-->
+      <!--<select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromPropertyTypeSeqno"-->
+              <!--(change)="onPropertyTypeChange($event.target.selectedIndex, 'from', '')">-->
+        <!--<option value="">Select Property Type</option>-->
+        <!--<option *ngFor="let property of fromPropertyTypes;" [value]="property.seqno">{{property.typename}}</option>-->
+      <!--</select>-->
+    <!--</div>-->
+    <!--<div class="form-group" [hidden]="fromPropLevels.length===0">-->
+      <!--<select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelid"-->
+              <!--(change)="onLevelChange($event.target.selectedIndex,'from', '')">-->
+        <!--<option value="">Select Property Level</option>-->
+        <!--<option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>-->
+      <!--</select>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+      <!--<select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectedFromPropertyValue">-->
+        <!--<option value="">Select Property Value</option>-->
+        <!--<option *ngFor="let val of formPropertyValues;" [value]="val.id">{{val.typename}}</option>-->
+      <!--</select>-->
+    <!--</div>-->
+    <!--=====================================-->
+    <div class="field">
+      <div *ngFor="let container of additionalField; let i = index">
+        <div class="form-group">
+          <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="container.toPropertyTypeId"
+                  (change)="onPropertyTypeChange($event.target.selectedIndex,  i)">
+            <option value="">Select Property Type</option>
+            <option *ngFor="let property of fromPropertyTypes;" [value]="property.id">{{property.typename}}</option>
+          </select>
+        </div>
+        <div class="form-group" id="level{{i}}">
+          <!-- <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="container.tolevelid"
+                  (change)="onLevelChange($event.target.selectedIndex, i)">
+            <option value="">Select Property Level</option>
+            <option *ngFor="let level of toPropLevels" [value]="level.id">{{level.typename}}</option>
+          </select> -->
+        </div>
+        <div class="form-group" id="container{{i}}">
+        </div>
+      </div>
+    </div>
+    <!--===============================================-->
+    <button type="button" class="btn btn-success radius-0 add-more"(click)="addAdditionalFieldDiv()">Add more</button>
+    <div class="form-group">
+      <select class="custom-select font-13 radius-0" [(ngModel)]="termNameSelected" (change)="onTermNameChange($event.target.selectedIndex)">
+        <option value="">Select Record Term Name</option>
+        <option *ngFor="let term of termNames" [value]="term.id">{{term.termname}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+<!--
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Show Data</div>
+  </div>
+  <div class="modal-body">
+    <div class="form-group" *ngFor="let item of fieldData">
+      {{item.mstrecorddifferentiationtypename}} : {{item.mstrecorddifferentiationname}}
+    </div>
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+<ng-template #content2 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Update Additional Fields</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" *ngIf="isError" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="clientSelectedName" readonly>
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="orgSelectedName" readonly>
+    </div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectedTermType">
+        <option value="">Select Term Type</option>
+        <option *ngFor="let type of termType" [value]="type.name">{{type.name}}</option>
+      </select>
+    </div>   -->
+
+
+
+
+    <!--<div class="form-group">-->
+    <!--<select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromPropertyTypeSeqno"-->
+    <!--(change)="onPropertyTypeChange($event.target.selectedIndex, 'from', '')">-->
+    <!--<option value="">Select Property Type</option>-->
+    <!--<option *ngFor="let property of fromPropertyTypes;" [value]="property.seqno">{{property.typename}}</option>-->
+    <!--</select>-->
+    <!--</div>-->
+    <!--<div class="form-group" [hidden]="fromPropLevels.length===0">-->
+    <!--<select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelid"-->
+    <!--(change)="onLevelChange($event.target.selectedIndex,'from', '')">-->
+    <!--<option value="">Select Property Level</option>-->
+    <!--<option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>-->
+    <!--</select>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+    <!--<select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="selectedFromPropertyValue">-->
+    <!--<option value="">Select Property Value</option>-->
+    <!--<option *ngFor="let val of formPropertyValues;" [value]="val.id">{{val.typename}}</option>-->
+    <!--</select>-->
+    <!--</div>-->
+    <!--=====================================-->
+
+
+
+
+<!--    <div class="field">
+      <div *ngFor="let container of additionalField; let i = index">
+        <div class="form-group">
+          <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="container.toPropertyTypeId"
+                  (change)="onPropertyTypeChange($event.target.selectedIndex, i)">
+            <option value="">Select Property Type</option>
+            <option *ngFor="let property of fromPropertyTypes;" [value]="property.id">{{property.typename}}</option>
+          </select>
+        </div>
+        <div class="form-group level" id="level{{i}}">
+          <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="container.tolevelid"
+                  (change)="onLevelChange($event.target.selectedIndex, i)">
+            <option value="">Select Property Level</option>
+            <option *ngFor="let level of toPropLevels" [value]="level.id">{{level.typename}}</option>
+          </select>
+        </div>
+        <div class="form-group" id="container{{i}}">
+        </div>  -->
+
+
+
+
+        <!--<div class="form-group level">-->
+          <!--<select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="container.toPropertyValue"-->
+                  <!--(change)="onLevelChange($event.target.selectedIndex,'to', i)">-->
+            <!--<option value="">Select Property Level</option>-->
+            <!--<option *ngFor="let level of toPropertyValues" [value]="level.id">{{level.typename}}</option>-->
+          <!--</select>-->
+        <!--</div>-->
+<!--      </div>
+    </div>    -->
+
+
+
+
+    <!--===============================================-->
+    <!--<button (click)="addAdditionalFieldDiv()">Add more</button>-->
+
+
+
+
+<!--  <div class="form-group">
+      <select class="custom-select font-13 radius-0" [(ngModel)]="termNameSelected" (change)="onTermNameChange($event.target.selectedIndex)">
+        <option value="">Select Term Name</option>
+        <option *ngFor="let term of termNames" [value]="term.id">{{term.termname}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+-->

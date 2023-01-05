@@ -1,0 +1,30 @@
+.mat-input-element{
+    border: 1px solid !important;
+    border-color: lightgray !important;
+    padding: 7px !important;
+}
+
+
+ul.a{
+    list-style-position: inside;
+    padding-left: 18px;
+ }
+ .note{
+ 
+     font-size: 12px;
+     background-color: antiquewhite;
+     padding-bottom: 1px;
+     margin-bottom: 8px;
+ }
+ .p{
+   font-size: 19px;
+   margin-left:5px; 
+ }
+ 
+ .file-name{
+    padding: 4%;
+    font-weight: 600;
+    color: green;
+    font-size: 14px;
+}
+

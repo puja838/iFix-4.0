@@ -1,0 +1,218 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+  (offset)="getData($event)" (pageSize)="onPageSizeChange($event)" [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Add Banner</div>
+  </div>
+
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+    <div class="form-group">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+        (change)="onOrgChange($event.target.selectedIndex)">
+        <option *ngFor="let org of organization" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+
+    <!--<div class="form-group">
+      <mat-form-field>
+        <mat-label class="font-13">Select Group Name</mat-label>
+        <mat-select [(ngModel)]="grpSelected" (change)="ongrpChange($event.target.selectedIndex)" multiple>
+          <mat-option *ngFor="let grp of groups" [value]="grp.id">{{grp.supportgroupname}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>-->
+
+    <div class="form-group">
+      <ng-select [items]="groups" bindLabel="supportgroupname" bindValue="id" [closeOnSelect]="false" [multiple]="true"
+        groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false" [searchable]="true"
+        placeholder="Select Group Name" [(ngModel)]="grpSelected">
+
+        <ng-template ng-multi-label-tmp let-items="items">
+          <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+            <span class="ng-value-label"> {{item.supportgroupname}}</span>
+          </div>
+          <div class="ng-value" *ngIf="items.length > 4">
+            <span class="ng-value-label">{{items.length - 4}} more...</span>
+          </div>
+        </ng-template>
+
+        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+          <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;Select All
+        </ng-template>
+
+        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+          <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.supportgroupname}}
+        </ng-template>
+      </ng-select>
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" placeholder="Add Sequence Number" [(ngModel)]="seqNo"
+        min="1">
+    </div>
+
+    <div class="form-group">
+      <input class="form-control radius-0 font-13" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+        placeholder="Start Time" [(ngModel)]="startTime">
+      <owl-date-time [showSecondsTimer]="true" #dt2></owl-date-time>
+    </div>
+
+    <div class="form-group">
+      <input class="form-control radius-0 font-13" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3" placeholder="End Time"
+        [(ngModel)]="endTime">
+      <owl-date-time [showSecondsTimer]="true" #dt3></owl-date-time>
+    </div>
+
+    <div class="form-group row">
+      <div class="form-group col-sm-12">
+        <input type="text" class="form-control radius-0 font-13" placeholder="Add Message" [(ngModel)]="desc"
+          maxlength="100">
+        <div class="warning-msg">
+          *maximum 100 characters
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Change Color :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="color" class="form-control radius-0 font-13" [(ngModel)]="setcolor">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Font Size in Pixel:</b></label>
+      <div class="col-sm-2 col-md-2">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="fontsize" (keyup)="chngeFont()">
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <input type="text" class="form-control radius-0 font-13" [ngStyle]="{'font-size': displayfont }" value="Text"
+          readonly>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Update Banner</div>
+  </div>
+
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+          (change)="onOrgChange($event.target.selectedIndex)">
+          <option *ngFor="let org of organization" [value]="org.id">{{org.organizationname}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Group Name :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <ng-select [items]="groups" bindLabel="supportgroupname" bindValue="id" [closeOnSelect]="false"
+          [multiple]="true" groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false"
+          [searchable]="true" placeholder="Select Group Name" [(ngModel)]="grpSelected">
+
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+              <span class="ng-value-label"> {{item.supportgroupname}}</span>
+            </div>
+            <div class="ng-value" *ngIf="items.length > 4">
+              <span class="ng-value-label">{{items.length - 4}} more...</span>
+            </div>
+          </ng-template>
+
+          <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;Select All
+          </ng-template>
+
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox"
+              [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.supportgroupname}}
+          </ng-template>
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Start Time :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input class="form-control radius-0 font-13" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+          placeholder="Start Time" [(ngModel)]="startTime">
+        <owl-date-time [showSecondsTimer]="true" #dt2></owl-date-time>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>End Time :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input class="form-control radius-0 font-13" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3"
+          placeholder="End Time" [(ngModel)]="endTime">
+        <owl-date-time [showSecondsTimer]="true" #dt3></owl-date-time>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Message :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" placeholder="Add Message" [(ngModel)]="desc"
+          maxlength="100">
+        <div class="warning-msg">
+          *maximum 100 characters
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-success radius-0" (click)="update()">Update</button>
+    <!--   <div class="form-group row  pad-8">-->
+    <!--      <div class="col-sm-9 col-md-9">-->
+    <!--      </div>-->
+    <!--      <div class="col-sm-3 col-md-3">-->
+    <!--        <button type="button" class="btn btn-success radius-0" (click)="update()">Update</button>-->
+    <!--      </div>-->
+    <!--   </div>-->
+
+    <hr>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Change Color :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="color" class="form-control radius-0 font-13" [(ngModel)]="setcolor">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Font Size in Pixel:</b></label>
+      <div class="col-sm-4 col-md-4">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="fontsize" (keyup)="chngeFont()">
+      </div>
+      <div class="col-sm-4 col-md-4">
+        <input type="text" class="form-control radius-0 font-13" [ngStyle]="{'font-size': displayfont }" value="Text"
+          readonly>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Sequence Number :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" placeholder="Add Sequence Number" [(ngModel)]="seqNo"
+          min="1">
+      </div>
+
+    </div>
+    <button type="button" class="btn btn-success radius-0" (click)="updateSeq()">Update </button>
+  </div>
+  <div class="modal-footer pad-8 supdate">
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>

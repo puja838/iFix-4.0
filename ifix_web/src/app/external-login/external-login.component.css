@@ -1,0 +1,17 @@
+.back {
+  border-bottom-right-radius: 70px;
+  border-top-left-radius: 70px;
+  overflow: hidden;
+  box-shadow: 0 0 8px #333;
+}
+
+.bg-image {
+  background-image: url('../../assets/img/bg-01.jpg');
+}
+
+.div-container {
+  background-color: #9fb6e2;
+  padding: 0px;
+  margin: 0px;
+}
+

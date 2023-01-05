@@ -1,0 +1,252 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+  (offset)="getData($event)" (pageSize)="onPageSizeChange($event)" [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" *ngIf="!isEdit">Add Template Variable</div>
+    <div class="modal-title" *ngIf="isEdit">Update Template Variable</div>
+  </div>
+  <mat-tab-group (modal)="openModal(content)" (selectedTabChange)="tabClick($event)">
+    <mat-tab label="Add Template">
+      <ng-template mat-tab-label>
+        Template Variable &nbsp;
+      </ng-template>
+      <div class="modal-body">
+        <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+        <div class="form-group row" *ngIf="baseFlag">
+          <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Client :</b></label>
+          <div class="col-sm-8 col-md-8">
+            <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected"
+              (change)="onClientChange($event.target.selectedIndex)">
+              <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization :</b></label>
+          <div class="col-sm-8 col-md-8">
+            <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+              (change)="onOrgChange($event.target.selectedIndex)">
+              <option value="0">Select Organization</option>
+              <option *ngFor="let org of organization" [value]="org.id">{{org.organizationname}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Template Type :</b></label>
+          <div class="col-sm-8 col-md-8">
+            <mat-radio-group [(ngModel)]="queryType" class="font-13">
+              <mat-radio-button [value]="0">Without Query </mat-radio-button> &nbsp;&nbsp;
+              <mat-radio-button [value]="1">With Query </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Template Variable Name
+              {{VariableName}}:</b></label>
+          <div class="col-sm-8 col-md-8">
+            <input type="text" class="form-control radius-0 font-13" placeholder="{{VariableName}}"
+              [(ngModel)]="varbName">
+          </div>
+        </div>
+
+        <div class="form-group row" *ngIf="queryType == 1">
+          <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Template Variable Query :</b></label>
+          <div class="col-sm-8 col-md-8">
+            <textarea type="text" class="form-control radius-0 font-13" placeholder="Enter Variable Query"
+              [(ngModel)]="varbQuery"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group row" *ngIf="queryType == 1">
+          <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Template Variable Query Parameters :</b></label>
+          <div class="col-sm-8 col-md-8">
+            <textarea type="text" class="form-control radius-0 font-13" placeholder="Enter Variable Query Parameters"
+              [(ngModel)]="varbParam"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer pad-8">
+        <button type="button" class="btn btn-success radius-0" *ngIf="!isEdit" (click)="save()">Save</button>
+        <!-- <button type="button" class="btn btn-success radius-0" *ngIf="isEdit" (click)="update()">Update</button> -->
+        <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Template Copy">
+      <ng-template mat-tab-label>
+        Copy Template Variable &nbsp;
+      </ng-template>
+      <div class="modal-body">
+        <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+        <fieldset>
+          <legend>From</legend>
+
+          <div class="form-group row" *ngIf="baseFlag">
+            <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Client :</b></label>
+            <div class="col-sm-8 col-md-8">
+              <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected"
+                (change)="onClientChange($event.target.selectedIndex)">
+                <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization :</b></label>
+            <div class="col-sm-8 col-md-8">
+              <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+                (change)="onOrgChange($event.target.selectedIndex)">
+                <option value="0">Select Organization</option>
+                <option *ngFor="let org of organization" [value]="org.id">{{org.organizationname}}</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Template Variable:</b></label>
+            <div class="col-sm-8 col-md-8">
+              <ng-select [items]="variableList" bindLabel="templatename" bindValue="templatename"
+                [closeOnSelect]="false" [multiple]="true" groupBy="selectedAllGroup" [selectableGroup]="true"
+                [selectableGroupAsModel]="false" appendTo="body" [searchable]="true"
+                placeholder="Select Template Variable" [(ngModel)]="tempVarSelected">
+
+                <ng-template ng-multi-label-tmp let-items="items">
+                  <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                    <span class="ng-value-label"> {{item.templatename}}</span>
+                  </div>
+                  <div class="ng-value" *ngIf="items.length > 4">
+                    <span class="ng-value-label">{{items.length - 4}} more...</span>
+                  </div>
+                </ng-template>
+
+                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;Select All
+                </ng-template>
+
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox"
+                    [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.templatename}}
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+        </fieldset>
+        <div class="container">
+        </div>
+        <fieldset>
+          <legend>To</legend>
+          <div class="form-group row">
+            <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization :</b></label>
+            <div class="col-sm-8 col-md-8">
+              <!-- <ng-select [items]="organizationTo" bindLabel="organizationname" bindValue="id" [closeOnSelect]="false"
+                [multiple]="true" groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                appendTo="body" [searchable]="true" placeholder="Select Organization" [(ngModel)]="toOrgSelected">
+
+                <ng-template ng-multi-label-tmp let-items="items">
+                  <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                    <span class="ng-value-label"> {{item.organizationname}}</span>
+                  </div>
+                  <div class="ng-value" *ngIf="items.length > 4">
+                    <span class="ng-value-label">{{items.length - 4}} more...</span>
+                  </div>
+                </ng-template>
+
+                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;Select All
+                </ng-template>
+
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox"
+                    [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.organizationname}}
+                </ng-template>
+              </ng-select> -->
+              <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="toOrgSelected"
+                (change)="onOrgChangeTo($event.target.selectedIndex)">
+                <option value="0">Select Organization</option>
+                <option *ngFor="let org of organizationTo" [value]="org.id">{{org.organizationname}}</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="modal-footer pad-8">
+        <button type="button" class="btn btn-success radius-0" *ngIf="!isEdit" (click)="copy()">Copy</button>
+        <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</ng-template>
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" *ngIf="!isEdit">Add Template Variable</div>
+    <div class="modal-title" *ngIf="isEdit">Update Template Variable</div>
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+    <div class="form-group row" *ngIf="baseFlag">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Client :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="clientSelected"
+          (change)="onClientChange($event.target.selectedIndex)">
+          <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="orgSelected"
+          (change)="onOrgChange($event.target.selectedIndex)">
+          <option value="0">Select Organization</option>
+          <option *ngFor="let org of organization" [value]="org.id">{{org.organizationname}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Template Type :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <mat-radio-group [(ngModel)]="queryType" class="font-13">
+          <mat-radio-button [value]="0">Without Query </mat-radio-button> &nbsp;&nbsp;
+          <mat-radio-button [value]="1">With Query </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Template Variable Name
+          {{VariableName}}:</b></label>
+      <div class="col-sm-8 col-md-8">
+        <input type="text" class="form-control radius-0 font-13" placeholder="{{VariableName}}" [(ngModel)]="varbName">
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="queryType == 1">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Template Variable Query :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <textarea type="text" class="form-control radius-0 font-13" placeholder="Enter Variable Query"
+          [(ngModel)]="varbQuery"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="queryType == 1">
+      <label class="col-sm-4 col-md-4 col-form-label font-13"><b>Template Variable Query Parameters :</b></label>
+      <div class="col-sm-8 col-md-8">
+        <textarea type="text" class="form-control radius-0 font-13" placeholder="Enter Variable Query Parameters"
+          [(ngModel)]="varbParam"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" *ngIf="isEdit" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>

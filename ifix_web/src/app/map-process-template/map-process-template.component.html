@@ -1,0 +1,91 @@
+<div class="loader" [hidden]="dataLoaded"><img class="loading-gif" src="../../../assets/img/loader.gif"></div>
+<div class="dasboard-width">
+  <div class="row header mar-lft-rgt-0">
+    <div class="col-md-4 col-sm-4 pageName">{{displayData.pageName}}</div>
+  </div>
+</div>
+
+<div class="row content mr-top-5 mar-lft-rgt-0">
+  <div class="col-md-12 col-sm-12">
+    <div class="card">
+      <div class="card-header card-header-top">
+        <div class="col-md-4 mar-lft-rgt-0">
+          {{displayData.tabName}}
+        </div>
+        <div class="col-md-8 mar-lft-rgt-0  row pull-right ">
+
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="container-fluid mar-top-15">
+          <div class="offset-3 col-sm-6">
+            <fieldset>
+              <legend>Add Process</legend>
+              <div class="form-group">
+                <select class="form-control font-13 radius-0" [(ngModel)]="organizationId"
+                  (change)="onOrgChange($event.target.selectedIndex)">
+                  <option value="">Select Organization</option>
+                  <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffType"
+                  (change)="OnChangeRecordByDiffType($event.target.selectedIndex)">
+                  <option value="">Select Property Type</option>
+                  <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId"
+                  (change)="onPropertyChange('m')">
+                  <option value="">Select Property</option>
+                  <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <ng-select [items]="workingList" bindLabel="name" bindValue="id" [closeOnSelect]="false" [multiple]="true" 
+                           groupBy="selectedAllGroup" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                           [searchable]="true" placeholder="Select Working Category"[(ngModel)]="workingdiffid">
+                  <ng-template ng-multi-label-tmp let-items="items">
+                    <div class="ng-value" *ngFor="let item of (items ? items.slice(0,4): [])">
+                      <span class="ng-value-label"> {{item.name}}</span>
+                      <!-- <span class="ng-value-icon right" (click)="clear(item.id)" aria-hidden="true">×</span> -->
+                    </div>
+                    <div class="ng-value" *ngIf="items.length > 4">
+                      <span class="ng-value-label">{{items.length - 4}} more...</span>
+                    </div>
+                  </ng-template>
+
+                  <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;Select All
+                  </ng-template>
+
+                  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox"
+                      [ngModel]="item$.selected" />&nbsp;&nbsp;{{item.name}}
+                  </ng-template>
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <!-- <select class="form-control font-13 radius-0" [(ngModel)]="templateSelected"
+                  (change)="onTemplateChange($event.target.selectedIndex)">
+                  <option *ngFor="let template of templates;" [value]="template.id">{{template.processname}}</option>
+                </select> -->
+
+                <ng-select [items]="templates" bindLabel="processname" bindValue="id"  [multiple]="false"       
+                           [searchable]="true" placeholder="Select Template"[(ngModel)]="templateSelected">
+                </ng-select>
+              </div>
+
+
+              <div class="modal-footer pad-8">
+                <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+                <button type="button" class="btn btn-danger radius-0" (click)="resetValues()">Reset</button>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<app-base-template (modal)="openModal(content)"  (tabledata)="getTableData()" [displayData]="displayData" [nextOffset]="nextOffset"
+                   [previousOffset]="previousOffset" (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [pageNo]="page_no" [totalPage]="totalPage"[dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Add Role</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" *ngIf = "isError" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="rolename"
+             placeholder="Role Name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="roledesc"
+             placeholder="Role Description">
+    </div>
+    <mat-checkbox [(ngModel)]="adminRlCheck">Is Admin Role</mat-checkbox>
+
+    <!--<mat-slide-toggle (toggleChange)="slideChange()" [checked]="slideChecked"> <b class="blue"> This role is for Super Admin</b></mat-slide-toggle>-->
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title">Update Role</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" *ngIf = "isError" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Role Name :</b></label>
+        <div class="col-sm-8 col-md-8">
+            <input type="text" class="form-control radius-0 font-13" [(ngModel)]="rolename"
+            placeholder="Role Name">
+        </div>
+      </div>
+
+      <div class="form-group row">
+          <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Role Description :</b></label>
+          <div class="col-sm-8 col-md-8">
+              <input type="text" class="form-control radius-0 font-13" [(ngModel)]="roledesc"
+             placeholder="Role Description">
+          </div>
+        </div>
+    <mat-checkbox [(ngModel)]="adminRlCheck">Is Admin Role</mat-checkbox>
+
+    <!--<mat-slide-toggle (toggleChange)="slideChange()" [checked]="slideChecked"> <b class="blue"> This role is for Super Admin</b></mat-slide-toggle>-->
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+<notifier-container></notifier-container>
+

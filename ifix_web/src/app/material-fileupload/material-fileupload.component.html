@@ -1,0 +1,26 @@
+<button mat-button color="warn" (click)="onClick()" *ngIf="isVisible">
+  <mat-icon>attachment</mat-icon>
+<!--    <span><img src="../../assets/img/attachment-clip.png" height="20" width="20"></span>-->
+  Attach File
+</button>
+<button mat-button color="warn" (click)="onClickFileUpload()" *ngIf="isVisible">
+    <mat-icon>file_upload</mat-icon>
+    <!--<span><img src="../../assets/img/download-button.png" height="20" width="20"></span>-->
+  {{text}}
+</button>
+<br/>
+<ul>
+  <li *ngFor="let file of files" [@fadeInOut]="file.state">
+    <mat-progress-bar [value]="file.progress" id="progressbar"></mat-progress-bar>
+    <span id="file-label">
+            {{file.data.name}}
+            <a title="Retry" (click)="retryFile(file)" *ngIf="file.canRetry">
+            <mat-icon>refresh</mat-icon></a>
+            <a title="Cancel" (click)="cancelFile(file)" *ngIf="file.canCancel">
+            <mat-icon>cancel</mat-icon></a>
+            </span>
+  </li>
+</ul>
+<input type="file" id="fileUpload" name="fileUpload" [multiple]="isMultiple"
+
+       accept="{{accept}}" style="display:none;"/>

@@ -1,0 +1,2130 @@
+2022/06/27 15:02:21 logger.go:54: LogFile : /home/ubuntu/Puja/ALL IFIX CODES/Go Code/AutoClosureTicketSchedular/src/log/logFile_AutoCloseTicketScheduler.log
+2022/06/27 15:02:21 StartPoint.go:34: ===========================Scheduler Started===============
+2022/06/27 15:03:21 StartPoint.go:29: <================Closuretask is Started===============>
+2022/06/27 15:03:21 AutoclosureModel.go:33: In side Autoclosure model function
+2022/06/27 15:03:21 dbconfig.go:27: dbConn======>  <nil>
+2022/06/27 15:03:21 dbconfig.go:38: root:password@tcp(127.0.0.1:3306)/iFIX
+2022/06/27 15:03:21 dbconfig.go:41: Connection Object=====> &{0 0xc0000b2050 0 {0 0} [] map[] 0 0 0xc00008e0c0 false map[] map[] 0 0 0 0 <nil> 0 0 0 0 0x502ae0}
+2022/06/27 15:03:21 dbconfig.go:46: DB Connected!!!
+2022/06/27 15:03:21 dbconfig.go:50: DbConn in Else condition =======> &{0 0xc0000b2050 0 {0 0} [] map[] 0 0 0xc00008e0c0 false map[] map[] 0 0 0 0 <nil> 0 0 0 0 0x502ae0}
+2022/06/27 15:03:21 AutoclosureDao.go:12: In side GetResolvedRecordsInfo model function
+2022/06/27 15:03:29 AutoclosureModel.go:45: Total Tickets **************************** 28957
+2022/06/27 15:03:29 AutoclosureModel.go:46: 
+
+
+2022/06/27 15:03:29 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:29 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 10019
+2022/06/27 15:03:29 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:29 AutoclosureModel.go:58: nxtstateID is----> 6
+2022/06/27 15:03:29 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:29 AutoclosureDao.go:98: parameters --> 2 2 10019 10031 18 16
+2022/06/27 15:03:29 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:29 AutoclosureDao.go:117: parameters --> 2 2 10019 10031 19 16
+2022/06/27 15:03:29 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:29 AutoclosureModel.go:109: Record status request body --> &{2 2 34 847 5 6 10019 12 12 16}
+2022/06/27 15:03:30 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:30 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 10019
+2022/06/27 15:03:30 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 10019
+2022/06/27 15:03:30 AutoclosureModel.go:134: 
+2022/06/27 15:03:30 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:30 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 10131
+2022/06/27 15:03:30 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:30 AutoclosureModel.go:58: nxtstateID is----> 6
+2022/06/27 15:03:30 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:30 AutoclosureDao.go:98: parameters --> 2 2 10131 10142 18 304
+2022/06/27 15:03:30 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:30 AutoclosureDao.go:117: parameters --> 2 2 10131 10142 19 304
+2022/06/27 15:03:30 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:30 AutoclosureModel.go:109: Record status request body --> &{2 2 34 698 5 6 10131 26 26 304}
+2022/06/27 15:03:30 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:30 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 10131
+2022/06/27 15:03:30 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 10131
+2022/06/27 15:03:30 AutoclosureModel.go:134: 
+2022/06/27 15:03:30 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:30 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 10285
+2022/06/27 15:03:30 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:30 AutoclosureModel.go:58: nxtstateID is----> 93
+2022/06/27 15:03:30 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:30 AutoclosureDao.go:98: parameters --> 2 10 10285 10296 328 331
+2022/06/27 15:03:30 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:30 AutoclosureDao.go:117: parameters --> 2 10 10285 10296 329 331
+2022/06/27 15:03:30 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:30 AutoclosureModel.go:109: Record status request body --> &{2 10 122 3434 92 93 10285 102 102 331}
+2022/06/27 15:03:31 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:31 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 10285
+2022/06/27 15:03:31 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 10285
+2022/06/27 15:03:31 AutoclosureModel.go:134: 
+2022/06/27 15:03:31 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:31 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6802
+2022/06/27 15:03:31 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:31 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:31 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:31 AutoclosureDao.go:98: parameters --> 2 15 6802 6818 705 385
+2022/06/27 15:03:31 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:31 AutoclosureDao.go:117: parameters --> 2 15 6802 6818 706 385
+2022/06/27 15:03:31 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:31 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6802 120 120 385}
+2022/06/27 15:03:32 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:32 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6802
+2022/06/27 15:03:32 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6802
+2022/06/27 15:03:32 AutoclosureModel.go:134: 
+2022/06/27 15:03:32 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:32 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6813
+2022/06/27 15:03:32 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:32 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:32 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:32 AutoclosureDao.go:98: parameters --> 2 15 6813 6829 705 385
+2022/06/27 15:03:32 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:32 AutoclosureDao.go:117: parameters --> 2 15 6813 6829 706 385
+2022/06/27 15:03:32 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:32 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6813 120 120 385}
+2022/06/27 15:03:32 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:32 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6813
+2022/06/27 15:03:32 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6813
+2022/06/27 15:03:32 AutoclosureModel.go:134: 
+2022/06/27 15:03:32 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:32 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6805
+2022/06/27 15:03:32 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:32 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:32 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:32 AutoclosureDao.go:98: parameters --> 2 15 6805 6821 705 385
+2022/06/27 15:03:32 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:32 AutoclosureDao.go:117: parameters --> 2 15 6805 6821 706 385
+2022/06/27 15:03:32 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:32 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6805 120 120 385}
+2022/06/27 15:03:33 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:33 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6805
+2022/06/27 15:03:33 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6805
+2022/06/27 15:03:33 AutoclosureModel.go:134: 
+2022/06/27 15:03:33 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:33 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6816
+2022/06/27 15:03:33 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:33 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:33 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:33 AutoclosureDao.go:98: parameters --> 2 15 6816 6832 705 385
+2022/06/27 15:03:33 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:33 AutoclosureDao.go:117: parameters --> 2 15 6816 6832 706 385
+2022/06/27 15:03:33 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:33 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6816 120 120 385}
+2022/06/27 15:03:33 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:33 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6816
+2022/06/27 15:03:33 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6816
+2022/06/27 15:03:33 AutoclosureModel.go:134: 
+2022/06/27 15:03:33 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:33 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6767
+2022/06/27 15:03:33 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:33 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:33 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:33 AutoclosureDao.go:98: parameters --> 2 15 6767 6783 705 385
+2022/06/27 15:03:33 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:33 AutoclosureDao.go:117: parameters --> 2 15 6767 6783 706 385
+2022/06/27 15:03:33 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:33 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6767 120 120 385}
+2022/06/27 15:03:34 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:34 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6767
+2022/06/27 15:03:34 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6767
+2022/06/27 15:03:34 AutoclosureModel.go:134: 
+2022/06/27 15:03:34 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:34 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6818
+2022/06/27 15:03:34 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:34 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:34 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:34 AutoclosureDao.go:98: parameters --> 2 15 6818 6834 705 385
+2022/06/27 15:03:34 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:34 AutoclosureDao.go:117: parameters --> 2 15 6818 6834 706 385
+2022/06/27 15:03:34 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:34 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6818 120 120 385}
+2022/06/27 15:03:34 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:34 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6818
+2022/06/27 15:03:34 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6818
+2022/06/27 15:03:34 AutoclosureModel.go:134: 
+2022/06/27 15:03:34 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:34 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6812
+2022/06/27 15:03:34 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:34 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:34 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:34 AutoclosureDao.go:98: parameters --> 2 15 6812 6828 705 385
+2022/06/27 15:03:34 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:34 AutoclosureDao.go:117: parameters --> 2 15 6812 6828 706 385
+2022/06/27 15:03:34 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:34 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6812 120 120 385}
+2022/06/27 15:03:35 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:35 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6812
+2022/06/27 15:03:35 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6812
+2022/06/27 15:03:35 AutoclosureModel.go:134: 
+2022/06/27 15:03:35 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:35 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6819
+2022/06/27 15:03:35 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:35 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:35 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:35 AutoclosureDao.go:98: parameters --> 2 15 6819 6835 705 385
+2022/06/27 15:03:35 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:35 AutoclosureDao.go:117: parameters --> 2 15 6819 6835 706 385
+2022/06/27 15:03:35 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:35 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6819 120 120 385}
+2022/06/27 15:03:36 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:36 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6819
+2022/06/27 15:03:36 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6819
+2022/06/27 15:03:36 AutoclosureModel.go:134: 
+2022/06/27 15:03:36 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6830
+2022/06/27 15:03:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:36 AutoclosureDao.go:98: parameters --> 2 15 6830 6846 705 385
+2022/06/27 15:03:36 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:36 AutoclosureDao.go:117: parameters --> 2 15 6830 6846 706 385
+2022/06/27 15:03:36 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:36 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6830 120 120 385}
+2022/06/27 15:03:36 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:36 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6830
+2022/06/27 15:03:36 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6830
+2022/06/27 15:03:36 AutoclosureModel.go:134: 
+2022/06/27 15:03:36 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6831
+2022/06/27 15:03:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:36 AutoclosureDao.go:98: parameters --> 2 15 6831 6847 705 385
+2022/06/27 15:03:36 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:36 AutoclosureDao.go:117: parameters --> 2 15 6831 6847 706 385
+2022/06/27 15:03:36 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:36 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6831 120 120 385}
+2022/06/27 15:03:37 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:37 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6831
+2022/06/27 15:03:37 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6831
+2022/06/27 15:03:37 AutoclosureModel.go:134: 
+2022/06/27 15:03:37 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:37 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6809
+2022/06/27 15:03:37 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:37 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:37 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:37 AutoclosureDao.go:98: parameters --> 2 15 6809 6825 705 385
+2022/06/27 15:03:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:37 AutoclosureDao.go:117: parameters --> 2 15 6809 6825 706 385
+2022/06/27 15:03:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:37 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6809 120 120 385}
+2022/06/27 15:03:37 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:37 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6809
+2022/06/27 15:03:37 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6809
+2022/06/27 15:03:37 AutoclosureModel.go:134: 
+2022/06/27 15:03:37 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:37 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6810
+2022/06/27 15:03:37 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:37 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:37 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:37 AutoclosureDao.go:98: parameters --> 2 15 6810 6826 705 385
+2022/06/27 15:03:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:37 AutoclosureDao.go:117: parameters --> 2 15 6810 6826 706 385
+2022/06/27 15:03:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:37 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6810 120 120 385}
+2022/06/27 15:03:38 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:38 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6810
+2022/06/27 15:03:38 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6810
+2022/06/27 15:03:38 AutoclosureModel.go:134: 
+2022/06/27 15:03:38 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:38 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6835
+2022/06/27 15:03:38 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:38 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:38 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:38 AutoclosureDao.go:98: parameters --> 2 15 6835 6851 705 385
+2022/06/27 15:03:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:38 AutoclosureDao.go:117: parameters --> 2 15 6835 6851 706 385
+2022/06/27 15:03:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:38 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6835 120 120 385}
+2022/06/27 15:03:38 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:38 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6835
+2022/06/27 15:03:38 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6835
+2022/06/27 15:03:38 AutoclosureModel.go:134: 
+2022/06/27 15:03:38 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:38 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6820
+2022/06/27 15:03:38 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:38 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:38 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:38 AutoclosureDao.go:98: parameters --> 2 15 6820 6836 705 385
+2022/06/27 15:03:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:38 AutoclosureDao.go:117: parameters --> 2 15 6820 6836 706 385
+2022/06/27 15:03:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:38 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6820 120 120 385}
+2022/06/27 15:03:39 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:39 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6820
+2022/06/27 15:03:39 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6820
+2022/06/27 15:03:39 AutoclosureModel.go:134: 
+2022/06/27 15:03:39 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:39 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6832
+2022/06/27 15:03:39 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:39 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:39 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:39 AutoclosureDao.go:98: parameters --> 2 15 6832 6848 705 385
+2022/06/27 15:03:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:39 AutoclosureDao.go:117: parameters --> 2 15 6832 6848 706 385
+2022/06/27 15:03:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:39 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6832 120 120 385}
+2022/06/27 15:03:39 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:39 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6832
+2022/06/27 15:03:39 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6832
+2022/06/27 15:03:39 AutoclosureModel.go:134: 
+2022/06/27 15:03:39 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:39 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6821
+2022/06/27 15:03:39 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:39 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:39 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:39 AutoclosureDao.go:98: parameters --> 2 15 6821 6837 705 385
+2022/06/27 15:03:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:39 AutoclosureDao.go:117: parameters --> 2 15 6821 6837 706 385
+2022/06/27 15:03:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:39 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6821 120 120 385}
+2022/06/27 15:03:40 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:40 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6821
+2022/06/27 15:03:40 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6821
+2022/06/27 15:03:40 AutoclosureModel.go:134: 
+2022/06/27 15:03:40 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:40 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6827
+2022/06/27 15:03:40 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:40 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:40 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:40 AutoclosureDao.go:98: parameters --> 2 15 6827 6843 705 385
+2022/06/27 15:03:40 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:40 AutoclosureDao.go:117: parameters --> 2 15 6827 6843 706 385
+2022/06/27 15:03:40 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:40 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6827 120 120 385}
+2022/06/27 15:03:41 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:41 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6827
+2022/06/27 15:03:41 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6827
+2022/06/27 15:03:41 AutoclosureModel.go:134: 
+2022/06/27 15:03:41 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:41 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6823
+2022/06/27 15:03:41 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:41 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:41 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:41 AutoclosureDao.go:98: parameters --> 2 15 6823 6839 705 385
+2022/06/27 15:03:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:41 AutoclosureDao.go:117: parameters --> 2 15 6823 6839 706 385
+2022/06/27 15:03:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:41 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6823 120 120 385}
+2022/06/27 15:03:41 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:41 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6823
+2022/06/27 15:03:41 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6823
+2022/06/27 15:03:41 AutoclosureModel.go:134: 
+2022/06/27 15:03:41 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:41 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6829
+2022/06/27 15:03:41 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:41 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:41 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:41 AutoclosureDao.go:98: parameters --> 2 15 6829 6845 705 385
+2022/06/27 15:03:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:41 AutoclosureDao.go:117: parameters --> 2 15 6829 6845 706 385
+2022/06/27 15:03:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:41 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6829 120 120 385}
+2022/06/27 15:03:42 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:42 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6829
+2022/06/27 15:03:42 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6829
+2022/06/27 15:03:42 AutoclosureModel.go:134: 
+2022/06/27 15:03:42 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:42 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6824
+2022/06/27 15:03:42 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:42 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:42 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:42 AutoclosureDao.go:98: parameters --> 2 15 6824 6840 705 385
+2022/06/27 15:03:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:42 AutoclosureDao.go:117: parameters --> 2 15 6824 6840 706 385
+2022/06/27 15:03:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:42 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6824 120 120 385}
+2022/06/27 15:03:42 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:42 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6824
+2022/06/27 15:03:42 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6824
+2022/06/27 15:03:42 AutoclosureModel.go:134: 
+2022/06/27 15:03:42 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:42 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6825
+2022/06/27 15:03:42 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:42 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:42 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:42 AutoclosureDao.go:98: parameters --> 2 15 6825 6841 705 385
+2022/06/27 15:03:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:42 AutoclosureDao.go:117: parameters --> 2 15 6825 6841 706 385
+2022/06/27 15:03:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:42 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6825 120 120 385}
+2022/06/27 15:03:43 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:43 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6825
+2022/06/27 15:03:43 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6825
+2022/06/27 15:03:43 AutoclosureModel.go:134: 
+2022/06/27 15:03:43 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:43 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6826
+2022/06/27 15:03:43 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:43 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:43 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:43 AutoclosureDao.go:98: parameters --> 2 15 6826 6842 705 385
+2022/06/27 15:03:43 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:43 AutoclosureDao.go:117: parameters --> 2 15 6826 6842 706 385
+2022/06/27 15:03:43 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:43 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6826 120 120 385}
+2022/06/27 15:03:44 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:44 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6826
+2022/06/27 15:03:44 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6826
+2022/06/27 15:03:44 AutoclosureModel.go:134: 
+2022/06/27 15:03:44 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:44 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6749
+2022/06/27 15:03:44 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:44 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:44 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:44 AutoclosureDao.go:98: parameters --> 2 15 6749 6765 705 385
+2022/06/27 15:03:44 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:44 AutoclosureDao.go:117: parameters --> 2 15 6749 6765 706 385
+2022/06/27 15:03:44 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:44 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6749 120 120 385}
+2022/06/27 15:03:44 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:44 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6749
+2022/06/27 15:03:44 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6749
+2022/06/27 15:03:44 AutoclosureModel.go:134: 
+2022/06/27 15:03:44 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:44 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6836
+2022/06/27 15:03:44 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:44 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:44 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:44 AutoclosureDao.go:98: parameters --> 2 15 6836 6852 705 385
+2022/06/27 15:03:44 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:44 AutoclosureDao.go:117: parameters --> 2 15 6836 6852 706 385
+2022/06/27 15:03:44 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:44 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6836 120 120 385}
+2022/06/27 15:03:45 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:45 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6836
+2022/06/27 15:03:45 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6836
+2022/06/27 15:03:45 AutoclosureModel.go:134: 
+2022/06/27 15:03:45 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:45 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6843
+2022/06/27 15:03:45 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:45 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:45 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:45 AutoclosureDao.go:98: parameters --> 2 15 6843 6859 705 385
+2022/06/27 15:03:45 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:45 AutoclosureDao.go:117: parameters --> 2 15 6843 6859 706 385
+2022/06/27 15:03:45 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:45 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6843 120 120 385}
+2022/06/27 15:03:45 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:45 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6843
+2022/06/27 15:03:45 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6843
+2022/06/27 15:03:45 AutoclosureModel.go:134: 
+2022/06/27 15:03:45 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:45 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6847
+2022/06/27 15:03:45 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:45 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:45 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:45 AutoclosureDao.go:98: parameters --> 2 15 6847 6863 705 385
+2022/06/27 15:03:45 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:45 AutoclosureDao.go:117: parameters --> 2 15 6847 6863 706 385
+2022/06/27 15:03:45 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:45 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6847 120 120 385}
+2022/06/27 15:03:46 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:46 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6847
+2022/06/27 15:03:46 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6847
+2022/06/27 15:03:46 AutoclosureModel.go:134: 
+2022/06/27 15:03:46 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:46 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6848
+2022/06/27 15:03:46 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:46 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:46 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:46 AutoclosureDao.go:98: parameters --> 2 15 6848 6864 705 385
+2022/06/27 15:03:46 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:46 AutoclosureDao.go:117: parameters --> 2 15 6848 6864 706 385
+2022/06/27 15:03:46 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:46 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6848 120 120 385}
+2022/06/27 15:03:46 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:46 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6848
+2022/06/27 15:03:46 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6848
+2022/06/27 15:03:46 AutoclosureModel.go:134: 
+2022/06/27 15:03:46 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:46 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6839
+2022/06/27 15:03:46 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:46 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:46 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:46 AutoclosureDao.go:98: parameters --> 2 15 6839 6855 705 385
+2022/06/27 15:03:46 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:46 AutoclosureDao.go:117: parameters --> 2 15 6839 6855 706 385
+2022/06/27 15:03:46 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:46 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6839 120 120 385}
+2022/06/27 15:03:47 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:47 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6839
+2022/06/27 15:03:47 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6839
+2022/06/27 15:03:47 AutoclosureModel.go:134: 
+2022/06/27 15:03:47 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:47 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6771
+2022/06/27 15:03:47 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:47 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:47 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:47 AutoclosureDao.go:98: parameters --> 2 15 6771 6787 705 385
+2022/06/27 15:03:47 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:47 AutoclosureDao.go:117: parameters --> 2 15 6771 6787 706 385
+2022/06/27 15:03:47 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:47 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6771 120 120 385}
+2022/06/27 15:03:48 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:48 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6771
+2022/06/27 15:03:48 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6771
+2022/06/27 15:03:48 AutoclosureModel.go:134: 
+2022/06/27 15:03:48 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:48 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6857
+2022/06/27 15:03:48 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:48 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:48 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:48 AutoclosureDao.go:98: parameters --> 2 15 6857 6873 705 385
+2022/06/27 15:03:48 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:48 AutoclosureDao.go:117: parameters --> 2 15 6857 6873 706 385
+2022/06/27 15:03:48 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:48 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6857 120 120 385}
+2022/06/27 15:03:48 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:48 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6857
+2022/06/27 15:03:48 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6857
+2022/06/27 15:03:48 AutoclosureModel.go:134: 
+2022/06/27 15:03:48 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:48 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6844
+2022/06/27 15:03:48 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:48 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:48 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:48 AutoclosureDao.go:98: parameters --> 2 15 6844 6860 705 385
+2022/06/27 15:03:48 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:48 AutoclosureDao.go:117: parameters --> 2 15 6844 6860 706 385
+2022/06/27 15:03:48 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:48 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6844 120 120 385}
+2022/06/27 15:03:49 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:49 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6844
+2022/06/27 15:03:49 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6844
+2022/06/27 15:03:49 AutoclosureModel.go:134: 
+2022/06/27 15:03:49 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:49 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6856
+2022/06/27 15:03:49 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:49 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:49 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:49 AutoclosureDao.go:98: parameters --> 2 15 6856 6872 705 385
+2022/06/27 15:03:49 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:49 AutoclosureDao.go:117: parameters --> 2 15 6856 6872 706 385
+2022/06/27 15:03:49 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:49 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6856 120 120 385}
+2022/06/27 15:03:49 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:49 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6856
+2022/06/27 15:03:49 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6856
+2022/06/27 15:03:49 AutoclosureModel.go:134: 
+2022/06/27 15:03:49 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:49 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6855
+2022/06/27 15:03:49 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:49 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:49 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:49 AutoclosureDao.go:98: parameters --> 2 15 6855 6871 705 385
+2022/06/27 15:03:49 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:49 AutoclosureDao.go:117: parameters --> 2 15 6855 6871 706 385
+2022/06/27 15:03:49 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:49 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6855 120 120 385}
+2022/06/27 15:03:50 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:50 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6855
+2022/06/27 15:03:50 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6855
+2022/06/27 15:03:50 AutoclosureModel.go:134: 
+2022/06/27 15:03:50 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:50 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6736
+2022/06/27 15:03:50 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:50 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:50 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:50 AutoclosureDao.go:98: parameters --> 2 15 6736 6752 705 385
+2022/06/27 15:03:50 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:50 AutoclosureDao.go:117: parameters --> 2 15 6736 6752 706 385
+2022/06/27 15:03:50 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:50 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6736 120 120 385}
+2022/06/27 15:03:50 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:50 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6736
+2022/06/27 15:03:50 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6736
+2022/06/27 15:03:50 AutoclosureModel.go:134: 
+2022/06/27 15:03:50 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:50 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6741
+2022/06/27 15:03:50 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:50 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:50 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:50 AutoclosureDao.go:98: parameters --> 2 15 6741 6757 705 385
+2022/06/27 15:03:50 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:50 AutoclosureDao.go:117: parameters --> 2 15 6741 6757 706 385
+2022/06/27 15:03:50 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:50 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6741 120 120 385}
+2022/06/27 15:03:51 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:51 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6741
+2022/06/27 15:03:51 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6741
+2022/06/27 15:03:51 AutoclosureModel.go:134: 
+2022/06/27 15:03:51 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:51 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6743
+2022/06/27 15:03:51 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:51 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:51 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:51 AutoclosureDao.go:98: parameters --> 2 15 6743 6759 705 385
+2022/06/27 15:03:51 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:51 AutoclosureDao.go:117: parameters --> 2 15 6743 6759 706 385
+2022/06/27 15:03:51 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:51 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6743 120 120 385}
+2022/06/27 15:03:51 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:51 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6743
+2022/06/27 15:03:51 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6743
+2022/06/27 15:03:51 AutoclosureModel.go:134: 
+2022/06/27 15:03:51 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:51 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6758
+2022/06/27 15:03:51 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:51 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:51 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:51 AutoclosureDao.go:98: parameters --> 2 15 6758 6774 705 385
+2022/06/27 15:03:51 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:51 AutoclosureDao.go:117: parameters --> 2 15 6758 6774 706 385
+2022/06/27 15:03:51 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:51 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6758 120 120 385}
+2022/06/27 15:03:52 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:52 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6758
+2022/06/27 15:03:52 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6758
+2022/06/27 15:03:52 AutoclosureModel.go:134: 
+2022/06/27 15:03:52 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:52 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6744
+2022/06/27 15:03:52 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:52 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:52 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:52 AutoclosureDao.go:98: parameters --> 2 15 6744 6760 705 385
+2022/06/27 15:03:52 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:52 AutoclosureDao.go:117: parameters --> 2 15 6744 6760 706 385
+2022/06/27 15:03:52 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:52 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6744 120 120 385}
+2022/06/27 15:03:53 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:53 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6744
+2022/06/27 15:03:53 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6744
+2022/06/27 15:03:53 AutoclosureModel.go:134: 
+2022/06/27 15:03:53 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:53 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6745
+2022/06/27 15:03:53 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:53 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:53 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:53 AutoclosureDao.go:98: parameters --> 2 15 6745 6761 705 385
+2022/06/27 15:03:53 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:53 AutoclosureDao.go:117: parameters --> 2 15 6745 6761 706 385
+2022/06/27 15:03:53 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:53 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6745 120 120 385}
+2022/06/27 15:03:53 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:53 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6745
+2022/06/27 15:03:53 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6745
+2022/06/27 15:03:53 AutoclosureModel.go:134: 
+2022/06/27 15:03:53 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:53 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6765
+2022/06/27 15:03:53 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:53 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:53 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:53 AutoclosureDao.go:98: parameters --> 2 15 6765 6781 705 385
+2022/06/27 15:03:53 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:53 AutoclosureDao.go:117: parameters --> 2 15 6765 6781 706 385
+2022/06/27 15:03:53 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:53 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6765 120 120 385}
+2022/06/27 15:03:54 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:54 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6765
+2022/06/27 15:03:54 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6765
+2022/06/27 15:03:54 AutoclosureModel.go:134: 
+2022/06/27 15:03:54 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:54 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6747
+2022/06/27 15:03:54 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:54 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:54 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:54 AutoclosureDao.go:98: parameters --> 2 15 6747 6763 705 385
+2022/06/27 15:03:54 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:54 AutoclosureDao.go:117: parameters --> 2 15 6747 6763 706 385
+2022/06/27 15:03:54 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:54 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6747 120 120 385}
+2022/06/27 15:03:54 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:54 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6747
+2022/06/27 15:03:54 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6747
+2022/06/27 15:03:54 AutoclosureModel.go:134: 
+2022/06/27 15:03:54 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:54 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6770
+2022/06/27 15:03:54 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:54 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:54 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:54 AutoclosureDao.go:98: parameters --> 2 15 6770 6786 705 385
+2022/06/27 15:03:54 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:54 AutoclosureDao.go:117: parameters --> 2 15 6770 6786 706 385
+2022/06/27 15:03:54 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:54 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6770 120 120 385}
+2022/06/27 15:03:55 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:55 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6770
+2022/06/27 15:03:55 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6770
+2022/06/27 15:03:55 AutoclosureModel.go:134: 
+2022/06/27 15:03:55 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:55 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6753
+2022/06/27 15:03:55 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:55 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:55 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:55 AutoclosureDao.go:98: parameters --> 2 15 6753 6769 705 385
+2022/06/27 15:03:55 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:55 AutoclosureDao.go:117: parameters --> 2 15 6753 6769 706 385
+2022/06/27 15:03:55 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:55 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6753 120 120 385}
+2022/06/27 15:03:55 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:55 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6753
+2022/06/27 15:03:55 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6753
+2022/06/27 15:03:55 AutoclosureModel.go:134: 
+2022/06/27 15:03:55 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:55 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6811
+2022/06/27 15:03:55 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:55 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:55 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:55 AutoclosureDao.go:98: parameters --> 2 15 6811 6827 705 385
+2022/06/27 15:03:55 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:55 AutoclosureDao.go:117: parameters --> 2 15 6811 6827 706 385
+2022/06/27 15:03:55 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:55 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6811 120 120 385}
+2022/06/27 15:03:56 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:56 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6811
+2022/06/27 15:03:56 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6811
+2022/06/27 15:03:56 AutoclosureModel.go:134: 
+2022/06/27 15:03:56 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:56 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6833
+2022/06/27 15:03:56 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:56 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:56 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:56 AutoclosureDao.go:98: parameters --> 2 15 6833 6849 705 385
+2022/06/27 15:03:56 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:56 AutoclosureDao.go:117: parameters --> 2 15 6833 6849 706 385
+2022/06/27 15:03:56 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:56 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6833 120 120 385}
+2022/06/27 15:03:56 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:56 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6833
+2022/06/27 15:03:56 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6833
+2022/06/27 15:03:56 AutoclosureModel.go:134: 
+2022/06/27 15:03:56 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:56 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6837
+2022/06/27 15:03:56 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:56 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:56 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:56 AutoclosureDao.go:98: parameters --> 2 15 6837 6853 705 385
+2022/06/27 15:03:57 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:57 AutoclosureDao.go:117: parameters --> 2 15 6837 6853 706 385
+2022/06/27 15:03:57 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:57 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6837 120 120 385}
+2022/06/27 15:03:57 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:57 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6837
+2022/06/27 15:03:57 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6837
+2022/06/27 15:03:57 AutoclosureModel.go:134: 
+2022/06/27 15:03:57 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:57 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6849
+2022/06/27 15:03:57 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:57 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:57 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:57 AutoclosureDao.go:98: parameters --> 2 15 6849 6865 705 385
+2022/06/27 15:03:57 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:57 AutoclosureDao.go:117: parameters --> 2 15 6849 6865 706 385
+2022/06/27 15:03:57 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:57 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6849 120 120 385}
+2022/06/27 15:03:58 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:58 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6849
+2022/06/27 15:03:58 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6849
+2022/06/27 15:03:58 AutoclosureModel.go:134: 
+2022/06/27 15:03:58 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:58 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6850
+2022/06/27 15:03:58 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:58 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:58 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:58 AutoclosureDao.go:98: parameters --> 2 15 6850 6866 705 385
+2022/06/27 15:03:58 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:58 AutoclosureDao.go:117: parameters --> 2 15 6850 6866 706 385
+2022/06/27 15:03:58 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:58 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6850 120 120 385}
+2022/06/27 15:03:58 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:58 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6850
+2022/06/27 15:03:58 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6850
+2022/06/27 15:03:58 AutoclosureModel.go:134: 
+2022/06/27 15:03:58 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:58 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6861
+2022/06/27 15:03:58 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:58 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:58 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:58 AutoclosureDao.go:98: parameters --> 2 15 6861 6877 705 385
+2022/06/27 15:03:58 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:58 AutoclosureDao.go:117: parameters --> 2 15 6861 6877 706 385
+2022/06/27 15:03:58 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:58 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6861 120 120 385}
+2022/06/27 15:03:59 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:59 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6861
+2022/06/27 15:03:59 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6861
+2022/06/27 15:03:59 AutoclosureModel.go:134: 
+2022/06/27 15:03:59 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:59 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6868
+2022/06/27 15:03:59 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:59 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:59 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:59 AutoclosureDao.go:98: parameters --> 2 15 6868 6884 705 385
+2022/06/27 15:03:59 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:59 AutoclosureDao.go:117: parameters --> 2 15 6868 6884 706 385
+2022/06/27 15:03:59 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:59 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6868 120 120 385}
+2022/06/27 15:03:59 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:03:59 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6868
+2022/06/27 15:03:59 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6868
+2022/06/27 15:03:59 AutoclosureModel.go:134: 
+2022/06/27 15:03:59 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:03:59 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6866
+2022/06/27 15:03:59 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:03:59 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:03:59 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:03:59 AutoclosureDao.go:98: parameters --> 2 15 6866 6882 705 385
+2022/06/27 15:03:59 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:59 AutoclosureDao.go:117: parameters --> 2 15 6866 6882 706 385
+2022/06/27 15:03:59 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:03:59 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6866 120 120 385}
+2022/06/27 15:04:00 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:00 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6866
+2022/06/27 15:04:00 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6866
+2022/06/27 15:04:00 AutoclosureModel.go:134: 
+2022/06/27 15:04:00 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:00 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6874
+2022/06/27 15:04:00 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:00 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:00 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:00 AutoclosureDao.go:98: parameters --> 2 15 6874 6890 705 385
+2022/06/27 15:04:00 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:00 AutoclosureDao.go:117: parameters --> 2 15 6874 6890 706 385
+2022/06/27 15:04:00 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:00 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6874 120 120 385}
+2022/06/27 15:04:00 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:00 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6874
+2022/06/27 15:04:00 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6874
+2022/06/27 15:04:00 AutoclosureModel.go:134: 
+2022/06/27 15:04:00 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:00 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6865
+2022/06/27 15:04:00 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:00 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:00 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:00 AutoclosureDao.go:98: parameters --> 2 15 6865 6881 705 385
+2022/06/27 15:04:00 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:00 AutoclosureDao.go:117: parameters --> 2 15 6865 6881 706 385
+2022/06/27 15:04:00 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:00 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6865 120 120 385}
+2022/06/27 15:04:01 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:01 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6865
+2022/06/27 15:04:01 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6865
+2022/06/27 15:04:01 AutoclosureModel.go:134: 
+2022/06/27 15:04:01 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:01 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6871
+2022/06/27 15:04:01 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:01 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:01 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:01 AutoclosureDao.go:98: parameters --> 2 15 6871 6887 705 385
+2022/06/27 15:04:01 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:01 AutoclosureDao.go:117: parameters --> 2 15 6871 6887 706 385
+2022/06/27 15:04:01 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:01 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6871 120 120 385}
+2022/06/27 15:04:01 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:01 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6871
+2022/06/27 15:04:02 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6871
+2022/06/27 15:04:02 AutoclosureModel.go:134: 
+2022/06/27 15:04:02 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:02 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6870
+2022/06/27 15:04:02 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:02 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:02 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:02 AutoclosureDao.go:98: parameters --> 2 15 6870 6886 705 385
+2022/06/27 15:04:02 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:02 AutoclosureDao.go:117: parameters --> 2 15 6870 6886 706 385
+2022/06/27 15:04:02 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:02 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6870 120 120 385}
+2022/06/27 15:04:02 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:02 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6870
+2022/06/27 15:04:02 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6870
+2022/06/27 15:04:02 AutoclosureModel.go:134: 
+2022/06/27 15:04:02 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:02 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6873
+2022/06/27 15:04:02 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:02 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:02 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:02 AutoclosureDao.go:98: parameters --> 2 15 6873 6889 705 385
+2022/06/27 15:04:02 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:02 AutoclosureDao.go:117: parameters --> 2 15 6873 6889 706 385
+2022/06/27 15:04:02 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:02 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6873 120 120 385}
+2022/06/27 15:04:03 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:03 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6873
+2022/06/27 15:04:03 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6873
+2022/06/27 15:04:03 AutoclosureModel.go:134: 
+2022/06/27 15:04:03 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:03 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6828
+2022/06/27 15:04:03 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:03 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:03 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:03 AutoclosureDao.go:98: parameters --> 2 15 6828 6844 705 385
+2022/06/27 15:04:03 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:03 AutoclosureDao.go:117: parameters --> 2 15 6828 6844 706 385
+2022/06/27 15:04:03 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:03 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6828 120 120 385}
+2022/06/27 15:04:03 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:03 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6828
+2022/06/27 15:04:03 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6828
+2022/06/27 15:04:03 AutoclosureModel.go:134: 
+2022/06/27 15:04:03 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:03 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6583
+2022/06/27 15:04:03 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:03 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:03 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:03 AutoclosureDao.go:98: parameters --> 2 15 6583 6599 705 385
+2022/06/27 15:04:03 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:03 AutoclosureDao.go:117: parameters --> 2 15 6583 6599 706 385
+2022/06/27 15:04:03 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:03 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6583 120 120 385}
+2022/06/27 15:04:04 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:04 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6583
+2022/06/27 15:04:04 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6583
+2022/06/27 15:04:04 AutoclosureModel.go:134: 
+2022/06/27 15:04:04 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:04 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6582
+2022/06/27 15:04:04 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:04 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:04 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:04 AutoclosureDao.go:98: parameters --> 2 15 6582 6598 705 385
+2022/06/27 15:04:04 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:04 AutoclosureDao.go:117: parameters --> 2 15 6582 6598 706 385
+2022/06/27 15:04:04 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:04 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6582 120 120 385}
+2022/06/27 15:04:04 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:04 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6582
+2022/06/27 15:04:04 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6582
+2022/06/27 15:04:04 AutoclosureModel.go:134: 
+2022/06/27 15:04:04 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:04 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6581
+2022/06/27 15:04:04 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:04 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:04 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:04 AutoclosureDao.go:98: parameters --> 2 15 6581 6597 705 385
+2022/06/27 15:04:04 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:04 AutoclosureDao.go:117: parameters --> 2 15 6581 6597 706 385
+2022/06/27 15:04:04 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:04 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6581 120 120 385}
+2022/06/27 15:04:05 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:05 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6581
+2022/06/27 15:04:05 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6581
+2022/06/27 15:04:05 AutoclosureModel.go:134: 
+2022/06/27 15:04:05 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:05 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6886
+2022/06/27 15:04:05 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:05 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:05 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:05 AutoclosureDao.go:98: parameters --> 2 15 6886 6902 705 385
+2022/06/27 15:04:05 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:05 AutoclosureDao.go:117: parameters --> 2 15 6886 6902 706 385
+2022/06/27 15:04:05 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:05 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6886 120 120 385}
+2022/06/27 15:04:05 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:05 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6886
+2022/06/27 15:04:05 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6886
+2022/06/27 15:04:05 AutoclosureModel.go:134: 
+2022/06/27 15:04:05 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:05 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6885
+2022/06/27 15:04:05 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:05 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:05 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:05 AutoclosureDao.go:98: parameters --> 2 15 6885 6901 705 385
+2022/06/27 15:04:05 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:05 AutoclosureDao.go:117: parameters --> 2 15 6885 6901 706 385
+2022/06/27 15:04:05 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:05 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6885 120 120 385}
+2022/06/27 15:04:06 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:06 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6885
+2022/06/27 15:04:06 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6885
+2022/06/27 15:04:06 AutoclosureModel.go:134: 
+2022/06/27 15:04:06 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:06 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6887
+2022/06/27 15:04:06 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:06 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:06 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:06 AutoclosureDao.go:98: parameters --> 2 15 6887 6903 705 385
+2022/06/27 15:04:06 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:06 AutoclosureDao.go:117: parameters --> 2 15 6887 6903 706 385
+2022/06/27 15:04:06 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:06 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6887 120 120 385}
+2022/06/27 15:04:07 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:07 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6887
+2022/06/27 15:04:07 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6887
+2022/06/27 15:04:07 AutoclosureModel.go:134: 
+2022/06/27 15:04:07 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:07 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6834
+2022/06/27 15:04:07 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:07 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:07 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:07 AutoclosureDao.go:98: parameters --> 2 15 6834 6850 705 385
+2022/06/27 15:04:07 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:07 AutoclosureDao.go:117: parameters --> 2 15 6834 6850 706 385
+2022/06/27 15:04:07 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:07 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6834 120 120 385}
+2022/06/27 15:04:07 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:07 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6834
+2022/06/27 15:04:07 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6834
+2022/06/27 15:04:07 AutoclosureModel.go:134: 
+2022/06/27 15:04:07 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:07 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6893
+2022/06/27 15:04:07 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:07 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:07 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:07 AutoclosureDao.go:98: parameters --> 2 15 6893 6909 705 385
+2022/06/27 15:04:07 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:07 AutoclosureDao.go:117: parameters --> 2 15 6893 6909 706 385
+2022/06/27 15:04:07 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:07 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6893 120 120 385}
+2022/06/27 15:04:08 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:08 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6893
+2022/06/27 15:04:08 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6893
+2022/06/27 15:04:08 AutoclosureModel.go:134: 
+2022/06/27 15:04:08 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:08 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 5378
+2022/06/27 15:04:08 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:08 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:08 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:08 AutoclosureDao.go:98: parameters --> 2 15 5378 5395 705 385
+2022/06/27 15:04:08 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:08 AutoclosureDao.go:117: parameters --> 2 15 5378 5395 706 385
+2022/06/27 15:04:08 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:08 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 5378 120 120 385}
+2022/06/27 15:04:09 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:09 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 5378
+2022/06/27 15:04:09 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 5378
+2022/06/27 15:04:09 AutoclosureModel.go:134: 
+2022/06/27 15:04:09 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:09 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6899
+2022/06/27 15:04:09 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:09 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:09 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:09 AutoclosureDao.go:98: parameters --> 2 15 6899 6915 705 385
+2022/06/27 15:04:09 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:09 AutoclosureDao.go:117: parameters --> 2 15 6899 6915 706 385
+2022/06/27 15:04:09 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:09 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6899 120 120 385}
+2022/06/27 15:04:09 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:09 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6899
+2022/06/27 15:04:09 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6899
+2022/06/27 15:04:09 AutoclosureModel.go:134: 
+2022/06/27 15:04:09 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:09 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6590
+2022/06/27 15:04:09 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:09 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:09 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:09 AutoclosureDao.go:98: parameters --> 2 15 6590 6606 705 385
+2022/06/27 15:04:09 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:09 AutoclosureDao.go:117: parameters --> 2 15 6590 6606 706 385
+2022/06/27 15:04:09 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:09 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6590 120 120 385}
+2022/06/27 15:04:10 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:10 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6590
+2022/06/27 15:04:10 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6590
+2022/06/27 15:04:10 AutoclosureModel.go:134: 
+2022/06/27 15:04:10 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:10 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6589
+2022/06/27 15:04:10 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:10 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:10 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:10 AutoclosureDao.go:98: parameters --> 2 15 6589 6605 705 385
+2022/06/27 15:04:10 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:10 AutoclosureDao.go:117: parameters --> 2 15 6589 6605 706 385
+2022/06/27 15:04:10 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:10 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6589 120 120 385}
+2022/06/27 15:04:10 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:10 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6589
+2022/06/27 15:04:10 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6589
+2022/06/27 15:04:10 AutoclosureModel.go:134: 
+2022/06/27 15:04:10 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:10 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6587
+2022/06/27 15:04:10 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:10 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:10 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:10 AutoclosureDao.go:98: parameters --> 2 15 6587 6603 705 385
+2022/06/27 15:04:10 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:10 AutoclosureDao.go:117: parameters --> 2 15 6587 6603 706 385
+2022/06/27 15:04:10 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:10 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6587 120 120 385}
+2022/06/27 15:04:11 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:11 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6587
+2022/06/27 15:04:11 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6587
+2022/06/27 15:04:11 AutoclosureModel.go:134: 
+2022/06/27 15:04:11 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:11 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 4967
+2022/06/27 15:04:11 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:11 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:11 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:11 AutoclosureDao.go:98: parameters --> 2 15 4967 4987 705 385
+2022/06/27 15:04:11 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:11 AutoclosureDao.go:117: parameters --> 2 15 4967 4987 706 385
+2022/06/27 15:04:11 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:11 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 4967 120 120 385}
+2022/06/27 15:04:11 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:11 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 4967
+2022/06/27 15:04:11 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 4967
+2022/06/27 15:04:11 AutoclosureModel.go:134: 
+2022/06/27 15:04:11 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:11 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6571
+2022/06/27 15:04:11 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:11 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:11 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:11 AutoclosureDao.go:98: parameters --> 2 15 6571 6587 705 385
+2022/06/27 15:04:11 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:11 AutoclosureDao.go:117: parameters --> 2 15 6571 6587 706 385
+2022/06/27 15:04:11 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:11 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6571 120 120 385}
+2022/06/27 15:04:12 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:12 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6571
+2022/06/27 15:04:12 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6571
+2022/06/27 15:04:12 AutoclosureModel.go:134: 
+2022/06/27 15:04:12 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:12 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6570
+2022/06/27 15:04:12 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:12 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:12 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:12 AutoclosureDao.go:98: parameters --> 2 15 6570 6586 705 385
+2022/06/27 15:04:12 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:12 AutoclosureDao.go:117: parameters --> 2 15 6570 6586 706 385
+2022/06/27 15:04:12 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:12 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6570 120 120 385}
+2022/06/27 15:04:13 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:13 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6570
+2022/06/27 15:04:13 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6570
+2022/06/27 15:04:13 AutoclosureModel.go:134: 
+2022/06/27 15:04:13 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:13 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6901
+2022/06/27 15:04:13 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:13 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:13 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:13 AutoclosureDao.go:98: parameters --> 2 15 6901 6917 705 385
+2022/06/27 15:04:13 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:13 AutoclosureDao.go:117: parameters --> 2 15 6901 6917 706 385
+2022/06/27 15:04:13 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:13 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6901 120 120 385}
+2022/06/27 15:04:13 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:13 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6901
+2022/06/27 15:04:13 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6901
+2022/06/27 15:04:13 AutoclosureModel.go:134: 
+2022/06/27 15:04:13 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:13 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6903
+2022/06/27 15:04:13 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:13 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:13 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:13 AutoclosureDao.go:98: parameters --> 2 15 6903 6919 705 385
+2022/06/27 15:04:13 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:13 AutoclosureDao.go:117: parameters --> 2 15 6903 6919 706 385
+2022/06/27 15:04:13 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:13 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6903 120 120 385}
+2022/06/27 15:04:14 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:14 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6903
+2022/06/27 15:04:14 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6903
+2022/06/27 15:04:14 AutoclosureModel.go:134: 
+2022/06/27 15:04:14 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:14 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6914
+2022/06/27 15:04:14 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:14 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:14 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:14 AutoclosureDao.go:98: parameters --> 2 15 6914 6930 705 385
+2022/06/27 15:04:14 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:14 AutoclosureDao.go:117: parameters --> 2 15 6914 6930 706 385
+2022/06/27 15:04:14 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:14 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6914 120 120 385}
+2022/06/27 15:04:14 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:14 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6914
+2022/06/27 15:04:14 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6914
+2022/06/27 15:04:14 AutoclosureModel.go:134: 
+2022/06/27 15:04:14 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:14 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6915
+2022/06/27 15:04:14 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:14 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:14 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:14 AutoclosureDao.go:98: parameters --> 2 15 6915 6931 705 385
+2022/06/27 15:04:14 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:14 AutoclosureDao.go:117: parameters --> 2 15 6915 6931 706 385
+2022/06/27 15:04:14 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:14 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6915 120 120 385}
+2022/06/27 15:04:15 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:15 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6915
+2022/06/27 15:04:15 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6915
+2022/06/27 15:04:15 AutoclosureModel.go:134: 
+2022/06/27 15:04:15 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:15 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6897
+2022/06/27 15:04:15 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:15 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:15 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:15 AutoclosureDao.go:98: parameters --> 2 15 6897 6913 705 385
+2022/06/27 15:04:15 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:15 AutoclosureDao.go:117: parameters --> 2 15 6897 6913 706 385
+2022/06/27 15:04:15 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:15 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6897 120 120 385}
+2022/06/27 15:04:15 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:15 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6897
+2022/06/27 15:04:15 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6897
+2022/06/27 15:04:15 AutoclosureModel.go:134: 
+2022/06/27 15:04:15 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:15 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6858
+2022/06/27 15:04:15 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:15 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:15 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:15 AutoclosureDao.go:98: parameters --> 2 15 6858 6874 705 385
+2022/06/27 15:04:15 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:15 AutoclosureDao.go:117: parameters --> 2 15 6858 6874 706 385
+2022/06/27 15:04:15 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:16 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6858 120 120 385}
+2022/06/27 15:04:16 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:16 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6858
+2022/06/27 15:04:16 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6858
+2022/06/27 15:04:16 AutoclosureModel.go:134: 
+2022/06/27 15:04:16 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:16 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6622
+2022/06/27 15:04:16 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:16 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:16 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:16 AutoclosureDao.go:98: parameters --> 2 15 6622 6638 705 385
+2022/06/27 15:04:16 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:16 AutoclosureDao.go:117: parameters --> 2 15 6622 6638 706 385
+2022/06/27 15:04:16 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:16 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6622 120 120 385}
+2022/06/27 15:04:17 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:17 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6622
+2022/06/27 15:04:17 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6622
+2022/06/27 15:04:17 AutoclosureModel.go:134: 
+2022/06/27 15:04:17 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:17 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6919
+2022/06/27 15:04:17 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:17 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:17 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:17 AutoclosureDao.go:98: parameters --> 2 15 6919 6935 705 385
+2022/06/27 15:04:17 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:17 AutoclosureDao.go:117: parameters --> 2 15 6919 6935 706 385
+2022/06/27 15:04:17 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:17 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6919 120 120 385}
+2022/06/27 15:04:17 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:17 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6919
+2022/06/27 15:04:17 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6919
+2022/06/27 15:04:17 AutoclosureModel.go:134: 
+2022/06/27 15:04:17 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:17 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6659
+2022/06/27 15:04:17 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:17 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:17 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:17 AutoclosureDao.go:98: parameters --> 2 15 6659 6675 705 385
+2022/06/27 15:04:17 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:17 AutoclosureDao.go:117: parameters --> 2 15 6659 6675 706 385
+2022/06/27 15:04:17 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:17 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6659 120 120 385}
+2022/06/27 15:04:18 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:18 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6659
+2022/06/27 15:04:18 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6659
+2022/06/27 15:04:18 AutoclosureModel.go:134: 
+2022/06/27 15:04:18 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:18 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6920
+2022/06/27 15:04:18 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:18 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:18 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:18 AutoclosureDao.go:98: parameters --> 2 15 6920 6936 705 385
+2022/06/27 15:04:18 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:18 AutoclosureDao.go:117: parameters --> 2 15 6920 6936 706 385
+2022/06/27 15:04:18 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:18 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6920 120 120 385}
+2022/06/27 15:04:18 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:18 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6920
+2022/06/27 15:04:18 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6920
+2022/06/27 15:04:18 AutoclosureModel.go:134: 
+2022/06/27 15:04:18 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:18 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6917
+2022/06/27 15:04:18 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:18 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:18 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:18 AutoclosureDao.go:98: parameters --> 2 15 6917 6933 705 385
+2022/06/27 15:04:18 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:18 AutoclosureDao.go:117: parameters --> 2 15 6917 6933 706 385
+2022/06/27 15:04:18 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:18 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6917 120 120 385}
+2022/06/27 15:04:19 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:19 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6917
+2022/06/27 15:04:19 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6917
+2022/06/27 15:04:19 AutoclosureModel.go:134: 
+2022/06/27 15:04:19 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:19 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6910
+2022/06/27 15:04:19 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:19 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:19 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:19 AutoclosureDao.go:98: parameters --> 2 15 6910 6926 705 385
+2022/06/27 15:04:19 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:19 AutoclosureDao.go:117: parameters --> 2 15 6910 6926 706 385
+2022/06/27 15:04:19 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:19 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6910 120 120 385}
+2022/06/27 15:04:19 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:19 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6910
+2022/06/27 15:04:20 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6910
+2022/06/27 15:04:20 AutoclosureModel.go:134: 
+2022/06/27 15:04:20 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:20 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6921
+2022/06/27 15:04:20 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:20 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:20 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:20 AutoclosureDao.go:98: parameters --> 2 15 6921 6937 705 385
+2022/06/27 15:04:20 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:20 AutoclosureDao.go:117: parameters --> 2 15 6921 6937 706 385
+2022/06/27 15:04:20 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:20 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6921 120 120 385}
+2022/06/27 15:04:20 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:20 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6921
+2022/06/27 15:04:20 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6921
+2022/06/27 15:04:20 AutoclosureModel.go:134: 
+2022/06/27 15:04:20 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:20 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6898
+2022/06/27 15:04:20 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:20 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:20 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:20 AutoclosureDao.go:98: parameters --> 2 15 6898 6914 705 385
+2022/06/27 15:04:20 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:20 AutoclosureDao.go:117: parameters --> 2 15 6898 6914 706 385
+2022/06/27 15:04:20 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:20 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6898 120 120 385}
+2022/06/27 15:04:21 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:21 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6898
+2022/06/27 15:04:21 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6898
+2022/06/27 15:04:21 AutoclosureModel.go:134: 
+2022/06/27 15:04:21 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:21 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6620
+2022/06/27 15:04:21 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:21 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:21 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:21 AutoclosureDao.go:98: parameters --> 2 15 6620 6636 705 385
+2022/06/27 15:04:21 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:21 AutoclosureDao.go:117: parameters --> 2 15 6620 6636 706 385
+2022/06/27 15:04:21 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:21 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6620 120 120 385}
+2022/06/27 15:04:21 StartPoint.go:29: <================Closuretask is Started===============>
+2022/06/27 15:04:21 AutoclosureModel.go:33: In side Autoclosure model function
+2022/06/27 15:04:21 dbconfig.go:50: DbConn in Else condition =======> &{0 0xc0000b2050 0 {0 0} [0xc000192000] map[] 0 1 0xc00008e0c0 false map[0xc000192000:map[0xc000192000:true]] map[] 0 0 0 0 <nil> 0 0 0 0 0x502ae0}
+2022/06/27 15:04:21 AutoclosureDao.go:12: In side GetResolvedRecordsInfo model function
+2022/06/27 15:04:21 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:21 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6620
+2022/06/27 15:04:21 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6620
+2022/06/27 15:04:21 AutoclosureModel.go:134: 
+2022/06/27 15:04:21 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:21 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6619
+2022/06/27 15:04:21 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:21 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:21 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:21 AutoclosureDao.go:98: parameters --> 2 15 6619 6635 705 385
+2022/06/27 15:04:21 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:21 AutoclosureDao.go:117: parameters --> 2 15 6619 6635 706 385
+2022/06/27 15:04:21 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:21 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6619 120 120 385}
+2022/06/27 15:04:22 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:22 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6619
+2022/06/27 15:04:22 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6619
+2022/06/27 15:04:22 AutoclosureModel.go:134: 
+2022/06/27 15:04:22 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:22 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6923
+2022/06/27 15:04:22 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:22 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:22 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:22 AutoclosureDao.go:98: parameters --> 2 15 6923 6939 705 385
+2022/06/27 15:04:22 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:22 AutoclosureDao.go:117: parameters --> 2 15 6923 6939 706 385
+2022/06/27 15:04:22 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:22 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6923 120 120 385}
+2022/06/27 15:04:23 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:23 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6923
+2022/06/27 15:04:23 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6923
+2022/06/27 15:04:23 AutoclosureModel.go:134: 
+2022/06/27 15:04:23 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:23 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6925
+2022/06/27 15:04:23 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:23 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:23 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:23 AutoclosureDao.go:98: parameters --> 2 15 6925 6941 705 385
+2022/06/27 15:04:23 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:23 AutoclosureDao.go:117: parameters --> 2 15 6925 6941 706 385
+2022/06/27 15:04:23 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:23 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6925 120 120 385}
+2022/06/27 15:04:23 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:23 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6925
+2022/06/27 15:04:23 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6925
+2022/06/27 15:04:23 AutoclosureModel.go:134: 
+2022/06/27 15:04:23 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:23 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6934
+2022/06/27 15:04:23 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:23 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:23 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:23 AutoclosureDao.go:98: parameters --> 2 15 6934 6950 705 385
+2022/06/27 15:04:23 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:23 AutoclosureDao.go:117: parameters --> 2 15 6934 6950 706 385
+2022/06/27 15:04:23 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:23 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6934 120 120 385}
+2022/06/27 15:04:24 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:24 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6934
+2022/06/27 15:04:24 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6934
+2022/06/27 15:04:24 AutoclosureModel.go:134: 
+2022/06/27 15:04:24 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:24 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6971
+2022/06/27 15:04:24 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:24 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:24 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:24 AutoclosureDao.go:98: parameters --> 2 15 6971 6987 705 385
+2022/06/27 15:04:24 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:24 AutoclosureDao.go:117: parameters --> 2 15 6971 6987 706 385
+2022/06/27 15:04:24 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:24 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6971 120 120 385}
+2022/06/27 15:04:25 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:25 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6971
+2022/06/27 15:04:25 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6971
+2022/06/27 15:04:25 AutoclosureModel.go:134: 
+2022/06/27 15:04:25 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:25 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6902
+2022/06/27 15:04:25 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:25 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:25 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:25 AutoclosureDao.go:98: parameters --> 2 15 6902 6918 705 385
+2022/06/27 15:04:25 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:25 AutoclosureDao.go:117: parameters --> 2 15 6902 6918 706 385
+2022/06/27 15:04:25 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:25 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6902 120 120 385}
+2022/06/27 15:04:25 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:25 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6902
+2022/06/27 15:04:25 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6902
+2022/06/27 15:04:25 AutoclosureModel.go:134: 
+2022/06/27 15:04:25 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:25 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6967
+2022/06/27 15:04:25 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:25 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:25 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:25 AutoclosureDao.go:98: parameters --> 2 15 6967 6983 705 385
+2022/06/27 15:04:25 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:25 AutoclosureDao.go:117: parameters --> 2 15 6967 6983 706 385
+2022/06/27 15:04:25 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:25 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6967 120 120 385}
+2022/06/27 15:04:26 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:26 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6967
+2022/06/27 15:04:26 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6967
+2022/06/27 15:04:26 AutoclosureModel.go:134: 
+2022/06/27 15:04:26 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:26 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6966
+2022/06/27 15:04:26 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:26 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:26 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:26 AutoclosureDao.go:98: parameters --> 2 15 6966 6982 705 385
+2022/06/27 15:04:26 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:26 AutoclosureDao.go:117: parameters --> 2 15 6966 6982 706 385
+2022/06/27 15:04:26 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:26 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6966 120 120 385}
+2022/06/27 15:04:27 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:27 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6966
+2022/06/27 15:04:27 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6966
+2022/06/27 15:04:27 AutoclosureModel.go:134: 
+2022/06/27 15:04:27 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:27 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6911
+2022/06/27 15:04:27 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:27 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:27 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:27 AutoclosureDao.go:98: parameters --> 2 15 6911 6927 705 385
+2022/06/27 15:04:27 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:27 AutoclosureDao.go:117: parameters --> 2 15 6911 6927 706 385
+2022/06/27 15:04:27 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:27 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6911 120 120 385}
+2022/06/27 15:04:27 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:27 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6911
+2022/06/27 15:04:27 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6911
+2022/06/27 15:04:27 AutoclosureModel.go:134: 
+2022/06/27 15:04:27 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:27 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6963
+2022/06/27 15:04:27 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:27 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:27 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:27 AutoclosureDao.go:98: parameters --> 2 15 6963 6979 705 385
+2022/06/27 15:04:27 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:27 AutoclosureDao.go:117: parameters --> 2 15 6963 6979 706 385
+2022/06/27 15:04:27 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:27 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6963 120 120 385}
+2022/06/27 15:04:28 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:28 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6963
+2022/06/27 15:04:28 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6963
+2022/06/27 15:04:28 AutoclosureModel.go:134: 
+2022/06/27 15:04:28 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:28 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6907
+2022/06/27 15:04:28 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:28 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:28 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:28 AutoclosureDao.go:98: parameters --> 2 15 6907 6923 705 385
+2022/06/27 15:04:28 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:28 AutoclosureDao.go:117: parameters --> 2 15 6907 6923 706 385
+2022/06/27 15:04:28 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:28 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6907 120 120 385}
+2022/06/27 15:04:28 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:28 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6907
+2022/06/27 15:04:28 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6907
+2022/06/27 15:04:28 AutoclosureModel.go:134: 
+2022/06/27 15:04:28 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:28 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6908
+2022/06/27 15:04:28 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:28 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:28 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:28 AutoclosureDao.go:98: parameters --> 2 15 6908 6924 705 385
+2022/06/27 15:04:28 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:28 AutoclosureDao.go:117: parameters --> 2 15 6908 6924 706 385
+2022/06/27 15:04:28 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:28 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6908 120 120 385}
+2022/06/27 15:04:29 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:29 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6908
+2022/06/27 15:04:29 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6908
+2022/06/27 15:04:29 AutoclosureModel.go:134: 
+2022/06/27 15:04:29 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:29 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6968
+2022/06/27 15:04:29 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:29 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:29 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:29 AutoclosureDao.go:98: parameters --> 2 15 6968 6984 705 385
+2022/06/27 15:04:29 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:29 AutoclosureDao.go:117: parameters --> 2 15 6968 6984 706 385
+2022/06/27 15:04:29 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:29 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6968 120 120 385}
+2022/06/27 15:04:30 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:30 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6968
+2022/06/27 15:04:30 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6968
+2022/06/27 15:04:30 AutoclosureModel.go:134: 
+2022/06/27 15:04:30 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:30 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6942
+2022/06/27 15:04:30 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:30 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:30 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:30 AutoclosureDao.go:98: parameters --> 2 15 6942 6958 705 385
+2022/06/27 15:04:30 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:30 AutoclosureDao.go:117: parameters --> 2 15 6942 6958 706 385
+2022/06/27 15:04:30 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:30 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6942 120 120 385}
+2022/06/27 15:04:30 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:30 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6942
+2022/06/27 15:04:30 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6942
+2022/06/27 15:04:30 AutoclosureModel.go:134: 
+2022/06/27 15:04:30 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:30 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6944
+2022/06/27 15:04:30 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:30 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:30 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:30 AutoclosureDao.go:98: parameters --> 2 15 6944 6960 705 385
+2022/06/27 15:04:30 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:30 AutoclosureDao.go:117: parameters --> 2 15 6944 6960 706 385
+2022/06/27 15:04:30 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:30 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6944 120 120 385}
+2022/06/27 15:04:31 AutoclosureModel.go:45: Total Tickets **************************** 28867
+2022/06/27 15:04:31 AutoclosureModel.go:46: 
+
+
+2022/06/27 15:04:31 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:31 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 9575
+2022/06/27 15:04:31 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:31 AutoclosureModel.go:58: nxtstateID is----> 6
+2022/06/27 15:04:31 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:31 AutoclosureDao.go:98: parameters --> 2 2 9575 9585 18 16
+2022/06/27 15:04:31 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:31 AutoclosureDao.go:117: parameters --> 2 2 9575 9585 19 16
+2022/06/27 15:04:31 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:31 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6944
+2022/06/27 15:04:31 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6944
+2022/06/27 15:04:31 AutoclosureModel.go:134: 
+2022/06/27 15:04:31 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:31 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6943
+2022/06/27 15:04:31 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:31 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:31 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:31 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:31 AutoclosureDao.go:98: parameters --> 2 15 6943 6959 705 385
+2022/06/27 15:04:31 AutoclosureModel.go:109: Record status request body --> &{2 2 34 940 5 6 9575 12 12 16}
+2022/06/27 15:04:31 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:31 AutoclosureDao.go:117: parameters --> 2 15 6943 6959 706 385
+2022/06/27 15:04:31 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:31 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6943 120 120 385}
+2022/06/27 15:04:32 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:32 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 9575
+2022/06/27 15:04:32 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 9575
+2022/06/27 15:04:32 AutoclosureModel.go:134: 
+2022/06/27 15:04:32 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:32 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 9539
+2022/06/27 15:04:32 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:32 AutoclosureModel.go:58: nxtstateID is----> 6
+2022/06/27 15:04:32 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:32 AutoclosureDao.go:98: parameters --> 2 2 9539 9549 18 16
+2022/06/27 15:04:32 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:32 AutoclosureDao.go:117: parameters --> 2 2 9539 9549 19 16
+2022/06/27 15:04:32 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:32 AutoclosureModel.go:109: Record status request body --> &{2 2 34 940 5 6 9539 12 12 16}
+2022/06/27 15:04:32 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:32 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6943
+2022/06/27 15:04:32 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6943
+2022/06/27 15:04:32 AutoclosureModel.go:134: 
+2022/06/27 15:04:32 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:32 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6941
+2022/06/27 15:04:32 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:32 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:32 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:32 AutoclosureDao.go:98: parameters --> 2 15 6941 6957 705 385
+2022/06/27 15:04:32 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:32 AutoclosureDao.go:117: parameters --> 2 15 6941 6957 706 385
+2022/06/27 15:04:32 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:32 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6941 120 120 385}
+2022/06/27 15:04:33 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:33 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 9539
+2022/06/27 15:04:33 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 9539
+2022/06/27 15:04:33 AutoclosureModel.go:134: 
+2022/06/27 15:04:33 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:33 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 10328
+2022/06/27 15:04:33 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:33 AutoclosureModel.go:58: nxtstateID is----> 6
+2022/06/27 15:04:33 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:33 AutoclosureDao.go:98: parameters --> 2 2 10328 10339 18 16
+2022/06/27 15:04:33 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:33 AutoclosureDao.go:117: parameters --> 2 2 10328 10339 19 16
+2022/06/27 15:04:33 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:33 AutoclosureModel.go:109: Record status request body --> &{2 2 34 847 5 6 10328 12 12 16}
+2022/06/27 15:04:33 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:33 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6941
+2022/06/27 15:04:33 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6941
+2022/06/27 15:04:33 AutoclosureModel.go:134: 
+2022/06/27 15:04:33 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:33 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6947
+2022/06/27 15:04:33 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:33 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:33 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:33 AutoclosureDao.go:98: parameters --> 2 15 6947 6963 705 385
+2022/06/27 15:04:33 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:33 AutoclosureDao.go:117: parameters --> 2 15 6947 6963 706 385
+2022/06/27 15:04:33 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:33 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6947 120 120 385}
+2022/06/27 15:04:34 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:34 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 10328
+2022/06/27 15:04:34 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 10328
+2022/06/27 15:04:34 AutoclosureModel.go:134: 
+2022/06/27 15:04:34 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:34 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 9571
+2022/06/27 15:04:34 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:34 AutoclosureModel.go:58: nxtstateID is----> 6
+2022/06/27 15:04:34 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:34 AutoclosureDao.go:98: parameters --> 2 2 9571 9581 18 16
+2022/06/27 15:04:34 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:34 AutoclosureDao.go:117: parameters --> 2 2 9571 9581 19 16
+2022/06/27 15:04:34 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:34 AutoclosureModel.go:109: Record status request body --> &{2 2 34 940 5 6 9571 12 12 16}
+2022/06/27 15:04:34 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:34 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6947
+2022/06/27 15:04:34 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6947
+2022/06/27 15:04:34 AutoclosureModel.go:134: 
+2022/06/27 15:04:34 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:34 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6946
+2022/06/27 15:04:34 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:34 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:34 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:34 AutoclosureDao.go:98: parameters --> 2 15 6946 6962 705 385
+2022/06/27 15:04:34 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:34 AutoclosureDao.go:117: parameters --> 2 15 6946 6962 706 385
+2022/06/27 15:04:34 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:34 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6946 120 120 385}
+2022/06/27 15:04:35 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:35 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 9571
+2022/06/27 15:04:35 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 9571
+2022/06/27 15:04:35 AutoclosureModel.go:134: 
+2022/06/27 15:04:35 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:35 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 10298
+2022/06/27 15:04:35 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:35 AutoclosureModel.go:58: nxtstateID is----> 89
+2022/06/27 15:04:35 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:35 AutoclosureDao.go:98: parameters --> 2 12 10298 10309 408 333
+2022/06/27 15:04:35 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:35 AutoclosureDao.go:117: parameters --> 2 12 10298 10309 409 333
+2022/06/27 15:04:35 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:35 AutoclosureModel.go:109: Record status request body --> &{2 12 108 3523 91 89 10298 104 104 333}
+2022/06/27 15:04:35 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:35 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6946
+2022/06/27 15:04:35 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6946
+2022/06/27 15:04:35 AutoclosureModel.go:134: 
+2022/06/27 15:04:35 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:35 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6945
+2022/06/27 15:04:35 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:35 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:35 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:35 AutoclosureDao.go:98: parameters --> 2 15 6945 6961 705 385
+2022/06/27 15:04:35 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:35 AutoclosureDao.go:117: parameters --> 2 15 6945 6961 706 385
+2022/06/27 15:04:35 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:35 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6945 120 120 385}
+2022/06/27 15:04:36 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:36 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 10298
+2022/06/27 15:04:36 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 10298
+2022/06/27 15:04:36 AutoclosureModel.go:134: 
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6620
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6619
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6923
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6925
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6934
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6971
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6902
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6967
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6966
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6911
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6963
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6907
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6908
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6968
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6942
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6944
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6943
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6941
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6947
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6946
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6945
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureDao.go:98: parameters --> 2 15 6945 6961 705 385
+2022/06/27 15:04:36 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:36 AutoclosureDao.go:117: parameters --> 2 15 6945 6961 706 385
+2022/06/27 15:04:36 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:36 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6945 120 120 385}
+2022/06/27 15:04:36 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:36 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6945
+2022/06/27 15:04:36 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:36 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6945
+2022/06/27 15:04:36 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6945
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 1738
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureDao.go:98: parameters --> 2 15 1738 1733 705 385
+2022/06/27 15:04:36 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:36 AutoclosureDao.go:117: parameters --> 2 15 1738 1733 706 385
+2022/06/27 15:04:36 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:36 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 1738 120 120 385}
+2022/06/27 15:04:36 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6945
+2022/06/27 15:04:36 AutoclosureModel.go:134: 
+2022/06/27 15:04:36 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:36 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 1738
+2022/06/27 15:04:36 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:36 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:36 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:36 AutoclosureDao.go:98: parameters --> 2 15 1738 1733 705 385
+2022/06/27 15:04:36 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:36 AutoclosureDao.go:117: parameters --> 2 15 1738 1733 706 385
+2022/06/27 15:04:36 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:36 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 1738 120 120 385}
+2022/06/27 15:04:37 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:37 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 1738
+2022/06/27 15:04:37 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:37 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 1738
+2022/06/27 15:04:37 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 1738
+2022/06/27 15:04:37 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:37 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6956
+2022/06/27 15:04:37 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:37 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:37 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:37 AutoclosureDao.go:98: parameters --> 2 15 6956 6972 705 385
+2022/06/27 15:04:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:37 AutoclosureDao.go:117: parameters --> 2 15 6956 6972 706 385
+2022/06/27 15:04:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:37 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6956 120 120 385}
+2022/06/27 15:04:37 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 1738
+2022/06/27 15:04:37 AutoclosureModel.go:134: 
+2022/06/27 15:04:37 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:37 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6956
+2022/06/27 15:04:37 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:37 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:37 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:37 AutoclosureDao.go:98: parameters --> 2 15 6956 6972 705 385
+2022/06/27 15:04:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:37 AutoclosureDao.go:117: parameters --> 2 15 6956 6972 706 385
+2022/06/27 15:04:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:37 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6956 120 120 385}
+2022/06/27 15:04:37 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:37 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6956
+2022/06/27 15:04:37 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:37 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6956
+2022/06/27 15:04:37 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6956
+2022/06/27 15:04:37 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:37 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6959
+2022/06/27 15:04:37 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:37 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:37 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:37 AutoclosureDao.go:98: parameters --> 2 15 6959 6975 705 385
+2022/06/27 15:04:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:37 AutoclosureDao.go:117: parameters --> 2 15 6959 6975 706 385
+2022/06/27 15:04:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:37 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6959 120 120 385}
+2022/06/27 15:04:37 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6956
+2022/06/27 15:04:37 AutoclosureModel.go:134: 
+2022/06/27 15:04:37 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:37 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6959
+2022/06/27 15:04:37 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:37 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:37 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:37 AutoclosureDao.go:98: parameters --> 2 15 6959 6975 705 385
+2022/06/27 15:04:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:37 AutoclosureDao.go:117: parameters --> 2 15 6959 6975 706 385
+2022/06/27 15:04:37 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:37 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6959 120 120 385}
+2022/06/27 15:04:38 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:38 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6959
+2022/06/27 15:04:38 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:38 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6959
+2022/06/27 15:04:38 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6959
+2022/06/27 15:04:38 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:38 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6958
+2022/06/27 15:04:38 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:38 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:38 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:38 AutoclosureDao.go:98: parameters --> 2 15 6958 6974 705 385
+2022/06/27 15:04:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:38 AutoclosureDao.go:117: parameters --> 2 15 6958 6974 706 385
+2022/06/27 15:04:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:38 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6958 120 120 385}
+2022/06/27 15:04:38 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6959
+2022/06/27 15:04:38 AutoclosureModel.go:134: 
+2022/06/27 15:04:38 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:38 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6958
+2022/06/27 15:04:38 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:38 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:38 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:38 AutoclosureDao.go:98: parameters --> 2 15 6958 6974 705 385
+2022/06/27 15:04:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:38 AutoclosureDao.go:117: parameters --> 2 15 6958 6974 706 385
+2022/06/27 15:04:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:38 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6958 120 120 385}
+2022/06/27 15:04:38 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:38 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6958
+2022/06/27 15:04:38 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:38 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6958
+2022/06/27 15:04:38 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6958
+2022/06/27 15:04:38 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:38 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6516
+2022/06/27 15:04:38 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:38 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:38 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:38 AutoclosureDao.go:98: parameters --> 2 15 6516 6532 705 385
+2022/06/27 15:04:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:38 AutoclosureDao.go:117: parameters --> 2 15 6516 6532 706 385
+2022/06/27 15:04:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:38 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6516 120 120 385}
+2022/06/27 15:04:38 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6958
+2022/06/27 15:04:38 AutoclosureModel.go:134: 
+2022/06/27 15:04:38 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:38 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6516
+2022/06/27 15:04:38 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:38 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:38 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:38 AutoclosureDao.go:98: parameters --> 2 15 6516 6532 705 385
+2022/06/27 15:04:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:38 AutoclosureDao.go:117: parameters --> 2 15 6516 6532 706 385
+2022/06/27 15:04:38 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:38 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6516 120 120 385}
+2022/06/27 15:04:39 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:39 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6516
+2022/06/27 15:04:39 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:39 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6516
+2022/06/27 15:04:39 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6516
+2022/06/27 15:04:39 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:39 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6977
+2022/06/27 15:04:39 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:39 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:39 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:39 AutoclosureDao.go:98: parameters --> 2 15 6977 6993 705 385
+2022/06/27 15:04:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:39 AutoclosureDao.go:117: parameters --> 2 15 6977 6993 706 385
+2022/06/27 15:04:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:39 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6977 120 120 385}
+2022/06/27 15:04:39 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6516
+2022/06/27 15:04:39 AutoclosureModel.go:134: 
+2022/06/27 15:04:39 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:39 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6977
+2022/06/27 15:04:39 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:39 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:39 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:39 AutoclosureDao.go:98: parameters --> 2 15 6977 6993 705 385
+2022/06/27 15:04:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:39 AutoclosureDao.go:117: parameters --> 2 15 6977 6993 706 385
+2022/06/27 15:04:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:39 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6977 120 120 385}
+2022/06/27 15:04:39 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:39 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6977
+2022/06/27 15:04:39 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:39 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6977
+2022/06/27 15:04:39 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6977
+2022/06/27 15:04:39 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:39 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6877
+2022/06/27 15:04:39 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:39 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:39 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:39 AutoclosureDao.go:98: parameters --> 2 15 6877 6893 705 385
+2022/06/27 15:04:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:39 AutoclosureDao.go:117: parameters --> 2 15 6877 6893 706 385
+2022/06/27 15:04:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:39 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6877 120 120 385}
+2022/06/27 15:04:39 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6977
+2022/06/27 15:04:39 AutoclosureModel.go:134: 
+2022/06/27 15:04:39 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:39 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6877
+2022/06/27 15:04:39 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:39 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:39 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:39 AutoclosureDao.go:98: parameters --> 2 15 6877 6893 705 385
+2022/06/27 15:04:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:39 AutoclosureDao.go:117: parameters --> 2 15 6877 6893 706 385
+2022/06/27 15:04:39 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:40 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6877 120 120 385}
+2022/06/27 15:04:40 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:40 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6877
+2022/06/27 15:04:40 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:40 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6877
+2022/06/27 15:04:40 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6877
+2022/06/27 15:04:40 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:40 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6878
+2022/06/27 15:04:40 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:40 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:40 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:40 AutoclosureDao.go:98: parameters --> 2 15 6878 6894 705 385
+2022/06/27 15:04:40 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:40 AutoclosureDao.go:117: parameters --> 2 15 6878 6894 706 385
+2022/06/27 15:04:40 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:40 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6878 120 120 385}
+2022/06/27 15:04:40 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6877
+2022/06/27 15:04:40 AutoclosureModel.go:134: 
+2022/06/27 15:04:40 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:40 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6878
+2022/06/27 15:04:40 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:40 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:40 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:40 AutoclosureDao.go:98: parameters --> 2 15 6878 6894 705 385
+2022/06/27 15:04:40 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:40 AutoclosureDao.go:117: parameters --> 2 15 6878 6894 706 385
+2022/06/27 15:04:40 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:40 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6878 120 120 385}
+2022/06/27 15:04:40 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:40 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6878
+2022/06/27 15:04:40 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:40 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6878
+2022/06/27 15:04:40 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6878
+2022/06/27 15:04:40 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:40 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6879
+2022/06/27 15:04:40 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:40 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:40 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:40 AutoclosureDao.go:98: parameters --> 2 15 6879 6895 705 385
+2022/06/27 15:04:40 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:40 AutoclosureDao.go:117: parameters --> 2 15 6879 6895 706 385
+2022/06/27 15:04:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:41 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6879 120 120 385}
+2022/06/27 15:04:41 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6878
+2022/06/27 15:04:41 AutoclosureModel.go:134: 
+2022/06/27 15:04:41 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:41 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6879
+2022/06/27 15:04:41 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:41 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:41 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:41 AutoclosureDao.go:98: parameters --> 2 15 6879 6895 705 385
+2022/06/27 15:04:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:41 AutoclosureDao.go:117: parameters --> 2 15 6879 6895 706 385
+2022/06/27 15:04:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:41 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6879 120 120 385}
+2022/06/27 15:04:41 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:41 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6879
+2022/06/27 15:04:41 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:41 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6879
+2022/06/27 15:04:41 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6879
+2022/06/27 15:04:41 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:41 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6578
+2022/06/27 15:04:41 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:41 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:41 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:41 AutoclosureDao.go:98: parameters --> 2 15 6578 6594 705 385
+2022/06/27 15:04:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:41 AutoclosureDao.go:117: parameters --> 2 15 6578 6594 706 385
+2022/06/27 15:04:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:41 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6578 120 120 385}
+2022/06/27 15:04:41 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6879
+2022/06/27 15:04:41 AutoclosureModel.go:134: 
+2022/06/27 15:04:41 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:41 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6578
+2022/06/27 15:04:41 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:41 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:41 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:41 AutoclosureDao.go:98: parameters --> 2 15 6578 6594 705 385
+2022/06/27 15:04:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:41 AutoclosureDao.go:117: parameters --> 2 15 6578 6594 706 385
+2022/06/27 15:04:41 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:41 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6578 120 120 385}
+2022/06/27 15:04:42 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:42 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6578
+2022/06/27 15:04:42 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:42 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6578
+2022/06/27 15:04:42 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6578
+2022/06/27 15:04:42 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:42 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6991
+2022/06/27 15:04:42 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:42 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:42 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:42 AutoclosureDao.go:98: parameters --> 2 15 6991 7007 705 385
+2022/06/27 15:04:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:42 AutoclosureDao.go:117: parameters --> 2 15 6991 7007 706 385
+2022/06/27 15:04:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:42 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6991 120 120 385}
+2022/06/27 15:04:42 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6578
+2022/06/27 15:04:42 AutoclosureModel.go:134: 
+2022/06/27 15:04:42 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:42 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6991
+2022/06/27 15:04:42 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:42 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:42 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:42 AutoclosureDao.go:98: parameters --> 2 15 6991 7007 705 385
+2022/06/27 15:04:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:42 AutoclosureDao.go:117: parameters --> 2 15 6991 7007 706 385
+2022/06/27 15:04:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:42 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6991 120 120 385}
+2022/06/27 15:04:42 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:42 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6991
+2022/06/27 15:04:42 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:42 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6991
+2022/06/27 15:04:42 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6991
+2022/06/27 15:04:42 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:42 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6990
+2022/06/27 15:04:42 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:42 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:42 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:42 AutoclosureDao.go:98: parameters --> 2 15 6990 7006 705 385
+2022/06/27 15:04:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:42 AutoclosureDao.go:117: parameters --> 2 15 6990 7006 706 385
+2022/06/27 15:04:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:42 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6990 120 120 385}
+2022/06/27 15:04:42 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6991
+2022/06/27 15:04:42 AutoclosureModel.go:134: 
+2022/06/27 15:04:42 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:42 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6990
+2022/06/27 15:04:42 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:42 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:42 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:42 AutoclosureDao.go:98: parameters --> 2 15 6990 7006 705 385
+2022/06/27 15:04:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:42 AutoclosureDao.go:117: parameters --> 2 15 6990 7006 706 385
+2022/06/27 15:04:42 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:42 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6990 120 120 385}
+2022/06/27 15:04:43 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:43 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6990
+2022/06/27 15:04:43 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:43 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6990
+2022/06/27 15:04:43 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6990
+2022/06/27 15:04:43 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:43 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6988
+2022/06/27 15:04:43 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:43 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:43 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:43 AutoclosureDao.go:98: parameters --> 2 15 6988 7004 705 385
+2022/06/27 15:04:43 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:43 AutoclosureDao.go:117: parameters --> 2 15 6988 7004 706 385
+2022/06/27 15:04:43 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:43 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6988 120 120 385}
+2022/06/27 15:04:43 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6990
+2022/06/27 15:04:43 AutoclosureModel.go:134: 
+2022/06/27 15:04:43 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:43 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6988
+2022/06/27 15:04:43 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:43 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:43 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:43 AutoclosureDao.go:98: parameters --> 2 15 6988 7004 705 385
+2022/06/27 15:04:43 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:43 AutoclosureDao.go:117: parameters --> 2 15 6988 7004 706 385
+2022/06/27 15:04:43 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:43 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6988 120 120 385}
+2022/06/27 15:04:43 AutoclosureModel.go:125: Auto close workflow message --> true
+2022/06/27 15:04:43 AutoclosureModel.go:126: Auto close workflow response error message -->  ====== 6988
+2022/06/27 15:04:43 AutoclosureModel.go:125: Auto close workflow message --> false
+2022/06/27 15:04:43 AutoclosureModel.go:126: Auto close workflow response error message --> Current State not matched. ====== 6988
+2022/06/27 15:04:43 AutoclosureModel.go:136: <***************************MoveWorkflow API Error****************************> 6988
+2022/06/27 15:04:43 AutoclosureModel.go:51: Total Tickets  ---------> 28957
+2022/06/27 15:04:43 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6989
+2022/06/27 15:04:43 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:43 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:43 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:43 AutoclosureDao.go:98: parameters --> 2 15 6989 7005 705 385
+2022/06/27 15:04:43 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:43 AutoclosureDao.go:117: parameters --> 2 15 6989 7005 706 385
+2022/06/27 15:04:43 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:43 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6989 120 120 385}
+2022/06/27 15:04:43 AutoclosureModel.go:132: <================================Ticket IS closed===============================> 6988
+2022/06/27 15:04:43 AutoclosureModel.go:134: 
+2022/06/27 15:04:43 AutoclosureModel.go:51: Total Tickets  ---------> 28867
+2022/06/27 15:04:43 AutoclosureModel.go:52: ===================================================Ticket ID is ===========================> 6989
+2022/06/27 15:04:43 AutoclosureDao.go:37: In side GetNxtStateID model function
+2022/06/27 15:04:43 AutoclosureModel.go:58: nxtstateID is----> 209
+2022/06/27 15:04:43 AutoclosureDao.go:58: In side GetCurrentStatusSeq model function
+2022/06/27 15:04:43 AutoclosureDao.go:98: parameters --> 2 15 6989 7005 705 385
+2022/06/27 15:04:43 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:43 AutoclosureDao.go:117: parameters --> 2 15 6989 7005 706 385
+2022/06/27 15:04:43 AutoclosureDao.go:147: Gettermnamebyid rows.next() Error <nil>
+2022/06/27 15:04:43 AutoclosureModel.go:109: Record status request body --> &{2 15 231 6623 208 209 6989 120 120 385}

@@ -1,0 +1,193 @@
+<nav class="navbar navbar-expand-md navbar-style fixed-top" id="navbarId">
+
+  <div class="container-fluid pad-lft-rgt-0 row">
+    <div class="col-3 row">
+      <div class="col-9 mar-lft">
+        <img class="user-avatar mr-3  user-logo" src="../../assets/img/logo.png" height="40" width="140">
+        <img class="user-avatar mr-3  user-logo1" src="../../assets/img/logo2.png" height="40" width="140">
+
+      </div>
+
+      <div class="col-3 pad-lft-2">
+        <a id="menuToggle" class="menutoggle pull-left mar-lft" [ngClass] = "isOpenSideBar ? 'open' : ''" (click)="drawers()"><i class="fa fa fa-tasks"></i></a>
+      </div>
+    </div>
+
+
+    <div class="col-sm-6 row header-left margin-lt">
+      <div class="col-search mar-lft width-box">
+        <a><i class="fa fa-search"></i></a>
+
+        <!-- <div class="form-inline">
+                <form class="search-form">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                    <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                </form>
+            </div> -->
+
+      </div>
+
+      <div class=" disply-inline width-box">
+        <!-- ////////////////////////////////////////////////// -->
+        <!-- <a class=" dropdown-toggle" type="button" id="notification">
+                <i class="fa fa-bell"></i>
+                <span class="count bg-danger">5</span>
+
+        </a> -->
+
+        <!-- ///////////////////////////////////////// -->
+
+
+        <div class="dropdown for-notification ">
+          <a class=" dropdown-toggle" id="notification" data-toggle="dropdown" (click)="notification()">
+            <i class="fa fa-bell"></i> </a>
+          <span class="count bg-danger">5</span>
+          <div class="dropdown-menu dropdownDiv collapse" *ngIf="showNotification" id="dropdown">
+            <p class="red">You have 3 Notification</p>
+            <a class="dropdown-item media bg-flat-color-1" href="#">
+              <i class="fa fa-check"></i>
+              <p>Server #1 overloaded.</p>
+            </a>
+            <a class="dropdown-item media bg-flat-color-4" href="#">
+              <i class="fa fa-info"></i>
+              <p>Server #2 overloaded.</p>
+            </a>
+            <a class="dropdown-item media bg-flat-color-5" href="#">
+              <i class="fa fa-warning"></i>
+              <p>Server #3 overloaded.</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="notification-email width-box">
+        <div class="dropdown for-message">
+          <button class="btn btn-secondary dropdown-toggle" type="button"
+                  id="message" (click)="mailNotifications()"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="ti-email"></i>
+            <span class="count bg-primary">9</span>
+          </button>
+          <div *ngIf="mailNotification" class="dropdown-menu" aria-labelledby="message">
+            <p class="red">You have 4 Mails</p>
+            <a class="dropdown-item media bg-flat-color-1" href="#">
+              <span class="photo media-left"><img alt="avatar" src="../../assets/img/admin.jpg" height="35" width="35"></span>
+              <span class="message media-body">
+                                    <span class="name float-left">Jonathan Smith</span>
+                                    <span class="time float-right">Just now</span>
+                                        <p>Hello, this is an example msg</p>
+                                </span>
+            </a>
+            <a class="dropdown-item media bg-flat-color-4" href="#">
+              <span class="photo media-left"><img alt="avatar" src="../../assets/img/admin.jpg" height="35" width="35"></span>
+              <span class="message media-body">
+                                    <span class="name float-left">Jack Sanders</span>
+                                    <span class="time float-right">5 minutes ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </span>
+            </a>
+            <a class="dropdown-item media bg-flat-color-5" href="#">
+              <span class="photo media-left"><img alt="avatar" src="../../assets/img/admin.jpg" height="35" width="35"></span>
+              <span class="message media-body">
+                                    <span class="name float-left">Cheryl Wheeler</span>
+                                    <span class="time float-right">10 minutes ago</span>
+                                        <p>Hello, this is an example msg</p>
+                                </span>
+            </a>
+            <a class="dropdown-item media bg-flat-color-3" href="#">
+              <span class="photo media-left"><img alt="avatar" src="../../assets/img/admin.jpg" height="35" width="35"></span>
+              <span class="message media-body">
+                                    <span class="name float-left">Rachel Santos</span>
+                                    <span class="time float-right">15 minutes ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="col-sm-3 widthx">
+
+      <div class="user-area dropdown float-right">
+        <img class="user-avatar mr-3 profile " src="../../assets/img/tata.png" alt="User Avatar">
+        <a class="dropdown-toggle" (click)="profileDetail()">
+          <img class="user-avatar rounded-circle profile" src="../../assets/img/admin.jpg" alt="User Avatar" height="40"
+               width="40">
+        </a>
+        <div class="user-menu dropdown-menu" *ngIf="isProfile">
+          <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
+
+          <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
+
+          <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
+
+          <a class="nav-link" href="#" (click)="logOut()"><i class="fa fa-power-off"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer [mode]="mobileQuery.matches ? 'push' : 'side'"  class="nav-content sidenav" [(opened)]="isOpenSideBar">
+    <ul class="nav sidenavbar">
+      <li class="dashname">
+        <img class="user-avatar rounded-circle" src="../../assets/img/admin.jpg" alt="User Avatar" width="40">
+        <b class="mar-dashname"> Welcome {{userName}}</b>
+      </li>
+      <br>
+      <!-- <li class="menuitemsingle active">
+        <a> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+      </li> -->
+    </ul>
+    <!--<ng-material-multilevel-menu [items]='navbar' class="meterial-menu font-13"-->
+                                 <!--(selectedItem)="changeRouting($event.path)">-->
+    <!--</ng-material-multilevel-menu>-->
+    <!--=================-->
+    <mat-accordion>
+      <mat-expansion-panel class="menu">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="menu-name">
+            Platform Config
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-material-multilevel-menu  [items]='platformAdmin' class="menu-name meterial-menu" (selectedItem)="changeRouting($event.path)">
+        </ng-material-multilevel-menu>
+      </mat-expansion-panel>
+      <mat-expansion-panel class="menu">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="menu-name">
+            Client Config
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-material-multilevel-menu  [items]='clientAdmin'  class="menu-name meterial-menu" (selectedItem)="changeRouting($event.path)">
+        </ng-material-multilevel-menu>
+      </mat-expansion-panel>
+      <mat-expansion-panel class="menu">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="menu-name">
+            Data Migration
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-material-multilevel-menu  [items]='migrationAdmin'  class="menu-name meterial-menu" (selectedItem)="changeRouting($event.path)">
+        </ng-material-multilevel-menu>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!--====================-->
+  </mat-sidenav>
+
+  <mat-sidenav-content opened=true>
+    <div class="pad-lft-rgt-0 mar-top">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="row">
+      <footer class=" dashfoot text-center">
+        <small>Copyright: iFIX tech Global</small>
+      </footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- ===================================================================== -->

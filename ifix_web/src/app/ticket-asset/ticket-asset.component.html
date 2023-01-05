@@ -1,0 +1,131 @@
+<div class="row mar-lft-rgt-0">
+  <div class="col-md-9 search-box font-13" [ngStyle]="{'background':darkCss}" >
+    <table class="table">
+      <thead [ngStyle]="{'background':selectedColor,'color':footerItem}">
+      <tr class="rsdb-head">
+        <th>Hostname / Serial No. (Backup)</th>
+        <th>IP Address</th>
+        <th>Role</th>
+        <th [hidden]="tickettypeseq === CR_SEQ || tickettypeseq=== CTASK_SEQ"></th>
+      </tr>
+      </thead>
+      <tbody class="rsdb-body" [ngStyle]="{'color':footerItem}">
+      <tr *ngFor="let asset of Tickets; let i = index;">
+        <td class="link" (click)="onAssetClick(asset.id)">{{asset['Hostname']}}</td>
+        <td>{{asset['IPAddress']}}</td>
+        <td>{{asset['Role']}}</td>
+        <td class="pointer" [hidden]="tickettypeseq === CR_SEQ || tickettypeseq=== CTASK_SEQ">
+          <mat-icon (click)="removeAsset1(i,0,-1)" *ngIf="sameUser">delete_outline</mat-icon>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-3 right" *ngIf="sameUser && tickettypeseq !==5">
+    <button type="button" class="btn btn-dark radius-0 font-13" (click)="openModal(content)"
+            [ngStyle]="{'background':buttonCss}">
+      Attach CI
+    </button>
+  </div>
+</div>
+<ng-template #content let-modal let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title">Asset Management</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <div class="col-md-3">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="masterNameSelected"
+                (change)="onMasterChange($event.target.selectedIndex)">
+          <option *ngFor="let master of masterNameObj" [value]="master.id">{{master.name}}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="columnNameSelected"
+                (change)="onClientChange($event.target.selectedIndex)">
+          <option *ngFor="let column of columnDataObj"
+                  [value]="column.id">{{column.name}}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control radius-0 font-13" [(ngModel)]="assetValue"
+               placeholder="Digital Asset value">
+      </div>
+      <div class="col-md-3">
+        <img class="loading-gif-42-edit2" *ngIf="dataLoadedForSubmit" src="../../../assets/img/loader-42px.gif">
+        <button type="button" class="btn btn-primary radius-0 font-13" (click)="submitAssetData()" *ngIf="!dataLoadedForSubmit">Submit
+        </button>
+      </div>
+    </div>
+    <div class="height-40" [hidden]="dataLoaded">
+      <img class="loading-gif-42-edit" src="../../../assets/img/loader-42px.gif">
+    </div>
+    <div class="card-body-grid">
+      <angular-slickgrid gridId="grid1"
+                         [columnDefinitions]="columnDefinitions"
+                         [gridOptions]="gridOptions"
+                         (onAngularGridCreated)="angularGridReady($event)"
+                         gridHeight="300"
+                         (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
+                         (sgOnSelectedRowsChanged)="handleSelectedRowsChanged($event.detail.eventData, $event.detail.args)"
+                         [dataset]="data">
+      </angular-slickgrid>
+    </div>
+  </div>
+  <div class="modal-footer content-center">
+    <!--    <ngb-pagination [collectionSize]="collectionSize" [maxSize]="5" (pageChange)="onPageChange($event)"-->
+    <!--                    [(page)]="page"-->
+    <!--                    [pageSize]="pageSize" aria-label="Default pagination"></ngb-pagination>-->
+    <button type="button" class="btn btn-success  radius-0 font-13 "[disabled]="isDisabled" (click)="saveData()" style="
+    margin-top: 8px;">Add Asset
+    </button>
+
+    <button type="button" class="btn btn-warning  radius-0 font-13 "[disabled]="isDisabled" (click)="close()">Close
+    </button>
+  </div>
+  <div class="col-md-12 height-350 font-13 mar-top-9" [ngStyle]="{'background':darkCss}"
+       *ngFor="let assets of allassets;let j=index">
+    <table class="table" *ngIf="assets.length>0">
+      <thead [ngStyle]="{'background':selectedColor,'color':footerItem}">
+      <tr class="rsdb-head">
+        <th></th>
+        <th *ngFor="let header of _object.keys(assets[0])">{{header}}</th>
+      </tr>
+      </thead>
+      <tbody [ngStyle]="{'color':footerItem}">
+      <tr *ngFor="let row of assets; let i = index">
+        <td class="pointer">
+          <mat-icon (click)="removeAsset(i,j)" *ngIf="sameUser">delete_outline</mat-icon>
+        </td>
+        <td *ngFor="let objKey of _object.keys(row)">{{ row[objKey] }} </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+<ng-template #assetcontent let-modal let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title">Selected Asset</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="overflow-auto">
+      <angular-slickgrid gridId="grid1"
+                         [columnDefinitions]="columnDefinitions"
+                         [gridOptions]="gridOptions"
+                         (onAngularGridCreated)="angularGridReady($event)"
+                         gridWidth="4000"
+                         gridHeight="120"
+                         [dataset]="assetdata">
+      </angular-slickgrid>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning radius-0 font-13" (click)="closeAsset()">Close</button>
+  </div>
+</ng-template>

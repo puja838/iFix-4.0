@@ -1,0 +1,65 @@
+<div class="loader" [hidden]="dataLoaded"><img class="loading-gif" src="../../../assets/img/loader.gif"></div>
+<div class="dasboard-width" [ngStyle]="{'background':footerCss,'color':pageNameCss}">
+  <div class="row header mar-lft-rgt-0">
+    <div class="col-md-4 col-sm-4 pageName" [style.color]="lebelCss">{{displayData.pageName}}</div>
+    <div class="col-md-4 col-sm-4">
+      <button class="btn btn-success addButton" (click)="openModal()" [ngStyle]="{'background':openModalCss}" [hidden]="hideBtn">{{displayData.openModalButton}}</button>
+<!--      <button class="btn btn-success addButton Searchbtn" (click)="searchModal()" *ngIf = "showSearch">{{displayData.searchModalButton}}</button>-->
+<!--      <button class="btn btn-success addButton Searchbtn" (click)="createIndex()" *ngIf = "showIndex">{{displayData.indexButton}}</button>-->
+    </div>
+<!--    <div class="col-md-4 col-sm-4">-->
+<!--      <button class="btn btn-primary addButton" (click)="exportToExcel()" *ngIf="showExportBtn" [disabled]="isExportDisable">{{displayData.exportBtn}}</button>-->
+<!--      <button class="btn btn-primary addButton mar-lft-rgt-15" (click)="reset()" *ngIf="showResetBtn">Reset</button>-->
+<!--    </div>-->
+  </div>
+  <div class="row content mr-top-5 mar-lft-rgt-0">
+    <div class="col-md-12 col-sm-12">
+      <div class="card">
+          <div class="card-header card-header-top"  [ngStyle]="{'background':footerCss}">
+              <div class="col-md-4 mar-lft-rgt-0">
+                 {{displayData.tabName}}
+              </div>
+          <div class="col-md-8 mar-lft-rgt-0  row pull-right ">
+           <div class="col-sm-2 font-13"  [hidden]="!view">
+              <select class="custom-select mr-sm-2 radius-0 font-13 custom-width" [ngStyle]="{'background':footerCss}" [(ngModel)]="pageSizeSelected" (change)="onPageSizeChange($event.target.selectedIndex)">
+              <option *ngFor="let pageSize of pageSizeObj" [value]="pageSize.id" [ngStyle]="{'color':pageNameCss}">{{pageSize.value}}</option>
+            </select>
+
+              <!-- <ngb-pagination [(collectionSize)]="totalData" #numPages [(pageSize)]="itemsPerPage" [(page)]="page" [(maxSize)] = "maxLength" (pageChange)="pageChanged($event)" aria-label="Default pagination"></ngb-pagination> -->
+
+            </div>
+
+
+            <div class="col-sm-6 mar-lft-rgt-0 font-13">
+                   <ngb-pagination [(collectionSize)]="totalData" #numPages [(pageSize)]="itemsPerPage" [(page)]="page" [(maxSize)] = "maxLength" (pageChange)="pageChanged($event)" aria-label="Default pagination"></ngb-pagination>
+            </div>
+
+           <div class="col-sm-4 mar-lft-rgt-0  font-13">
+              <b>Total items: </b> {{totalData}}
+              </div>
+
+
+
+          </div>
+          <!-- <div class="pull-right none font-13" [ngClass]="{'block':show}">
+            (Selected items:<span>{{selected}}</span>)
+          </div> -->
+          <!--<div class="pull-right font-13" [hidden]="hidePagination">-->
+            <!--<select class="custom-select mr-sm-2 radius-0 font-13 custom-width" [(ngModel)]="pageSizeSelected" (change)="onPageSizeChange($event.target.selectedIndex)">-->
+              <!--<option *ngFor="let pageSize of pageSizeObj" [value]="pageSize.id">{{pageSize.value}}</option>-->
+            <!--</select>-->
+            <!--<button class="btn btn-primary addButton" [disabled]="previousOffset === 0" (click)="getPreviousData()"> < </button>&nbsp;-->
+            <!--<button class="btn btn-danger addButton" [disabled]="nextOffset === 0"(click)="getNextData()"> > </button>&nbsp;-->
+            <!--<span><b>Page</b> {{pageNo}} <b>Of</b> {{totalPage}} &nbsp;&nbsp;<b>Total items: </b> {{totalData}}</span>-->
+            <!--&lt;!&ndash;<b>Total items: </b> <span>{{totalData}}</span>&ndash;&gt;-->
+          <!--</div>-->
+      </div>
+        <div class="card-body card-body-grid" [ngStyle]="{'background':selectedColor}">
+          <app-common-slickgrid #commonGrid >
+
+          </app-common-slickgrid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

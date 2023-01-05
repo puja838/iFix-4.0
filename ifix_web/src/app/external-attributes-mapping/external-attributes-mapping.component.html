@@ -1,0 +1,168 @@
+<!-- <div class="loader" [hidden]="dataLoaded"><img class="loading-gif" src="../../../assets/img/loader.gif"></div>
+<div class="dasboard-width">
+  <div class="row header mar-lft-rgt-0">
+    <div class="col-md-4 col-sm-4 pageName" >{{displayData.pageName}}</div>
+    <div class="col-md-4 col-sm-4">
+      <button class="btn btn-success addButton" (click)="openModal(content)"
+              [hidden]="hideBtn">{{displayData.openModalButton}}</button>
+    </div>
+  </div>
+  <div class="col-md-9 col-sm-12 maxWidth">
+    <div class="card">
+      <div class="card-header card-header-top">
+        <div class="col-md-4 mar-lft-rgt-0">
+            {{displayData.tabName}}
+        </div>
+        <div class="col-md-8 mar-lft-rgt-0  row pull-right ">
+          <div class="col-sm-2 font-13">
+            <select class="custom-select mr-sm-2 radius-0 font-13 custom-width" [(ngModel)]="pageSizeSelected"
+                    (change)="onPageSizeChange($event.target.selectedIndex)">
+              <option *ngFor="let pageSize of pageSizeObj" [value]="pageSize.id">{{pageSize.value}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6 mar-lft-rgt-0 font-13">
+            <ngb-pagination [(collectionSize)]="totalData" #numPages
+                            [(pageSize)]="itemsPerPage" [(page)]="page"
+                            [(maxSize)]="maxLength" (pageChange)="pageChanged($event)"
+                            aria-label="Default pagination"></ngb-pagination>
+          </div>
+          <div class="col-sm-4 mar-lft-rgt-0  font-13">
+            <b >Total items: </b> <span>{{totalData}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>   -->
+
+
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [totalPage]="totalPage"
+                   [dataLoaded]="dataLoaded"></app-base-template>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" [hidden]="isUpdate">Add External Attributes Mapping</div>
+    <div class="modal-title" [hidden]="!isUpdate">Update External Attributes Mapping</div>
+
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Organization: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="organizationId"
+              (change)="onOrgChange($event.target.selectedIndex)">
+        <option value="0">Select Organization</option>
+        <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3"><b>Login Type: </b></label>
+      <select class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="selectLoginType"
+              (change)="onLoginTypeChange($event.target.selectedIndex)">
+        <option *ngFor="let login of logins" [value]="login.id">{{login.name}}</option>
+      </select>
+    </div>
+    <div class="form-group row" *ngIf="selectLoginType === '1'">
+      <label class="col-sm-3"><b>User Name: </b></label>
+      <input type="text" class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="enteredUserName"
+             placeholder="Enter User Name">
+    </div>
+    <!--<div class="form-group row">
+      <label class="col-sm-3"><b>Password: </b></label>
+      <input type="Password" class="form-control font-13 radius-0 col-sm-8" [(ngModel)]="enteredPassword"
+             placeholder="Enter Password">
+    </div>-->
+    <div class="form-group textAlign">
+      <button type="button" class="btn btn-primary radius-0" (click)="onSearchClicked()">Search</button>
+    </div>
+
+    <div class="form-group row" [hidden]="!isTableShow">
+      <br><span class="col-sm-12 midLine"></span><br><br>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8 height-350">
+        <table class="table table-bordered table-striped ">
+          <thead class="thead">
+          <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="table_data" *ngFor="let item of ldpaAttributes">
+            <td>{{item.key}}</td>
+            <td>{{item.value}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--      <div class="col-sm-2"></div>-->
+    </div>
+
+    <div class="form-group body row" [hidden]="!isTableShow">
+      <br><span class="col-sm-12 midLine"></span><br>
+
+      <div class="col-md-6 row" cdkDropListGroup>
+        <div class="col-md-4">
+          <h3 style="text-align: center;"><b><i>External Attribute</i></b></h3>
+          <div
+            cdkDropList
+            [cdkDropListData]="externalAttributes"
+            class="example-list accordion height-350"
+            (cdkDropListDropped)="drop1($event)">
+            <div class="example-box" *ngFor="let item of externalAttributes" cdkDrag><b>{{item}}</b></div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <h3 style="text-align: center;"><b><i>Drop Here 1</i></b></h3>
+          <div
+            cdkDropList
+            [cdkDropListData]="arrayListDrop1"
+            class="example-list1 height-350"
+            (cdkDropListDropped)="openDropList1($event)">
+            <div class="boxes" *ngFor="let item of arrayList1">{{item}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 row" cdkDropListGroup>
+        <div class="col-md-8">
+          <h3 style="text-align: center;"><b><i>Drop Here 2</i></b></h3>
+          <div
+            cdkDropList
+            [cdkDropListData]="arrayListDrop2"
+            class="example-list1 height-350"
+            (cdkDropListDropped)="openDropList2($event)">
+            <div class="boxes" *ngFor="let item of arrayList2">{{item}}</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h3 style="text-align: center;"><b><i>System Attribute</i></b></h3>
+
+          <div
+            cdkDropList
+            [cdkDropListData]="systemAttributes"
+            class="example-list accordion height-350"
+            (cdkDropListDropped)="drop2($event)">
+            <div class="example-box" *ngFor="let item of systemAttributes" cdkDrag><b>{{item}}</b></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()"
+            [disabled]="!isDisabled" [hidden]="isUpdate">Save
+    </button>
+    <button type="button" class="btn btn-success radius-0" (click)="update()" [hidden]="!isUpdate">Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>
+
+
+

@@ -1,0 +1,86 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)"
+                   [dataLoaded]="dataLoaded"></app-base-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" *ngIf="!isEdit">Add Excel Template Configuration </div>
+    <div class="modal-title" *ngIf="isEdit">Update Excel Template Configuration</div>
+  </div>
+
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+        <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Organization :</b></label>
+           <div class="col-sm-8 col-md-8">
+               <select class="form-control radius-0 font-13" [(ngModel)]="orgSelected"
+                       (change)="onOrgChange($event.target.selectedIndex)">
+                   <option *ngFor="let org of organization" [value]="org.id">{{org.organizationname}}</option>
+               </select>
+           </div>
+       </div>
+   
+       <div class="form-group row">
+       <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Type :</b></label>
+           <div class="col-sm-8 col-md-8">
+               <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffTypeId" (change)="getrecordbydifftype($event.target.selectedIndex)">
+                <option  [value]="0">Select Property Type</option>   
+                <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+               </select>
+           </div>    
+       </div>
+   
+       <div class="form-group row" [hidden]="fromPropLevels.length===0">
+       <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Level :</b></label>
+           <div class="col-sm-8 col-md-8">
+               <select class="form-control font-13 radius-0" [(ngModel)]="fromlevelid"
+                       (change)="onLevelChange($event.target.selectedIndex)">
+                   <option value="0">Select Property Level</option>
+                   <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+               </select>
+           </div>    
+       </div>
+
+        <div class="form-group row">
+        <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Property Value :</b></label>
+            <div class="col-sm-8 col-md-8">
+                <select class="form-control radius-0 font-13" [(ngModel)]="fromRecordDiffId" (change)="onTicketTypeChange($event.target.selectedIndex)">
+                    <option value="0">Select Property Value</option>
+                    <option *ngFor="let cat of allPropertyValues" [value]="cat.id">{{cat.typename}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Excel Template :</b></label>
+                <div class="col-sm-8 col-md-8">
+                    <select class="form-control radius-0 font-13" [(ngModel)]="exlTemp" (change)="onExlTmpletChange($event.target.selectedIndex)">
+                        <option value="0">Select Excel Template</option>
+                        <option *ngFor="let exl of excel" [value]="exl.id">{{exl.typename}}</option>
+                    </select>
+                </div>
+        </div>
+
+        <div class="form-group row">
+            <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Header Name :</b></label>
+              <div class="col-sm-8 col-md-8">
+                  <input type="text" class="form-control radius-0 font-13" placeholder="Enter Header Name" [(ngModel)]="headername">
+              </div>
+        </div>
+
+        <div class="form-group row">
+            <label  class="col-sm-4 col-md-4 col-form-label font-13"><b>Sequence Number :</b></label>
+              <div class="col-sm-8 col-md-8">
+                  <input type="number" class="form-control radius-0 font-13" placeholder="Enter Sequence Number More Than 0" [(ngModel)]="seqNo">
+              </div>
+        </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" *ngIf="!isEdit" (click)="save()">Save</button>
+    <button type="button" class="btn btn-success radius-0" *ngIf="isEdit" (click)="update()">Update</button>
+    <button type="button" class="btn btn-danger radius-0"  (click)="c()">Cancel</button>
+  </div>
+</ng-template>

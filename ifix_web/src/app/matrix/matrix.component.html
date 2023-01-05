@@ -1,0 +1,149 @@
+<app-base-template (modal)="openModal(content)" (tabledata)="getTableData()" [displayData]="displayData"
+                   (offset)="getData($event)"
+                   (pageSize)="onPageSizeChange($event)" [totalPage]="totalPage"
+                   [dataLoaded]="dataLoaded"></app-base-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalTitle">
+    <div class="modal-title" [hidden]=isUpdate>Add Business Matrix</div>
+    <div class="modal-title" [hidden]=!isUpdate>Update Business Matrix</div>
+  </div>
+  <div class="modal-body">
+    <div class="none" [ngClass]="{'inputError':isError}">{{errorMessage}}</div>
+
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="organizationId"
+              (change)="onOrgChange($event.target.selectedIndex)">
+        <option value="0">Select Organization</option>
+        <option *ngFor="let org of organizationList;" [value]="org.id">{{org.organizationname}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffType"
+              (change)="getrecordbydifftype($event.target.selectedIndex)">
+        <option value="0">Select From Property Type</option>
+        <option *ngFor="let record of recordTypeStatus;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+
+    <div class="form-group" [hidden]="fromPropLevels.length===0">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="fromlevelid"
+              (change)="onLevelChange($event.target.selectedIndex)">
+        <option value="0">Select Property Level</option>
+        <option *ngFor="let level of fromPropLevels" [value]="level.id">{{level.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="fromRecordDiffId"
+              (change)="onPropertyChange($event.target.selectedIndex)">
+        <option value="0">Select From Property</option>
+        <option *ngFor="let record of formTicketTypeList;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+
+    <div *ngIf='chkMatrix===2'>
+      <div class="form-group">
+        <select class="form-control font-13 radius-0" [(ngModel)]="workingLevelSelect"
+                (change)="onlevelChange($event.target.selectedIndex)">
+          <option value="0">Select Last Level Property Value</option>
+          <option *ngFor="let level of workingLevel;" [value]="level.id">{{level.name}}</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div *ngIf='chkMatrix===1'>
+      <!-- ================================impact============================ -->
+      <div class="form-group">
+        <select class="form-control font-13 radius-0" [(ngModel)]="recordDiffTypeImpact"
+                (change)="getrecordImpactbydifftype($event.target.selectedIndex)">
+          <option value="0">Select From Property Type</option>
+          <option *ngFor="let record of recordTypeImpact;" [value]="record.id">{{record.typename}}</option>
+        </select>
+      </div>
+
+      <div class="form-group" [hidden]="propLevelsImpact.length===0">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="levelidImpact"
+                (change)="onLevelImpactChange($event.target.selectedIndex)">
+          <option value="0">Select Property Level</option>
+          <option *ngFor="let level of propLevelsImpact" [value]="level.id">{{level.typename}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control font-13 radius-0" [(ngModel)]="recordDiffIdImpact"
+                (change)="onPropertyImpactChange($event.target.selectedIndex)">
+          <option value="0">Select From Property</option>
+          <option *ngFor="let record of ticketTypeImpactList;" [value]="record.id">{{record.typename}}</option>
+        </select>
+      </div>
+      <!-- ================================urgency============================ -->
+      <div class="form-group">
+        <select class="form-control font-13 radius-0" [(ngModel)]="recordDiffTypeUrgency"
+                (change)="getrecordUrgencybydifftype($event.target.selectedIndex)">
+          <option value="0">Select From Property Type</option>
+          <option *ngFor="let record of recordTypeUrgency;" [value]="record.id">{{record.typename}}</option>
+        </select>
+      </div>
+
+      <div class="form-group" [hidden]="propLevelsUrgency.length===0">
+        <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="levelidUrgency"
+                (change)="onLevelUrgencyChange($event.target.selectedIndex)">
+          <option value="0">Select Property Level</option>
+          <option *ngFor="let level of propLevelsUrgency" [value]="level.id">{{level.typename}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control font-13 radius-0" [(ngModel)]="recordDiffIdUrgency"
+                (change)="onPropertyUrgencyChange($event.target.selectedIndex)">
+          <option value="0">Select From Property</option>
+          <option *ngFor="let record of ticketTypeUrgencyList;" [value]="record.id">{{record.typename}}</option>
+        </select>
+      </div>
+
+    </div>
+    <!-- ================================priority============================ -->
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="recordDiffTypePriority"
+              (change)="getrecordPrioritybydifftype($event.target.selectedIndex)">
+        <option value="0">Select From Property Type</option>
+        <option *ngFor="let record of recordTypePriority;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+
+    <div class="form-group" [hidden]="propLevelsPriority.length===0">
+      <select class="custom-select mr-sm-2 radius-0 font-13" [(ngModel)]="levelidPriority"
+              (change)="onLevelPriorityChange($event.target.selectedIndex)">
+        <option value="0">Select Property Level</option>
+        <option *ngFor="let level of propLevelsPriority" [value]="level.id">{{level.typename}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="form-control font-13 radius-0" [(ngModel)]="recordDiffIdPriority"
+              (change)="onPropertyPriorityChange($event.target.selectedIndex)">
+        <option value="0">Select From Property</option>
+        <option *ngFor="let record of ticketTypePriorityList;" [value]="record.id">{{record.typename}}</option>
+      </select>
+    </div>
+
+    <!-- </div> -->
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="estimatedeffort"
+             placeholder="Enter Estimated Effort">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="slacompliance"
+             placeholder="Enter SLA Compliance">
+    </div>
+    
+    <div class="form-group">
+      <input type="text" class="form-control radius-0 font-13" [(ngModel)]="changetype"
+             placeholder="Enter Change Type">
+    </div>
+
+  </div>
+  <div class="modal-footer pad-8">
+    <button type="button" class="btn btn-success radius-0" (click)="save()" [hidden]=isUpdate>Save</button>
+    <button type="button" class="btn btn-success radius-0" (click)="update()" [hidden]=!isUpdate>Update</button>
+    <button type="button" class="btn btn-danger radius-0" (click)="c()">Cancel</button>
+  </div>
+</ng-template>

@@ -1,0 +1,22 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"> Select organization to fetch ticket creation page of that organization</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row mar-lft-rgt-0">
+      <p class="col-sm-4 custom-label pad-lft-0 color">Select Organization :</p>
+      <select class="custom-select font-13 radius-0 col-sm-8 " [(ngModel)]="organizationId"
+              (change)="onOrganizationChange()">
+        <option value="0">Select Organization</option>
+        <option *ngFor="let org of organizationList;"
+                [value]="org.mstorgnhirarchyid">{{org.mstorgnhirarchyname}}</option>
+      </select>
+    </div>
+
+  </div>
+
+</ng-template>
+

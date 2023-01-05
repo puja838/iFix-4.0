@@ -1,0 +1,25 @@
+.search-box {
+  padding: 10px;
+  background-color: #DDDBDC;
+  height: 150px;
+  float: left;
+  overflow: auto;
+}
+
+.loading-gif-42-edit {
+  position: absolute;
+  height: 60px;
+  top: 45%;
+  left: 45%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1000;
+}
+
+.loading-gif-42-edit2 {
+  position: absolute;
+  left: 11%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1000;
+}
